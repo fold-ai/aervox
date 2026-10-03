@@ -1,0 +1,9 @@
+Built-in image_gen__imagegen generation, 2026-10-02. Original scene ground texture. Source /Users/zahar/.codex/generated_images/01a0fe41-e55a-7713-bf61-ce8381d5718a/exec-c87a9f08-213d-4f7b-8e00-f49baf9f50b6.png. Encoded WebP with sharp quality85 effort6, no image editing.
+
+Use case: product-mockup
+Asset type: Seamlessly tiling photorealistic ground albedo texture for a 3D rural landscape.
+Primary request: Looking exactly straight down at a large patch of dry rocky scrubland soil, covering approximately 12 by 12 meters. Muted cool olive gray soil with irregular patches of dusty earth, small gravel, fine pebbles, a few tufts of short dry grass, and tiny lichen. Detailed real ground texture.
+Composition: Square texture fills every edge. Even coverage with irregular natural variation; organically mottled large soil patches and sparse short vegetation. Seamlessly tileable in every direction; left and right borders match, top and bottom borders match.
+Lighting: Flat soft overcast diffuse ambient lighting; no strong cast shadows, no sunlight gradients, no vignetting, no highlights.
+Palette: Subdued dark gray olive, sage, warm slate, dusty brown earth. Medium-dark tonal range. Low saturation.
+Constraints: Photographic material scan, not an illustration. No horizon, perspective, sky, roads, buildings, vehicles, people, objects, trees, large bushes, text, borders, labels or watermarks. This is only a texture.

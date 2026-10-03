@@ -1,84 +1,127 @@
 .recon { width: 100%; color: #f2f1ed; }
-.scene { position: relative; isolation: isolate; aspect-ratio: 16 / 9; overflow: hidden; background: #282b2a; }
-.scene::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(#05090c78, transparent 24%, transparent 68%, #05090c70); }
-.world { position: absolute; inset: 0; transform-origin: center; }
-.landscape { width: 100%; height: 100%; object-fit: fill; display: block; filter: saturate(.62) brightness(.86); user-select: none; }
-.vehicle { position: absolute; width: 4.8%; aspect-ratio: 1402 / 1122; transform: translate(-50%, -50%); z-index: 2; }
-.vehicleImage { display: block; width: 100%; height: 100%; object-fit: contain; filter: brightness(.9) saturate(.6); user-select: none; }
-.vehicle[data-tone="dark"] .vehicleImage { filter: brightness(.48) saturate(.4); }
-.vehicle[data-tone="silver"] .vehicleImage { filter: brightness(.73) saturate(.5); }
-.track { position: absolute; inset: 3%; color: #f1f0e7; filter: drop-shadow(0 1px 2px #0008); pointer-events: none; }
-.vehicle[data-selected="true"] .track { color: #efb598; }
-.track i { position: absolute; width: 22%; height: 22%; border: solid currentColor; border-width: 0; }
-.cornerTL { left: 0; top: 0; border-top-width: 1px !important; border-left-width: 1px !important; }
-.cornerTR { right: 0; top: 0; border-top-width: 1px !important; border-right-width: 1px !important; }
-.cornerBL { left: 0; bottom: 0; border-bottom-width: 1px !important; border-left-width: 1px !important; }
-.cornerBR { right: 0; bottom: 0; border-bottom-width: 1px !important; border-right-width: 1px !important; }
-.trackLabel { position: absolute; bottom: calc(100% + 8px); left: 0; display: flex; align-items: center; gap: 9px; white-space: nowrap; font: 9px/1.4 ui-monospace, SFMono-Regular, monospace; letter-spacing: .07em; }
-.trackLabel > span { font-size: 7px; color: #eeeee7; opacity: .85; }
-.vehicleButton { position: absolute; inset: 0; min-width: 30px; min-height: 30px; padding: 0; border: 0; background: transparent; cursor: pointer; }
-.vehicleButton:focus-visible { outline: 2px solid #efb598; outline-offset: 6px; }
-.observationLines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; overflow: visible; pointer-events: none; }
-.observationLines > path { stroke: #f3f0e3; stroke-width: 1; stroke-dasharray: 5 9; opacity: .4; }
-.observer circle { stroke: #f3f0e3; stroke-width: 1; fill: #111a21a8; }
-.observer path { fill: #f3f0e3; }
-.observer text { fill: #f3f0e3; font: 11px ui-monospace, monospace; letter-spacing: 1px; paint-order: stroke; stroke: #182025; stroke-width: 3px; }
-.sceneHeader, .viewLabel { position: absolute; left: 28px; right: 28px; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 20px; font: 9px/1.5 ui-monospace, SFMono-Regular, monospace; letter-spacing: .1em; text-shadow: 0 1px 4px #000; }
-.sceneHeader { top: 27px; }
-.sceneHeader > span:first-child { display: flex; align-items: center; gap: 11px; }
-.sceneHeader i { width: 4px; height: 4px; background: #efb598; }
-.sceneHeader > span:last-child { opacity: .7; font-size: 8px; }
-.viewLabel { bottom: 26px; font-size: 8px; }
-.viewLabel > span:last-child { opacity: .65; }
-.sceneReadout { position: absolute; z-index: 3; left: 28px; top: 86px; display: flex; flex-direction: column; gap: 11px; text-shadow: 0 1px 5px #0005; }
-.sceneReadout > span { font: 8px/1.5 ui-monospace, monospace; letter-spacing: .1em; opacity: .75; }
-.sceneReadout strong { display: flex; gap: 12px; align-items: center; font: 400 43px/1 var(--font-display), sans-serif; letter-spacing: -.05em; }
-.sceneReadout small { width: 65px; font: 11px/1.4 var(--font-body), sans-serif; letter-spacing: 0; color: #e8e6dc; }
-.sceneScale { position: absolute; z-index: 3; left: 28px; top: 46%; display: grid; gap: 15px; }
-.sceneScale span { height: 1px; width: 9px; background: #eee9; }
-.sceneScale span:nth-child(3) { width: 17px; background: #eeed; }
-.reacquiring { position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 18px 22px; background: #0a101ade; max-width: 80%; text-align: center; }
-.reacquiring > span { display: block; font: 8px ui-monospace, monospace; color: #dab198; letter-spacing: .08em; margin-bottom: 8px; }
-.reacquiring strong { font-size: 12px; line-height: 1.5; font-weight: 400; }
-.observationBar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 8px 0; border-bottom: 1px solid #ffffff28; }
-.vehicleChoices, .viewChoices { display: flex; align-items: center; gap: 26px; }
-.observationBar button { min-height: 44px; padding: 0; border: 0; background: transparent; color: #868a89; font: 10px ui-monospace, monospace; cursor: pointer; display: flex; gap: 9px; align-items: center; }
-.observationBar button[aria-pressed="true"] { color: #f0eee7; }
-.vehicleChoices button > span { width: 4px; height: 4px; background: #777; }
-.vehicleChoices button[aria-pressed="true"] > span { background: #d39b7e; }
-.viewChoices button { font-family: var(--font-body), sans-serif; font-size: 12px; }
-.viewChoices button:last-child > span { font-size: 16px; }
-.context { display: grid; grid-template-columns: 1.15fr 1fr; gap: 11%; padding: 34px 0 29px; }
-.kicker { color: #bb8b73; font: 9px/1.5 ui-monospace, monospace; letter-spacing: .1em; }
-.context h3 { font-size: clamp(23px, 2.1vw, 32px); line-height: 1.2; margin: 13px 0 16px !important; letter-spacing: -.025em; }
-.context p { max-width: 410px; font-size: 13px; line-height: 1.75; color: #9c9f9d; margin: 0; }
-.context dl { margin: 0; padding: 0; }
-.context dl > div { display: flex; justify-content: space-between; align-items: start; gap: 24px; border-bottom: 1px solid #ffffff22; padding: 12px 0; font-size: 12px; line-height: 1.7; }
-.context dl > div:first-child { padding-top: 0; }
-.context dt { color: #919692; }
-.context dd { margin: 0; text-align: right; color: #e0e1d9; }
-.context dd > span { display: block; color: #919692; font-size: 11px; }
-.recon[data-compact="true"] .trackLabel { font-size: 7px; }
+.scene { position: relative; isolation: isolate; aspect-ratio: 16 / 9; overflow: hidden; background: #454c48; }
+.scene::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, #111b207a, transparent 28%, transparent 60%, #0b131a8c), radial-gradient(ellipse at center, transparent 30%, #14202026 100%); z-index: 1; }
+.canvas { position: absolute; inset: 0; }
+.canvas canvas { display: block; touch-action: pan-y !important; }
+.fallbackImage { width: 100%; height: 100%; display: block; object-fit: cover; filter: saturate(.4) brightness(.68); }
+.trackingLayer { position: absolute; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; }
+.track { position: absolute; left: 0; top: 0; width: 0; height: 0; visibility: hidden; color: #e9ece170; will-change: transform, width, height; }
+.track[data-selected="true"] { color: #e2af91; }
+.track > i { position: absolute; width: 11px; height: 11px; border: solid currentColor; border-width: 0; filter: drop-shadow(0 1px 2px #0c161b66); }
+.track > i:nth-child(1) { left: 0; top: 0; border-width: 1px 0 0 1px; }
+.track > i:nth-child(2) { right: 0; top: 0; border-width: 1px 1px 0 0; }
+.track > i:nth-child(3) { left: 0; bottom: 0; border-width: 0 0 1px 1px; }
+.track > i:nth-child(4) { right: 0; bottom: 0; border-width: 0 1px 1px 0; }
+.trackLabel { position: absolute; left: 0; bottom: calc(100% + 8px); display: flex; align-items: center; gap: 9px; white-space: nowrap; font: 10px/1.4 ui-monospace, SFMono-Regular, monospace; letter-spacing: .08em; color: #f0f1e6; text-shadow: 0 1px 5px #0a141a; }
+.trackLabel > span { font-size: 8px; opacity: .8; }
+.track[data-selected="true"] .trackLabel { color: #f0c6aa; }
+.sceneHeader, .sceneFooter { position: absolute; left: 28px; right: 28px; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 20px; font: 10px/1.5 ui-monospace, SFMono-Regular, monospace; letter-spacing: .12em; text-shadow: 0 1px 4px #0004; pointer-events: none; }
+.sceneHeader { top: 25px; }
+.sceneHeader > span:first-child { display: flex; align-items: center; gap: 10px; }
+.sceneHeader i { width: 4px; height: 4px; background: #d7a387; }
+.sceneHeader > span:last-child { font-size: 9px; color: #e5e8dcaa; }
+.sceneFooter { bottom: 23px; font-size: 9px; color: #eff0e9aa; }
+.cameraLabel { position: absolute; z-index: 3; left: 28px; top: 76px; display: flex; flex-direction: column; text-shadow: 0 1px 6px #10212433; pointer-events: none; }
+.cameraLabel > span { font: 9px/1.5 ui-monospace, monospace; letter-spacing: .12em; color: #e3e9e2aa; }
+.cameraLabel strong { font: 400 28px/1.25 var(--font-display), sans-serif; letter-spacing: -.03em; margin: 6px 0; }
+.cameraLabel small { font-size: 10px; line-height: 1.5; color: #e4e9ddc9; }
+.telemetry { position: absolute; right: 28px; bottom: 67px; z-index: 3; width: 236px; padding: 15px 17px 13px; border: 1px solid #eef1df30; background: #111d20b5; backdrop-filter: blur(10px); pointer-events: none; }
+.telemetryTitle { display: flex; justify-content: space-between; align-items: center; gap: 14px; color: #edc2a5; font: 9px/1.5 ui-monospace, monospace; letter-spacing: .08em; }
+.telemetryTitle > span { color: #d9dfd0aa; font-size: 8px; }
+.speed { display: flex; align-items: center; gap: 12px; padding: 13px 0 15px; }
+.speed > strong { font: 400 51px/.95 var(--font-display), sans-serif; letter-spacing: -.045em; }
+.speed > span { font: 10px/1.7 ui-monospace, monospace; color: #d7dfd5; }
+.speed small { display: block; font: 10px/1.7 var(--font-body), sans-serif; color: #b0baae; }
+.occupants { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 11px; border-top: 1px solid #e8efdc24; }
+.occupants > span { font-size: 10px; color: #c3ccbf; }
+.occupants strong { font: 400 18px/1.2 var(--font-display), sans-serif; white-space: nowrap; }
+.occupants small { font: 9px/1.5 ui-monospace, monospace; margin-left: 6px; color: #aeb8aa; }
+.observationBar { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #ffffff25; padding: 5px 0; }
+.viewChoices { display: flex; align-items: center; gap: 24px; }
+.observationBar button { display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 0; border: 0; background: transparent; color: #898f89; font: 11px/1.5 var(--font-body), sans-serif; cursor: pointer; }
+.observationBar button[aria-pressed="true"] { color: #f1f0e8; }
+.viewIcon { font: 18px/1 var(--font-body), sans-serif; color: #7e8a82; }
+.observationBar button[aria-pressed="true"] .viewIcon { color: #d4a183; }
+.viewStatus { font: 9px/1.5 ui-monospace, monospace; letter-spacing: .08em; color: #778370; }
+.recon button:focus-visible { outline: 1px solid #d8aa8d; outline-offset: 5px; }
+.context { display: grid; grid-template-columns: 1.15fr 1fr; gap: 11%; padding: 33px 0 27px; }
+.kicker { color: #bd9278; font: 8px/1.5 ui-monospace, monospace; letter-spacing: .12em; }
+.context h3 { font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; margin: 13px 0 15px !important; letter-spacing: -.025em; }
+.context p { max-width: 410px; font-size: 12px; line-height: 1.8; color: #989f96; margin: 0; }
+.vehiclePanel { padding-top: 3px; }
+.vehiclePanelTitle { display: flex; align-items: center; justify-content: space-between; gap: 15px; font: 9px/1.5 ui-monospace, monospace; letter-spacing: .08em; color: #959e93; margin-bottom: 11px; }
+.vehiclePanelTitle > span:last-child { color: #8b9686; font-size: 8px; }
+.vehicleChoices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.vehicleChoices button { display: grid; grid-template-columns: 6px 1fr; gap: 8px; align-items: center; padding: 11px; border: 1px solid #ced7c521; color: #9ca596; background: transparent; text-align: left; font: 9px/1.5 ui-monospace, monospace; cursor: pointer; }
+.vehicleChoices button[aria-pressed="true"] { border-color: #c0957670; background: #c095760b; color: #f0ebdc; }
+.vehicleChoices button > span { width: 5px; height: 5px; }
+.vehicleChoices small { grid-column: 2; font: 9px/1.5 var(--font-body), sans-serif; color: #818d7d; }
+.vehicleChoices button[aria-pressed="true"] small { color: #ceab90; }
+.context .scenarioNote { font-size: 10px; line-height: 1.7; color: #7f8a79; margin-top: 14px; }
+.fallbackNotice { position: absolute; z-index: 4; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(330px, 80%); padding: 20px; background: #101a20db; text-align: center; }
+.fallbackNotice > span { font: 8px/1.5 ui-monospace, monospace; letter-spacing: .12em; color: #d9b699; }
+.fallbackNotice > p { font-size: 12px; line-height: 1.6; margin: 10px 0 5px; }
+.fallbackNotice > small { font-size: 9px; color: #a8b0a4; }
+.compactBadge { position: absolute; right: 14px; bottom: 14px; z-index: 3; font: 6px/1.5 ui-monospace, monospace; letter-spacing: .1em; color: #e8ecdfaa; background: #142027a3; padding: 5px 7px; }
+.recon[data-compact="true"] .sceneHeader { top: 15px; left: 15px; right: 15px; font-size: 6px; }
+.recon[data-compact="true"] .sceneHeader > span:last-child { display: none; }
+.recon[data-compact="true"] .trackLabel { font-size: 6px; }
 .recon[data-compact="true"] .trackLabel > span { display: none; }
-@media (max-width: 700px) {
-  .sceneHeader, .viewLabel { left: 15px; right: 15px; font-size: 7px; }
-  .sceneHeader { top: 16px; }
-  .sceneHeader > span:last-child { font-size: 6px; }
-  .sceneReadout { left: 15px; top: 48px; gap: 6px; }
-  .sceneReadout > span { font-size: 6px; }
-  .sceneReadout > span:last-child { display: none; }
-  .sceneReadout strong { font-size: 28px; gap: 7px; }
-  .sceneReadout small { font-size: 8px; width: 47px; }
-  .viewLabel { bottom: 15px; font-size: 6px; }
-  .sceneScale { display: none; }
-  .trackLabel { font-size: 7px; bottom: calc(100% + 4px); }
+@media (max-width: 800px) and (min-width: 601px) {
+  .telemetry { width: 200px; right: 20px; bottom: 52px; padding: 12px; }
+  .speed { padding: 10px 0 12px; }
+  .speed > strong { font-size: 39px; }
+  .cameraLabel { top: 63px; }
+  .cameraLabel strong { font-size: 25px; }
+  .cameraLabel small { font-size: 9px; }
+}
+@media (max-width: 600px) {
+  .scene { aspect-ratio: auto; padding-bottom: calc(75% + 112px); }
+  .canvas, .trackingLayer { bottom: 112px; }
+  .scene::after { bottom: 112px; }
+  .sceneHeader, .sceneFooter { left: 14px; right: 14px; font-size: 7px; letter-spacing: .04em; }
+  .sceneHeader { top: 15px; gap: 10px; }
+  .sceneHeader > span:last-child { font-size: 7px; max-width: 58px; text-align: right; line-height: 1.45; }
+  .sceneHeader > span:first-child { gap: 7px; }
+  .sceneFooter { bottom: 125px; font-size: 6px; }
+  .sceneFooter > span:last-child { display: none; }
+  .cameraLabel { left: 14px; top: 44px; }
+  .cameraLabel > span { display: none; }
+  .cameraLabel strong { font-size: 20px; margin: 0; }
+  .cameraLabel small { display: none; }
+  .telemetry { width: auto; right: 0; left: 0; bottom: 0; height: 112px; box-sizing: border-box; padding: 11px 15px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 23px 1fr; gap: 0 20px; background: #121b1c; border: 0; border-top: 1px solid #e8efdc24; backdrop-filter: none; }
+  .telemetryTitle { grid-column: 1 / -1; font-size: 9px; }
+  .telemetryTitle > span { font-size: 8px; }
+  .speed { padding: 4px 0; gap: 9px; }
+  .speed > strong { font-size: 37px; }
+  .speed > span { font-size: 10px; }
+  .speed small { font-size: 8px; }
+  .occupants { padding: 2px 0 0 18px; border-top: 0; border-left: 1px solid #e8efdc24; flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px; }
+  .occupants > span { font-size: 9px; }
+  .occupants strong { font-size: 24px; }
+  .occupants small { font-size: 8px; margin-left: 7px; }
+  .track > i { width: 8px; height: 8px; }
+  .trackLabel { font-size: 8px; bottom: calc(100% + 5px); }
   .trackLabel > span { display: none; }
-  .observationBar { gap: 10px; flex-wrap: wrap; padding: 5px 0; }
-  .vehicleChoices { gap: 20px; }
-  .viewChoices { gap: 16px; margin-left: auto; }
-  .observationBar button { font-size: 9px; }
-  .context { grid-template-columns: 1fr; gap: 27px; padding: 25px 0; }
+  .viewChoices { gap: 23px; }
+  .observationBar button { font-size: 11px; gap: 6px; }
+  .viewStatus { display: none; }
+  .viewIcon { font-size: 14px; }
+  .context { grid-template-columns: 1fr; gap: 24px; padding: 25px 0; }
   .context h3 { font-size: 26px; }
   .context p { font-size: 12px; }
-  .context dl > div { font-size: 11px; }
+  .vehiclePanelTitle { font-size: 8px; }
+  .vehicleChoices button { min-height: 61px; font-size: 11px; }
+  .vehicleChoices small { font-size: 10px; }
+  .recon[data-compact="true"] .scene { aspect-ratio: 16 / 9; padding-bottom: 0; }
+  .recon[data-compact="true"] .canvas, .recon[data-compact="true"] .trackingLayer, .recon[data-compact="true"] .scene::after { bottom: 0; }
+  .scene[data-overlays="false"] { padding-bottom: 75%; }
+  .scene[data-overlays="false"] .canvas, .scene[data-overlays="false"] .trackingLayer, .scene[data-overlays="false"]::after { bottom: 0; }
+  .recon[data-compact="true"] .scene[data-overlays="false"] { padding-bottom: 0; }
 }
+@media (max-width: 600px) {
+  .recon[data-failed="true"] .scene { padding-bottom: 75%; }
+  .recon[data-failed="true"] .canvas, .recon[data-failed="true"] .scene::after { bottom: 0; }
+  .recon[data-failed="true"][data-compact="true"] .scene { padding-bottom: 0; }
+}
+.recon button:disabled { opacity: .4; cursor: default; }

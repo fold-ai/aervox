@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import PerceptionDemo, { TrackedScene } from "@/components/site/PerceptionDemo";
-import FlightSequence from "@/components/site/FlightSequence";
+import MissionHero from "@/components/site/MissionHero";
 import wordmark from "@/public/actprove-wordmark.png";
 import styles from "./home.module.css";
 
@@ -11,6 +11,12 @@ const roadmap = [
   { name: "ARCA-1", category: "Wide-area sensing", copy: "A planned radar and camera system for wide-area drone detection. The proposed 3–6 metre system has a 50 km detection-range design goal, which has not been validated.", status: "PLANNED" },
   { name: "DETECT-1", category: "Long-range perception", copy: "A planned perception system for long-range drones, designed to interpret changing scenes, identify objects of interest, and surface new observations to operators.", status: "PLANNED" },
   { name: "ERA-1", category: "Next-generation autonomy", copy: "A long-term research direction for autonomous fighter-aircraft flight management, with object classification, civilian-risk awareness, and human authorization for consequential decisions.", status: "RESEARCH" }
+];
+
+const missions = [
+  { name: "Counter-drone", detail: "Intelligence for interceptor aircraft" },
+  { name: "Deep strike", detail: "Perception for long-range platforms" },
+  { name: "Reconnaissance", detail: "A connected view of the ground" },
 ];
 
 function Arrow({ diagonal = false, down = false, className = "" }) {
@@ -22,6 +28,8 @@ export default function Page() {
   const [motionPaused, setMotionPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [heroPlayback, setHeroPlayback] = useState("paused");
+  const [heroPhase, setHeroPhase] = useState(0);
+  const [phaseRequest, setPhaseRequest] = useState(null);
   const menuButton = useRef(null);
   const pageRef = useRef(null);
   const paused = motionPaused || reducedMotion;
@@ -71,24 +79,22 @@ export default function Page() {
       </header>
       <main id="main">
         <section id="top" className={styles.hero} aria-labelledby="hero-title">
-          <div className={styles.heroBackdrop} aria-hidden="true" />
-          <FlightSequence variant="hero" motionPaused={paused} className={styles.heroFilm} onPlaybackStateChange={setHeroPlayback} />
+          <MissionHero motionPaused={paused} phaseRequest={phaseRequest} onPhaseChange={setHeroPhase} onPlaybackStateChange={setHeroPlayback} />
           <div className={styles.heroShade} />
           <div className={styles.heroContent}>
-            <h1 id="hero-title">See more.<br />Understand more.</h1>
-            <p className={styles.heroDescription}>Computer vision, onboard intelligence, and decision support. Built to help operators understand the scene—and the consequences of acting.</p>
-            <a className={styles.primaryLink} href="#vision">Explore our vision <Arrow down /></a>
+            <h1 id="hero-title">Built for<br />contested skies.</h1>
+            <p className={styles.heroDescription}>Onboard intelligence for counter-drone,<br className={styles.desktopBreak} /> deep-strike and reconnaissance aircraft.</p>
+            <div className={styles.heroActions}><a className={styles.primaryLink} href="#vision">Explore the systems <Arrow down /></a><span>ACT-1 + PROVE-1<br />IN DEVELOPMENT</span></div>
           </div>
+          <div className={styles.heroSceneLabel} aria-hidden="true"><span>0{heroPhase + 1} / {missions[heroPhase].name.toUpperCase()}</span><span>CONCEPT FILM</span></div>
           <div className={styles.heroBottom}>
-            <a className={styles.scrollCue} href="#vision"><span className={styles.scrollLine} /><span>SCROLL TO DISCOVER</span></a>
-            <div className={styles.heroCaption}><span>01 — ACQUIRE. LOCK. FOLLOW.</span><span>A CINEMATIC FLIGHT SEQUENCE</span></div>
-            {!["blocked", "error"].includes(heroPlayback) && <button className={styles.motionButton} onClick={() => setMotionPaused(!motionPaused)} aria-pressed={paused} disabled={reducedMotion} aria-label={reducedMotion ? "Film disabled by reduced motion preference" : paused ? "Resume films" : "Pause films"}><svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true">{paused ? <path d="m6 3 10 7-10 7Z" /> : <path d="M5 4h3v12H5zm7 0h3v12h-3z" />}</svg><span>{reducedMotion ? "REDUCED MOTION" : paused ? "RESUME FILM" : "PAUSE FILM"}</span></button>}
+            <div className={styles.missionSelector} role="group" aria-label="Explore mission films">{missions.map((mission, index) => <button key={mission.name} type="button" aria-pressed={heroPhase === index} onClick={() => { setHeroPhase(index); setPhaseRequest({ index, nonce: Date.now() }); }}><span className={styles.missionNumber}>0{index + 1}</span><span><strong>{mission.name}</strong><small>{mission.detail}</small></span><Arrow diagonal /></button>)}</div>
+            {!["blocked", "error"].includes(heroPlayback) && <button className={styles.motionButton} onClick={() => setMotionPaused(!motionPaused)} aria-pressed={paused} disabled={reducedMotion} aria-label={reducedMotion ? "Film disabled by reduced motion preference" : paused ? "Resume films" : "Pause films"}><svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true">{paused ? <path d="m6 3 10 7-10 7Z" /> : <path d="M5 4h3v12H5zm7 0h3v12h-3z" />}</svg><span>{reducedMotion ? "MOTION OFF" : paused ? "PLAY" : "PAUSE"}</span></button>}
           </div>
         </section>
-        <div className={styles.disciplineBar}><span>ACTPROVE DEFENSE TECHNOLOGIES</span><div><span>Computer vision</span><span>Onboard intelligence</span><span>Decision support</span></div></div>
 
         <section id="vision" className={`${styles.visionSection} ${styles.sectionWrap}`}>
-          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ VISION SYSTEMS ]</p><h2>Understand the air.<br />Read the ground.</h2></div><p>From airborne tracking to reconnaissance. Follow movement, connect observations, and give operators a clearer view of the scene.</p></div>
+          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ VISION SYSTEMS ]</p><h2>Every angle.<br />A clearer picture.</h2></div><p>From airborne tracking to a three-dimensional view of the ground. Explore how connected observations can bring movement into context.</p></div>
           <div data-reveal><PerceptionDemo motionPaused={paused} /></div>
         </section>
 

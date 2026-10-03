@@ -1,0 +1,61 @@
+.sequence {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: #0b1116;
+}
+
+.film,
+.poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--mission-fit, cover);
+  object-position: var(--mission-position, 62% 50%);
+  user-select: none;
+}
+
+.poster {
+  pointer-events: none;
+}
+
+.playButton {
+  position: absolute;
+  z-index: 3;
+  right: max(30px, 5vw);
+  bottom: max(100px, 13vh);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 128px;
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 1px solid #f4f4f275;
+  border-radius: 0;
+  background: #0c1219c7;
+  backdrop-filter: blur(10px);
+  color: #f3f1ec;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.playButton > span { font-size: 10px; }
+.playButton:hover { border-color: #f4f4f2; background: #0c1219ed; }
+.playButton:focus-visible { outline: 2px solid #f4f4f2; outline-offset: 5px; }
+
+@media (max-width: 660px) {
+  .film, .poster { object-position: var(--mission-position, 63% 50%); }
+  .playButton { right: 24px; bottom: 112px; min-height: 44px; font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film { visibility: hidden; }
+}

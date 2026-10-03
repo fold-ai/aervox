@@ -19,11 +19,11 @@ export const metadata = {
   metadataBase: new URL("https://actprove.com"),
   title: "Actprove Defense Technologies",
   description:
-    "Actprove develops drone software and hardware: onboard compute, perception models, training data, and mission analysis tools.",
+    "Actprove develops onboard intelligence and ground software for counter-drone, deep-strike and reconnaissance aircraft.",
   openGraph: {
     title: "Actprove Defense Technologies",
     description:
-      "Drone software and hardware, from onboard perception to operational insight.",
+      "Onboard intelligence for counter-drone, deep-strike and reconnaissance aircraft. ACT-1 and PROVE-1, in development.",
     type: "website"
   }
 };

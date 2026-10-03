@@ -1,117 +1,106 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { Component, useCallback, useEffect, useRef, useState } from "react";
 import styles from "./GroundRecon.module.css";
 
+const GroundReconWorld = dynamic(() => import("./GroundReconWorld"), { ssr: false });
 const VEHICLES = [
-  { id: "G-01", offset: 0.16, tone: "light" },
-  { id: "G-02", offset: 0.45, tone: "dark" },
-  { id: "G-03", offset: 0.74, tone: "silver" },
+  { id: "G-01", color: "#bcbdb3", offset: 32, lane: 1.88, speed: 54, occupants: "1–2" },
+  { id: "G-02", color: "#646e68", offset: 0, lane: 1.88, speed: 54, occupants: "2–3" },
+  { id: "G-03", color: "#a4aaa4", offset: -35, lane: 1.88, speed: 54, occupants: "1–2" },
 ];
-// Authored animation coordinates in the photograph, not sensor data.
-const ROAD = [
-  { x: 10, y: 111 }, { x: 34.55, y: 71.25 },
-  { x: 52.85, y: 44.9 }, { x: 70.05, y: 19 }, { x: 89.4, y: -11 },
+const VIEWS = [
+  { id: "aerial", label: "Aerial", description: "Wide area / elevated perspective" },
+  { id: "drone01", label: "Drone 01", description: "Rear quarter / following vehicle" },
+  { id: "drone02", label: "Drone 02", description: "Front quarter / opposite side" },
 ];
 
-function positionAt(progress) {
-  const scaled = progress * (ROAD.length - 1);
-  const index = Math.min(Math.floor(scaled), ROAD.length - 2);
-  const amount = scaled - index;
-  const from = ROAD[index];
-  const to = ROAD[index + 1];
-  return { x: from.x + (to.x - from.x) * amount, y: from.y + (to.y - from.y) * amount };
-}
-
-function Observer({ x, y, number }) {
-  return <g transform={`translate(${x} ${y})`} className={styles.observer}>
-    <circle r="17" /><path d="m-11 3 11-8 11 8-11-3Z" /><text x="25" y="4">VIEW {number}</text>
-  </g>;
+class SceneBoundary extends Component {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  componentDidCatch(error) { console.error("GroundRecon render failure:", error); this.props.onFailure(); }
+  render() { return this.state.failed ? null : this.props.children; }
 }
 
 export default function GroundRecon({ motionPaused = false, showOverlays = true, compact = false, className = "" }) {
   const rootRef = useRef(null);
-  const elapsedRef = useRef(0);
-  const [elapsed, setElapsed] = useState(0);
+  const trackerRefs = useRef([]);
   const [inView, setInView] = useState(false);
+  const [hasEntered, setHasEntered] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [selectedId, setSelectedId] = useState("G-02");
-  const [view, setView] = useState("wide");
+  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [view, setView] = useState("drone01");
+  const [failed, setFailed] = useState(false);
+  const onFailure = useCallback(() => setFailed(true), []);
 
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setReducedMotion(preference.matches);
-    sync();
-    preference.addEventListener("change", sync);
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.05 });
+    const syncMotion = () => setReducedMotion(preference.matches);
+    const syncVisibility = () => setPageVisible(document.visibilityState !== "hidden");
+    syncMotion(); syncVisibility();
+    preference.addEventListener("change", syncMotion);
+    document.addEventListener("visibilitychange", syncVisibility);
+    const observer = new IntersectionObserver(([entry]) => {
+      setInView(entry.isIntersecting);
+      if (entry.isIntersecting) setHasEntered(true);
+    }, { threshold: .02 });
     if (rootRef.current) observer.observe(rootRef.current);
-    return () => { observer.disconnect(); preference.removeEventListener("change", sync); };
+    return () => {
+      observer.disconnect();
+      preference.removeEventListener("change", syncMotion);
+      document.removeEventListener("visibilitychange", syncVisibility);
+    };
   }, []);
 
-  useEffect(() => {
-    if (!inView || motionPaused || reducedMotion) return undefined;
-    let request;
-    let previous;
-    let drawn = 0;
-    const animate = now => {
-      if (previous !== undefined) elapsedRef.current += Math.min((now - previous) / 1000, 0.1);
-      previous = now;
-      if (now - drawn >= 32) { setElapsed(elapsedRef.current); drawn = now; }
-      request = requestAnimationFrame(animate);
-    };
-    request = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(request);
-  }, [inView, motionPaused, reducedMotion]);
+  const active = inView && pageVisible && !motionPaused && !reducedMotion;
+  const selected = VEHICLES[selectedIndex];
+  const selectedView = VIEWS.find(item => item.id === view);
+  const paused = motionPaused || reducedMotion;
+  const chooseVehicle = useCallback(index => setSelectedIndex(index), []);
 
-  const vehicles = VEHICLES.map(vehicle => ({ ...vehicle, ...positionAt((vehicle.offset + elapsed / 52) % 1) }));
-  const selected = vehicles.find(vehicle => vehicle.id === selectedId);
-  const zoom = view === "detail" && !compact ? 2.25 : 1;
-  const limit = (zoom - 1) * 50;
-  const shiftX = Math.max(-limit, Math.min(limit, (50 - selected.x) * zoom));
-  const shiftY = Math.max(-limit, Math.min(limit, (50 - selected.y) * zoom));
-  const isVisible = vehicle => {
-    const x = 50 + (vehicle.x - 50) * zoom + shiftX;
-    const y = 50 + (vehicle.y - 50) * zoom + shiftY;
-    const halfWidth = 2.4 * zoom;
-    const halfHeight = halfWidth * (1672 / 941) * (1122 / 1402);
-    return x + halfWidth > 0 && x - halfWidth < 100 && y + halfHeight > 0 && y - halfHeight < 100;
-  };
-  const visibleCount = vehicles.filter(isVisible).length;
-  const selectedVisible = isVisible(selected);
-
-  return <div ref={rootRef} className={`${styles.recon} ${className}`} data-compact={compact}>
-    <div className={styles.scene} data-overlays={showOverlays} role="group" aria-label="Simulated reconnaissance view with three moving vehicles">
-      <div className={styles.world} style={{ transform: `translate(${shiftX}%, ${shiftY}%) scale(${zoom})` }}>
-        <img className={styles.landscape} src="/media/ground-road-clean.webp" width="1672" height="941" alt="A mountain road seen from above" loading="lazy" draggable="false" />
-        {!compact && showOverlays && <svg className={styles.observationLines} viewBox="0 0 1672 941" fill="none" aria-hidden="true">
-          <path d={`M 600 185 L ${selected.x * 16.72} ${selected.y * 9.41} L 1260 720`} />
-          <Observer x={600} y={185} number="01" /><Observer x={1260} y={720} number="02" />
-        </svg>}
-        {vehicles.map(vehicle => <div key={vehicle.id} className={styles.vehicle} data-selected={vehicle.id === selectedId} data-tone={vehicle.tone} style={{ left: `${vehicle.x}%`, top: `${vehicle.y}%` }}>
-          <img src="/media/recon-vehicle.webp" alt="" draggable="false" className={styles.vehicleImage} />
-          {showOverlays && <div className={styles.track}>
-            <i className={styles.cornerTL} /><i className={styles.cornerTR} /><i className={styles.cornerBL} /><i className={styles.cornerBR} />
-            <span className={styles.trackLabel}>{vehicle.id}<span>{vehicle.id === selectedId ? "FOLLOWING" : "VEHICLE"}</span></span>
-          </div>}
-          {!compact && <button type="button" className={styles.vehicleButton} aria-label={`Follow vehicle ${vehicle.id}`} aria-pressed={vehicle.id === selectedId} onClick={() => setSelectedId(vehicle.id)} />}
-        </div>)}
+  return <div ref={rootRef} className={`${styles.recon} ${className}`} data-compact={compact} data-failed={failed}>
+    <div className={styles.scene} role="group" aria-label="Interactive 3D reconstruction of three civilian vehicles on a country road" data-overlays={showOverlays}>
+      <div className={styles.canvas}>
+        {hasEntered && !failed && <SceneBoundary onFailure={onFailure}>
+          <GroundReconWorld active={active} reducedMotion={reducedMotion} view={view} selectedIndex={selectedIndex} vehicles={VEHICLES} trackerRefs={trackerRefs} onSelect={chooseVehicle} onFailure={onFailure} />
+        </SceneBoundary>}
+        {(!hasEntered || failed) && <img className={styles.fallbackImage} src="/media/ground-road-clean.webp" alt="A country road through scrubland" width="1672" height="941" loading="lazy" />}
       </div>
-      {!compact && showOverlays && <>
-        <div className={styles.sceneHeader}><span><i />GROUND / RECONNAISSANCE</span><span>SIMULATED SCENE</span></div>
-        <div className={styles.sceneReadout}><span>EO OBSERVATION</span><strong>{String(visibleCount).padStart(2, "0")}<small>vehicles in view</small></strong><span>03 UNIQUE VEHICLE TRACKS</span></div>
-        <div className={styles.viewLabel}><span>{view === "detail" ? "VEHICLE DETAIL" : "WIDE AREA VIEW"}</span><span>{zoom.toFixed(2)}× DIGITAL VIEW</span></div>
-        <div className={styles.sceneScale} aria-hidden="true"><span /><span /><span /><span /><span /></div>
-        {view === "detail" && !selectedVisible && <div className={styles.reacquiring}><span>{selectedId} / OUT OF VIEW</span><strong>Waiting for the vehicle to re-enter.</strong></div>}
+      {!failed && showOverlays && <div className={styles.trackingLayer} aria-hidden="true">
+        {VEHICLES.map((vehicle, index) => <div key={vehicle.id} ref={element => { trackerRefs.current[index] = element; }} className={styles.track} data-selected={index === selectedIndex}>
+          <i /><i /><i /><i />
+          <span className={styles.trackLabel}>{vehicle.id}<span>{index === selectedIndex ? "FOLLOWING" : "VEHICLE"}</span></span>
+        </div>)}
+      </div>}
+      {showOverlays && !failed && <>
+        <div className={styles.sceneHeader}><span><i />GROUND / 3D RECONSTRUCTION</span><span>SIMULATED SCENARIO</span></div>
+        {!compact && <>
+          <div className={styles.cameraLabel}><span>VIEWPOINT</span><strong>{selectedView.label}</strong><small>{selectedView.description}</small></div>
+          <div className={styles.telemetry}>
+            <span className={styles.telemetryTitle}>{selected.id}<span>SIMULATED DATA</span></span>
+            <div className={styles.speed}><strong>{selected.speed}</strong><span>km/h<small>Speed (simulated)</small></span></div>
+            <div className={styles.occupants}><span>Occupants (scenario)</span><strong>{selected.occupants}<small>approx.</small></strong></div>
+          </div>
+          <div className={styles.sceneFooter}><span>{paused ? "MOTION PAUSED" : "CONTINUOUS 3D FOLLOW"}</span><span>03 VEHICLES / 03 PERSPECTIVES</span></div>
+        </>}
       </>}
+      {failed && <div className={styles.fallbackNotice}><span>3D PREVIEW UNAVAILABLE</span><p>This browser could not display the interactive scene.</p><small>The image is a static scene reference.</small></div>}
+      {compact && !failed && <span className={styles.compactBadge}>3D / SIMULATED</span>}
     </div>
     {!compact && <>
       <div className={styles.observationBar}>
-        <div className={styles.vehicleChoices} role="group" aria-label="Select a vehicle">{VEHICLES.map(vehicle => <button type="button" key={vehicle.id} aria-pressed={selectedId === vehicle.id} onClick={() => setSelectedId(vehicle.id)}><span />{vehicle.id}</button>)}</div>
-        <div className={styles.viewChoices} role="group" aria-label="Reconnaissance view"><button type="button" aria-pressed={view === "wide"} onClick={() => setView("wide")}>Overview</button><button type="button" aria-pressed={view === "detail"} onClick={() => setView("detail")}>Vehicle detail <span aria-hidden="true">↗</span></button></div>
+        <div className={styles.viewChoices} role="group" aria-label="3D camera viewpoint">{VIEWS.map(item => <button type="button" key={item.id} disabled={failed} aria-pressed={view === item.id} onClick={() => setView(item.id)}><span className={styles.viewIcon} aria-hidden="true">{item.id === "aerial" ? "⌖" : "↗"}</span>{item.label}</button>)}</div>
+        <span className={styles.viewStatus}>{failed ? "STATIC REFERENCE" : "3D VIEW / SIMULATED"}</span>
       </div>
       <div className={styles.context}>
-        <div><span className={styles.kicker}>RECONNAISSANCE</span><h3>Follow the movement.<br />Keep the context.</h3><p>A concept for reconnaissance aircraft: follow vehicles and connect observations across the scene.</p></div>
-        <dl><div><dt>Selected vehicle</dt><dd>{selectedId} · {selectedVisible ? "visual track" : "out of view"}</dd></div><div><dt>Observation viewpoints</dt><dd>02 · illustrated</dd></div><div><dt>Occupancy</dt><dd>Unconfirmed<span>Cabin not visible</span></dd></div></dl>
+        <div><span className={styles.kicker}>A DIFFERENT PERSPECTIVE</span><h3>Move around the scene.<br />See more of the story.</h3><p>Follow the same vehicle from above, behind, or across the road. Each view reveals its shape, motion, and place in the wider scene.</p></div>
+        <div className={styles.vehiclePanel}>
+          <div className={styles.vehiclePanelTitle}><span>SELECT A VEHICLE</span><span>03 IN SCENARIO</span></div>
+          <div className={styles.vehicleChoices} role="group" aria-label="Select a vehicle">{VEHICLES.map((vehicle, index) => <button type="button" key={vehicle.id} disabled={failed} aria-pressed={selectedIndex === index} onClick={() => setSelectedIndex(index)}><span style={{ backgroundColor: vehicle.color }} />{vehicle.id}<small>{failed ? "Unavailable" : selectedIndex === index ? "Following" : "Follow"}</small></button>)}</div>
+          <p className={styles.scenarioNote}>Digital reconstruction. Speed and approximate occupant counts are authored scenario values; occupancy is not inferred from the windows.</p>
+        </div>
       </div>
     </>}
   </div>;
