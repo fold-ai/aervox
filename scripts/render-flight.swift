@@ -1,25 +1,24 @@
 // Original illustrative marketing animation. No live sensor data or detection logic.
-// Compile: swiftc -module-cache-path /tmp/actprove-swift-cache scripts/render-flight.swift -o /tmp/render-actprove-flight
-// Run from the project root: /tmp/render-actprove-flight [--frames-only]
+// Compile: swiftc -module-cache-path /tmp/actprove-swift-cache scripts/render-flight.swift -o /tmp/render-actprove-flight-v2
+// Run from the project root: /tmp/render-actprove-flight-v2 [--frames-only]
 import Foundation
 import AVFoundation
 import CoreGraphics
 import CoreVideo
 import CoreMedia
-import CoreText
 import ImageIO
 import UniformTypeIdentifiers
 import VideoToolbox
 
-let frameWidth = 1280
-let frameHeight = 720
+let frameWidth = 1920
+let frameHeight = 1080
 let fps: Int32 = 30
-let duration = 16.0
+let duration = 18.0
 let project = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
 let media = project.appendingPathComponent("public/media")
-let output = media.appendingPathComponent("flight-sequence.mp4")
-let poster = media.appendingPathComponent("flight-poster.png")
-let reviewDirectory = URL(fileURLWithPath: "/private/tmp/actprove-flight-review", isDirectory: true)
+let output = media.appendingPathComponent("flight-sequence-v2.mp4")
+let poster = media.appendingPathComponent("flight-poster-v2.png")
+let reviewDirectory = URL(fileURLWithPath: "/private/tmp/actprove-flight-v2-review", isDirectory: true)
 let colorSpace = CGColorSpace(name: CGColorSpace.sRGB)!
 let bitmapInfo = CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
 
@@ -69,54 +68,24 @@ func ink(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ alpha: CGFloat = 1) -> CGCo
     CGColor(colorSpace: colorSpace, components: [r, g, b, alpha])!
 }
 
-let white = ink(0.96, 0.95, 0.92)
-let amber = ink(0.81, 0.60, 0.44)
-let quietWhite = ink(0.87, 0.88, 0.86)
-
-func text(_ value: String, at point: CGPoint, size: CGFloat, color: CGColor, context: CGContext, tracking: CGFloat = 1.2) {
-    let font = CTFontCreateWithName("Menlo-Regular" as CFString, size, nil)
-    let attrs: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key(kCTFontAttributeName as String): font,
-        NSAttributedString.Key(kCTForegroundColorAttributeName as String): color,
-        NSAttributedString.Key(kCTKernAttributeName as String): tracking,
-    ]
-    let line = CTLineCreateWithAttributedString(NSAttributedString(string: value, attributes: attrs))
-    context.saveGState()
-    context.textMatrix = .identity
-    context.textPosition = point
-    context.setShadow(offset: CGSize(width: 0, height: -1), blur: 3, color: ink(0, 0, 0, 0.65))
-    CTLineDraw(line, context)
-    context.restoreGState()
-}
-
 struct AircraftState {
     let x: Double
-    let y: Double // Fraction down from the top of the frame.
+    let y: Double
     let width: Double
     let bank: Double
-    let acquisition: Double
-    let locked: Bool
 }
 
+// Original authored camera choreography; these are illustration coordinates only.
 func state(at time: Double) -> AircraftState {
-    if time < 2 {
-        let p = smooth(time / 2)
-        return AircraftState(x: mix(0.55, 0.548, p), y: mix(0.48, 0.471, p),
-                             width: mix(0.07, 0.09, p), bank: mix(-1.2, 0.7, p), acquisition: 0, locked: false)
-    }
-    if time < 4 {
-        let p = smooth((time - 2) / 2)
-        return AircraftState(x: mix(0.548, 0.55, p), y: mix(0.471, 0.474, p),
-                             width: mix(0.09, 0.105, p), bank: mix(0.7, -0.4, p), acquisition: p, locked: false)
-    }
-    let p = smooth((time - 4) / 8)
-    let drift = sin(clamp((time - 4) / 8) * Double.pi)
-    let settled = time > 12 ? sin((time - 12) * Double.pi / 3) : 0
-    return AircraftState(x: mix(0.55, 0.572, p) + drift * 0.009 + settled * 0.0015,
-                         y: mix(0.474, 0.53, p) - drift * 0.006 + settled * 0.001,
-                         width: mix(0.105, 0.42, pow(p, 1.13)),
-                         bank: mix(-0.4, 1.3, p) + drift * 2.1 + settled * 0.2,
-                         acquisition: 1, locked: true)
+    let p = smooth(clamp(time / 15.7))
+    let approach = pow(p, 1.12)
+    let arc = sin(clamp(time / 15.7) * .pi)
+    return AircraftState(
+        x: mix(0.755, 0.565, p) + 0.018 * sin(time * 0.34) * arc,
+        y: mix(0.385, 0.555, p) - 0.016 * sin(time * 0.42) * arc,
+        width: mix(0.075, 0.615, approach),
+        bank: mix(-7.0, -1.2, p) + 6.7 * sin(time * 0.42) * arc
+    )
 }
 
 func drawAircraft(_ aircraft: AircraftState, alpha: Double, context: CGContext) {
@@ -129,77 +98,53 @@ func drawAircraft(_ aircraft: AircraftState, alpha: Double, context: CGContext) 
     context.rotate(by: aircraft.bank * .pi / 180)
     context.interpolationQuality = .high
     context.draw(drone, in: CGRect(x: -width / 2, y: -height / 2, width: width, height: height))
-
-    if aircraft.acquisition > 0 || aircraft.locked {
-        // The annotation receives the exact aircraft translation and bank; neither can drift.
-        let acquisition = aircraft.acquisition
-        let expansion = mix(1.7, 1, acquisition)
-        let padding = mix(20, 8, acquisition)
-        let w = width * expansion + padding * 2
-        let h = height * expansion + padding * 2
-        let left = -w / 2, right = w / 2, bottom = -h / 2, top = h / 2
-        let length = min(22.0, max(12.0, width * 0.045))
-        context.setAlpha(alpha * (aircraft.locked ? 0.87 : min(0.88, 0.18 + acquisition * 1.3)))
-        context.setStrokeColor(aircraft.locked ? white : amber)
-        context.setLineWidth(1.05)
-        context.setLineCap(.butt)
-        let path = CGMutablePath()
-        for (x, y, dx, dy) in [(left, top, 1.0, -1.0), (right, top, -1.0, -1.0),
-                               (left, bottom, 1.0, 1.0), (right, bottom, -1.0, 1.0)] {
-            path.move(to: CGPoint(x: x + dx * length, y: y))
-            path.addLine(to: CGPoint(x: x, y: y))
-            path.addLine(to: CGPoint(x: x, y: y + dy * length))
-        }
-        context.addPath(path)
-        context.strokePath()
-        if aircraft.locked || acquisition > 0.65 {
-            text("AIRCRAFT  A-01", at: CGPoint(x: left, y: top + 12), size: 9,
-                 color: white, context: context, tracking: 0.9)
-        }
-    }
     context.restoreGState()
 }
 
-func drawStatus(_ value: String, alpha: Double, acquiring: Bool, context: CGContext) {
-    guard alpha > 0.001 else { return }
+func drawBackground(time: Double, alpha: Double, context: CGContext) {
+    let p = smooth(clamp(time / 16.2))
+    let scale = mix(1.045, 1.14, p)
+    let backgroundWidth = Double(frameWidth) * scale
+    let backgroundHeight = backgroundWidth * Double(background.height) / Double(background.width)
+    let x = (Double(frameWidth) - backgroundWidth) / 2 + mix(8, -38, p)
+    let y = (Double(frameHeight) - backgroundHeight) / 2 + mix(-4, 13, p)
     context.saveGState()
     context.setAlpha(alpha)
-    context.setFillColor(acquiring ? amber : quietWhite)
-    context.fill(CGRect(x: 42, y: frameHeight - 45, width: 4, height: 4))
-    text(value, at: CGPoint(x: 57, y: frameHeight - 45), size: 10, color: quietWhite, context: context)
+    context.interpolationQuality = .high
+    context.draw(background, in: CGRect(x: x, y: y, width: backgroundWidth, height: backgroundHeight))
     context.restoreGState()
 }
 
 func drawFrame(time: Double, context: CGContext) {
-    let phase = time / duration * .pi * 2
-    let breathing = pow(sin(time / duration * .pi), 2)
-    let scale = 1.018 + 0.017 * breathing
-    let backgroundWidth = Double(frameWidth) * scale
-    let backgroundHeight = backgroundWidth * Double(background.height) / Double(background.width)
-    let x = (Double(frameWidth) - backgroundWidth) / 2 + sin(phase) * 2
-    let y = (Double(frameHeight) - backgroundHeight) / 2 + sin(phase) * 1.2
-    context.interpolationQuality = .high
-    context.draw(background, in: CGRect(x: x, y: y, width: backgroundWidth, height: backgroundHeight))
-    // A light cinematic grade keeps the source image visible and annotations legible.
-    context.setFillColor(ink(0.015, 0.025, 0.035, 0.07))
+    let reset = smooth((time - 16.3) / 1.7)
+    drawBackground(time: min(time, 16.3), alpha: 1, context: context)
+    if reset > 0 { drawBackground(time: 0, alpha: reset, context: context) }
+    context.setFillColor(ink(0.02, 0.03, 0.045, 0.035))
     context.fill(CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight))
-    let colors = [ink(0.01, 0.02, 0.025, 0.38), ink(0, 0, 0, 0), ink(0, 0, 0, 0.15)] as CFArray
-    let gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: [0, 0.42, 1])!
-    context.drawLinearGradient(gradient, start: CGPoint(x: 0, y: 0), end: CGPoint(x: 0, y: frameHeight), options: [])
+    drawAircraft(state(at: min(time, 16.3)), alpha: 1 - reset, context: context)
+    if reset > 0 { drawAircraft(state(at: 0), alpha: reset, context: context) }
+}
 
-    if time >= 14 {
-        let p = smooth((time - 14) / 2)
-        drawAircraft(state(at: 14), alpha: 1 - p, context: context)
-        drawAircraft(state(at: 0), alpha: p, context: context)
-        drawStatus("TRACK LOCKED", alpha: 1 - p, acquiring: false, context: context)
-        drawStatus("SEARCHING", alpha: p, acquiring: false, context: context)
-    } else {
-        drawAircraft(state(at: time), alpha: 1, context: context)
-        let caption = time < 2 ? "SEARCHING" : time < 4 ? "ACQUIRING" : "TRACK LOCKED"
-        drawStatus(caption, alpha: 1, acquiring: time >= 2 && time < 4, context: context)
-    }
-    text("CINEMATIC SIMULATION", at: CGPoint(x: 42, y: 32), size: 9, color: quietWhite,
-         context: context, tracking: 1.3)
+func metadata(at time: Double) -> [String: Any] {
+    let aircraft = state(at: min(time, 16.3))
+    let width = aircraft.width * Double(frameWidth)
+    let height = width * Double(drone.height) / Double(drone.width)
+    let acquiring = smooth((time - 1.35) / 1.7)
+    let opacity = time < 1.35 ? 0 : time > 16.3 ? max(0, 1 - (time - 16.3) / 0.7) : min(1, (time - 1.35) / 0.3)
+    let phase = time < 1.35 ? "Observing" : time < 3.05 ? "Acquiring" : time < 5 ? "Track acquired" : time < 16.3 ? "Following" : "Sequence reset"
+    return [
+        "t": time,
+        "cx": aircraft.x * Double(frameWidth),
+        "cy": aircraft.y * Double(frameHeight),
+        "w": width,
+        "h": height,
+        "rotation": -aircraft.bank,
+        "opacity": opacity,
+        "acquisition": acquiring,
+        "phase": phase,
+        "zoom": aircraft.width / 0.075,
+        "confidence": time < 3.05 ? mix(62, 98, acquiring) : 98,
+    ]
 }
 
 func stillImage(at time: Double) throws -> CGImage {
@@ -219,8 +164,22 @@ func writePNG(_ image: CGImage, to url: URL) throws {
 }
 
 try FileManager.default.createDirectory(at: reviewDirectory, withIntermediateDirectories: true)
-try writePNG(stillImage(at: 11), to: poster)
-for time in [0.0, 3.0, 6.0, 11.0, 14.0, 15.5] {
+try writePNG(stillImage(at: 13), to: poster)
+try writePNG(stillImage(at: 0), to: media.appendingPathComponent("flight-start-v2.png"))
+
+// Keep full-resolution source stills and lighter web-facing posters in sync.
+let compressPosters = Process()
+compressPosters.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+compressPosters.arguments = ["node", "-e", "const sharp=require('sharp'); (async()=>{for(const n of ['flight-start-v2','flight-poster-v2']) await sharp('public/media/'+n+'.png').webp({quality:88,effort:5}).toFile('public/media/'+n+'.webp');})().catch(e=>{console.error(e);process.exit(1)});"]
+try compressPosters.run()
+compressPosters.waitUntilExit()
+guard compressPosters.terminationStatus == 0 else { throw RenderError.invalidImage("WebP poster compression") }
+
+let samples = (0...Int(duration * Double(fps))).map { metadata(at: Double($0) / Double(fps)) }
+let track: [String: Any] = ["version": 2, "width": frameWidth, "height": frameHeight, "fps": fps, "duration": duration, "posterTime": 13, "illustrative": true, "samples": samples]
+let trackData = try JSONSerialization.data(withJSONObject: track, options: [.sortedKeys])
+try trackData.write(to: media.appendingPathComponent("flight-track-v2.json"))
+for time in [0.0, 2.2, 5.0, 9.0, 13.0, 16.0, 17.2] {
     try writePNG(stillImage(at: time), to: reviewDirectory.appendingPathComponent("frame-\(time).png"))
 }
 print("Poster: \(poster.path)")
@@ -240,7 +199,7 @@ var settings: [String: Any] = [
         AVVideoYCbCrMatrixKey: AVVideoYCbCrMatrix_ITU_R_709_2,
     ],
     AVVideoCompressionPropertiesKey: [
-        AVVideoAverageBitRateKey: 4_800_000,
+        AVVideoAverageBitRateKey: 8_500_000,
         AVVideoExpectedSourceFrameRateKey: fps,
         AVVideoMaxKeyFrameIntervalKey: 60,
         AVVideoProfileLevelKey: AVVideoProfileLevelH264HighAutoLevel,

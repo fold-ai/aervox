@@ -75,7 +75,6 @@ export default function Page() {
           <FlightSequence variant="hero" motionPaused={paused} className={styles.heroFilm} onPlaybackStateChange={setHeroPlayback} />
           <div className={styles.heroShade} />
           <div className={styles.heroContent}>
-            <p className={styles.eyebrow}><span className={styles.signalDot} /> PERCEPTION. CONTEXT. HUMAN CONTROL.</p>
             <h1 id="hero-title">See more.<br />Understand more.</h1>
             <p className={styles.heroDescription}>Computer vision, onboard intelligence, and decision support. Built to help operators understand the scene—and the consequences of acting.</p>
             <a className={styles.primaryLink} href="#vision">Explore our vision <Arrow down /></a>
@@ -89,7 +88,7 @@ export default function Page() {
         <div className={styles.disciplineBar}><span>ACTPROVE DEFENSE TECHNOLOGIES</span><div><span>Computer vision</span><span>Onboard intelligence</span><span>Decision support</span></div></div>
 
         <section id="vision" className={`${styles.visionSection} ${styles.sectionWrap}`}>
-          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ VISION SYSTEMS ]</p><h2>Understand the air.<br />Read the ground.</h2></div><p>Recognize objects. Follow movement. Interpret the environment. Perception software developed around the aircraft, its sensors, and the people making decisions.</p></div>
+          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ VISION SYSTEMS ]</p><h2>Understand the air.<br />Read the ground.</h2></div><p>From airborne tracking to reconnaissance. Follow movement, connect observations, and give operators a clearer view of the scene.</p></div>
           <div data-reveal><PerceptionDemo motionPaused={paused} /></div>
         </section>
 
@@ -127,7 +126,7 @@ export default function Page() {
 
         <section id="contact" className={`${styles.contactSection} ${styles.sectionWrap}`}><div className={styles.contactGrid} aria-hidden="true" /><div data-reveal><p className={styles.eyebrow}>[ WORK WITH ACTPROVE ]</p><a className={styles.contactHeading} href="mailto:contact@actprove.com"><h2>Build what<br />comes next.</h2><span><Arrow diagonal /></span></a><div className={styles.contactBottom}><p>For aircraft manufacturers, engineering teams,<br />and technology partners.</p><a href="mailto:contact@actprove.com">contact@actprove.com <Arrow diagonal /></a></div></div></section>
       </main>
-      <footer className={styles.footer}><div className={styles.footerTop}><a className={styles.brand} href="#top" aria-label="Actprove home"><Image src={wordmark} alt="Actprove" sizes="170px" /><span>DEFENSE TECHNOLOGIES</span></a><p>Perception. Context. Human control.</p><a href="#top">BACK TO TOP <Arrow down className={styles.backArrow} /></a></div><div className={styles.footerBottom}><span>© 2026 Actprove Defense Technologies</span><span>DRONE SOFTWARE + HARDWARE</span><span>DEVELOPED WITH PURPOSE.</span></div></footer>
+      <footer className={styles.footer}><div className={styles.footerTop}><a className={styles.brand} href="#top" aria-label="Actprove home"><Image src={wordmark} alt="Actprove" sizes="170px" /><span>DEFENSE TECHNOLOGIES</span></a><p>Intelligence for unmanned systems.</p><a href="#top">BACK TO TOP <Arrow down className={styles.backArrow} /></a></div><div className={styles.footerBottom}><span>© 2026 Actprove Defense Technologies</span><span>DRONE SOFTWARE + HARDWARE</span><span>DEVELOPED WITH PURPOSE.</span></div></footer>
     </div>
   );
 }

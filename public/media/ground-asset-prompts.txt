@@ -1,0 +1,47 @@
+Ground animation concept assets
+Generation mode: Built-in image_gen__imagegen tool, imagegen skill. No alternate API/CLI image generation and no programmatic background removal.
+Generated 2026-10-02. Non-operational illustrative traffic visualization.
+
+ground-road-clean.png / ground-road-clean.webp
+Original edit target: public/media/perception-ground.png
+Generated source: /Users/zahar/.codex/generated_images/01a0fe41-e55a-7713-bf61-ce8381d5718a/exec-100e2aa0-8ade-4230-aeed-3274eb7ab2fd.png
+Tool parameter transparent_background: false.
+Dimensions: 1672 x 941. All three vehicles removed; road is empty. The composition, diagonal road geometry and buildings visually preserved. Original PNG retained; WebP encoded with sharp quality 88 effort 6.
+Exact edit prompt:
+Use case: precise-object-edit
+Asset type: Clean photographic background plate for a non-operational traffic visualization.
+Input image: The attached overhead aerial country-road photograph is the edit target.
+Primary request: Remove exactly the three civilian vehicles from this photograph: the white van at approximately 34.5% from the left and 71% from the top, the dark compact car at approximately 53% from the left and 45% from the top, and the light gray SUV at approximately 70% from the left and 19% from the top. Fill their former locations seamlessly with the original realistic asphalt, matching all road markings.
+Constraints/invariants: Change only the three vehicles and their shadows. Preserve exactly the image framing, image aspect ratio, diagonal road geometry and orientation, lane width and road markings, every building, grass, rock, bush, dirt track, lighting, color, shadows and camera perspective. The original two-lane paved road must still run from the bottom-left to the top-right. Keep the surrounding landscape absolutely identical wherever possible. Make the entire road empty.
+Avoid: No vehicles, no people, no HUD, no labels, no text, no graphics, no weapons, no targets. Do not crop, rotate, relight, stylize, zoom, repaint the entire image, or redesign the landscape.
+
+recon-vehicle.png
+Generated initial source: /Users/zahar/.codex/generated_images/01a0fe41-e55a-7713-bf61-ce8381d5718a/exec-a6341e0b-2933-4f55-bbd5-bd3708494a8d.png
+Final source after camera elevation refinement: /Users/zahar/.codex/generated_images/01a0fe41-e55a-7713-bf61-ce8381d5718a/exec-8bab1ae6-d9ee-4db2-b1ad-a3350310609b.png
+Both calls use transparent_background: true.
+Exact initial generation prompt:
+Use case: product-mockup
+Asset type: Realistic transparent civilian vehicle sprite for a non-operational aerial traffic visualization.
+Primary request: A single generic light-gray civilian SUV isolated on TRUE TRANSPARENT BACKGROUND, heading diagonally toward the upper-right of the canvas.
+Subject: One ordinary contemporary light-gray SUV with a plain unbranded body, dark window glass, four realistic tires and understated details. Front end points to the upper-right at a 40-degree counterclockwise angle from horizontal, rear end toward bottom-left.
+Style/medium: Photorealistic aerial photograph of a real civilian vehicle. Match muted cool-gray daylight and realistic small-vehicle optical detail of rural aerial survey photography. Never an illustration or cartoon.
+Composition/framing: Camera approximately 65 degrees above ground, near-overhead oblique view, so the roof is dominant, windshield/hood visible at upper-right, rear windshield/rear at bottom-left and one narrow side visible. Single complete SUV centered in canvas with small but clear transparent padding on every side. Vehicle occupies about 75% of canvas width and height; no clipping. Include a subtle short diffuse contact shadow close under the wheels/body, on transparency.
+Lighting/mood: Soft overcast natural daylight, no dramatic studio reflections.
+Background: Genuine transparent alpha channel, no white or gray surface, no ground, no street, no backdrop, no checkerboard pattern.
+Constraints: Exactly one civilian SUV. No logos, brand emblems, words, readable license plate text, people, weapons, additional objects, HUD, tracking brackets, labels, or watermarks. Non-operational illustrative traffic asset.
+
+Exact refinement prompt:
+Use case: precise-object-edit
+Asset type: Transparent photorealistic vehicle sprite for compositing into near-top-down rural aerial photography.
+Input image: This isolated light-gray SUV is the edit target.
+Primary request: Change ONLY the camera elevation so the SUV is viewed from almost directly overhead, approximately 80 degrees above the ground (only 10 degrees away from looking vertically straight down). It must look like aerial survey footage, with the roof, windshield and hood dominating; visible side doors and wheels reduced to very narrow slivers.
+Keep invariant: One identical generic light-gray civilian SUV, same colors/materials, soft overcast lighting, no branding, the front points toward the upper-right and the rear toward the bottom-left, entire car fully visible and centered with clear transparent padding, subtle short contact shadow. Maintain the existing 40-degree road-aligned diagonal heading.
+Background: Preserve genuine transparent alpha channel around the vehicle and its subtle shadow.
+Avoid: No road, no ground surface, no background, no people, no text or labels, no tracking boxes, no weapons, no HUD. No low viewpoint or elevated studio three-quarter perspective; this is an almost straight-down aerial view.
+
+Final vehicle inspection: 1402 x 1122 RGBA PNG, 1261200 bytes. True alpha channel with 51.91% pixels completely transparent. SUV front points upper-right; rear lower-left. Camera elevation refined once to better fit original aerial background.
+Visible alpha >=8 bounds including soft shadow: x=110..1353, y=78..1072; width=1244, height=995.
+Vehicle alpha >=128 bounds: x=120..1320, y=81..1051; width=1201, height=971.
+For tight tracking around main body use alpha >=128: left=8.56%, top=7.22%, width=85.66%, height=86.54%, center approximately 51.39%, 50.45%.
+
+WebP derivative: recon-vehicle.webp encoded from the final PNG using sharp with quality=90, alphaQuality=100, effort=6. Original dimensions and alpha preserved; conventional format conversion only, no resizing, editing, or regeneration.
