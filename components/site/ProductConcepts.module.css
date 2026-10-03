@@ -1,0 +1,100 @@
+.concepts { --green: #9cf6b7; --line: #dce7df26; color: #edf1eb; width: 100%; }
+.sectionBar { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding: 17px 0; }
+.sectionBar > span { font: 9px/1.5 ui-monospace, SFMono-Regular, monospace; letter-spacing: .1em; color: #88988c; }
+.motionControl { display: flex; align-items: center; gap: 9px; min-height: 44px; border: 0; padding: 0; background: transparent; color: #bec9bd; font: 10px/1.5 ui-monospace, SFMono-Regular, monospace; white-space: nowrap; }
+.motionControl:disabled { color: #788276; cursor: default; }
+.row { display: grid; grid-template-columns: minmax(235px, .75fr) minmax(0, 1.55fr); align-items: center; gap: 7%; padding: 52px 0 56px; border-top: 1px solid var(--line); }
+.row:last-child { border-bottom: 1px solid var(--line); }
+.index { display: block; color: #86988a; font: 8px/1.7 ui-monospace, SFMono-Regular, monospace; letter-spacing: .09em; }
+.concepts .copy h3 { font-size: clamp(47px, 5.15vw, 78px); line-height: 1.04; font-weight: 400; letter-spacing: -.055em; margin: 19px 0 15px; }
+.planned { display: flex; align-items: center; gap: 8px; color: #acd5b6; font: 8px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .11em; }
+.planned i { width: 4px; height: 4px; background: var(--green); }
+.concepts .copy h4 { font-size: clamp(21px, 1.85vw, 28px); line-height: 1.2; letter-spacing: -.025em; margin: 37px 0 16px; font-weight: 400; }
+.copy p { font-size: 13px; line-height: 1.8; color: #a4afa3; max-width: 370px; }
+.productNote { display: block; max-width: 330px; color: #72816f; font-size: 10px; line-height: 1.7; margin-top: 25px; }
+.figure { min-width: 0; position: relative; }
+.visual { display: block; width: 100%; height: auto; aspect-ratio: 900 / 520; overflow: hidden; }
+.figureFooter { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 54px; border-bottom: 1px solid var(--line); }
+.figureFooter > span { color: #6e8273; font: 8px/1.5 ui-monospace, SFMono-Regular, monospace; letter-spacing: .09em; }
+.figureFooter button { display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 0; background: transparent; border: 0; color: #becabb; font: 9px/1.5 ui-monospace, SFMono-Regular, monospace; }
+.figureFooter button[aria-pressed="true"] { color: var(--green); }
+.layerIcon { height: 9px; width: 12px; border: 1px solid currentColor; display: block; box-shadow: -3px 3px 0 -1px #080d0b, -3px 3px 0 0 currentColor; opacity: .85; }
+.concepts button:focus-visible { outline: 1px solid var(--green); outline-offset: 5px; }
+.figureLabel { fill: #819c8a; font: 10px ui-monospace, SFMono-Regular, monospace; letter-spacing: 1.8px; }
+.mutedLabel { fill: #5b7261; font: 8px ui-monospace, SFMono-Regular, monospace; letter-spacing: 1.4px; }
+.lightLabel { fill: #bbd0c2; font: 9px ui-monospace, SFMono-Regular, monospace; letter-spacing: 1.2px; }
+.greenLabel { fill: #a3eab7; font: 8px ui-monospace, SFMono-Regular, monospace; letter-spacing: 1.1px; }
+.calloutLine { fill: none; stroke: #8abb9a; stroke-width: .8; stroke-opacity: .6; }
+.terrainLines { stroke: #769781; stroke-width: .75; stroke-opacity: .33; fill: none; }
+.terrainLines path:nth-child(3n) { stroke-opacity: .53; }
+.terrainDetails { fill: #2b4434; fill-opacity: .19; stroke: #7c9f87; stroke-opacity: .45; stroke-width: .8; }
+.flightPath { fill: none; stroke: #6c987b; stroke-width: .8; stroke-opacity: .32; stroke-dasharray: 2 7; }
+.flightPulse { fill: none; stroke: #b3ffd0; stroke-width: 1; stroke-opacity: .55; stroke-dasharray: 15 750; animation: signalTravel 10s linear infinite; }
+.detectAircraft { animation: aircraftPass 14s ease-in-out infinite; }
+.beamEdge { fill: none; stroke: #98edb1; stroke-opacity: .12; stroke-width: .7; }
+.footprint { fill: #87dfa2; fill-opacity: .035; stroke: #9becb4; stroke-opacity: .39; stroke-width: .8; }
+.scanLine { stroke: #a8fec1; stroke-width: 1; stroke-opacity: .6; animation: sceneScan 5.5s ease-in-out infinite; }
+.sceneObservation { opacity: .85; animation: observationAppear 7s ease-in-out infinite; }
+.newObservation { opacity: .65; animation: observationAppear 7s ease-in-out -3.5s infinite; }
+.registration { fill: none; stroke: #aec8b4; stroke-opacity: .35; stroke-width: .8; }
+.perceptionLayer, .networkLayer { transition: opacity .3s ease; }
+.visual[data-perception="false"] .perceptionLayer, .visual[data-network="false"] .networkLayer { opacity: 0 !important; }
+.rings { fill: none; stroke: #789983; stroke-width: .8; stroke-opacity: .27; }
+.rings circle:first-child { stroke-opacity: .5; }
+.rings path { stroke-opacity: .11; }
+.radarSweep { transform-origin: 0 0; animation: sweep 16s linear infinite; }
+.sensorPulse { fill: none; stroke: #a2f5b8; stroke-width: 1; opacity: .3; transform-origin: 0 0; animation: sensingPulse 8s ease-out infinite; }
+.airTrackPath { fill: none; stroke: #819e89; stroke-width: 1; stroke-opacity: .36; stroke-dasharray: 2 5; }
+.networkLine { fill: none; stroke: #8bdeb0; stroke-width: .9; stroke-opacity: .4; stroke-dasharray: 3 5; }
+.networkPulse { fill: none; stroke: #b2ffcc; stroke-width: 1.4; stroke-opacity: .8; stroke-dasharray: 10 230; animation: networkSignal 5s linear infinite; }
+.ownNode { fill: #183724; fill-opacity: .35; stroke: #8ee7a8; stroke-width: .8; stroke-opacity: .65; }
+.trackBrackets { fill: none; stroke: #9addaf; stroke-width: .8; stroke-opacity: .72; }
+.trackLabel { fill: #8eb39a; font: 8px ui-monospace, SFMono-Regular, monospace; letter-spacing: 1.4px; }
+.trackOne { animation: aerialTrackOne 16s ease-in-out infinite; }
+.trackTwo { animation: aerialTrackTwo 19s ease-in-out infinite; }
+.trackThree { animation: aerialTrackThree 17s ease-in-out infinite; }
+.figure[data-paused="true"] *, .visual[data-paused="true"] * { animation-play-state: paused !important; }
+@keyframes aircraftPass { 0%, 100% { transform: translate(-45px, -12px); } 50% { transform: translate(55px, 11px); } }
+@keyframes signalTravel { to { stroke-dashoffset: -765; } }
+@keyframes sceneScan { 0%, 100% { transform: translate(-20px, 30px); opacity: .12; } 50% { transform: translate(24px, -28px); opacity: .75; } }
+@keyframes observationAppear { 0%, 100% { opacity: .3; } 35%, 65% { opacity: .95; } }
+@keyframes sweep { to { transform: rotate(360deg); } }
+@keyframes sensingPulse { 0% { transform: scale(1); opacity: .22; } 90%, 100% { transform: scale(3.7); opacity: 0; } }
+@keyframes networkSignal { to { stroke-dashoffset: -240; } }
+@keyframes aerialTrackOne { 0%, 100% { transform: translate(-18px, 5px); } 50% { transform: translate(22px, -6px); } }
+@keyframes aerialTrackTwo { 0%, 100% { transform: translate(-13px, -10px); } 50% { transform: translate(20px, 12px); } }
+@keyframes aerialTrackThree { 0%, 100% { transform: translate(-12px, 11px); } 50% { transform: translate(13px, -14px); } }
+@media (max-width: 1000px) {
+  .row { grid-template-columns: minmax(200px, .75fr) minmax(0, 1.4fr); gap: 5%; }
+  .concepts .copy h3 { font-size: 54px; }
+  .concepts .copy h4 { font-size: 23px; margin-top: 29px; }
+  .copy p { font-size: 12px; }
+  .figureFooter { flex-wrap: wrap; gap: 0 15px; padding: 6px 0; }
+  .figureFooter > span { font-size: 7px; }
+}
+@media (max-width: 760px) {
+  .row { grid-template-columns: minmax(0, 1fr); gap: 30px; padding: 35px 0 42px; }
+  .copy { display: grid; grid-template-columns: 1fr auto; }
+  .index { grid-column: 1 / -1; }
+  .concepts .copy h3 { font-size: clamp(48px, 10vw, 64px); margin-top: 15px; margin-bottom: 0; }
+  .planned { align-self: end; margin-bottom: 6px; font-size: 7px; }
+  .concepts .copy h4 { grid-column: 1 / -1; font-size: 23px; margin-top: 26px; }
+  .copy p, .productNote { grid-column: 1 / -1; max-width: 500px; }
+  .copy p { font-size: 13px; }
+  .productNote { margin-top: 15px; }
+  .figureFooter { min-height: 48px; }
+  .figureFooter button { font-size: 8px; }
+  .sectionBar > span { max-width: 150px; font-size: 8px; }
+  .motionControl { font-size: 9px; }
+  .visual { width: calc(100% + 32px); max-width: none; margin-left: -16px; }
+}
+@media (max-width: 390px) {
+  .planned { font-size: 6px; gap: 5px; }
+  .sectionBar { gap: 12px; }
+  .sectionBar > span { max-width: 125px; font-size: 7px; }
+  .figureFooter > span { font-size: 6px; letter-spacing: .05em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .visual * { animation: none !important; transition: none !important; }
+  .sensorPulse { opacity: .1; }
+}

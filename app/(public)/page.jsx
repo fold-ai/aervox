@@ -4,12 +4,11 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import PerceptionDemo, { TrackedScene } from "@/components/site/PerceptionDemo";
 import MissionHero from "@/components/site/MissionHero";
+import ProductConcepts from "@/components/site/ProductConcepts";
 import wordmark from "@/public/actprove-wordmark.png";
 import styles from "./home.module.css";
 
 const roadmap = [
-  { name: "ARCA-1", category: "Wide-area sensing", copy: "A planned radar and camera system for wide-area drone detection. The proposed 3–6 metre system has a 50 km detection-range design goal, which has not been validated.", status: "PLANNED" },
-  { name: "DETECT-1", category: "Long-range perception", copy: "A planned perception system for long-range drones, designed to interpret changing scenes, identify objects of interest, and surface new observations to operators.", status: "PLANNED" },
   { name: "ERA-1", category: "Next-generation autonomy", copy: "A long-term research direction for autonomous fighter-aircraft flight management, with object classification, civilian-risk awareness, and human authorization for consequential decisions.", status: "RESEARCH" }
 ];
 
@@ -73,18 +72,18 @@ export default function Page() {
         <section id="top" className={styles.hero} aria-labelledby="hero-title">
           <MissionHero motionPaused={paused} onPlaybackStateChange={setHeroPlayback} />
           <div className={styles.heroContent}>
-            <h1 id="hero-title">Built for<br />contested skies.</h1>
-            <p className={styles.heroDescription}>Onboard intelligence for counter-drone,<br className={styles.desktopBreak} /> deep-strike and reconnaissance aircraft.</p>
+            <h1 id="hero-title">Built for strike.<br />Built to intercept.</h1>
+            <p className={styles.heroDescription}>Onboard intelligence for one-way strike<br className={styles.desktopBreak} /> and interceptor drones. Perception that connects<br className={styles.desktopBreak} /> the aircraft to the operator.</p>
             <div className={styles.heroActions}><a className={styles.primaryLink} href="#vision">Explore the systems <Arrow down /></a><span>ACT-1 + PROVE-1<br />IN DEVELOPMENT</span></div>
           </div>
           <div className={styles.heroBottom}>
-            <span className={styles.heroFilmCaption}>COUNTER-DRONE <span>/ ILLUSTRATIVE SEQUENCE</span></span>
+            <span className={styles.heroFilmCaption}>DRONE-ON-DRONE <span>/ CONCEPT FILM</span></span>
             {!["blocked", "error"].includes(heroPlayback) && <button className={styles.motionButton} onClick={() => setMotionPaused(!motionPaused)} aria-pressed={paused} disabled={reducedMotion} aria-label={reducedMotion ? "Film disabled by reduced motion preference" : paused ? "Resume films" : "Pause films"}><svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true">{paused ? <path d="m6 3 10 7-10 7Z" /> : <path d="M5 4h3v12H5zm7 0h3v12h-3z" />}</svg><span>{reducedMotion ? "MOTION OFF" : paused ? "PLAY" : "PAUSE"}</span></button>}
           </div>
         </section>
 
         <section id="vision" className={`${styles.visionSection} ${styles.sectionWrap}`}>
-          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ VISION SYSTEMS ]</p><h2>Every angle.<br />A clearer picture.</h2></div><p>From airborne tracking to a three-dimensional view of the ground. Explore how connected observations can bring movement into context.</p></div>
+          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ CONNECTED PERCEPTION ]</p><h2>The whole scene.<br />Every aircraft.</h2></div><p>From a shared view of moving objects to the perspective of an individual drone. Explore the perception layer behind our strike and interceptor platforms.</p></div>
           <div data-reveal><PerceptionDemo motionPaused={paused} /></div>
         </section>
 
@@ -116,7 +115,8 @@ export default function Page() {
         </section>
 
         <section id="roadmap" className={`${styles.roadmapSection} ${styles.sectionWrap}`}>
-          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ NEXT HORIZON ]</p><h2>Research beyond<br />the current platform.</h2></div><p>Extending our work into wider sensing and new classes of aircraft. A roadmap of research and planned capabilities.</p></div>
+          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ NEXT HORIZON ]</p><h2>Beyond the<br />current platform.</h2></div><p>Long-range onboard perception and wide-area sensing. Two planned systems, shown through illustrative concepts.</p></div>
+          <ProductConcepts motionPaused={paused} />
           <div className={styles.roadmapList} data-reveal>{roadmap.map((item, index) => <details className={styles.roadmapItem} key={item.name}><summary><span className={styles.roadmapIndex}>0{index + 1}</span><h3>{item.name}</h3><span className={styles.roadmapCategory}>{item.category}</span><span className={styles.roadmapStatus}>{item.status}</span><span className={styles.expandIcon} aria-hidden="true">+</span></summary><p>{item.copy}</p></details>)}</div>
         </section>
 

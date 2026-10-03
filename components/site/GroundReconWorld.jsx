@@ -298,9 +298,10 @@ function Vehicle({ definition, index, groupRef, elapsedRef, active, onSelect }) 
   </group>;
 }
 
-function World({ active, reducedMotion, view, selectedIndex, vehicles, trackerRefs, onSelect, onFailure }) {
+function World({ active, reducedMotion, view, selectedIndex, vehicles, trackerRefs, clockRef, onSelect, onFailure }) {
   const { camera, scene, gl, size, invalidate } = useThree();
-  const elapsed = useRef(0);
+  const localElapsed = useRef(0);
+  const elapsed = clockRef || localElapsed;
   const groups = useRef([]);
   const light = useRef();
   const lightTarget = useMemo(() => new THREE.Object3D(), []);

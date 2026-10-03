@@ -125,3 +125,24 @@
   .recon[data-failed="true"][data-compact="true"] .scene { padding-bottom: 0; }
 }
 .recon button:disabled { opacity: .4; cursor: default; }
+
+/* Area overview is a lightweight authored SVG; camera views retain full-color WebGL. */
+.recon[data-mode="overview"] .scene { aspect-ratio: 16 / 9; padding-bottom: 0; background: #050b08; }
+.recon[data-mode="overview"] .scene::after { display: none; }
+.recon[data-mode="overview"] .observationBar button[aria-pressed="true"] .viewIcon { color: #9be9aa; }
+.recon[data-mode="overview"] .kicker { color: #8db095; }
+.selectedTrack { display: flex; align-items: center; gap: 18px; padding: 7px 0 13px; border-bottom: 1px solid #9bcc9d24; }
+.selectedTrack > strong { font: 400 30px/1.2 var(--font-display), sans-serif; color: #c1e7c7; letter-spacing: -.03em; }
+.selectedTrack > span { font-size: 11px; color: #afc8b2; line-height: 1.6; }
+.selectedTrack small { display: block; font-size: 10px; color: #7d9984; }
+.selectedTrack > i { display: block; width: 13px; height: 13px; border: 1px solid #9bf3ab; margin-left: auto; }
+.selectedTrack > i[data-friendly="true"] { border-color: #9be4ef; border-radius: 3px; background: #9be4ef22; }
+.returnOverview { position: absolute; z-index: 5; top: 12px; left: 12px; min-height: 38px; display: flex; align-items: center; gap: 8px; padding: 8px 11px; border: 1px solid #dce8d74d; background: #0c1a1ae8; color: #e6eee0; font-size: 10px; cursor: pointer; }
+.returnOverview > span:last-child { color: #9dc7c3; font: 8px ui-monospace, monospace; }
+.fallbackNotice button { border: 1px solid #91b69b66; color: #d1edcf; background: #143120; min-height: 40px; padding: 8px 14px; margin-top: 12px; font-size: 11px; cursor: pointer; }
+@media (max-width: 600px) {
+  .recon[data-mode="overview"] .scene { aspect-ratio: 5 / 4; padding-bottom: 0; }
+  .recon[data-mode="overview"][data-compact="true"] .scene { aspect-ratio: 4 / 3; }
+  .recon[data-mode="overview"] .viewChoices { gap: 25px; }
+  .returnOverview { min-height: 40px; }
+}

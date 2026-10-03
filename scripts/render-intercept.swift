@@ -1,6 +1,6 @@
 // Authored fictional brand-film choreography. No detection, guidance, or ballistics logic.
-// Compile: swiftc -module-cache-path /tmp/actprove-swift-cache scripts/render-intercept.swift -o /tmp/render-actprove-intercept
-// Run from the project root: /tmp/render-actprove-intercept [--frames-only]
+// Compile: swiftc -module-cache-path /tmp/actprove-swift-cache scripts/render-intercept.swift -o /tmp/render-actprove-intercept-v2
+// Run from the project root: /tmp/render-actprove-intercept-v2 [--frames-only]
 import Foundation
 import AVFoundation
 import CoreGraphics
@@ -16,9 +16,9 @@ let fps: Int32 = 30
 let duration = 18.0
 let project = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
 let media = project.appendingPathComponent("public/media")
-let output = media.appendingPathComponent("intercept-sequence-v1.mp4")
-let posterTime = 8.0
-let reviewDirectory = URL(fileURLWithPath: "/private/tmp/actprove-intercept-review", isDirectory: true)
+let output = media.appendingPathComponent("intercept-sequence-v2.mp4")
+let posterTime = 10.0
+let reviewDirectory = URL(fileURLWithPath: "/private/tmp/actprove-intercept-v2-review", isDirectory: true)
 let colorSpace = CGColorSpace(name: CGColorSpace.sRGB)!
 let bitmapInfo = CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue
 
@@ -55,11 +55,15 @@ func alphaBounds(_ image: CGImage) throws -> CGRect {
     return CGRect(x: x0, y: y0, width: x1 - x0 + 1, height: y1 - y0 + 1)
 }
 
-let background = try loadImage("flight-clouds.png")
+let background = try loadImage("intercept-backdrop-v2.png")
 let fullDrone = try loadImage("flight-drone.png")
 let bounds = try alphaBounds(fullDrone)
 guard let drone = fullDrone.cropping(to: bounds) else { throw RenderError.invalidImage("Drone alpha crop") }
-print("Drone source \(fullDrone.width)×\(fullDrone.height), alpha bounds \(bounds)")
+print("Target source \(fullDrone.width)×\(fullDrone.height), alpha bounds \(bounds)")
+let fullInterceptor = try loadImage("intercept-aircraft-v2.png")
+let interceptorBounds = try alphaBounds(fullInterceptor)
+guard let interceptor = fullInterceptor.cropping(to: interceptorBounds) else { throw RenderError.invalidImage("Interceptor alpha crop") }
+print("Interceptor source \(fullInterceptor.width)×\(fullInterceptor.height), alpha bounds \(interceptorBounds)")
 
 func clamp(_ value: Double, _ lo: Double = 0, _ hi: Double = 1) -> Double { min(hi, max(lo, value)) }
 func smooth(_ value: Double) -> Double { let x = clamp(value); return x * x * (3 - 2 * x) }
@@ -76,72 +80,67 @@ struct AircraftPose {
     let opacity: Double
 }
 
-struct KeyPose {
-    let time: Double
-    let pose: AircraftPose
-}
-
-let aftermath: [KeyPose] = [
-    KeyPose(time: 11.30, pose: AircraftPose(cx: 0.636, cy: 0.347, w: 0.145, rotation: -4, opacity: 1)),
-    KeyPose(time: 11.58, pose: AircraftPose(cx: 0.639, cy: 0.354, w: 0.145, rotation: 11, opacity: 1)),
-    KeyPose(time: 12.05, pose: AircraftPose(cx: 0.651, cy: 0.394, w: 0.142, rotation: 36, opacity: 1)),
-    KeyPose(time: 12.70, pose: AircraftPose(cx: 0.674, cy: 0.514, w: 0.126, rotation: 74, opacity: 0.96)),
-    KeyPose(time: 13.42, pose: AircraftPose(cx: 0.702, cy: 0.713, w: 0.101, rotation: 121, opacity: 0.88)),
-    KeyPose(time: 14.12, pose: AircraftPose(cx: 0.719, cy: 0.948, w: 0.073, rotation: 169, opacity: 0.66)),
-    KeyPose(time: 14.80, pose: AircraftPose(cx: 0.735, cy: 1.190, w: 0.043, rotation: 201, opacity: 0)),
-]
+let hiddenAircraft = AircraftPose(cx: 0, cy: 0, w: 0, rotation: 0, opacity: 0)
+let contactTime = 12.20
 
 func approach(at time: Double) -> AircraftPose {
-    let p = clamp(time / 10.4), e = smooth(p), arc = sin(p * .pi)
+    let p = clamp(time / 8.5), e = smooth(p), arc = sin(p * .pi)
     return AircraftPose(cx: mix(0.654, 0.636, e) + sin(time * 0.51) * 0.003 * arc,
                         cy: mix(0.291, 0.347, e) - sin(time * 0.43) * 0.003 * arc,
                         w: mix(0.015, 0.145, e), rotation: -4 + 5 * arc,
-                        opacity: mix(0.58, 1, smooth(p * 1.8)))
+                        opacity: mix(0.64, 1, smooth(p * 1.8)))
 }
 
-// These key poses are fixed editorial animation, never a physical simulation.
+// Fixed editorial choreography: both silhouettes dissolve into a brief contact transition.
 func pose(at time: Double) -> AircraftPose {
     if time >= duration { return approach(at: 0) }
-    if time < 11.30 { return approach(at: time) }
-    for index in 0..<(aftermath.count - 1) {
-        let first = aftermath[index], last = aftermath[index + 1]
-        if time <= last.time {
-            let p = smooth((time - first.time) / (last.time - first.time))
-            return AircraftPose(cx: mix(first.pose.cx, last.pose.cx, p), cy: mix(first.pose.cy, last.pose.cy, p),
-                                w: mix(first.pose.w, last.pose.w, p), rotation: mix(first.pose.rotation, last.pose.rotation, p),
-                                opacity: mix(first.pose.opacity, last.pose.opacity, p))
-        }
+    if time < contactTime { return approach(at: time) }
+    let locked = approach(at: 8.5)
+    if time < 17 {
+        return AircraftPose(cx: locked.cx, cy: locked.cy, w: locked.w, rotation: locked.rotation,
+                            opacity: 1 - smooth((time - contactTime) / 0.28))
     }
     let first = approach(at: 0)
     return AircraftPose(cx: first.cx, cy: first.cy, w: first.w, rotation: first.rotation,
                         opacity: first.opacity * smooth((time - 17.0) / 1.0))
 }
 
+func interceptorPose(at time: Double) -> AircraftPose {
+    guard time >= 8.45 && time < contactTime + 0.28 else { return hiddenAircraft }
+    let p = clamp((time - 8.45) / (contactTime - 8.45))
+    let fadeIn = smooth((time - 8.45) / 0.28)
+    let fadeOut = 1 - smooth((time - contactTime) / 0.28)
+    // A continuous, plainly visible foreground pass toward an authored final screen pose.
+    return AircraftPose(cx: mix(0.800, 0.652, p), cy: mix(0.770, 0.373, p),
+                        w: mix(0.215, 0.056, p), rotation: mix(-3, 9, smooth(p)),
+                        opacity: fadeIn * fadeOut)
+}
+
 func phase(at time: Double) -> String {
     if time < 2.0 || time >= 17.0 { return "Distant" }
     if time < 4.5 { return "Acquiring" }
-    if time < 11.3 { return "Locked" }
-    if time < 12.75 { return "Intercept" }
+    if time < 8.45 { return "Locked" }
+    if time < 12.5 { return "Intercept" }
     return "Complete"
 }
 
 func lockAlpha(at time: Double) -> Double {
     if time < 2 { return 0 }
     if time < 4.5 { return smooth((time - 2) / 1.15) * (0.72 + 0.28 * sin(time * 7.4)) }
-    if time < 11.3 { return 1 }
-    return 1 - smooth((time - 11.3) / 0.80)
+    if time < contactTime { return 1 }
+    return 1 - smooth((time - contactTime) / 0.28)
 }
 
-func drawAircraft(_ aircraft: AircraftPose, context: CGContext) {
+func drawAircraft(_ aircraft: AircraftPose, image: CGImage, context: CGContext) {
     guard aircraft.opacity > 0.001 else { return }
     let width = aircraft.w * Double(frameWidth)
-    let height = width * Double(drone.height) / Double(drone.width)
+    let height = width * Double(image.height) / Double(image.width)
     context.saveGState()
     context.setAlpha(aircraft.opacity)
     context.translateBy(x: aircraft.cx * Double(frameWidth), y: (1 - aircraft.cy) * Double(frameHeight))
     context.rotate(by: -aircraft.rotation * .pi / 180)
     context.interpolationQuality = .high
-    context.draw(drone, in: CGRect(x: -width / 2, y: -height / 2, width: width, height: height))
+    context.draw(image, in: CGRect(x: -width / 2, y: -height / 2, width: width, height: height))
     context.restoreGState()
 }
 
@@ -155,8 +154,7 @@ func drawBackground(time: Double, context: CGContext) {
     let y = (Double(frameHeight) - height) / 2 + (1 - cos(angle)) * 5
     context.interpolationQuality = .high
     context.draw(background, in: CGRect(x: x, y: y, width: width, height: height))
-    context.setFillColor(ink(0.018, 0.031, 0.052, 0.055))
-    context.fill(CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight))
+    // The photographic blue-hour exposure stays intact; no additional dark wash.
 }
 
 func softGlow(cx: Double, cy: Double, rx: Double, ry: Double, color: [CGFloat], alpha: Double, context: CGContext) {
@@ -170,66 +168,45 @@ func softGlow(cx: Double, cy: Double, rx: Double, ry: Double, color: [CGFloat], 
     context.restoreGState()
 }
 
-func drawWisps(time: Double, context: CGContext) {
-    guard time > 11.38 && time < 15.10 else { return }
-    let envelope = smooth((time - 11.38) / 0.22) * (1 - smooth((time - 13.7) / 1.4))
-    for index in 0..<13 {
-        let age = Double(index) * 0.11
-        let oldTime = time - age
-        if oldTime < 11.35 { continue }
-        let oldPose = pose(at: oldTime)
-        let drift = Double(index)
-        let x = oldPose.cx * Double(frameWidth) + drift * 1.4 + sin(oldTime * 3.3 + drift) * 3.5
-        let y = (1 - oldPose.cy) * Double(frameHeight) + drift * 1.6
-        softGlow(cx: x, cy: y, rx: 10 + drift * 1.4, ry: 4 + drift * 0.95,
-                 color: [0.69, 0.71, 0.72], alpha: envelope * 0.16 * (1 - drift / 15), context: context)
-    }
-}
-
 func drawContact(time: Double, context: CGContext) {
-    // A brief authored light streak and contained flash suggest the fictional story beat.
     let contactX = 0.636 * Double(frameWidth)
     let contactY = (1 - 0.347) * Double(frameHeight)
-    if time >= 11.10 && time < 11.40 {
-        let p = clamp((time - 11.10) / 0.24)
-        let tipX = mix(1.06 * Double(frameWidth), contactX, p)
-        let tipY = mix(0.14 * Double(frameHeight), contactY, p)
-        let tailX = tipX + mix(140, 80, p)
-        let tailY = tipY - mix(100, 56, p)
-        let alpha = sin(clamp((time - 11.10) / 0.30) * .pi) * 0.78
-        context.saveGState()
-        context.setLineCap(.round)
-        context.setStrokeColor(ink(0.83, 0.87, 0.91, alpha * 0.18))
-        context.setLineWidth(6)
-        context.move(to: CGPoint(x: tailX, y: tailY)); context.addLine(to: CGPoint(x: tipX, y: tipY)); context.strokePath()
-        context.setStrokeColor(ink(0.97, 0.98, 0.96, alpha))
-        context.setLineWidth(1.25)
-        context.move(to: CGPoint(x: tailX, y: tailY)); context.addLine(to: CGPoint(x: tipX, y: tipY)); context.strokePath()
-        context.restoreGState()
-    }
-    let p = (time - 11.35) / 0.13
-    let brightness = exp(-p * p * 2.2)
+    let pulse = (time - (contactTime + 0.065)) / 0.12
+    let brightness = exp(-pulse * pulse * 2.4)
     if brightness > 0.005 {
         context.saveGState(); context.setBlendMode(.screen)
-        softGlow(cx: contactX, cy: contactY, rx: 43, ry: 30, color: [0.96, 0.75, 0.48], alpha: brightness * 0.67, context: context)
-        softGlow(cx: contactX, cy: contactY, rx: 15, ry: 10, color: [1, 0.97, 0.88], alpha: brightness * 0.98, context: context)
+        softGlow(cx: contactX, cy: contactY, rx: 60, ry: 43, color: [0.96, 0.84, 0.64], alpha: brightness * 0.70, context: context)
+        softGlow(cx: contactX, cy: contactY, rx: 19, ry: 14, color: [1, 0.97, 0.88], alpha: brightness * 0.98, context: context)
         context.restoreGState()
+    }
+    // A soft photographic haze completes the transition; no projectile or debris imagery.
+    if time > contactTime && time < 14.4 {
+        let p = clamp((time - contactTime) / 2.2)
+        softGlow(cx: contactX + p * 32, cy: contactY + p * 8, rx: 32 + p * 110, ry: 12 + p * 32,
+                 color: [0.57, 0.60, 0.63], alpha: sin(p * .pi) * 0.12, context: context)
     }
 }
 
 func drawFrame(time: Double, context: CGContext) {
     drawBackground(time: time, context: context)
-    drawWisps(time: time, context: context)
-    drawAircraft(pose(at: time), context: context)
+    drawAircraft(pose(at: time), image: drone, context: context)
+    drawAircraft(interceptorPose(at: time), image: interceptor, context: context)
     drawContact(time: time, context: context)
 }
 
+func serializedPose(_ aircraft: AircraftPose, image: CGImage) -> [String: Any] {
+    let height = aircraft.w * Double(frameWidth) * Double(image.height) / Double(image.width) / Double(frameHeight)
+    return ["cx": aircraft.cx, "cy": aircraft.cy, "w": aircraft.w, "h": height,
+            "rotation": aircraft.rotation, "opacity": aircraft.opacity]
+}
+
 func metadata(at time: Double) -> [String: Any] {
-    let aircraft = pose(at: time)
-    let height = aircraft.w * Double(frameWidth) * Double(drone.height) / Double(drone.width) / Double(frameHeight)
-    return ["time": time, "cx": aircraft.cx, "cy": aircraft.cy, "w": aircraft.w, "h": height,
-            "rotation": aircraft.rotation, "opacity": aircraft.opacity,
-            "phase": phase(at: time), "lockAlpha": lockAlpha(at: time)]
+    var frame = serializedPose(pose(at: time), image: drone)
+    frame["time"] = time
+    frame["phase"] = phase(at: time)
+    frame["lockAlpha"] = lockAlpha(at: time)
+    frame["interceptor"] = serializedPose(interceptorPose(at: time), image: interceptor)
+    return frame
 }
 
 func stillImage(at time: Double) throws -> CGImage {
@@ -250,17 +227,17 @@ try FileManager.default.createDirectory(at: reviewDirectory, withIntermediateDir
 try writePNG(stillImage(at: posterTime), to: reviewDirectory.appendingPathComponent("poster.png"))
 let compression = Process()
 compression.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-compression.arguments = ["node", "-e", "require('sharp')('/private/tmp/actprove-intercept-review/poster.png').webp({quality:90,effort:5}).toFile('public/media/intercept-poster-v1.webp').catch(e=>{console.error(e);process.exit(1)});"]
+compression.arguments = ["node", "-e", "require('sharp')('/private/tmp/actprove-intercept-v2-review/poster.png').webp({quality:90,effort:5}).toFile('public/media/intercept-poster-v2.webp').catch(e=>{console.error(e);process.exit(1)});"]
 try compression.run(); compression.waitUntilExit()
 guard compression.terminationStatus == 0 else { throw RenderError.bitmap }
 
 let frames = (0...Int(duration * Double(fps))).map { metadata(at: Double($0) / Double(fps)) }
-let track: [String: Any] = ["version": 1, "width": frameWidth, "height": frameHeight, "fps": fps, "duration": duration,
+let track: [String: Any] = ["version": 2, "width": frameWidth, "height": frameHeight, "fps": fps, "duration": duration,
                           "posterTime": posterTime, "illustrative": true, "coordinates": "normalized-unrotated-alpha-bounds",
                           "rotationConvention": "clockwise-degrees", "frames": frames]
 let trackData = try JSONSerialization.data(withJSONObject: track, options: [.sortedKeys])
-try trackData.write(to: media.appendingPathComponent("intercept-track-v1.json"))
-for time in [0.0, 2.5, 5.0, 8.0, 11.0, 11.2, 11.35, 11.55, 12.3, 13.5, 14.5, 17.5] {
+try trackData.write(to: media.appendingPathComponent("intercept-track-v2.json"))
+for time in [0.0, 2.5, 5.0, 8.0, 8.8, 9.5, 10.0, 10.8, 11.5, 12.15, 12.27, 12.5, 13.5, 17.5] {
     try writePNG(stillImage(at: time), to: reviewDirectory.appendingPathComponent("frame-\(time).png"))
 }
 print("Review frames: \(reviewDirectory.path)"); fflush(stdout)

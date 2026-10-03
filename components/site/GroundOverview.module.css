@@ -1,0 +1,88 @@
+.overview { position: absolute; inset: 0; isolation: isolate; overflow: hidden; background: #050b08; color: #a2efad; }
+.overview::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 38%, #02070462), linear-gradient(#0207047a, transparent 17%, transparent 82%, #020704bd); }
+.map { display: block; width: 100%; height: 100%; }
+.contours { fill: none; stroke: #2a4931; stroke-width: .75; opacity: .46; }
+.parcels { stroke: #345239; stroke-width: .7; opacity: .52; }
+.roads { fill: none; }
+.roadEdge { stroke: #385540; stroke-width: 15; }
+.roadFill { stroke: #101c14; stroke-width: 12; }
+.roadCenter { stroke: #34533b; stroke-width: .7; stroke-dasharray: 5 10; }
+.accessRoads { fill: none; stroke: #34513b; stroke-width: 3; opacity: .55; }
+.buildings rect { fill: #112117; stroke: #527157; stroke-width: .8; }
+.buildings path { fill: none; stroke: #325038; stroke-width: .55; }
+.mapLabels { fill: #5b7861; font: 9px/1 ui-monospace, monospace; letter-spacing: 2.3px; opacity: .65; }
+.trails path { fill: none; stroke: #74cf88; stroke-width: 1.3; opacity: .37; stroke-linecap: round; }
+.trails path[data-friendly="true"] { stroke: #83d8df; opacity: .46; }
+.footprints path { fill: #71c6cb09; stroke: #80cbd138; stroke-width: .75; stroke-dasharray: 3 5; }
+.footprints path:last-child { fill: none; stroke: #80cbd161; }
+.vehicle { cursor: pointer; outline: none; color: #9bf3ab; }
+.vehicle[data-friendly="true"] { color: #9be4ef; }
+.hitArea, .droneHit { fill: transparent; stroke: none; }
+.vehicleBody { fill: currentColor; stroke: #050b08; stroke-width: .7; }
+.vehicleGlass { stroke: #1b4329; stroke-width: .9; }
+.vehicleBracket { fill: transparent; stroke: currentColor; stroke-width: .7; opacity: .75; }
+.vehicle[data-friendly="true"] .vehicleBracket { rx: 3; stroke-dasharray: none; stroke-width: 1; }
+.vehicleId { fill: currentColor; font: 8px/1 ui-monospace, SFMono-Regular, monospace; letter-spacing: .04em; opacity: .85; paint-order: stroke; stroke: #050b08; stroke-width: 3px; stroke-linejoin: round; }
+.vehicle[data-selected="true"] .vehicleBracket { stroke-width: 1.5; fill: #a3f6ad12; }
+.vehicle[data-selected="true"] .vehicleId { fill: #dcffdc; opacity: 1; }
+.vehicle:hover .vehicleBracket, .vehicle:focus-visible .vehicleBracket { stroke: #e5ffe8; stroke-width: 2; }
+.vehicle:focus-visible .hitArea { stroke: #d7ffe0; stroke-width: 1; fill: #9bf3ab10; }
+.friendlyChevron { fill: none; stroke: currentColor; stroke-width: 1; }
+.drone { color: #9fe3e9; cursor: pointer; outline: none; }
+.droneRing { fill: #0a2322e0; stroke: currentColor; stroke-width: .7; }
+.droneIcon { fill: currentColor; }
+.droneId { fill: currentColor; font: 10px/1 ui-monospace, SFMono-Regular, monospace; letter-spacing: .06em; paint-order: stroke; stroke: #050b08; stroke-width: 3px; stroke-linejoin: round; }
+.droneId tspan { font-size: 7px; letter-spacing: .06em; fill: #7fa8a5; }
+.droneDot { fill: #ccffff; stroke: #050b08; stroke-width: 2; }
+.drone:hover .droneRing, .drone:focus-visible .droneRing { stroke: #edffff; stroke-width: 2; fill: #173e34; }
+.north { fill: #71917a; stroke: #71917a; stroke-width: .8; }
+.north text { font: 9px ui-monospace, monospace; stroke: none; }
+.topline, .legend, .selection, .hint, .summary { position: absolute; z-index: 2; pointer-events: none; }
+.topline { inset: 25px 28px auto; display: flex; justify-content: space-between; gap: 15px; font: 9px/1.5 ui-monospace, SFMono-Regular, monospace; letter-spacing: .11em; }
+.topline > span:first-child { display: flex; align-items: center; gap: 10px; }
+.topline i { width: 4px; height: 4px; background: #95f3a4; box-shadow: 0 0 8px #95f3a430; }
+.topline > span:last-child { color: #6a8e75; font-size: 8px; }
+.summary { left: 28px; top: 68px; display: flex; gap: 13px; align-items: center; }
+.summary strong { font: 400 40px/.95 var(--font-display), sans-serif; letter-spacing: -.04em; color: #c7f3ca; }
+.summary > span { font-size: 10px; line-height: 1.6; color: #8bb291; }
+.summary small { display: block; font: 8px/1.7 ui-monospace, monospace; color: #749c91; }
+.legend { bottom: 26px; left: 28px; display: flex; align-items: center; gap: 21px; font: 9px/1.5 ui-monospace, monospace; color: #8cab91; }
+.legend > span { display: flex; gap: 7px; align-items: center; white-space: nowrap; }
+.legend b { color: #9ec1a2; font-weight: 400; font-size: 8px; margin-left: 1px; }
+.legend i { display: block; width: 7px; height: 7px; border: 1px solid #9bf3ab; }
+.legend .friendlyKey { border-color: #9be4ef; border-radius: 2px; background: #9be4ef45; }
+.legend .droneKey { border-color: #9be4ef; transform: rotate(45deg); }
+.selection { right: 28px; top: 78px; display: flex; flex-direction: column; gap: 5px; text-align: right; font: 11px/1.5 ui-monospace, monospace; color: #b8f3be; }
+.selection > span:last-child { font-size: 7px; color: #6f9679; letter-spacing: .05em; }
+.hint { bottom: 27px; right: 28px; font-size: 10px; color: #789d83; }
+.hint > span { margin-left: 8px; color: #9bd9cb; }
+.overview[data-compact="true"] .topline { inset: 17px 18px auto; font-size: 7px; }
+.overview[data-compact="true"] .topline > span:last-child { font-size: 6px; }
+.overview[data-compact="true"] .legend { bottom: 15px; left: 18px; font-size: 7px; gap: 14px; }
+.overview[data-compact="true"] .legend b { font-size: 6px; }
+@media (max-width: 700px) {
+  .topline { inset: 18px 17px auto; font-size: 8px; letter-spacing: .06em; }
+  .topline > span:last-child { font-size: 7px; }
+  .summary { left: 17px; top: 52px; gap: 10px; }
+  .summary strong { font-size: 31px; }
+  .summary > span { font-size: 8px; }
+  .summary small { font-size: 7px; }
+  .selection { right: 17px; top: 57px; font-size: 10px; }
+  .selection > span:last-child { font-size: 6px; }
+  .legend { bottom: 20px; left: 17px; gap: 16px; font-size: 8px; }
+  .legend b { font-size: 7px; }
+  .hint { display: none; }
+}
+@media (max-width: 600px) {
+  .vehicle:not([data-selected="true"]) .vehicleId { display: none; }
+  .summary { gap: 7px; }
+  .summary strong { font-size: 24px; }
+  .summary > span, .summary small { font-size: 7px; }
+}
+@media (max-width: 420px) {
+  .topline { font-size: 7px; }
+  .topline > span:last-child { font-size: 6px; }
+  .legend { gap: 13px; font-size: 7px; }
+  .legend i { width: 6px; height: 6px; }
+  .legend b { font-size: 6px; }
+}

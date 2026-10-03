@@ -32,13 +32,13 @@ export default function PerceptionDemo({ motionPaused = false }) {
 
   return <div id="perception-demo" className={styles.demo}>
     <div className={styles.tabs} role="group" aria-label="Choose a scene">
-      <button className={styles.tab} type="button" aria-pressed={sceneKey === "ground"} onClick={() => setSceneKey("ground")}>Ground reconnaissance</button>
+      <button className={styles.tab} type="button" aria-pressed={sceneKey === "ground"} onClick={() => setSceneKey("ground")}>Connected overview</button>
       <button className={styles.tab} type="button" aria-pressed={sceneKey === "air"} onClick={() => setSceneKey("air")}>Drone interception</button>
       <span className={styles.demoLabel}>ILLUSTRATIVE SEQUENCES</span>
     </div>
     {sceneKey === "air" ? <FlightSequence key={`air-${replay}`} motionPaused={paused} showOverlays={showOverlays} onPlaybackStateChange={setFilmPlayback} /> : <GroundRecon key={`ground-${replay}`} motionPaused={paused} showOverlays={showOverlays} />}
     <div className={styles.footer}>
-      <p className={styles.caption}>{sceneKey === "air" ? "Acquire. Track. Intercept. / Concept sequence" : "3D reconstruction / illustrative scenario data"}</p>
+      <p className={styles.caption}>{sceneKey === "air" ? "Drone-on-drone interception / Concept film" : "Connected tracks & aircraft views / Illustrative scenario"}</p>
       <div className={styles.controls}>
         <button type="button" className={styles.control} aria-pressed={showOverlays} onClick={() => setShowOverlays(value => !value)}><span className={styles.annotationIcon} aria-hidden="true" /><span>{showOverlays ? "Hide overlay" : "Show overlay"}</span></button>
         <button type="button" className={styles.control} onClick={() => { setReplay(value => value + 1); setLocalPaused(false); }} disabled={motionPaused || reducedMotion} aria-label="Replay sequence"><span aria-hidden="true">↺</span><span>Replay</span></button>
