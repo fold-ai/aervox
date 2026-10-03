@@ -1,0 +1,36 @@
+Original website photographic concept assets
+Generation mode: Built-in image_gen__imagegen tool, imagegen skill; no API/CLI fallback.
+Generated 2026-10-02. These images are illustrative concepts, not actual Actprove hardware or operational camera footage.
+WebP derivatives: sharp, quality 86, effort 6; original generated PNG files retained.
+
+perception-air.png / perception-air.webp
+Source: /Users/zahar/.codex/generated_images/01a0fe41-e55a-7713-bf61-ce8381d5718a/exec-3b5b72ca-6a65-417f-940f-015aaea8c7e2.png
+Use case: ads-marketing
+Asset type: Original ultrawide 21:9 cinematic photograph for a premium aerospace perception website hero.
+Primary request: An aerial view of a mountainous rocky coast and reservoir with layered blue gray hills and a single small dark unbranded fixed-wing survey drone.
+Scene/backdrop: Vast rugged rocky coastal terrain and an inland reservoir seen from the air; textured terrain dominates the lower half, pale hazy blue sky fills the top third, distant layered mountains.
+Subject: Exactly one civilian unarmed survey drone, seen from a three-quarter rear angle, positioned in the right half at approximately 72% from the left and 43% from the top. The drone should occupy approximately 13% of the image width, with a crisp recognizable fixed-wing silhouette.
+Style/medium: Photorealistic premium aerospace editorial photography, cinematic, realistic atmospheric depth, fine natural texture.
+Composition/framing: Ultrawide landscape composition. Left half is visually calm and low contrast, ready for a large white webpage headline overlay. Keep the drone completely inside the frame and silhouetted against the landscape/sky.
+Lighting/mood: Diffuse cold dawn light, calm, precise, expansive.
+Color palette: Muted desaturated blue gray and charcoal.
+Constraints: This is an original illustrative concept asset, not a depiction of actual Actprove hardware. No text, HUD, crosshairs, labels, graphics, logos, watermarks, weapons, explosions or people. Do not imitate a specific branded aircraft.
+
+perception-ground.png / perception-ground.webp
+Source: /Users/zahar/.codex/generated_images/01a0fe41-e55a-7713-bf61-ce8381d5718a/exec-1712a0fe-e2ed-4d6e-b9fb-45551b550342.png
+Use case: ads-marketing
+Asset type: Original 16:9 photographic visual for an interactive aerospace perception demonstration on a website.
+Primary request: An almost top-down aerial photograph of cool gray scrubland and dry grass, with a diagonal paved country road, a few small light industrial buildings, and exactly three small civilian vehicles spaced widely along the road.
+Scene/backdrop: Detailed sparse scrub, grass, pale gravel tracks, and gray soil in a remote rural landscape. A two-lane road runs diagonally from near bottom left at x=12%, y=100% to top right at x=89%, y=0%. A small cluster of plain low industrial buildings lies away from the road near the left side, with realistic pale roofs.
+Subject: Exactly three civilian vehicles, all visibly separated. A white van on the road near x=32%, y=72%; a dark gray compact car near x=53%, y=47%; a light gray SUV near x=73%, y=23%. Vehicles should be clearly recognizable from above, each approximately 2.5–3% of the image width.
+Style/medium: Photorealistic high resolution aerial survey photography, realistic optics, excellent fine texture, straight photographic scene.
+Composition/framing: 16:9 landscape, camera looking almost straight downward with only a slight oblique angle. No horizon or sky. Preserve spacious terrain around the three vehicles for subsequent webpage graphic overlays.
+Lighting/mood: Soft overcast daylight, realistic muted shadows.
+Color palette: Desaturated cool sage, gray, pale stone and charcoal.
+Constraints: An original illustrative concept asset. No text, HUD, crosshairs, boxes, tracking markers, graphic overlays, logos, watermarks, weapons, armed vehicles, people or explosions.
+
+Approximate subject bounding boxes in original image coordinates, percentages from top left:
+Air: one fixed-wing drone, left 58.8%, top 34.9%, width 25.3%, height 12.0%; center 71.5%, 40.9%.
+Ground: white van, left 32.9%, top 68.6%, width 3.3%, height 5.3%; center 34.55%, 71.25%.
+Ground: dark compact car, left 51.5%, top 42.7%, width 2.7%, height 4.4%; center 52.85%, 44.9%.
+Ground: light SUV, left 68.8%, top 16.7%, width 2.5%, height 4.6%; center 70.05%, 19.0%.

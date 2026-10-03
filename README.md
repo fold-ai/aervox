@@ -12,6 +12,8 @@ repository and were not redesigned as part of the public-site update.
 
     /                 public marketing site
     /pitchdeck        public presentation, excluded from search indexing
+    /investment-deck investor presentation, excluded from search indexing
+    /actprove/investment-deck redirects to /investment-deck
     /admin-pro        legacy flight-performance console
     /admin-pro/aero   detached aerodynamics window
     /admin-pro/study  airframe study

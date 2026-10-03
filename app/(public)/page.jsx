@@ -1,76 +1,133 @@
+"use client";
+
 import Image from "next/image";
-import Drawings from "@/components/site/Drawings";
+import { useEffect, useRef, useState } from "react";
+import PerceptionDemo, { TrackedScene } from "@/components/site/PerceptionDemo";
+import FlightSequence from "@/components/site/FlightSequence";
 import wordmark from "@/public/actprove-wordmark.png";
-import lockup from "@/public/actprove-lockup.png";
+import styles from "./home.module.css";
 
 const roadmap = [
-  { name: "ARCA-1", kind: "Future sensing system", copy: "A planned 3-6 metre radar and camera system for wide-area drone detection. A 50 km detection range is our design goal and has not been validated." },
-  { name: "DETECT-1", kind: "Future onboard perception", copy: "A planned perception system for long-range drones that can interpret changing scenes, identify objects of interest, and surface new observations to operators." },
-  { name: "ERA-1", kind: "Long-term research", copy: "A research direction for autonomous fighter-aircraft flight management, with object classification, civilian-risk awareness, and human authorization for consequential decisions." }
+  { name: "ARCA-1", category: "Wide-area sensing", copy: "A planned radar and camera system for wide-area drone detection. The proposed 3–6 metre system has a 50 km detection-range design goal, which has not been validated.", status: "PLANNED" },
+  { name: "DETECT-1", category: "Long-range perception", copy: "A planned perception system for long-range drones, designed to interpret changing scenes, identify objects of interest, and surface new observations to operators.", status: "PLANNED" },
+  { name: "ERA-1", category: "Next-generation autonomy", copy: "A long-term research direction for autonomous fighter-aircraft flight management, with object classification, civilian-risk awareness, and human authorization for consequential decisions.", status: "RESEARCH" }
 ];
 
+function Arrow({ diagonal = false, down = false, className = "" }) {
+  return <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ transform: down ? "rotate(90deg)" : undefined }}><path d={diagonal ? "M5 19 19 5M5 5h14v14" : "M4 12h15m-6-6 6 6-6 6"} stroke="currentColor" strokeWidth="1.4" /></svg>;
+}
+
 export default function Page() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [motionPaused, setMotionPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [heroPlayback, setHeroPlayback] = useState("paused");
+  const menuButton = useRef(null);
+  const pageRef = useRef(null);
+  const paused = motionPaused || reducedMotion;
+
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReducedMotion(preference.matches);
+    sync();
+    preference.addEventListener("change", sync);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.dataset.visible = "true";
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    pageRef.current?.querySelectorAll("[data-reveal]").forEach(node => {
+      node.dataset.visible = "false";
+      observer.observe(node);
+    });
+    return () => { preference.removeEventListener("change", sync); observer.disconnect(); };
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = event => {
+      if (event.key === "Escape") { setMenuOpen(false); menuButton.current?.focus(); }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [menuOpen]);
+
   return (
-    <>
-      <header className="nav">
-        <a className="brand" href="#top" aria-label="Actprove Defense Technologies, home"><Image src={wordmark} alt="Actprove" priority sizes="220px" /></a>
-        <nav aria-label="Main navigation"><ul>
-          <li><a className="lnk" href="#platform">Platform</a></li>
-          <li><a className="lnk" href="#partnership">Partnership</a></li>
-          <li><a className="lnk" href="#roadmap">Roadmap</a></li>
-          <li><a className="lnk" href="#contact">Contact</a></li>
-        </ul></nav>
+    <div ref={pageRef} className={`${styles.home} ${paused ? styles.motionPaused : ""}`}>
+      <a className={styles.skipLink} href="#main">Skip to content</a>
+      <header className={styles.header}>
+        <a className={styles.brand} href="#top" aria-label="Actprove home"><Image src={wordmark} alt="Actprove" priority sizes="170px" /><span>DEFENSE TECHNOLOGIES</span></a>
+        <button className={styles.menuButton} ref={menuButton} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Close" : "Menu"}<span aria-hidden="true">{menuOpen ? "−" : "+"}</span></button>
+        <nav id="main-navigation" aria-label="Main navigation" className={`${styles.navigation} ${menuOpen ? styles.navigationOpen : ""}`}>
+          <a href="#vision" onClick={() => setMenuOpen(false)}>Vision systems</a>
+          <a href="#software" onClick={() => setMenuOpen(false)}>Software</a>
+          <a href="#platform" onClick={() => setMenuOpen(false)}>Platform</a>
+          <a href="#company" onClick={() => setMenuOpen(false)}>Company</a>
+          <a className={styles.navContact} href="#contact" onClick={() => setMenuOpen(false)}>Build with us <Arrow diagonal /></a>
+        </nav>
       </header>
-
-      <main id="top">
-        <section className="hero wrap">
-          <p className="eyebrow">DRONE SOFTWARE + HARDWARE</p>
-          <h1>Intelligence for the next generation of drones.</h1>
-          <p className="lede">Actprove develops onboard computing, perception models, training data, and mission software for drone manufacturers. We build the systems around the aircraft, not the aircraft itself.</p>
-          <div className="hero-actions"><a className="text-link" href="#platform">Explore the platform <span aria-hidden="true">↗</span></a><span className="hero-index">01 / SYSTEMS</span></div>
-          <p className="status">Now working with <b>Savlo Dynamics</b> on a high-speed drone program.</p>
-          <div className="hero-mark" aria-hidden="true">A / P</div>
-        </section>
-
-        <hr className="rule" />
-        <section id="platform" className="wrap">
-          <div className="section-head"><p className="eyebrow">01 / CURRENT PRODUCTS</p><h2>One connected system, from onboard sensing to operational insight.</h2></div>
-          <div className="craft">
-            <Drawings />
-            <div><dl className="spec">
-              <div className="row"><dt>PROVE-1</dt><dd>Ground platform for software control, telemetry, and analysis of collected data.</dd></div>
-              <div className="row"><dt>ACT-1</dt><dd>Onboard compute and perception system, initially focused on interceptor drones.</dd></div>
-              <div className="row"><dt>Models</dt><dd>Custom perception models developed for each aircraft, sensor set, and operating context.</dd></div>
-              <div className="row"><dt>Data</dt><dd>Curated training datasets and evaluation workflows for partners building their own models.</dd></div>
-            </dl><p className="fine">These products are in development. Capabilities and performance will be updated as they are tested.</p></div>
+      <main id="main">
+        <section id="top" className={styles.hero} aria-labelledby="hero-title">
+          <div className={styles.heroBackdrop} aria-hidden="true" />
+          <FlightSequence variant="hero" motionPaused={paused} className={styles.heroFilm} onPlaybackStateChange={setHeroPlayback} />
+          <div className={styles.heroShade} />
+          <div className={styles.heroContent}>
+            <p className={styles.eyebrow}><span className={styles.signalDot} /> PERCEPTION. CONTEXT. HUMAN CONTROL.</p>
+            <h1 id="hero-title">See more.<br />Understand more.</h1>
+            <p className={styles.heroDescription}>Computer vision, onboard intelligence, and decision support. Built to help operators understand the scene—and the consequences of acting.</p>
+            <a className={styles.primaryLink} href="#vision">Explore our vision <Arrow down /></a>
+          </div>
+          <div className={styles.heroBottom}>
+            <a className={styles.scrollCue} href="#vision"><span className={styles.scrollLine} /><span>SCROLL TO DISCOVER</span></a>
+            <div className={styles.heroCaption}><span>01 — ACQUIRE. LOCK. FOLLOW.</span><span>A CINEMATIC FLIGHT SEQUENCE</span></div>
+            {!["blocked", "error"].includes(heroPlayback) && <button className={styles.motionButton} onClick={() => setMotionPaused(!motionPaused)} aria-pressed={paused} disabled={reducedMotion} aria-label={reducedMotion ? "Film disabled by reduced motion preference" : paused ? "Resume films" : "Pause films"}><svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true">{paused ? <path d="m6 3 10 7-10 7Z" /> : <path d="M5 4h3v12H5zm7 0h3v12h-3z" />}</svg><span>{reducedMotion ? "REDUCED MOTION" : paused ? "RESUME FILM" : "PAUSE FILM"}</span></button>}
           </div>
         </section>
+        <div className={styles.disciplineBar}><span>ACTPROVE DEFENSE TECHNOLOGIES</span><div><span>Computer vision</span><span>Onboard intelligence</span><span>Decision support</span></div></div>
 
-        <hr className="rule" />
-        <section id="partnership" className="wrap partner-section">
-          <div><p className="eyebrow">02 / FIRST PARTNER</p><h2>Savlo Dynamics</h2>
-            <p className="lede">Savlo Dynamics is developing a drone designed to fly at 500 mph. We are building an onboard perception system for that platform to recognize relevant aerial objects and support high-speed interception decisions.</p>
-            <p>The collaboration connects our models and compute systems to a real aircraft program. The system is under development; the speed is a partner-stated design figure, not a performance claim for Actprove hardware.</p>
+        <section id="vision" className={`${styles.visionSection} ${styles.sectionWrap}`}>
+          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ VISION SYSTEMS ]</p><h2>Understand the air.<br />Read the ground.</h2></div><p>Recognize objects. Follow movement. Interpret the environment. Perception software developed around the aircraft, its sensors, and the people making decisions.</p></div>
+          <div data-reveal><PerceptionDemo motionPaused={paused} /></div>
+        </section>
+
+        <section id="software" className={`${styles.softwareSection} ${styles.sectionWrap}`}>
+          <div className={styles.softwareIntro} data-reveal><p className={styles.eyebrow}>[ DECISION SUPPORT ]</p><h2>Recognition is only<br />the beginning.</h2><p>An object is part of a larger environment. Actprove is developing software that brings object understanding, civilian-risk awareness, and operator review into the same picture.</p></div>
+          <div className={styles.capabilities}>
+            <article data-reveal><span className={styles.capabilityNumber}>01</span><h3>Object understanding</h3><p>Recognize object classes and analyze their visible features and structural characteristics. Give operators context beyond a detection box.</p></article>
+            <article data-reveal><span className={styles.capabilityNumber}>02</span><h3>Civilian-risk awareness</h3><p>Bring surrounding activity and potential risks to civilians into the assessment. Support consideration of whether action is appropriate.</p></article>
+            <article data-reveal><span className={styles.capabilityNumber}>03</span><h3>Human authorization</h3><p>Support operator judgment with relevant observations and scene context. Consequential decisions remain subject to human authorization.</p></article>
           </div>
-          <div className="partner-panel" aria-label="Savlo Dynamics collaboration summary"><span className="panel-label">ACTIVE COLLABORATION</span><strong>500 <small>MPH</small></strong><span>Partner aircraft design speed</span><div className="panel-rule" /><span>ACT-1 · ONBOARD PERCEPTION</span><span>PROVE-1 · CONTROL + ANALYSIS</span></div>
+          <p className={styles.developmentNote}>Capabilities in development. These illustrative scenes do not demonstrate validated safety or operational performance.</p>
         </section>
 
-        <hr className="rule" />
-        <section id="roadmap" className="wrap">
-          <div className="section-head"><p className="eyebrow">03 / PRODUCT ROADMAP</p><h2>What comes next.</h2><p>We are extending the same foundation into wider sensing and new classes of aircraft.</p></div>
-          <div className="roadmap-grid">{roadmap.map((item, index) => <article className="roadmap-card" key={item.name}><span className="roadmap-number">0{index + 1} / PLANNED</span><h3>{item.name}</h3><span className="roadmap-kind">{item.kind}</span><p>{item.copy}</p></article>)}</div>
+        <section id="platform" className={`${styles.platformSection} ${styles.sectionWrap}`}>
+          <div className={styles.platformHeading} data-reveal><p className={styles.eyebrow}>[ OUR PLATFORM ]</p><h2>From the aircraft<br />to the operator.</h2><p>Two systems. A shared foundation of models, data, and partner integration.</p></div>
+          <article className={styles.productLine} data-reveal>
+            <div className={styles.productIdentity}><span>01 / ONBOARD INTELLIGENCE</span><h3>ACT-1</h3><span className={styles.productStatus}>IN DEVELOPMENT</span></div>
+            <div className={styles.productDescription}><h4>Intelligence where it’s needed.</h4><p>Onboard compute and custom perception models, developed for the aircraft and its sensor suite. ACT-1 connects object recognition with understanding of the surrounding environment.</p><ul><li>Onboard processing</li><li>Object recognition &amp; characterization</li><li>Aircraft-specific integration</li></ul><details className={styles.productDetails}><summary>About ACT-1 <span aria-hidden="true">+</span></summary><p>ACT-1 development initially focuses on interceptor drones. Work with aircraft partners brings computing, perception models, and civilian-risk awareness into the integration process. Capabilities are being developed and evaluated.</p></details></div>
+          </article>
+          <article className={styles.productLine} data-reveal>
+            <div className={styles.productIdentity}><span>02 / GROUND SOFTWARE</span><h3>PROVE-1</h3><span className={styles.productStatus}>IN DEVELOPMENT</span></div>
+            <div className={styles.productDescription}><h4>The context behind the observation.</h4><p>A software platform for control, telemetry, and collected-data analysis. PROVE-1 helps teams review what their aircraft observed and supports the operator’s understanding of the mission.</p><ul><li>Telemetry &amp; observation review</li><li>Mission analysis</li><li>Model evaluation workflows</li></ul><details className={styles.productDetails}><summary>About PROVE-1 <span aria-hidden="true">+</span></summary><p>PROVE-1 connects ground software with partner development workflows, bringing software control and telemetry together with the review of collected information. Testing and partner feedback guide development.</p></details></div>
+          </article>
         </section>
 
-        <hr className="rule" />
-        <section id="company" className="wrap"><div className="section-head"><p className="eyebrow">04 / ACTPROVE</p><h2>Focused on the systems that make drones useful.</h2></div>
-          <p>We work exclusively on drone software and hardware: onboard compute, perception, training data, model development, and the tools teams use to understand what their aircraft observed. Our work combines partner integration with a product roadmap of our own.</p>
-          <div className="status-grid"><div className="stat"><b>02</b><span>Current product systems</span></div><div className="stat"><b>03</b><span>Future product directions</span></div><div className="stat"><b>01</b><span>First active company partnership</span></div></div>
+        <section id="company" className={styles.companySection}>
+          <div className={styles.companyImage}><TrackedScene scene="ground" motionPaused={paused} className={styles.companyTrackedScene} /><span className={styles.imageCaption}>PERCEPTION, IN CONTEXT.</span></div>
+          <div className={styles.companyContent} data-reveal><p className={styles.eyebrow}>[ BUILT TOGETHER ]</p><h2>Built around<br />your aircraft.</h2><p>We build the systems around the aircraft. Working alongside manufacturers, we bring onboard compute, perception models, training data, and mission tools into their programs.</p><div className={styles.partnerBlock}><span className={styles.partnerKicker}><span className={styles.signalDot} /> FIRST ACTIVE PARTNERSHIP</span><h3>Savlo Dynamics <Arrow diagonal /></h3><p>Developing onboard perception for a high-speed drone program, with ACT-1 and PROVE-1 connecting the aircraft to its ground systems.</p></div><a className={styles.textLink} href="#contact">Let’s build together <Arrow diagonal /></a></div>
         </section>
 
-        <hr className="rule" />
-        <section id="contact" className="wrap"><p className="eyebrow">05 / CONTACT</p><h2>Build with us.</h2><p>For partnerships, model development, and engineering conversations, contact our team.</p><a className="mail" href="mailto:contact@actprove.com">contact@actprove.com</a></section>
+        <section id="roadmap" className={`${styles.roadmapSection} ${styles.sectionWrap}`}>
+          <div className={styles.sectionHeading} data-reveal><div><p className={styles.eyebrow}>[ NEXT HORIZON ]</p><h2>Research beyond<br />the current platform.</h2></div><p>Extending our work into wider sensing and new classes of aircraft. A roadmap of research and planned capabilities.</p></div>
+          <div className={styles.roadmapList} data-reveal>{roadmap.map((item, index) => <details className={styles.roadmapItem} key={item.name}><summary><span className={styles.roadmapIndex}>0{index + 1}</span><h3>{item.name}</h3><span className={styles.roadmapCategory}>{item.category}</span><span className={styles.roadmapStatus}>{item.status}</span><span className={styles.expandIcon} aria-hidden="true">+</span></summary><p>{item.copy}</p></details>)}</div>
+        </section>
+
+        <section id="contact" className={`${styles.contactSection} ${styles.sectionWrap}`}><div className={styles.contactGrid} aria-hidden="true" /><div data-reveal><p className={styles.eyebrow}>[ WORK WITH ACTPROVE ]</p><a className={styles.contactHeading} href="mailto:contact@actprove.com"><h2>Build what<br />comes next.</h2><span><Arrow diagonal /></span></a><div className={styles.contactBottom}><p>For aircraft manufacturers, engineering teams,<br />and technology partners.</p><a href="mailto:contact@actprove.com">contact@actprove.com <Arrow diagonal /></a></div></div></section>
       </main>
-      <footer><div className="lockup"><Image src={lockup} alt="Actprove Defense Technologies" sizes="300px" /></div><p>© 2026 Actprove Defense Technologies</p><p>Drone software + hardware</p></footer>
-    </>
+      <footer className={styles.footer}><div className={styles.footerTop}><a className={styles.brand} href="#top" aria-label="Actprove home"><Image src={wordmark} alt="Actprove" sizes="170px" /><span>DEFENSE TECHNOLOGIES</span></a><p>Perception. Context. Human control.</p><a href="#top">BACK TO TOP <Arrow down className={styles.backArrow} /></a></div><div className={styles.footerBottom}><span>© 2026 Actprove Defense Technologies</span><span>DRONE SOFTWARE + HARDWARE</span><span>DEVELOPED WITH PURPOSE.</span></div></footer>
+    </div>
   );
 }

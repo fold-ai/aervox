@@ -1,0 +1,36 @@
+Flight animation concept assets
+Generation mode: Built-in image_gen__imagegen tool, imagegen skill; no alternate API or CLI calls.
+Generated 2026-10-02. Illustrative concept, not actual Actprove hardware.
+
+flight-drone.png
+Source: /Users/zahar/.codex/generated_images/01a0fe41-e55a-7713-bf61-ce8381d5718a/exec-c06f0ff6-de2a-458f-9001-a485c5ea2acf.png
+Tool parameter transparent_background: true
+
+Use case: product-mockup
+Asset type: Transparent PNG aircraft cutout for a cinematic website flight animation.
+Primary request: One realistic unbranded fixed-wing reconnaissance-style civilian survey UAV seen from a rear three-quarter perspective, with the camera slightly above the aircraft and looking forward along its direction of flight.
+Subject: A slim matte charcoal airframe with long straight wings, narrow fuselage and rear tail. A practical contemporary survey aircraft, unarmed. Single aircraft only.
+Style/medium: Film-photoreal product photography with believable matte composite surfaces and subtle realistic material detail, never a futuristic illustration.
+Composition/framing: Horizontal landscape canvas. Center the entire aircraft horizontally and vertically, its long wings spanning approximately 85% of canvas width. The aircraft points away into the image and slightly left, so both wings and the rear tail are visible from above. Every part of the aircraft must fit inside the canvas with generous clear transparent borders on all sides. No cropped edges.
+Lighting/mood: Soft neutral overcast lighting with restrained highlights, suitable for compositing into a cool blue-gray aerial landscape.
+Background: Genuine transparency, true alpha channel, no backdrop, no ground plane and no cast shadow on a surface.
+Constraints: This is an original illustrative concept, not actual Actprove hardware. No weapons, no logos, no text, no exhaust, no additional objects, no duplicate aircraft, no border, no watermarks. Preserve transparent negative space around the complete silhouette.
+
+Inspection: 1774 x 887 RGBA PNG, 373243 bytes, genuine alpha channel. 1394482 pixels have alpha 0 (88.62% of canvas). Aircraft points up-left, fully in frame.
+Visible aircraft bounds (alpha >= 8): x=59..1721, y=250..686; width=1663, height=437.
+For overlays: left 3.33%, top 28.18%, width 93.74%, height 49.27%; center approximately 50.20%, 52.76%.
+All nonzero alpha bounds: x=57..1723, y=21..830. Very faint generated alpha specks (<8/255) extend beyond the visible subject. Main aircraft pixels are predominantly nearly opaque with antialiased edges.
+
+
+flight-clouds.png / flight-clouds.webp
+Source: /Users/zahar/.codex/generated_images/01a0fe3d-5b48-7c61-9d0d-5ddcc90ac788/exec-ecdfdeb3-6a34-4eda-bf07-a6fa586d33c1.png
+Generation mode: Built-in image_gen__imagegen. WebP derivative: Sharp quality90.
+Use case: ads-marketing
+Asset type: wide 16:9 photographic background plate for an animated aerospace website film.
+Primary request: A breathtaking but realistic aerial flight view above a huge rolling cloud bank, with dark blue-gray ridges and remote farmland barely visible through the clouds far below. Empty environment, absolutely no aircraft or objects in the sky.
+Style: premium cinematic aerial cinematography, detailed real clouds, natural optical softness, restrained contrast, realistic atmospheric depth, no fantasy, no illustration.
+Composition: 16:9 landscape, horizon near upper 40%, vast misty blue gray sky in upper half with layered stratus texture, sun softly glowing through haze at upper right outside frame, sweeping textured cloud tops occupying lower half, a dark distant mountain ridge at lower right. Keep middle of frame softly textured to read a dark aircraft composited later. Keep left side dark enough for white website headline overlay. Whole frame uninterrupted photo, no blank area.
+Palette: cold slate gray, muted steel blue, soft ivory highlights.
+Constraints: no drone, no aircraft, no text, no HUD, no crosshairs, no boxes, no logos, no watermarks, no people, no war or explosions. Original illustrative photographic environment.
+
+Animation output: flight-sequence.mp4 (1280x720, 30 fps, 16 seconds, silent H.264, network optimized). Composite animation rendered by scripts/render-flight.swift with AVFoundation from the two built-in imagegen assets. Poster: flight-poster.png at 11 seconds. Timeline: 0–2s distant aircraft/search, 2–4s acquire, 4–12s approach from 10.5% to 42% frame width, 12–14s hold, 14–16s crossfade to starting position. Aircraft and annotation share one transform. No actual detection, live sensor inputs, or operational measurements.

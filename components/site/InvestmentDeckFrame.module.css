@@ -1,0 +1,260 @@
+.frame {
+  --deck-background: #050505;
+  --deck-foreground: #f2f1ee;
+  --deck-accent: #c28569;
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--deck-background);
+  color: var(--deck-foreground);
+  font-family: inherit;
+}
+
+.frame::backdrop {
+  background: #050505;
+}
+
+.viewport {
+  width: 100%;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y proximity;
+  scroll-padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #393631 #050505;
+}
+
+.viewport [data-investment-slide] {
+  scroll-snap-align: start;
+}
+
+.viewport:focus-visible {
+  outline: 1px solid #c2856959;
+  outline-offset: -2px;
+}
+
+.topbar,
+.bottomBar {
+  position: fixed;
+  z-index: 50;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 0 clamp(22px, 3.2vw, 64px);
+  box-sizing: border-box;
+  background: #050505f2;
+  color: #f2f1ee;
+  font-family: inherit;
+}
+
+.topbar {
+  top: 0;
+  justify-content: space-between;
+  border-bottom: 1px solid #f2f1ee16;
+}
+
+.brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  text-decoration: none;
+}
+
+.brand img {
+  display: block;
+  width: 171px;
+  height: auto;
+}
+
+.brand span {
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: .33em;
+  color: #e0e0de;
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  color: #8b8884;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.printButton,
+.presentButton,
+.arrowButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #f2f1ee;
+  font: inherit;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.printButton {
+  padding: 0 2px;
+  color: #a6a19b;
+  font-size: 12px;
+}
+
+.presentButton {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #f2f1ee35;
+  font-size: 12px;
+}
+
+.presentButton:hover {
+  border-color: #c28569;
+}
+
+.bottomBar {
+  bottom: 0;
+  gap: 32px;
+  border-top: 1px solid #f2f1ee16;
+}
+
+.slideCounter {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.counterDivider {
+  color: #504b46;
+}
+
+.total {
+  color: #79746f;
+}
+
+.slideSelect {
+  max-width: min(420px, 50vw);
+  min-width: 140px;
+  min-height: 44px;
+  margin: 0 auto 0 0;
+  padding: 0 28px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #aca6a0;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.slideSelect option {
+  background: #101010;
+  color: #f2f1ee;
+}
+
+.arrows {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.arrowButton {
+  width: 44px;
+  padding: 0;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.arrowButton:hover:not(:disabled) {
+  color: #c28569;
+}
+
+.arrowButton:disabled {
+  color: #49443f;
+  cursor: default;
+}
+
+.brand:focus-visible,
+.printButton:focus-visible,
+.presentButton:focus-visible,
+.slideSelect:focus-visible,
+.arrowButton:focus-visible {
+  outline: 1px solid #c28569;
+  outline-offset: 4px;
+}
+
+.frame[data-presentation="true"] .brand,
+.frame[data-presentation="true"] .title,
+.frame[data-presentation="true"] .printButton {
+  visibility: hidden;
+}
+
+.frame[data-presentation="true"] .brand {
+  display: none;
+}
+
+.frame[data-presentation="true"] .topActions {
+  margin-left: auto;
+}
+
+.frame[data-presentation="true"] .topbar {
+  border-bottom-color: transparent;
+  background: transparent;
+}
+
+.frame[data-presentation="true"] .presentButton {
+  background: #050505e6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .frame[data-presentation="true"] .bottomBar { opacity: 0; }
+  .frame[data-presentation="true"] .bottomBar:hover,
+  .frame[data-presentation="true"] .bottomBar:focus-within { opacity: 1; }
+}
+
+@media (max-width: 660px) {
+  .topbar, .bottomBar { padding-left: 20px; padding-right: 20px; }
+  .brand img { width: 148px; }
+  .brand span { font-size: 7px; letter-spacing: .28em; }
+  .topActions { gap: 12px; }
+  .title { display: none; }
+  .printButton { font-size: 11px; }
+  .presentButton { min-height: 44px; padding: 0 11px; font-size: 11px; }
+  .bottomBar { gap: 17px; }
+  .slideCounter { gap: 7px; font-size: 11px; }
+  .slideSelect { min-width: 0; flex: 1 1 auto; max-width: none; width: 0; padding-right: 10px; font-size: 11px; }
+  .arrows { gap: 0; }
+  .arrowButton { font-size: 23px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewport { scroll-behavior: auto; }
+}
+
+@media print {
+  .frame { height: auto !important; overflow: visible !important; }
+  .viewport { height: auto !important; max-height: none !important; overflow: visible !important; scroll-snap-type: none; }
+  .topbar, .bottomBar { display: none !important; }
+}
