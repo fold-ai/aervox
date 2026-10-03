@@ -13,12 +13,6 @@ const roadmap = [
   { name: "ERA-1", category: "Next-generation autonomy", copy: "A long-term research direction for autonomous fighter-aircraft flight management, with object classification, civilian-risk awareness, and human authorization for consequential decisions.", status: "RESEARCH" }
 ];
 
-const missions = [
-  { name: "Counter-drone", detail: "Intelligence for interceptor aircraft" },
-  { name: "Deep strike", detail: "Perception for long-range platforms" },
-  { name: "Reconnaissance", detail: "A connected view of the ground" },
-];
-
 function Arrow({ diagonal = false, down = false, className = "" }) {
   return <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ transform: down ? "rotate(90deg)" : undefined }}><path d={diagonal ? "M5 19 19 5M5 5h14v14" : "M4 12h15m-6-6 6 6-6 6"} stroke="currentColor" strokeWidth="1.4" /></svg>;
 }
@@ -28,8 +22,6 @@ export default function Page() {
   const [motionPaused, setMotionPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [heroPlayback, setHeroPlayback] = useState("paused");
-  const [heroPhase, setHeroPhase] = useState(0);
-  const [phaseRequest, setPhaseRequest] = useState(null);
   const menuButton = useRef(null);
   const pageRef = useRef(null);
   const paused = motionPaused || reducedMotion;
@@ -79,16 +71,14 @@ export default function Page() {
       </header>
       <main id="main">
         <section id="top" className={styles.hero} aria-labelledby="hero-title">
-          <MissionHero motionPaused={paused} phaseRequest={phaseRequest} onPhaseChange={setHeroPhase} onPlaybackStateChange={setHeroPlayback} />
-          <div className={styles.heroShade} />
+          <MissionHero motionPaused={paused} onPlaybackStateChange={setHeroPlayback} />
           <div className={styles.heroContent}>
             <h1 id="hero-title">Built for<br />contested skies.</h1>
             <p className={styles.heroDescription}>Onboard intelligence for counter-drone,<br className={styles.desktopBreak} /> deep-strike and reconnaissance aircraft.</p>
             <div className={styles.heroActions}><a className={styles.primaryLink} href="#vision">Explore the systems <Arrow down /></a><span>ACT-1 + PROVE-1<br />IN DEVELOPMENT</span></div>
           </div>
-          <div className={styles.heroSceneLabel} aria-hidden="true"><span>0{heroPhase + 1} / {missions[heroPhase].name.toUpperCase()}</span><span>CONCEPT FILM</span></div>
           <div className={styles.heroBottom}>
-            <div className={styles.missionSelector} role="group" aria-label="Explore mission films">{missions.map((mission, index) => <button key={mission.name} type="button" aria-pressed={heroPhase === index} onClick={() => { setHeroPhase(index); setPhaseRequest({ index, nonce: Date.now() }); }}><span className={styles.missionNumber}>0{index + 1}</span><span><strong>{mission.name}</strong><small>{mission.detail}</small></span><Arrow diagonal /></button>)}</div>
+            <span className={styles.heroFilmCaption}>COUNTER-DRONE <span>/ ILLUSTRATIVE SEQUENCE</span></span>
             {!["blocked", "error"].includes(heroPlayback) && <button className={styles.motionButton} onClick={() => setMotionPaused(!motionPaused)} aria-pressed={paused} disabled={reducedMotion} aria-label={reducedMotion ? "Film disabled by reduced motion preference" : paused ? "Resume films" : "Pause films"}><svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true">{paused ? <path d="m6 3 10 7-10 7Z" /> : <path d="M5 4h3v12H5zm7 0h3v12h-3z" />}</svg><span>{reducedMotion ? "MOTION OFF" : paused ? "PLAY" : "PAUSE"}</span></button>}
           </div>
         </section>

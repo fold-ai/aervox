@@ -31,7 +31,7 @@ export default function GroundRecon({ motionPaused = false, showOverlays = true,
   const [pageVisible, setPageVisible] = useState(true);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(1);
-  const [view, setView] = useState("drone01");
+  const [view, setView] = useState("aerial");
   const [failed, setFailed] = useState(false);
   const onFailure = useCallback(() => setFailed(true), []);
 

@@ -327,8 +327,9 @@ function World({ active, reducedMotion, view, selectedIndex, vehicles, trackerRe
   useFrame((_, delta) => {
     const frameDelta = Math.min(delta, .06);
     if (active) elapsed.current += frameDelta;
+    const travel = ((elapsed.current * vehicles[0].speed / 3.6 + ROAD_LENGTH / 2) % ROAD_LENGTH) - ROAD_LENGTH / 2;
     vehicles.forEach((vehicle, index) => {
-      const x = ((vehicle.offset + elapsed.current * vehicle.speed / 3.6 + ROAD_LENGTH / 2) % ROAD_LENGTH) - ROAD_LENGTH / 2;
+      const x = travel + vehicle.offset;
       const group = groups.current[index];
       if (!group) return;
       group.position.set(x, .015, roadZ(x) + vehicle.lane);
@@ -340,12 +341,12 @@ function World({ active, reducedMotion, view, selectedIndex, vehicles, trackerRe
     const heading = -roadYaw(x);
     const c = Math.cos(heading), s = Math.sin(heading);
     let offset;
-    if (view === "aerial") offset = [-19, 53, 42];
+    if (view === "aerial") offset = [0, 88, 24];
     else if (view === "drone02") offset = [18, 9, -17.5];
     else offset = [-17, 8.5, 17];
     const narrow = size.width / size.height < 1.15 ? 1.35 : 1;
     desired.set(x + (offset[0] * c - offset[2] * s) * narrow, offset[1] * narrow, z + (offset[0] * s + offset[2] * c) * narrow);
-    aim.set(x + (view === "aerial" ? 7 : 1.2) * c, .75, z + (view === "aerial" ? 7 : 1.2) * s);
+    aim.set(x + (view === "aerial" ? 0 : 1.2) * c, .75, z + (view === "aerial" ? 0 : 1.2) * s);
     const wrapped = previousX.current !== null && Math.abs(x - previousX.current) > 200;
     previousX.current = x;
     const snap = !initialized.current || reducedMotion || wrapped;
