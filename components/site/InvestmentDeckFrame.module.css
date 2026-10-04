@@ -94,6 +94,11 @@
   line-height: 1.4;
 }
 
+.versionLink { color: #bbb5ae; font-size: 12px; text-decoration: none; padding: 12px 0; }
+.versionLink:hover { color: #f2f1ee; }
+.versionLink:focus-visible { outline: 1px solid #c28569; outline-offset: 4px; }
+.frame[data-presentation="true"] .versionLink { visibility: hidden; }
+
 .printButton,
 .presentButton,
 .arrowButton {
@@ -240,6 +245,8 @@
   .brand span { font-size: 7px; letter-spacing: .28em; }
   .topActions { gap: 12px; }
   .title { display: none; }
+  .versionLink { font-size: 10px; }
+  .printButton { display: none; }
   .printButton { font-size: 11px; }
   .presentButton { min-height: 44px; padding: 0 11px; font-size: 11px; }
   .bottomBar { gap: 17px; }

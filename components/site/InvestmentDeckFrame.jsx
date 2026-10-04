@@ -12,7 +12,7 @@ function indexFromHash(hash, count) {
   return Number.isInteger(index) && index >= 0 && index < count ? index : null;
 }
 
-export default function InvestmentDeckFrame({ slides = [], children }) {
+export default function InvestmentDeckFrame({ slides = [], brief = false, children }) {
   const frameRef = useRef(null);
   const viewportRef = useRef(null);
   const presentationButtonRef = useRef(null);
@@ -117,7 +117,7 @@ export default function InvestmentDeckFrame({ slides = [], children }) {
           <span>DEFENSE TECHNOLOGIES</span>
         </a>
         <div className={styles.topActions}>
-          <span className={styles.title}>Investment deck</span>
+          <a className={styles.versionLink} href={brief ? "/investment-deck" : "/investment-deck/brief"}>{brief ? "Full deck ↗" : "6-slide brief ↗"}</a>
           <button className={styles.printButton} type="button" onClick={() => window.print()}>Print</button>
           <button ref={presentationButtonRef} className={styles.presentButton} type="button" aria-pressed={presentation} onClick={togglePresentation}>
             {presentation ? "Exit presentation" : "Present"}
