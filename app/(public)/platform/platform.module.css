@@ -117,3 +117,6 @@
   .systemLink strong { font-size: 46px; }
 }
 @media (prefers-reduced-motion: reduce) { .textLink, .systemLink, .systemLink svg { transition: none; } }
+
+.explore { --accent:#eee; background:#101010; color:#eee; }
+.explore .sectionLabel { color:#aaa; }.exploreTitle p { color:#aaa; }.demoFoot { color:#888; }

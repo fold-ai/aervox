@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./GroundOverview.module.css";
 
 const ROUTES = [
@@ -36,7 +36,6 @@ const BUILDINGS = [
 const inputKey = (event, callback) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); callback(); } };
 
 export default function GroundOverview({ active, elapsedRef, showOverlays, compact, selectedId, onSelect, onOpenCamera, focusDroneId }) {
-  const id = useId().replace(/:/g, "");
   const rootRef = useRef(null), pathRefs = useRef({}), markers = useRef({}), trails = useRef({}), drones = useRef({}), footprints = useRef({});
   const [width, setWidth] = useState(1200);
   const scale = 1200 / Math.max(width, 300);
@@ -83,23 +82,10 @@ export default function GroundOverview({ active, elapsedRef, showOverlays, compa
 
   return <div ref={rootRef} className={styles.overview} data-compact={compact} data-overlays={showOverlays}>
     <svg viewBox="0 0 1200 700" className={styles.map} role="group" aria-label="Illustrative overhead map with twelve vehicle tracks, three friendly vehicles, and two friendly camera drones">
-      <defs>
-        <pattern id={`${id}-grid`} width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#4d795b" strokeWidth=".5" opacity=".14" /><path d="M28 30h4M30 28v4" stroke="#467753" strokeWidth=".5" opacity=".18" /></pattern>
-        <pattern id={`${id}-hatch`} width="8" height="8" patternTransform="rotate(28)" patternUnits="userSpaceOnUse"><path d="M0 0V8" stroke="#315438" strokeWidth=".65" opacity=".48" /></pattern>
-        <radialGradient id={`${id}-glow`}><stop offset="0" stopColor="#183323" stopOpacity=".25" /><stop offset="1" stopColor="#050b08" stopOpacity="0" /></radialGradient>
-      </defs>
-      <rect width="1200" height="700" fill="#050b08" />
-      <rect width="1200" height="700" fill={`url(#${id}-grid)`} />
-      <ellipse cx="626" cy="365" rx="554" ry="370" fill={`url(#${id}-glow)`} />
-      <g className={styles.contours}>
-        {[0,1,2,3,4,5].map(i => <path key={i} d={`M${35-i*24} ${92+i*20}C${130-i*12} ${10+i*26} ${284+i*7} ${44+i*18} ${404+i*4} ${88+i*10}S${621+i*10} ${62+i*8} ${694+i*23} ${-40+i*12}`} />)}
-        {[0,1,2,3,4,5].map(i => <path key={`bottom${i}`} d={`M${-20+i*25} ${690-i*20}C${175+i*22} ${578-i*8} ${230+i*17} ${671-i*15} ${401+i*15} ${699-i*8}`} />)}
-        {[0,1,2,3,4].map(i => <path key={`right${i}`} d={`M${1115+i*15} ${63+i*15}C${1005+i*27} ${147+i*18} ${1105+i*18} ${277+i*11} ${1215+i*20} ${306+i*25}`} />)}
-      </g>
-      <g className={styles.parcels} fill={`url(#${id}-hatch)`}>
+      <rect width="1200" height="700" fill="#141414" />
+      <g className={styles.parcels}>
         <path d="M390 88 574 128 550 179 372 141Z" /><path d="m663 116 156 11-9 74-160-26Z" />
         <path d="m71 374 166-29 33 111-182 27Z" /><path d="m834 407 175 93-47 42-161-89Z" />
-        <path d="m675 503 25 13 1 31-40 4Z" />
       </g>
       <g className={styles.roads}>{ROUTES.map(route => <g key={route.id}>
         <path d={route.path} className={styles.roadEdge} />
@@ -107,7 +93,7 @@ export default function GroundOverview({ active, elapsedRef, showOverlays, compa
         <path d={route.path} className={styles.roadCenter} ref={element => { pathRefs.current[route.id] = element; }} />
       </g>)}</g>
       <g className={styles.accessRoads}><path d="m218 196 3 47 67 6M438 246l-23 52 42 30M647 253l8-41M868 319l51 22M536 496l29 44M1020 518l-16 47" /></g>
-      <g className={styles.buildings}>{BUILDINGS.map(([x,y,w,h,angle],index) => <g key={index} transform={`translate(${x} ${y}) rotate(${angle})`}><rect width={w} height={h} /><path d={`M3 3h${w-6}v${h-6}H3Z M${w*.48} 3v${h-6}`} /></g>)}</g>
+      <g className={styles.buildings}>{BUILDINGS.map(([x,y,w,h,angle],index) => <g key={index} transform={`translate(${x} ${y}) rotate(${angle})`}><rect width={w} height={h} /></g>)}</g>
       <g className={styles.mapLabels} aria-hidden="true"><text x="104" y="126">NORTH RIDGE</text><text x="615" y="398" transform="rotate(-10 615 398)">CORRIDOR A</text><text x="925" y="627">SOUTH APPROACH</text><text x="97" y="618">SECTOR 02</text></g>
       {showOverlays && <g className={styles.footprints}>{DRONES.map(drone => <g key={drone.id} ref={element => { footprints.current[drone.id] = element; }}><path d="M0 0 86 86Q19 133-43 107Z" /><path d="M86 86Q19 133-43 107" /></g>)}</g>}
       {showOverlays && <g className={styles.trails}>{TRACKS.map(track => <path key={track.id} ref={element => { trails.current[track.id] = element; }} data-friendly={track.friendly || undefined} />)}</g>}
@@ -123,17 +109,17 @@ export default function GroundOverview({ active, elapsedRef, showOverlays, compa
           <circle className={styles.droneHit} r="24" />
           <circle className={styles.droneRing} r="16" />
           <path className={styles.droneIcon} d="m0-8 4 7 7 3-1 3-8-2-2 5-2-5-8 2-1-3 7-3Z" />
-          {showOverlays && <><text x="23" y="-2" className={styles.droneId}>{drone.id}<tspan x="23" dy="12">OUR DRONE ↗</tspan></text><circle className={styles.droneDot} cx="-13" cy="-13" r="2.5" /></>}
+          {showOverlays && <><text x="23" y="-2" className={styles.droneId}>{drone.id}<tspan x="23" dy="12">CAMERA ↗</tspan></text><circle className={styles.droneDot} cx="-13" cy="-13" r="2.5" /></>}
         </g>
       </g>)}
       <g className={styles.north} transform="translate(1129 91)" aria-hidden="true"><path d="m0 17 0-34m-5 9 5-9 5 9" /><text y="-25" textAnchor="middle">N</text></g>
     </svg>
     {showOverlays && <>
-      <div className={styles.topline}><span><i />GROUND / SITUATIONAL VIEW</span><span>CONCEPT SCENE</span></div>
-      {!compact && <div className={styles.summary}><strong>15</strong><span>moving vehicle tracks<small>02 friendly aircraft</small></span></div>}
+      <div className={styles.topline}><span><i />Area overview</span><span>SIMULATED</span></div>
+
       <div className={styles.legend}><span><i className={styles.trackKey} />Vehicles <b>12</b></span><span><i className={styles.friendlyKey} />Friendly <b>03</b></span><span><i className={styles.droneKey} />Our drones <b>02</b></span></div>
-      {!compact && <div className={styles.selection}><span>{selectedId}</span><span>{selectedId?.startsWith("F") ? "FRIENDLY VEHICLE" : "VEHICLE TRACK"}</span></div>}
-      {!compact && <span className={styles.hint}>Select a drone to open its camera <span aria-hidden="true">↗</span></span>}
+      <div className={styles.selection}><small>SELECTED OBJECT</small><strong>{selectedId}</strong><span>{selectedId?.startsWith("F") ? "Friendly vehicle" : "Vehicle track"}</span></div>
+      <div className={styles.cameraLinks} role="group" aria-label="Open an aircraft camera">{DRONES.map(drone => <button key={drone.id} type="button" onClick={event => onOpenCamera(drone.view, event.detail === 0)}>{drone.id}<span aria-hidden="true">↗</span></button>)}</div>
     </>}
   </div>;
 }

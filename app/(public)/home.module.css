@@ -58,3 +58,14 @@
 .editorialNav a > span { color:#7b8270; font:10px/1.5 ui-monospace,monospace; }.editorialNav svg { margin-left:auto; width:18px; }.editorialNav a:hover { background:#dddfd3; }
 @media(max-width:1000px) { .editorialHeading { grid-template-columns:1fr; gap:32px; }.editorialHeading p { max-width:420px; }.editorialNav a { gap:10px; padding:16px 12px; } }
 @media(max-width:660px) { .editorialHero { padding-top:32px; }.editorialEyebrow { font-size:8px; }.editorialEyebrow > span:last-child { display:none; }.editorialHeading { padding:38px 0; gap:28px; }.editorialHeading h1 { font-size:clamp(48px,12.6vw,80px); letter-spacing:-.06em; }.editorialHeading p { max-width:330px; font-size:15px; }.editorialNav { grid-template-columns:1fr 1fr; }.editorialNav a { min-height:58px; padding:14px 12px; border-bottom:1px solid #10120f25; }.editorialNav a:first-child { padding-left:12px; }.editorialNav a:nth-child(odd) { border-left:0; }.editorialNav a:last-child { grid-column:1/-1; border-bottom:0; }.systemArt:has([data-system="act-1"]) { height:340px; } }
+
+/* Monochrome observation workspace. */
+.platformSection { --acid:#f1f1f1; background:#101010; color:#eee; }
+.platformSection > .sectionLabel { color:#999; }
+.platformHeading h2 span { color:#898989; }
+.platformFrame { border-color:#3b3b3b; }
+.platformChrome { border-color:#3b3b3b; color:#8c8c8c; background:#181818; }
+.platformChrome > span:first-child { color:#ddd; }.platformChrome i { background:#ddd; }
+.platformCaption { border-color:#3b3b3b; color:#aaa; background:#181818; }
+.platformBenefits > div { border-color:#363636; }.platformBenefits p { color:#999; }
+.platformSection :focus-visible { outline-color:#eee; }
