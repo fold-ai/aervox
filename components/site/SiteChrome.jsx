@@ -63,7 +63,7 @@ export function SiteFooter() {
     <div className={styles.footerMain}>
       <div className={styles.footerIdentity}><Brand /><p>Onboard intelligence.<br />Ground software.<br />Aircraft-specific integration.</p></div>
       <div className={styles.footerNav}><span>EXPLORE</span><nav aria-label="Footer navigation">{navigation.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div>
-      <div className={styles.footerConnect}><span>CONNECT</span><a href="mailto:contact@actprove.com">contact@actprove.com<Arrow diagonal /></a><Link href="/investment-deck">Investment deck<Arrow diagonal /></Link></div>
+      <div className={styles.footerConnect}><span>CONNECT</span><a href="mailto:contact@actprove.com">contact@actprove.com<Arrow diagonal /></a></div>
     </div>
     <div className={styles.footerBottom}><span>© 2026 ACTPROVE DEFENSE TECHNOLOGIES</span><span>BUILT AROUND THE AIRCRAFT.</span><Link href="/">ACTPROVE<Arrow /></Link></div>
   </footer>;

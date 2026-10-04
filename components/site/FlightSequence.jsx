@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./FlightSequence.module.css";
 
-const FILM = "/media/intercept-sequence-v3.mp4";
-const POSTER = "/media/intercept-poster-v3.webp";
-const TRACK = "/media/intercept-track-v3.json";
+const FILM = "/media/intercept-sequence-v4.mp4";
+const POSTER = "/media/intercept-poster-v4.webp";
+const TRACK = "/media/intercept-track-v4.json";
 const HERO_POSITION = .64;
 let trackRequest;
 
@@ -45,8 +45,8 @@ function sampleTrack(track, seconds) {
 }
 
 function phaseLabel(phase) {
-  if (phase === "Complete") return "Feed ended";
-  if (phase === "Intercept") return "Closing";
+  if (phase === "Complete") return "Intercept complete";
+  if (phase === "Intercept") return "Intercepting";
   if (phase === "Locked") return "Track locked";
   if (phase === "Acquiring") return "Acquiring";
   return "Searching";
@@ -80,8 +80,8 @@ function TrackingOverlay({ track, frame, size, hero }) {
   const anchorLeft = anchorX - anchorSide / 2, anchorRight = anchorX + anchorSide / 2;
   const anchorTop = anchorY - anchorSide / 2, anchorBottom = anchorY + anchorSide / 2;
   const margin = width < 600 ? 15 : 28;
-  const panelWidth = width < 600 ? 132 : 160;
-  const panelHeight = hero ? 113 : width < 600 ? 96 : 113;
+  const panelWidth = width < 600 ? 158 : 192;
+  const panelHeight = width < 600 ? 151 : 174;
   const gap = width < 600 ? 13 : 20;
   const rightFits = anchorRight + gap + panelWidth <= width - margin;
   const leftFits = anchorLeft - gap - panelWidth >= margin - 8;
@@ -105,28 +105,40 @@ function TrackingOverlay({ track, frame, size, hero }) {
   const fixedMobileInfo = hero && width < 660;
   if (fixedMobileInfo) { panelX = 20; panelY = 116; placement = "fixed"; }
   const corners = `M${left + corner},${top}H${left}V${top + corner} M${right - corner},${top}H${right}V${top + corner} M${left},${bottom - corner}V${bottom}H${left + corner} M${right - corner},${bottom}H${right}V${bottom - corner}`;
-  const alpha = clamp(frame.lockAlpha, 0, 1) * clamp(frame.opacity, 0, 1) * (1 - clamp((frame.w - .22) / .16, 0, 1));
+  const alpha = clamp(frame.lockAlpha, 0, 1) * clamp(frame.opacity, 0, 1);
   const targetOnScreen = right > 0 && left < width && bottom > 0 && top < height;
   const status = phaseLabel(frame.phase);
+  // Scripted storytelling states, not outputs from sensors or a safety assessment.
+  const analyzed = frame.time >= 6.3 && frame.time < 12.7;
+  const zoneClear = frame.time >= 7.3 && frame.time < 12.7;
+  const committing = frame.phase === "Intercept" || ending;
+  const crossSize = clamp(side * .09, 10, 23);
+  const sight = `M${centerX-crossSize},${centerY}H${centerX-5} M${centerX+5},${centerY}H${centerX+crossSize} M${centerX},${centerY-crossSize}V${centerY-5} M${centerX},${centerY+5}V${centerY+crossSize}`;
 
-  return <div className={styles.overlay} aria-hidden="true" data-status={status}>
+  return <div className={styles.overlay} aria-hidden="true" data-status={status} data-committing={committing}>
     {!hero && <div className={styles.sceneHeader}><span>I-01 / INTERCEPTOR CAMERA</span><span>CONCEPT SEQUENCE</span></div>}
     <svg className={styles.geometry} viewBox={`0 0 ${width} ${height}`} fill="none" preserveAspectRatio="none">
       <g opacity={targetOnScreen ? alpha : 0}>
         <rect className={styles.lockOutline} x={left} y={top} width={side} height={side} vectorEffect="non-scaling-stroke" />
         <path className={styles.lockCorners} d={corners} vectorEffect="non-scaling-stroke" />
+        <path className={styles.crosshair} d={sight} vectorEffect="non-scaling-stroke" />
+        <circle className={styles.crosshair} cx={centerX} cy={centerY} r="3" vectorEffect="non-scaling-stroke" />
         {!ending && placement !== "below" && placement !== "fixed" && <path className={styles.leader} d={placement === "right" ? `M${right + 5},${centerY}H${panelX - 7}` : `M${panelX + panelWidth + 7},${centerY}H${left - 5}`} vectorEffect="non-scaling-stroke" />}
       </g>
     </svg>
     {hero && <div className={styles.cameraSource}><span><i /> I-01 / INTERCEPTOR VIEW</span><small>EO CAMERA <b>{String(Math.floor(frame.time)).padStart(2, "0")}:{String(Math.floor((frame.time % 1) * 30)).padStart(2, "0")}</b></small></div>}
     {(targetOnScreen || ending) && <div className={styles.targetInfo} style={{ left: panelX, top: panelY, width: panelWidth, opacity: ending ? 1 : frame.opacity }} data-placement={placement}>
       <div className={styles.targetHeading}><span>TARGET</span><b>01</b></div>
-      <div className={styles.targetClass}><strong>UAV</strong><span>FIXED WING</span></div>
+      <div className={styles.targetClass}><strong>SHAHED-136</strong><span>GERAN-2</span></div>
       <div className={styles.targetStatus}><i />{status}</div>
-      <span className={styles.simulation}>{ending ? "END OF CONCEPT SEQUENCE" : "VISUAL TRACK / CONCEPT"}</span>
+      <div className={styles.assessment}>
+        <span>{analyzed ? "ANALYSIS COMPLETE" : "SCENE ANALYSIS"}<b>{analyzed ? "✓" : "…"}</b></span>
+        <span>{zoneClear ? "ZONE SAFE · SIMULATED" : "ASSESSING ZONE"}<b>{zoneClear ? "✓" : "…"}</b></span>
+      </div>
+      <span className={styles.simulation}>SCRIPTED DEMONSTRATION</span>
     </div>}
     {!hero && <>
-      <div className={styles.sceneFooter}><span>ACQUIRE → FOLLOW → CLOSE</span><span>{String(Math.floor(frame.time)).padStart(2, "0")} / {Math.round(track.duration)} SEC</span></div>
+      <div className={styles.sceneFooter}><span>ACQUIRE → ASSESS → INTERCEPT</span><span>{String(Math.floor(frame.time)).padStart(2, "0")} / {Math.round(track.duration)} SEC</span></div>
       <div className={styles.progress}><span style={{ transform: `scaleX(${frame.time / track.duration})` }} /></div>
     </>}
   </div>;
@@ -236,12 +248,12 @@ export default function FlightSequence({ motionPaused = false, showOverlays = tr
   const showFallback = (playbackState === "blocked" || playbackState === "error") && !motionPaused && !reducedMotion;
 
   return <div ref={rootRef} className={`${styles.sequence} ${className}`.trim()} data-variant={hero ? "hero" : "demo"} data-playback={playbackState} role="group" aria-label="Illustrative drone-on-drone interception film">
-    <video ref={videoRef} className={styles.video} src={FILM} poster={POSTER} width="1920" height="1080" autoPlay={wantsPlayback} muted playsInline loop preload="metadata" aria-label="An authored onboard-camera perspective approaches a distant drone through a cloud corridor. A green square follows the aircraft as it grows closer, then the fictional camera feed ends."
+    <video ref={videoRef} className={styles.video} src={FILM} poster={POSTER} width="1920" height="1080" autoPlay={wantsPlayback} muted playsInline loop preload="metadata" aria-label="A fictional interceptor-camera film approaches a Shahed-136 / Geran-2. A centered crosshair and green square follow the aircraft. A scripted zone-clear message appears, the reticle turns red, and a brief impact transition ends the simulated interception. No live sensor data or real safety assessment."
       onPlaying={() => { setHasVideoFrame(true); setPlaybackState("playing"); }}
       onSeeked={() => { if (videoRef.current?.readyState >= 2 && !reducedMotion) setHasVideoFrame(true); }}
       onPause={() => setPlaybackState(state => reducedMotion ? "reduced-motion" : state === "blocked" || state === "error" ? state : "paused")}
       onError={() => setPlaybackState("error")} />
-    {showPoster && <img className={styles.poster} src={POSTER} alt="A single fixed-wing drone seen from behind through an atmospheric cloud corridor" fetchPriority={hero ? "high" : "auto"} decoding="async" draggable="false" />}
+    {showPoster && <img className={styles.poster} src={POSTER} alt="A Shahed-136 / Geran-2 silhouette seen from a fictional interceptor camera in a cloud corridor" fetchPriority={hero ? "high" : "auto"} decoding="async" draggable="false" />}
     {showOverlays && <TrackingOverlay track={track} frame={frame} size={size} hero={hero} />}
     {showFallback && <button className={styles.playButton} type="button" onClick={playFromGesture}><span aria-hidden="true">▷</span>{playbackState === "error" ? "Retry film" : "Play film"}</button>}
   </div>;

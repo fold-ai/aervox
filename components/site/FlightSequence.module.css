@@ -60,3 +60,17 @@
   .sequence[data-variant="hero"] .playButton { right: 24px; bottom: 112px; min-height: 44px; font-size: 11px; }
 }
 @media (prefers-reduced-motion: reduce) { .video { visibility: hidden; } }
+.overlay[data-committing="true"] { --lock: #ff7068; }
+.crosshair { stroke: var(--lock); stroke-width: 1.2; filter: drop-shadow(0 1px 3px #0008); }
+.targetInfo { border-left-color: var(--lock); }
+.targetHeading { border-bottom-color: color-mix(in srgb, var(--lock) 25%, transparent); }
+.assessment { display: grid; gap: 6px; padding-top: 9px; margin-top: 9px; border-top: 1px solid color-mix(in srgb, var(--lock) 25%, transparent); }
+.assessment > span { display: flex; justify-content: space-between; gap: 8px; font-size: 8px; line-height: 1.4; letter-spacing: .025em; }
+.assessment b { font-weight: 400; }
+.overlay[data-committing="true"] .targetInfo { background: linear-gradient(90deg, #24110fd9, #191113ad); }
+@media (max-width: 660px) {
+  .assessment { gap: 5px; padding-top: 7px; margin-top: 7px; }
+  .assessment > span { font-size: 7px; }
+  .targetClass > strong { font-size: 10px; }
+  .cameraSource { top: 294px; }
+}

@@ -41,7 +41,6 @@ export default function CompanyPage() {
           <div className={styles.milestoneRow}><span className={styles.milestoneDate}>Q1 2027</span><div><h3>First combat testing.</h3><p>First testing in actual combat conditions in Ukraine is planned for Q1 2027.</p></div><span className={styles.planned}>PLANNED</span></div>
           <div className={styles.milestoneRow}><span className={styles.milestoneDate}>ATLANTA</span><div><h3>A U.S. office.</h3><p>An Atlanta office is planned as part of Actprove’s development.</p></div><span className={styles.planned}>PLANNED</span></div>
         </div>
-        <div className={styles.investmentLink}><span>For investors</span><Link href="/investment-deck">Read the investment deck<Arrow diagonal /></Link></div>
       </section>
     </main>
     <SiteFooter />
