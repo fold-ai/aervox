@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import MissionHero from "@/components/site/MissionHero";
 import { TrackedScene } from "@/components/site/PerceptionDemo";
 import SystemVisual from "@/components/site/SystemVisual";
 import { SiteHeader, SiteFooter } from "@/components/site/SiteChrome";
@@ -18,7 +17,6 @@ function Arrow({ down = false }) {
 export default function HomePage() {
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [playback, setPlayback] = useState("paused");
   const [selected, setSelected] = useState(0);
   const active = systems[selected];
   const motionPaused = paused || reducedMotion;
@@ -29,21 +27,18 @@ export default function HomePage() {
     return () => media.removeEventListener("change", sync);
   }, []);
   return <div className={styles.home} id="top">
-    <SiteHeader overlay />
+    <SiteHeader theme="light" />
     <main id="main">
-      <section className={styles.hero} aria-labelledby="home-title">
-        <MissionHero className={styles.heroFilm} motionPaused={motionPaused} onPlaybackStateChange={setPlayback} />
-        <div className={styles.heroTopline}><span>ACTPROVE / DEFENSE TECHNOLOGIES</span><span>SOFTWARE × HARDWARE</span></div>
-        <div className={styles.heroContent}>
-          <span className={styles.heroKicker}>Intelligence at the edge</span>
-          <h1 id="home-title">Strike.<br />Intercept.</h1>
-          <div className={styles.heroIntro}><p>Onboard intelligence for strike and interceptor drones. Built around the aircraft. Connected to the operator.</p><Link className={styles.heroLink} href="/systems">Explore our systems <Arrow /></Link></div>
+      <section className={styles.editorialHero} aria-labelledby="home-title">
+        <div className={styles.editorialEyebrow}><span>ACTPROVE / DEFENSE TECHNOLOGIES</span><span>SOFTWARE × HARDWARE</span></div>
+        <div className={styles.editorialHeading}>
+          <h1 id="home-title">Intelligence.<br />Built into the aircraft.</h1>
+          <p>Onboard intelligence for strike and interceptor drones. Ground software for the operator. Built together, around your aircraft.</p>
         </div>
-        <div className={styles.heroBottom}>
-          <a href="#introduction" className={styles.discover}>Discover ACTPROVE <Arrow down /></a>
-          <span className={styles.filmCaption}>01 / DRONE-ON-DRONE <i>CONCEPT FILM</i></span>
-          {!["blocked", "error"].includes(playback) && <button className={styles.motion} onClick={() => setPaused(value => !value)} disabled={reducedMotion} aria-label={reducedMotion ? "Motion disabled by your preference" : motionPaused ? "Resume film" : "Pause film"}><span aria-hidden="true">{motionPaused ? "▷" : "Ⅱ"}</span>{reducedMotion ? "Motion off" : motionPaused ? "Play" : "Pause"}</button>}
-        </div>
+        <nav className={styles.editorialNav} aria-label="Explore our systems">
+          {systems.map((system, index) => <a key={system.type} href="#systems" onClick={() => setSelected(index)}><span>0{index + 1}</span>{system.name}<Arrow down /></a>)}
+          <Link href="/systems/era-1"><span>05</span>ERA-1<Arrow down /></Link>
+        </nav>
       </section>
       <section id="introduction" className={styles.introduction}>
         <div className={styles.sectionLabel}><span>01 / THE MISSION</span><span>FROM PERCEPTION TO UNDERSTANDING</span></div>

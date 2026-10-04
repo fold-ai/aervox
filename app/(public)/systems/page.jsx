@@ -24,7 +24,7 @@ export default function SystemsPage() {
         <div className={styles.sectionLabel}><span>01 / IN DEVELOPMENT</span><h2 id="development-title">The current foundation.</h2></div>
         {systems.slice(0, 2).map(system => <article key={system.slug} id={system.slug} className={styles.featuredProduct} aria-labelledby={`${system.slug}-title`}>
           <div className={styles.featuredCopy}><div className={styles.productKicker}><span>{system.number} / {system.category}</span><span className={styles.status}><i />{system.status}</span></div><h3 id={`${system.slug}-title`}>{system.name}</h3><p>{system.summary}</p><Link href={`/systems/${system.slug}`} className={styles.textLink}>Explore {system.name}<Arrow diagonal /></Link></div>
-          <Link href={`/systems/${system.slug}`} className={styles.featuredArt} aria-label={`Explore ${system.name}`} tabIndex={-1}><SystemVisual type={system.slug} compact /></Link>
+          <div className={styles.featuredArt}><SystemVisual type={system.slug} compact /></div>
         </article>)}
       </section>
 
