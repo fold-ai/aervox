@@ -1,0 +1,67 @@
+.page { --paper: #e8e8df; --ink: #10120f; --rule: #10120f30; --gutter: clamp(24px, 5vw, 88px); background: var(--paper); color: var(--ink); font: 400 16px/1.6 var(--font-body), sans-serif; overflow: clip; }
+.page h1, .page h2, .page h3 { font-family: var(--font-display), sans-serif; font-variation-settings: "wdth" 100; font-weight: 400; letter-spacing: -.045em; margin: 0; }
+.page :where(main) p { margin: 0; max-width: none; color: #51594a; }
+.page :where(main) a { color: inherit; text-decoration: none; }
+.page main :focus-visible { outline: 2px solid #10120f; outline-offset: 6px; }
+.page section { padding-left: var(--gutter); padding-right: var(--gutter); }
+.sectionLabel { display: flex; justify-content: space-between; gap: 30px; color: #6a745f; font: 9px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .08em; }
+.page .intro { padding-top: 45px; padding-bottom: 61px; }
+.heroGrid { display: grid; grid-template-columns: 1.5fr .8fr; gap: 9%; align-items: end; margin: 73px 0 74px; }
+.page .heroGrid h1 { font-size: clamp(65px, 8.15vw, 126px); line-height: .96; letter-spacing: -.06em; max-width: none; }
+.heroAside { padding-bottom: 7px; }
+.smallLabel { font: 8px/1.7 ui-monospace, SFMono-Regular, monospace; letter-spacing: .09em; color: #6b775e; }
+.systemContext { color: var(--ink); }
+.heroAside p { font-size: clamp(18px, 1.7vw, 26px); line-height: 1.5; letter-spacing: -.015em; margin: 26px 0 24px; color: #303a25; }
+.asideNote { display: block; max-width: 255px; color: #737e66; font-size: 12px; line-height: 1.7; }
+.email { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 30px 0 36px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font: 400 clamp(27px, 5.9vw, 91px)/1.08 var(--font-display), sans-serif; font-variation-settings: "wdth" 100; letter-spacing: -.045em; }
+.email span { min-width: 0; overflow-wrap: anywhere; }
+.email svg { width: clamp(28px, 4.7vw, 72px); height: clamp(28px, 4.7vw, 72px); flex-shrink: 0; transition: transform .2s ease; }
+.email:hover svg { transform: translate(4px, -4px); }
+.emailCaption { display: flex; justify-content: space-between; gap: 25px; padding-top: 18px; color: #77816a; font: 8px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .08em; }
+.page .inquiries { padding-top: 53px; padding-bottom: 85px; }
+.inquiriesHeading { display: flex; justify-content: space-between; gap: 40px; align-items: baseline; margin-bottom: 49px; }
+.inquiriesHeading h2 { font-size: clamp(31px, 3.35vw, 52px); line-height: 1.06; }
+.inquiryRow { display: grid; grid-template-columns: 48px 1.1fr 1fr 34px; gap: 29px; align-items: start; padding: 32px 0 36px; border-top: 1px solid var(--rule); }
+.inquiryRow:last-child { border-bottom: 1px solid var(--rule); }
+.rowNumber { font: 9px/1.6 ui-monospace, SFMono-Regular, monospace; color: #879078; padding-top: 3px; }
+.inquiryTitle > span { display: block; font: 8px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .065em; color: #738062; margin-bottom: 18px; }
+.page .inquiryTitle h3 { font-size: clamp(25px, 2.65vw, 40px); line-height: 1.1; }
+.inquiryRow p { font-size: 14px; line-height: 1.75; max-width: 355px; padding-top: 28px; }
+.inquiryRow > svg { width: 23px; height: 23px; margin-top: 33px; color: #455535; transition: transform .2s ease; }
+.inquiryRow:hover > svg { transform: translate(4px, -4px); }
+.inquiryRow:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.page .companyLink { display: grid; grid-template-columns: 1fr 1.45fr; gap: 12%; background: #dcdfd1; padding-top: 54px; padding-bottom: 59px; }
+.companyLink > span { font: 8px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .075em; color: #667259; padding-top: 6px; }
+.companyLink a { display: block; position: relative; padding-right: 51px; font: 400 clamp(26px, 3.1vw, 47px)/1.1 var(--font-display), sans-serif; font-variation-settings: "wdth" 100; letter-spacing: -.04em; }
+.companyLink svg { position: absolute; right: 0; top: 3px; width: 30px; height: 30px; }
+@media (max-width: 1000px) { .heroGrid { gap: 7%; } .inquiryRow { grid-template-columns: 35px 1.1fr 1fr 25px; gap: 24px; } .inquiryRow p { font-size: 13px; } }
+@media (max-width: 760px) {
+  .page .intro { padding-top: 27px; padding-bottom: 38px; }
+  .sectionLabel { font-size: 8px; gap: 20px; }
+  .sectionLabel > span:last-child { font-size: 7px; text-align: right; }
+  .heroGrid { grid-template-columns: 1fr; gap: 36px; margin: 54px 0 42px; }
+  .page .heroGrid h1 { font-size: clamp(58px, 11vw, 85px); line-height: .98; }
+  .heroAside { display: grid; grid-template-columns: 1fr 1fr; gap: 17px 25px; padding: 0; }
+  .heroAside .smallLabel { grid-column: 1 / -1; }
+  .heroAside p { font-size: 16px; line-height: 1.55; margin: 0; }
+  .asideNote { font-size: 11px; padding-top: 2px; }
+  .email { font-size: clamp(26px, 5.2vw, 40px); padding: 24px 0 29px; gap: 13px; }
+  .email svg { width: 27px; height: 27px; }
+  .emailCaption { font-size: 7px; gap: 20px; }
+  .emailCaption > span:last-child { max-width: 135px; text-align: right; font-size: 6px; }
+  .page .inquiries { padding-top: 38px; padding-bottom: 54px; }
+  .inquiriesHeading { flex-direction: column; gap: 22px; margin-bottom: 30px; }
+  .inquiriesHeading h2 { font-size: 36px; }
+  .inquiryRow { grid-template-columns: 23px 1fr 20px; gap: 17px; padding: 26px 0 29px; }
+  .rowNumber { font-size: 8px; padding-top: 0; }
+  .inquiryTitle > span { font-size: 7px; margin-bottom: 14px; }
+  .page .inquiryTitle h3 { font-size: 28px; }
+  .inquiryRow p { grid-column: 2; font-size: 13px; padding: 0; }
+  .inquiryRow > svg { grid-column: 3; grid-row: 1; width: 18px; height: 18px; margin-top: 27px; }
+  .page .companyLink { grid-template-columns: 1fr; gap: 29px; padding-top: 35px; padding-bottom: 41px; }
+  .companyLink > span { padding: 0; font-size: 7px; }
+  .companyLink a { font-size: 32px; padding-right: 44px; }
+  .companyLink svg { width: 25px; height: 25px; }
+}
+@media (max-width: 390px) { .page .heroGrid h1 { font-size: 53px; } .heroAside { grid-template-columns: 1fr; gap: 16px; } .heroAside p { font-size: 17px; } .asideNote { max-width: 260px; padding: 0; } .email { font-size: 23px; } .email svg { width: 23px; height: 23px; } .companyLink a { font-size: 28px; } }
+@media (prefers-reduced-motion: reduce) { .email svg, .inquiryRow > svg { transition: none; } }

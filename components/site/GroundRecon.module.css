@@ -1,4 +1,4 @@
-.recon { width: 100%; color: #f2f1ed; }
+.recon { width: 100%; color: #e8e8df; background: #10120f; }
 .scene { position: relative; isolation: isolate; aspect-ratio: 16 / 9; overflow: hidden; background: #454c48; }
 .scene::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, #111b207a, transparent 28%, transparent 60%, #0b131a8c), radial-gradient(ellipse at center, transparent 30%, #14202026 100%); z-index: 1; }
 .canvas { position: absolute; inset: 0; }
@@ -6,7 +6,7 @@
 .fallbackImage { width: 100%; height: 100%; display: block; object-fit: cover; filter: saturate(.4) brightness(.68); }
 .trackingLayer { position: absolute; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; }
 .track { position: absolute; left: 0; top: 0; width: 0; height: 0; visibility: hidden; color: #e9ece170; will-change: transform, width, height; }
-.track[data-selected="true"] { color: #e2af91; }
+.track[data-selected="true"] { color: #d8ed8a; }
 .track > i { position: absolute; width: 11px; height: 11px; border: solid currentColor; border-width: 0; filter: drop-shadow(0 1px 2px #0c161b66); }
 .track > i:nth-child(1) { left: 0; top: 0; border-width: 1px 0 0 1px; }
 .track > i:nth-child(2) { right: 0; top: 0; border-width: 1px 1px 0 0; }
@@ -14,19 +14,19 @@
 .track > i:nth-child(4) { right: 0; bottom: 0; border-width: 0 1px 1px 0; }
 .trackLabel { position: absolute; left: 0; bottom: calc(100% + 8px); display: flex; align-items: center; gap: 9px; white-space: nowrap; font: 10px/1.4 ui-monospace, SFMono-Regular, monospace; letter-spacing: .08em; color: #f0f1e6; text-shadow: 0 1px 5px #0a141a; }
 .trackLabel > span { font-size: 8px; opacity: .8; }
-.track[data-selected="true"] .trackLabel { color: #f0c6aa; }
+.track[data-selected="true"] .trackLabel { color: #e1efb7; }
 .sceneHeader, .sceneFooter { position: absolute; left: 28px; right: 28px; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 20px; font: 10px/1.5 ui-monospace, SFMono-Regular, monospace; letter-spacing: .12em; text-shadow: 0 1px 4px #0004; pointer-events: none; }
 .sceneHeader { top: 25px; }
 .sceneHeader > span:first-child { display: flex; align-items: center; gap: 10px; }
-.sceneHeader i { width: 4px; height: 4px; background: #d7a387; }
+.sceneHeader i { width: 4px; height: 4px; background: #d8ed8a; }
 .sceneHeader > span:last-child { font-size: 9px; color: #e5e8dcaa; }
 .sceneFooter { bottom: 23px; font-size: 9px; color: #eff0e9aa; }
 .cameraLabel { position: absolute; z-index: 3; left: 28px; top: 76px; display: flex; flex-direction: column; text-shadow: 0 1px 6px #10212433; pointer-events: none; }
 .cameraLabel > span { font: 9px/1.5 ui-monospace, monospace; letter-spacing: .12em; color: #e3e9e2aa; }
 .cameraLabel strong { font: 400 28px/1.25 var(--font-display), sans-serif; letter-spacing: -.03em; margin: 6px 0; }
 .cameraLabel small { font-size: 10px; line-height: 1.5; color: #e4e9ddc9; }
-.telemetry { position: absolute; right: 28px; bottom: 67px; z-index: 3; width: 236px; padding: 15px 17px 13px; border: 1px solid #eef1df30; background: #111d20b5; backdrop-filter: blur(10px); pointer-events: none; }
-.telemetryTitle { display: flex; justify-content: space-between; align-items: center; gap: 14px; color: #edc2a5; font: 9px/1.5 ui-monospace, monospace; letter-spacing: .08em; }
+.telemetry { position: absolute; right: 28px; bottom: 67px; z-index: 3; width: 236px; padding: 15px 17px 13px; border: 1px solid #eef1df30; background: #10150fea; pointer-events: none; }
+.telemetryTitle { display: flex; justify-content: space-between; align-items: center; gap: 14px; color: #d8ed8a; font: 9px/1.5 ui-monospace, monospace; letter-spacing: .08em; }
 .telemetryTitle > span { color: #d9dfd0aa; font-size: 8px; }
 .speed { display: flex; align-items: center; gap: 12px; padding: 13px 0 15px; }
 .speed > strong { font: 400 51px/.95 var(--font-display), sans-serif; letter-spacing: -.045em; }
@@ -36,27 +36,27 @@
 .occupants > span { font-size: 10px; color: #c3ccbf; }
 .occupants strong { font: 400 18px/1.2 var(--font-display), sans-serif; white-space: nowrap; }
 .occupants small { font: 9px/1.5 ui-monospace, monospace; margin-left: 6px; color: #aeb8aa; }
-.observationBar { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #ffffff25; padding: 5px 0; }
+.observationBar { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #343a2d; padding: 7px 23px; background: #191c16; }
 .viewChoices { display: flex; align-items: center; gap: 24px; }
-.observationBar button { display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 0; border: 0; background: transparent; color: #898f89; font: 11px/1.5 var(--font-body), sans-serif; cursor: pointer; }
-.observationBar button[aria-pressed="true"] { color: #f1f0e8; }
+.observationBar button { display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 0; border: 0; background: transparent; color: #9ca590; font: 11px/1.5 var(--font-body), sans-serif; cursor: pointer; }
+.observationBar button[aria-pressed="true"] { color: #e8e8df; }
 .viewIcon { font: 18px/1 var(--font-body), sans-serif; color: #7e8a82; }
-.observationBar button[aria-pressed="true"] .viewIcon { color: #d4a183; }
+.observationBar button[aria-pressed="true"] .viewIcon { color: #d8ed8a; }
 .viewStatus { font: 9px/1.5 ui-monospace, monospace; letter-spacing: .08em; color: #778370; }
-.recon button:focus-visible { outline: 1px solid #d8aa8d; outline-offset: 5px; }
-.context { display: grid; grid-template-columns: 1.15fr 1fr; gap: 11%; padding: 33px 0 27px; }
-.kicker { color: #bd9278; font: 8px/1.5 ui-monospace, monospace; letter-spacing: .12em; }
-.context h3 { font-size: clamp(23px, 2.1vw, 32px); line-height: 1.22; margin: 13px 0 15px !important; letter-spacing: -.025em; }
+.recon button:focus-visible { outline: 1px solid #d8ed8a; outline-offset: 5px; }
+.context { display: grid; grid-template-columns: 1.15fr 1fr; gap: 11%; padding: 28px 23px 30px; }
+.kicker { color: #d8ed8a; font: 9px/1.5 ui-monospace, monospace; letter-spacing: .08em; }
+.context h3 { font-size: clamp(23px, 2.1vw, 32px); font-variation-settings: "wdth" 100; line-height: 1.22; margin: 13px 0 15px !important; letter-spacing: -.035em; }
 .context p { max-width: 410px; font-size: 12px; line-height: 1.8; color: #989f96; margin: 0; }
 .vehiclePanel { padding-top: 3px; }
 .vehiclePanelTitle { display: flex; align-items: center; justify-content: space-between; gap: 15px; font: 9px/1.5 ui-monospace, monospace; letter-spacing: .08em; color: #959e93; margin-bottom: 11px; }
 .vehiclePanelTitle > span:last-child { color: #8b9686; font-size: 8px; }
 .vehicleChoices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
 .vehicleChoices button { display: grid; grid-template-columns: 6px 1fr; gap: 8px; align-items: center; padding: 11px; border: 1px solid #ced7c521; color: #9ca596; background: transparent; text-align: left; font: 9px/1.5 ui-monospace, monospace; cursor: pointer; }
-.vehicleChoices button[aria-pressed="true"] { border-color: #c0957670; background: #c095760b; color: #f0ebdc; }
+.vehicleChoices button[aria-pressed="true"] { border-color: #d8ed8a80; background: #d8ed8a0b; color: #edf1df; }
 .vehicleChoices button > span { width: 5px; height: 5px; }
 .vehicleChoices small { grid-column: 2; font: 9px/1.5 var(--font-body), sans-serif; color: #818d7d; }
-.vehicleChoices button[aria-pressed="true"] small { color: #ceab90; }
+.vehicleChoices button[aria-pressed="true"] small { color: #c3d49d; }
 .context .scenarioNote { font-size: 10px; line-height: 1.7; color: #7f8a79; margin-top: 14px; }
 .fallbackNotice { position: absolute; z-index: 4; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(330px, 80%); padding: 20px; background: #101a20db; text-align: center; }
 .fallbackNotice > span { font: 8px/1.5 ui-monospace, monospace; letter-spacing: .12em; color: #d9b699; }
@@ -107,7 +107,7 @@
   .observationBar button { font-size: 11px; gap: 6px; }
   .viewStatus { display: none; }
   .viewIcon { font-size: 14px; }
-  .context { grid-template-columns: 1fr; gap: 24px; padding: 25px 0; }
+  .context { grid-template-columns: 1fr; gap: 24px; padding: 24px 14px; }
   .context h3 { font-size: 26px; }
   .context p { font-size: 12px; }
   .vehiclePanelTitle { font-size: 8px; }
@@ -132,7 +132,7 @@
 .recon[data-mode="overview"] .observationBar button[aria-pressed="true"] .viewIcon { color: #9be9aa; }
 .recon[data-mode="overview"] .kicker { color: #8db095; }
 .selectedTrack { display: flex; align-items: center; gap: 18px; padding: 7px 0 13px; border-bottom: 1px solid #9bcc9d24; }
-.selectedTrack > strong { font: 400 30px/1.2 var(--font-display), sans-serif; color: #c1e7c7; letter-spacing: -.03em; }
+.selectedTrack > strong { font: 400 30px/1.2 var(--font-display), sans-serif; font-variation-settings: "wdth" 100; color: #c1e7c7; letter-spacing: -.03em; }
 .selectedTrack > span { font-size: 11px; color: #afc8b2; line-height: 1.6; }
 .selectedTrack small { display: block; font-size: 10px; color: #7d9984; }
 .selectedTrack > i { display: block; width: 13px; height: 13px; border: 1px solid #9bf3ab; margin-left: auto; }
@@ -141,6 +141,7 @@
 .returnOverview > span:last-child { color: #9dc7c3; font: 8px ui-monospace, monospace; }
 .fallbackNotice button { border: 1px solid #91b69b66; color: #d1edcf; background: #143120; min-height: 40px; padding: 8px 14px; margin-top: 12px; font-size: 11px; cursor: pointer; }
 @media (max-width: 600px) {
+  .observationBar { padding: 7px 14px; }
   .recon[data-mode="overview"] .scene { aspect-ratio: 5 / 4; padding-bottom: 0; }
   .recon[data-mode="overview"][data-compact="true"] .scene { aspect-ratio: 4 / 3; }
   .recon[data-mode="overview"] .viewChoices { gap: 25px; }

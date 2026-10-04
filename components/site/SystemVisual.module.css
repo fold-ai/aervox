@@ -1,0 +1,25 @@
+.visual { position: relative; display: grid; place-items: center; width: 100%; height: 100%; min-height: 240px; overflow: hidden; isolation: isolate; background: #d6d6d1; color: #474745; }
+.visual::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 52% 35%, #f0f0eab3, #c5c5c02b 68%); }
+.visual > svg { display: block; width: 100%; height: 100%; max-height: 720px; min-height: 240px; overflow: visible; }
+.visual[data-system="prove-1"], .visual[data-system="era-1"] { background: #151514; color: #bebeb9; }
+.visual[data-system="prove-1"]::before, .visual[data-system="era-1"]::before { background: radial-gradient(ellipse at 50% 43%, #2f2f2e, #151514 73%); }
+.visual[data-system="detect-1"] { background: #deded8; }
+.visual[data-system="arca-1"] { background: #d9d9d4; }
+.artLabel, .conceptLabel { position: absolute; bottom: 22px; font: 10px/1.4 ui-monospace, SFMono-Regular, monospace; letter-spacing: .06em; color: currentColor; opacity: .7; }
+.artLabel { left: 27px; }
+.conceptLabel { right: 27px; }
+.micro { fill: #5e5e5c; font: 10px ui-monospace, SFMono-Regular, monospace; letter-spacing: .08em; }
+.screenMicro { fill: #a4a4a0; font: 9px ui-monospace, SFMono-Regular, monospace; letter-spacing: .08em; }
+.softwareBrand { fill: #e6e6e0; font: 15px var(--font-display), sans-serif; letter-spacing: -.03em; }
+.screenText { fill: #d8d8d3; font: 13px var(--font-body), sans-serif; }
+.screenMuted { fill: #80807d; font: 13px var(--font-body), sans-serif; }
+.screenLarge { fill: #dadad5; font: 30px var(--font-display), sans-serif; }
+.compact .artLabel, .compact .conceptLabel { bottom: 16px; font-size: 9px; }
+.compact .artLabel { left: 19px; }
+.compact .conceptLabel { right: 19px; }
+@media (max-width: 600px) {
+  .visual, .visual > svg { min-height: 210px; }
+  .artLabel, .conceptLabel, .compact .artLabel, .compact .conceptLabel { bottom: 14px; font-size: 8px; }
+  .artLabel, .compact .artLabel { left: 15px; }
+  .conceptLabel, .compact .conceptLabel { right: 15px; }
+}
