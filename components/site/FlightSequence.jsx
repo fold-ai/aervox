@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./FlightSequence.module.css";
 
-const FILM = "/media/intercept-sequence-v2.mp4";
-const POSTER = "/media/intercept-poster-v2.webp";
-const TRACK = "/media/intercept-track-v2.json";
+const FILM = "/media/intercept-sequence-v3.mp4";
+const POSTER = "/media/intercept-poster-v3.webp";
+const TRACK = "/media/intercept-track-v3.json";
 const HERO_POSITION = .64;
 let trackRequest;
 
@@ -41,19 +41,15 @@ function sampleTrack(track, seconds) {
   }
   const rotationDelta = ((to.rotation - from.rotation + 540) % 360) - 180;
   sample.rotation = from.rotation + rotationDelta * fraction;
-  if (from.interceptor && to.interceptor) {
-    sample.interceptor = {};
-    for (const key of ["cx", "cy", "w", "h", "opacity", "rotation"]) {
-      sample.interceptor[key] = from.interceptor[key] + (to.interceptor[key] - from.interceptor[key]) * fraction;
-    }
-  }
   return sample;
 }
 
 function phaseLabel(phase) {
-  if (phase === "Complete") return "Intercept complete";
-  if (phase === "Locked" || phase === "Intercept") return "Locked";
-  return "Tracking";
+  if (phase === "Complete") return "Feed ended";
+  if (phase === "Intercept") return "Closing";
+  if (phase === "Locked") return "Track locked";
+  if (phase === "Acquiring") return "Acquiring";
+  return "Searching";
 }
 const clamp = (value, low, high) => Math.max(low, Math.min(high, value));
 
@@ -75,7 +71,7 @@ function TrackingOverlay({ track, frame, size, hero }) {
   const left = centerX - side / 2, top = centerY - side / 2;
   const right = left + side, bottom = top + side;
   const corner = Math.min(17, Math.max(8, side * .13));
-  const ending = frame.phase === "Intercept" || frame.phase === "Complete";
+  const ending = frame.phase === "Complete";
   const anchor = ending ? track.lastLockedPose : frame;
   const anchorRadians = anchor.rotation * Math.PI / 180;
   const anchorW = anchor.w * planeWidth, anchorH = anchor.h * planeHeight;
@@ -101,26 +97,20 @@ function TrackingOverlay({ track, frame, size, hero }) {
   const minY = hero ? 92 : 42;
   panelY = clamp(panelY, Math.min(minY, height - panelHeight - 18), height - panelHeight - (hero ? 24 : 35));
   panelX = clamp(panelX, margin, width - margin - panelWidth);
+  if (hero && width >= 660) {
+    panelX = width - Math.max(28, width * .05) - panelWidth;
+    panelY = filmHeight * .53;
+    placement = "fixed";
+  }
   const fixedMobileInfo = hero && width < 660;
   if (fixedMobileInfo) { panelX = 20; panelY = 116; placement = "fixed"; }
   const corners = `M${left + corner},${top}H${left}V${top + corner} M${right - corner},${top}H${right}V${top + corner} M${left},${bottom - corner}V${bottom}H${left + corner} M${right - corner},${bottom}H${right}V${bottom - corner}`;
-  const alpha = clamp(frame.lockAlpha, 0, 1) * clamp(frame.opacity, 0, 1);
+  const alpha = clamp(frame.lockAlpha, 0, 1) * clamp(frame.opacity, 0, 1) * (1 - clamp((frame.w - .22) / .16, 0, 1));
   const targetOnScreen = right > 0 && left < width && bottom > 0 && top < height;
   const status = phaseLabel(frame.phase);
-  const own = frame.interceptor;
-  const ownX = own ? offsetX + own.cx * planeWidth : 0;
-  const ownY = own ? offsetY + own.cy * planeHeight : 0;
-  const ownAngle = (own?.rotation || 0) * Math.PI / 180;
-  const ownW = (own?.w || 0) * planeWidth;
-  const ownH = (own?.h || 0) * planeHeight;
-  const ownExtentX = (Math.abs(ownW * Math.cos(ownAngle)) + Math.abs(ownH * Math.sin(ownAngle))) / 2;
-  const ownExtentY = (Math.abs(ownW * Math.sin(ownAngle)) + Math.abs(ownH * Math.cos(ownAngle))) / 2;
-  const ownVisible = own && own.opacity > .08 && ownX + ownExtentX > 0 && ownX - ownExtentX < width && ownY + ownExtentY > 0 && ownY - ownExtentY < height;
-  const ownLabelX = clamp(ownX - 52, 16, width - 128);
-  const ownLabelY = clamp(ownY + (own?.h || 0) * planeHeight / 2 + 15, 50, height - 42);
 
   return <div className={styles.overlay} aria-hidden="true" data-status={status}>
-    {!hero && <div className={styles.sceneHeader}><span>DRONE-ON-DRONE / INTERCEPTION</span><span>CONCEPT SEQUENCE</span></div>}
+    {!hero && <div className={styles.sceneHeader}><span>I-01 / INTERCEPTOR CAMERA</span><span>CONCEPT SEQUENCE</span></div>}
     <svg className={styles.geometry} viewBox={`0 0 ${width} ${height}`} fill="none" preserveAspectRatio="none">
       <g opacity={targetOnScreen ? alpha : 0}>
         <rect className={styles.lockOutline} x={left} y={top} width={side} height={side} vectorEffect="non-scaling-stroke" />
@@ -128,15 +118,15 @@ function TrackingOverlay({ track, frame, size, hero }) {
         {!ending && placement !== "below" && placement !== "fixed" && <path className={styles.leader} d={placement === "right" ? `M${right + 5},${centerY}H${panelX - 7}` : `M${panelX + panelWidth + 7},${centerY}H${left - 5}`} vectorEffect="non-scaling-stroke" />}
       </g>
     </svg>
-    {ownVisible && <div className={styles.ownAircraft} style={{ left: ownLabelX, top: ownLabelY, opacity: own.opacity }}><i />OUR INTERCEPTOR</div>}
+    {hero && <div className={styles.cameraSource}><span><i /> I-01 / INTERCEPTOR VIEW</span><small>EO CAMERA <b>{String(Math.floor(frame.time)).padStart(2, "0")}:{String(Math.floor((frame.time % 1) * 30)).padStart(2, "0")}</b></small></div>}
     {(targetOnScreen || ending) && <div className={styles.targetInfo} style={{ left: panelX, top: panelY, width: panelWidth, opacity: ending ? 1 : frame.opacity }} data-placement={placement}>
       <div className={styles.targetHeading}><span>TARGET</span><b>01</b></div>
       <div className={styles.targetClass}><strong>UAV</strong><span>FIXED WING</span></div>
       <div className={styles.targetStatus}><i />{status}</div>
-      {hero && <span className={styles.simulation}>CONCEPT SEQUENCE</span>}
+      <span className={styles.simulation}>{ending ? "END OF CONCEPT SEQUENCE" : "VISUAL TRACK / CONCEPT"}</span>
     </div>}
     {!hero && <>
-      <div className={styles.sceneFooter}><span>AUTHORED FLIGHT SEQUENCE</span><span>{String(Math.floor(frame.time)).padStart(2, "0")} / {Math.round(track.duration)} SEC</span></div>
+      <div className={styles.sceneFooter}><span>ACQUIRE → FOLLOW → CLOSE</span><span>{String(Math.floor(frame.time)).padStart(2, "0")} / {Math.round(track.duration)} SEC</span></div>
       <div className={styles.progress}><span style={{ transform: `scaleX(${frame.time / track.duration})` }} /></div>
     </>}
   </div>;
@@ -246,12 +236,12 @@ export default function FlightSequence({ motionPaused = false, showOverlays = tr
   const showFallback = (playbackState === "blocked" || playbackState === "error") && !motionPaused && !reducedMotion;
 
   return <div ref={rootRef} className={`${styles.sequence} ${className}`.trim()} data-variant={hero ? "hero" : "demo"} data-playback={playbackState} role="group" aria-label="Illustrative drone-on-drone interception film">
-    <video ref={videoRef} className={styles.video} src={FILM} poster={POSTER} width="1920" height="1080" autoPlay={wantsPlayback} muted playsInline loop preload="metadata" aria-label="A distant drone is visually tracked over flat terrain. A separate interceptor aircraft approaches it, followed by a brief fictional contact effect."
+    <video ref={videoRef} className={styles.video} src={FILM} poster={POSTER} width="1920" height="1080" autoPlay={wantsPlayback} muted playsInline loop preload="metadata" aria-label="An authored onboard-camera perspective approaches a distant drone through a cloud corridor. A green square follows the aircraft as it grows closer, then the fictional camera feed ends."
       onPlaying={() => { setHasVideoFrame(true); setPlaybackState("playing"); }}
       onSeeked={() => { if (videoRef.current?.readyState >= 2 && !reducedMotion) setHasVideoFrame(true); }}
       onPause={() => setPlaybackState(state => reducedMotion ? "reduced-motion" : state === "blocked" || state === "error" ? state : "paused")}
       onError={() => setPlaybackState("error")} />
-    {showPoster && <img className={styles.poster} src={POSTER} alt="A tracked aircraft and an approaching interceptor above rural terrain" fetchPriority={hero ? "high" : "auto"} decoding="async" draggable="false" />}
+    {showPoster && <img className={styles.poster} src={POSTER} alt="A single fixed-wing drone seen from behind through an atmospheric cloud corridor" fetchPriority={hero ? "high" : "auto"} decoding="async" draggable="false" />}
     {showOverlays && <TrackingOverlay track={track} frame={frame} size={size} hero={hero} />}
     {showFallback && <button className={styles.playButton} type="button" onClick={playFromGesture}><span aria-hidden="true">▷</span>{playbackState === "error" ? "Retry film" : "Play film"}</button>}
   </div>;
