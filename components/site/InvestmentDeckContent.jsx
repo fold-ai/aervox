@@ -57,7 +57,7 @@ const slides = [
   {
     key: "model", label: "Commercial model", nav: "How revenue works", title: <>Hardware and software delivery<br />with contracted support</>,
     content: <><Rows items={[
-      ["Product revenue", "Target $5,000–$10,000 per system, depending on camera and thermal configuration. Final price is not contracted."],
+      ["Product revenue", "Target $5,000 to $10,000 per system, depending on camera and thermal configuration. Final price is not contracted."],
       ["Integration revenue", "Charge for aircraft-specific engineering and acceptance work."],
       ["Support revenue", "Offer PROVE-1 software updates, hardware upgrades and technical support after delivery."],
     ]} /><p className={styles.bridge}>Unit cost, gross margin and support pricing remain to be determined from pilot delivery.</p></>
@@ -68,7 +68,7 @@ const slides = [
   },
   {
     key: "team", label: "People & capital", nav: "Team & use of funds", title: <>Three builders today<br />12 months to execute</>,
-    content: <><div className={styles.founderLayout}><article><span className={styles.label}>CURRENT TEAM</span><h3>Zakhar<br />Bernyk</h3><p>CEO and lead programmer. Computer science student with software development experience for large corporations.</p><p>Two hired developers — one software, one hardware — are beginning research for the next products.</p></article><article><span className={styles.label}>ALLOCATION · $1.5M</span><Table label="Twelve-month use of funds" headers={["Use", "Share", "USD"]} rows={[
+    content: <><div className={styles.founderLayout}><article><span className={styles.label}>CURRENT TEAM</span><h3>Zakhar<br />Bernyk</h3><p>CEO and lead programmer. Computer science student with software development experience for large corporations.</p><p>Two hired developers, one in software and one in hardware, are beginning research for the next products.</p></article><article><span className={styles.label}>ALLOCATION · $1.5M</span><Table label="Twelve-month use of funds" headers={["Use", "Share", "USD"]} rows={[
       ["Team and software", "45%", "$675k"], ["Hardware and integration", "25%", "$375k"], ["Testing", "15%", "$225k"], ["Office, operations and legal", "10%", "$150k"], ["Reserve", "5%", "$75k"],
     ]} /></article></div><p className={styles.sourceNote}>Management targets 12 months of operations, including office, salaries, hardware development and testing.</p></>
   },
