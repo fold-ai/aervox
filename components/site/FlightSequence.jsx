@@ -57,7 +57,7 @@ function TrackingOverlay({ track, frame, size, hero }) {
   if (!track || !frame || !size.width || !size.height) return null;
   const { width, height } = size;
   const filmHeight = hero && width <= 660 ? height * .7 : height;
-  const scale = hero ? Math.max(width / track.width, filmHeight / track.height) : Math.min(width / track.width, height / track.height);
+  const scale = Math.max(width / track.width, filmHeight / track.height);
   const planeWidth = track.width * scale, planeHeight = track.height * scale;
   const offsetX = (width - planeWidth) * (hero ? HERO_POSITION : .5);
   const offsetY = (filmHeight - planeHeight) * .5;
@@ -80,7 +80,7 @@ function TrackingOverlay({ track, frame, size, hero }) {
   const anchorLeft = anchorX - anchorSide / 2, anchorRight = anchorX + anchorSide / 2;
   const anchorTop = anchorY - anchorSide / 2, anchorBottom = anchorY + anchorSide / 2;
   const margin = width < 600 ? 15 : 28;
-  const panelWidth = width < 600 ? 158 : 192;
+  const panelWidth = width < 600 ? (hero ? 158 : 166) : (hero ? 192 : 222);
   const panelHeight = width < 600 ? 151 : 174;
   const gap = width < 600 ? 13 : 20;
   const rightFits = anchorRight + gap + panelWidth <= width - margin;
@@ -104,6 +104,11 @@ function TrackingOverlay({ track, frame, size, hero }) {
   }
   const fixedMobileInfo = hero && width < 660;
   if (fixedMobileInfo) { panelX = 20; panelY = 116; placement = "fixed"; }
+  if (!hero) {
+    panelX = width < 600 ? 15 : 28;
+    panelY = width < 600 ? 46 : Math.max(70, height * .18);
+    placement = "fixed";
+  }
   const corners = `M${left + corner},${top}H${left}V${top + corner} M${right - corner},${top}H${right}V${top + corner} M${left},${bottom - corner}V${bottom}H${left + corner} M${right - corner},${bottom}H${right}V${bottom - corner}`;
   const alpha = clamp(frame.lockAlpha, 0, 1) * clamp(frame.opacity, 0, 1);
   const targetOnScreen = right > 0 && left < width && bottom > 0 && top < height;
@@ -127,7 +132,7 @@ function TrackingOverlay({ track, frame, size, hero }) {
       </g>
     </svg>
     {hero && <div className={styles.cameraSource}><span><i /> I-01 / INTERCEPTOR VIEW</span><small>EO CAMERA <b>{String(Math.floor(frame.time)).padStart(2, "0")}:{String(Math.floor((frame.time % 1) * 30)).padStart(2, "0")}</b></small></div>}
-    {(targetOnScreen || ending) && <div className={styles.targetInfo} style={{ left: panelX, top: panelY, width: panelWidth, opacity: ending ? 1 : frame.opacity }} data-placement={placement}>
+    {(targetOnScreen || ending) && (hero || frame.phase !== "Distant") && <div className={styles.targetInfo} style={{ left: panelX, top: panelY, width: panelWidth, opacity: ending ? 1 : frame.opacity }} data-placement={placement}>
       <div className={styles.targetHeading}><span>TARGET</span><b>01</b></div>
       <div className={styles.targetClass}><strong>SHAHED-136</strong><span>GERAN-2</span></div>
       <div className={styles.targetStatus}><i />{status}</div>
@@ -135,7 +140,7 @@ function TrackingOverlay({ track, frame, size, hero }) {
         <span>{analyzed ? "ANALYSIS COMPLETE" : "SCENE ANALYSIS"}<b>{analyzed ? "✓" : "…"}</b></span>
         <span>{zoneClear ? "ZONE SAFE · SIMULATED" : "ASSESSING ZONE"}<b>{zoneClear ? "✓" : "…"}</b></span>
       </div>
-      <span className={styles.simulation}>SCRIPTED DEMONSTRATION</span>
+      {hero && <span className={styles.simulation}>SCRIPTED DEMONSTRATION</span>}
     </div>}
     {!hero && <>
       <div className={styles.sceneFooter}><span>ACQUIRE → ASSESS → INTERCEPT</span><span>{String(Math.floor(frame.time)).padStart(2, "0")} / {Math.round(track.duration)} SEC</span></div>
