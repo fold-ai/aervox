@@ -3,9 +3,10 @@ import styles from "@/app/(public)/investment-deck/investment.module.css";
 
 const ministrySource = "https://mod.gov.ua/en/news/troops-have-ordered-over-590-000-ua-vs-through-brave1-market-since-the-start-of-the-year";
 const auterionSource = "https://auterion.com/auterion-secures-contract-to-deliver-33000-skynode-drone-strike-kits-to-ukraine/";
+const fourthLawSource = "https://thefourthlaw.ai/";
 
 function Rows({ items }) {
-  return <div className={styles.statementRows}>{items.map(([title, text]) => <div key={title}><h3>{title}</h3><p>{text}</p></div>)}</div>;
+  return <div className={styles.statementRows}>{items.map(([title, description]) => <div key={title}><h3>{title}</h3><p>{description}</p></div>)}</div>;
 }
 function Table({ headers, rows, label }) {
   return <div className={styles.tableWrap}><table className={styles.evidenceTable} aria-label={label}><thead><tr>{headers.map(header => <th key={header} scope="col">{header}</th>)}</tr></thead><tbody>{rows.map((row, index) => <tr key={index}>{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row">{cell}</th> : <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody></table></div>;
@@ -14,71 +15,70 @@ function Table({ headers, rows, label }) {
 const slides = [
   {
     key: "thesis", label: "Investment overview · October 2026", nav: "ACTPROVE", cover: true,
-    title: <>Onboard intelligence<br />for interceptor drones</>,
+    title: <>The autonomy stack<br />for interceptor drones</>,
     content: <>
-      <p className={styles.coverDescription}>ACT-1 onboard hardware and software. PROVE-1 operator software. Both are in beta; Savlo Dynamics is our first integration partner.</p>
-      <div className={styles.coverBottom}><p><strong>Zakhar Bernyk</strong><span>CEO</span></p><p><strong>$1.5M</strong><span>Equity round</span></p><p><strong>$20M</strong><span>Target post-money valuation</span></p></div>
+      <p className={styles.coverDescription}>ACT-1 onboard perception and PROVE-1 operator software. Beta systems tested internally. Savlo Dynamics is our first aircraft integration partner.</p>
+      <div className={styles.coverBottom}><p><strong>Zakhar Bernyk</strong><span>CEO and lead programmer</span></p><p><strong>$1.5M</strong><span>Target equity raise</span></p><p><strong>$20M</strong><span>Target post-money valuation</span></p></div>
     </>
   },
   {
-    key: "problem", label: "Customer", nav: "Customer problem", title: <>Drone manufacturers need<br />one working system</>,
-    content: <><p className={styles.lead}>Our initial buyer is an aircraft manufacturer integrating onboard compute, perception software and an operator workflow into its drones.</p><Rows items={[
-      ["Current work", "The manufacturer must connect sensors, compute and ground software, then maintain the integration as the aircraft changes."],
-      ["ACTPROVE offer", "Supply ACT-1 and PROVE-1 together for the manufacturer's platform, with integration and continuing support."],
+    key: "problem", label: "Problem", nav: "OEM integration", title: <>Aircraft makers need<br />the complete workflow</>,
+    content: <><p className={styles.lead}>Interceptor OEMs must make sensors, onboard compute, perception, flight control and operator software work together on a specific aircraft.</p><Rows items={[
+      ["Integration burden", "Every airframe and sensor choice creates engineering, testing and maintenance work for the manufacturer."],
+      ["ACTPROVE entry point", "Deliver a matched onboard and ground software stack, then integrate and support it with the OEM."],
     ]} /></>
   },
   {
-    key: "product", label: "Product", nav: "ACT-1 + PROVE-1", title: <>Two products<br />for one aircraft program</>,
-    content: <><div className={styles.platformPair}><article><span className={styles.label}>ONBOARD</span><h3>ACT-1</h3><p>Compute hardware and perception software integrated with the aircraft and its sensors.</p><span className={styles.status}>Beta tested on a test drone</span></article><article><span className={styles.label}>GROUND</span><h3>PROVE-1</h3><p>Telemetry, observation review and mission analysis for operators and engineers.</p><span className={styles.status}>Beta in testing</span></article></div><p className={styles.bridge}>Initial application: interceptor drones. Next step: integrate both products into Savlo aircraft.</p></>
+    key: "product", label: "Product architecture", nav: "ACT-1 + PROVE-1", title: <>One aircraft program<br />Two connected products</>,
+    content: <><div className={styles.architecture} aria-label="ACTPROVE system architecture"><article><span className={styles.label}>AIRCRAFT INPUT</span><h3>Sensors</h3><p>Camera and aircraft data chosen with the OEM.</p></article><article><span className={styles.label}>ONBOARD</span><h3>ACT-1</h3><p>Compute hardware and perception software for the aircraft.</p></article><article><span className={styles.label}>OPERATOR</span><h3>PROVE-1</h3><p>Telemetry, observation review and mission analysis.</p></article></div><p className={styles.bridge}>The first use case is interceptor aircraft. Both products are in beta; Savlo aircraft integration is the next gate.</p></>
   },
   {
-    key: "evidence", label: "Evidence", nav: "What exists today", title: <>Beta systems tested<br />Pilot integration agreed</>,
-    content: <><Table label="ACTPROVE evidence at October 2026" headers={["Item", "Confirmed status", "Next proof"]} rows={[
-      ["ACT-1 beta", "Founder reports target lock at 10 km and threat assessment on a test drone", "Share test footage, conditions and repeatability data"],
-      ["PROVE-1 beta", "Founder reports ongoing successful tests", "Share recorded operator workflow and test results"],
-      ["Savlo / BRAVE1", "Savlo cooperation agreed; pilot plans cover 10 Savlo aircraft and about 20 BRAVE1-related aircraft", "Confirm written orders, pricing and acceptance criteria"],
-    ]} /><p className={styles.bridge}>Range and test claims are internal results reported by the founder; independent validation has not been provided.</p></>
+    key: "evidence", label: "Internal beta evidence", nav: "ACT-1 test results", title: <>A 10 km result<br />A clear validation plan</>,
+    content: <><div className={styles.testResult}><div><span className={styles.label}>ACT-1 INTERNAL BETA</span><strong>10 km</strong><p>Target lock on a moving object, achieved on the second attempt with a test drone.</p></div><div><span className={styles.label}>PROVE-1 INTERNAL BETA</span><h3>Operator software<br />in testing</h3><p>Telemetry and observation workflow are being tested alongside ACT-1 development.</p></div></div><div className={styles.stageGrid} aria-label="Perception workflow and validation status"><div><span>01</span><strong>Detection</strong><p>Internal test</p></div><div><span>02</span><strong>Classification</strong><p>Threat assessment tested</p></div><div><span>03</span><strong>Tracking</strong><p>Metrics to document</p></div><div><span>04</span><strong>Target lock</strong><p>Second attempt at 10 km</p></div><div><span>05</span><strong>Control handoff</strong><p>Savlo pilot gate</p></div></div><p className={styles.sourceNote}>Internal beta result from one successful acquisition after two attempts. Target type, optics, conditions, repeatability and false-positive rate still need a documented test report. Customer validation is planned with Savlo.</p></>
   },
   {
-    key: "market", label: "Market entry", nav: "Demand & route to market", title: <>Start with the manufacturer<br />Expand through accepted integrations</>,
-    content: <><div className={styles.marketNumbers}><div><strong>590,000+</strong><p>UAV orders placed through Brave1 Market in the first nine months of 2026. Interceptors were the most ordered category.</p></div><div><strong>10 + ~20</strong><p>Planned Savlo pilot aircraft plus a BRAVE1-related batch. This is a partner plan, not recognized revenue.</p></div></div><Rows items={[
-      ["First sale", "Complete the Savlo pilot, agree acceptance criteria and convert it to a priced order."],
-      ["Second sale", "Use the accepted integration to approach another interceptor manufacturer."],
-    ]} /><p className={styles.sourceNote}>Market context: <a href={ministrySource} target="_blank" rel="noreferrer">Ukraine Ministry of Defence, 25 September 2026 ↗</a>. The 590,000 figure covers all UAV types and is not ACTPROVE revenue.</p></>
+    key: "traction", label: "Customer traction", nav: "Savlo pilot", title: <>A first OEM relationship<br />A defined pilot path</>,
+    content: <><div className={styles.marketNumbers}><div><strong>10</strong><p>Savlo aircraft in the pilot plan for ACT-1 and PROVE-1 integration.</p></div><div><strong>~20</strong><p>Additional BRAVE1-related aircraft discussed in the partner plan.</p></div></div><Rows items={[
+      ["Savlo Dynamics", "Cooperation on aircraft integration is agreed in principle. The pilot quantities are not a signed or paid order."],
+      ["Next commercial gate", "Confirm the pilot in writing, then agree acceptance criteria, pricing and a production order."],
+    ]} /><p className={styles.sourceNote}>These quantities are a coordinated plan, not contracted revenue. BRAVE1 community and test coordination do not imply a purchase order.</p></>
   },
   {
-    key: "position", label: "Competition", nav: "Positioning", title: <>A focused OEM integration<br />in a competitive market</>,
-    content: <><Table label="Competitor comparison" headers={["Company", "Relevant offering", "ACTPROVE position"]} rows={[
-      [<a key="auterion" href={auterionSource} target="_blank" rel="noreferrer">Auterion ↗</a>, "Established onboard autonomy hardware and software", "Competes for aircraft integrations"],
-      ["The Fourth Law", "Ukrainian drone autonomy modules", "Competes for local manufacturer programs"],
-      ["ACTPROVE", "ACT-1 plus PROVE-1 for the customer's aircraft", "First proof is Savlo integration and repeatable delivery"],
-    ]} /><p className={styles.lead}>Our proposed advantage is one supplier for onboard and ground software, adapted to each OEM. We have not yet measured cost, speed or performance against competitors.</p></>
+    key: "market", label: "Market", nav: "Bottom-up demand", title: <>Large demand signal<br />Specific OEM market</>,
+    content: <><div className={styles.marketNumbers}><div><strong>590,000+</strong><p>UAVs ordered through Brave1 Market in the first nine months of 2026. Interceptors were the most ordered category.</p></div><div><span className={styles.label}>ACTPROVE MARKET MODEL</span><p className={styles.marketEquation}>Relevant interceptor OEMs × annual aircraft volume × $5,000 to $10,000 per system</p><p>Plus integration projects and recurring PROVE-1 support.</p></div></div><div className={styles.revenueSteps}><div><strong>$1M</strong><span>100 to 200 systems</span></div><div><strong>$10M</strong><span>1,000 to 2,000 systems</span></div><div><strong>$100M</strong><span>10,000 to 20,000 systems</span></div></div><p className={styles.sourceNote}>System-only revenue equivalents at the target price, not a forecast or TAM. <a href={ministrySource} target="_blank" rel="noreferrer">Demand source: Ukraine Ministry of Defence ↗</a></p></>
   },
   {
-    key: "model", label: "Commercial model", nav: "How revenue works", title: <>Hardware and software delivery<br />with contracted support</>,
-    content: <><Rows items={[
-      ["Product revenue", "Target $5,000 to $10,000 per system, depending on camera and thermal configuration. Final price is not contracted."],
-      ["Integration revenue", "Charge for aircraft-specific engineering and acceptance work."],
-      ["Support revenue", "Offer PROVE-1 software updates, hardware upgrades and technical support after delivery."],
-    ]} /><p className={styles.bridge}>Unit cost, gross margin and support pricing remain to be determined from pilot delivery.</p></>
+    key: "model", label: "Business model", nav: "Unit economics", title: <>Product delivery<br />Integration and support</>,
+    content: <><Table label="ACTPROVE commercial model" headers={["Revenue line", "Current estimate", "Commercial status"]} rows={[
+      ["ACT-1 system", "$5,000 to $10,000 target price by sensor configuration", "Not yet contracted"],
+      ["Unit cost", "$2,000 to $5,000 preliminary cost range", "Pilot BOM to confirm"],
+      ["OEM integration", "Aircraft-specific engineering and acceptance", "Price to be quoted"],
+      ["PROVE-1 support", "Software updates, hardware upgrades and technical support", "Annual terms to be set"],
+    ]} /><p className={styles.bridge}>Gross margin is not forecast until price and cost are matched for each configuration.</p></>
   },
   {
-    key: "milestones", label: "Execution", nav: "12-month plan", title: <>Aircraft tests first<br />Product acceptance next</>,
-    content: <><div className={styles.timeline}><div><span className={styles.label}>OCTOBER 2026</span><h3>Savlo pilot</h3><p>Move from the test drone to a planned 10-aircraft pilot; document performance and acceptance.</p></div><div><span className={styles.label}>END OF 2026</span><h3>Release target</h3><p>Complete a production-intent ACT-1 and PROVE-1 version after test findings.</p></div><div><span className={styles.label}>Q1 2027</span><h3>Ukraine evaluation</h3><p>Target a field evaluation under real operational conditions, subject to readiness and coordination.</p></div></div><p className={styles.bridge}>Investment gates: test report, partner acceptance, priced pilot order and repeatable installation.</p></>
+    key: "position", label: "Competition", nav: "Why ACTPROVE", title: <>Strong incumbents<br />A focused opening</>,
+    content: <><Table label="Competitive position using public evidence" headers={["Company", "Public evidence", "ACTPROVE response"]} rows={[
+      [<a key="auterion" href={auterionSource} target="_blank" rel="noreferrer">Auterion ↗</a>, "33,000 Skynode strike kits announced under a $50M Pentagon contract", "Focus first on air-target perception for interceptor OEMs"],
+      [<a key="fourth-law" href={fourthLawSource} target="_blank" rel="noreferrer">The Fourth Law ↗</a>, "Autonomy modules in production; Zerov-8 interceptor announced", "Prove the ACT-1 and PROVE-1 workflow on Savlo aircraft"],
+      ["OEM in-house", "Manufacturer can build its own stack", "Compete on integration effort, test data and long-term support"],
+    ]} /><p className={styles.bridge}>Our differentiation is a product thesis today. The Savlo pilot must measure performance, integration time and delivered cost.</p></>
   },
   {
-    key: "team", label: "People & capital", nav: "Team & use of funds", title: <>Three builders today<br />12 months to execute</>,
-    content: <><div className={styles.founderLayout}><article><span className={styles.label}>CURRENT TEAM</span><h3>Zakhar<br />Bernyk</h3><p>CEO and lead programmer. Computer science student with software development experience for large corporations.</p><p>Two hired developers, one in software and one in hardware, are beginning research for the next products.</p></article><article><span className={styles.label}>ALLOCATION · $1.5M</span><Table label="Twelve-month use of funds" headers={["Use", "Share", "USD"]} rows={[
-      ["Team and software", "45%", "$675k"], ["Hardware and integration", "25%", "$375k"], ["Testing", "15%", "$225k"], ["Office, operations and legal", "10%", "$150k"], ["Reserve", "5%", "$75k"],
-    ]} /></article></div><p className={styles.sourceNote}>Management targets 12 months of operations, including office, salaries, hardware development and testing.</p></>
+    key: "team", label: "Team", nav: "People", title: <>Zakhar Bernyk leads<br />product and engineering</>,
+    content: <><Table label="Current ACTPROVE team" headers={["Role", "Current responsibility", "Experience and status"]} rows={[
+      ["Zakhar Bernyk, CEO", "Leads ACT-1 software, PROVE-1 direction and OEM partnership", "Computer science student; has developed software for large corporations"],
+      ["Software intern", "Supports basic software tasks", "Relevant projects and employment status to document"],
+      ["Hardware intern", "Supports basic hardware tasks", "Relevant projects and employment status to document"],
+    ]} /><p className={styles.bridge}>Senior hardware, ML and aircraft integration leadership remains a hiring priority for the pilot and scale-up.</p></>
   },
   {
-    key: "round", label: "Equity round", nav: "The ask", light: true, title: <>$1.5M to reach<br />accepted customer delivery</>,
-    content: <><div className={styles.roundTerms}><div><strong>$1.5M</strong><span>Target equity raise</span></div><div><strong>$20M</strong><span>Target post-money valuation</span></div></div><p className={styles.roundPurpose}>Implied pre-money: $18.5M. New investor ownership: 7.5% before option-pool changes or other issuance.</p><p className={styles.roundPurpose}>The valuation is a management target. Pilot acceptance, unit economics and commercial orders remain to be proven.</p><div className={styles.roundContact}><p><strong>Zakhar Bernyk</strong><span>Chief Executive Officer</span></p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a></div></>
+    key: "round", label: "Equity round", nav: "The ask", light: true, title: <>$1.5M for the next<br />customer proof</>,
+    content: <><div className={styles.roundTerms}><div><strong>$1.5M</strong><span>Target priced equity raise</span></div><div><strong>$20M</strong><span>Target post-money valuation</span></div></div><div className={styles.roundMilestones}><span>01 · Savlo aircraft pilot and test report</span><span>02 · Production-intent ACT-1 and PROVE-1</span><span>03 · Priced order and repeatable installation</span></div><p className={styles.roundPurpose}>Planned 12-month allocation: 45% team and software, 25% hardware and integration, 15% testing, 10% compliance and operations, 5% reserve. Implied investor ownership is 7.5% before other issuance.</p><div className={styles.roundContact}><p><strong>Zakhar Bernyk</strong><span>Chief Executive Officer</span></p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a></div></>
   },
 ];
 
-const briefKeys = new Set(["thesis", "product", "evidence", "market", "model", "round"]);
+const briefKeys = new Set(["thesis", "product", "evidence", "traction", "market", "round"]);
 export default function InvestmentDeckContent({ brief = false }) {
   const visible = brief ? slides.filter(slide => briefKeys.has(slide.key)) : slides;
   return <InvestmentDeckFrame brief={brief} slides={visible.map(slide => slide.nav)}><div className={styles.content}>{visible.map((slide, index) => {

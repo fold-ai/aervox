@@ -240,6 +240,7 @@
 }
 
 @media (max-width: 660px) {
+  .viewport { scroll-snap-type: none; }
   .topbar, .bottomBar { padding-left: 20px; padding-right: 20px; }
   .brand img { width: 148px; }
   .brand span { font-size: 7px; letter-spacing: .28em; }
