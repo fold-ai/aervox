@@ -34,14 +34,15 @@ const slides = [
   },
   {
     key: "evidence", label: "Internal beta evidence", nav: "ACT-1 test results", title: <>A 10 km result<br />A clear validation plan</>,
-    content: <><div className={styles.testResult}><div><span className={styles.label}>ACT-1 INTERNAL BETA</span><strong>10 km</strong><p>Target lock on a moving object, achieved on the second attempt with a test drone.</p></div><div><span className={styles.label}>PROVE-1 INTERNAL BETA</span><h3>Operator software<br />in testing</h3><p>Telemetry and observation workflow are being tested alongside ACT-1 development.</p></div></div><div className={styles.stageGrid} aria-label="Perception workflow and validation status"><div><span>01</span><strong>Detection</strong><p>Internal test</p></div><div><span>02</span><strong>Classification</strong><p>Threat assessment tested</p></div><div><span>03</span><strong>Tracking</strong><p>Metrics to document</p></div><div><span>04</span><strong>Target lock</strong><p>Second attempt at 10 km</p></div><div><span>05</span><strong>Control handoff</strong><p>Savlo pilot gate</p></div></div><p className={styles.sourceNote}>Internal beta result from one successful acquisition after two attempts. Target type, optics, conditions, repeatability and false-positive rate still need a documented test report. Customer validation is planned with Savlo.</p></>
+    content: <><div className={styles.testResult}><div><span className={styles.label}>ACT-1 INTERNAL BETA</span><strong>10 km</strong><p>Target lock on a moving object, achieved on the second attempt with a test drone.</p></div><div><span className={styles.label}>PROVE-1 INTERNAL BETA</span><h3>Operator software<br />in testing</h3><p>Telemetry and observation workflow are being tested alongside ACT-1 development.</p></div></div><div className={styles.stageGrid} aria-label="Perception workflow and validation status"><div><span>01</span><strong>Detection</strong><p>Internal test</p></div><div><span>02</span><strong>Classification</strong><p>Threat assessment tested</p></div><div><span>03</span><strong>Tracking</strong><p>Metrics to document</p></div><div><span>04</span><strong>Target lock</strong><p>Second attempt at 10 km</p></div><div><span>05</span><strong>Control handoff</strong><p>Partner validation gate</p></div></div><p className={styles.sourceNote}>Internal beta result from one successful acquisition after two attempts. Target type, optics, conditions, repeatability and false-positive rate still need a documented test report. Partner validation is planned.</p></>
   },
   {
-    key: "traction", label: "Customer traction", nav: "Savlo pilot", title: <>A first OEM relationship<br />A defined pilot path</>,
-    content: <><div className={styles.marketNumbers}><div><strong>10</strong><p>Savlo aircraft in the pilot plan for ACT-1 and PROVE-1 integration.</p></div><div><strong>~20</strong><p>Additional BRAVE1-related aircraft discussed in the partner plan.</p></div></div><Rows items={[
-      ["Savlo Dynamics", "Cooperation on aircraft integration is agreed in principle. The pilot quantities are not a signed or paid order."],
-      ["Next commercial gate", "Confirm the pilot in writing, then agree acceptance criteria, pricing and a production order."],
-    ]} /><p className={styles.sourceNote}>These quantities are a coordinated plan, not contracted revenue. BRAVE1 community and test coordination do not imply a purchase order.</p></>
+    key: "traction", label: "Partner collaboration", nav: "Savlo integration", title: <>A first OEM relationship<br />A path to validation</>,
+    content: <><Rows items={[
+      ["Savlo Dynamics", "We are collaborating on aircraft integration for ACT-1 and PROVE-1."],
+      ["Next validation gate", "Define acceptance criteria and document performance on a partner aircraft."],
+      ["Commercial status", "No partner order or revenue is included in our financial model."],
+    ]} /><p className={styles.sourceNote}>The relationship is an integration path. No purchase volume or revenue is claimed.</p></>
   },
   {
     key: "market", label: "Market", nav: "Bottom-up demand", title: <>Large demand signal<br />Specific OEM market</>,
@@ -60,9 +61,9 @@ const slides = [
     key: "position", label: "Competition", nav: "Why ACTPROVE", title: <>Strong incumbents<br />A focused opening</>,
     content: <><Table label="Competitive position using public evidence" headers={["Company", "Public evidence", "ACTPROVE response"]} rows={[
       [<a key="auterion" href={auterionSource} target="_blank" rel="noreferrer">Auterion ↗</a>, "33,000 Skynode strike kits announced under a $50M Pentagon contract", "Focus first on air-target perception for interceptor OEMs"],
-      [<a key="fourth-law" href={fourthLawSource} target="_blank" rel="noreferrer">The Fourth Law ↗</a>, "Autonomy modules in production; Zerov-8 interceptor announced", "Prove the ACT-1 and PROVE-1 workflow on Savlo aircraft"],
+      [<a key="fourth-law" href={fourthLawSource} target="_blank" rel="noreferrer">The Fourth Law ↗</a>, "Autonomy modules in production; Zerov-8 interceptor announced", "Prove the ACT-1 and PROVE-1 workflow on a partner aircraft"],
       ["OEM in-house", "Manufacturer can build its own stack", "Compete on integration effort, test data and long-term support"],
-    ]} /><p className={styles.bridge}>Our differentiation is a product thesis today. The Savlo pilot must measure performance, integration time and delivered cost.</p></>
+    ]} /><p className={styles.bridge}>Our differentiation is a product thesis today. Partner testing must measure performance, integration time and delivered cost.</p></>
   },
   {
     key: "team", label: "Team", nav: "People", title: <>Zakhar Bernyk leads<br />product and engineering</>,
@@ -74,7 +75,7 @@ const slides = [
   },
   {
     key: "round", label: "Equity round", nav: "The ask", light: true, title: <>$1.5M for the next<br />customer proof</>,
-    content: <><div className={styles.roundTerms}><div><strong>$1.5M</strong><span>Target priced equity raise</span></div><div><strong>$20M</strong><span>Target post-money valuation</span></div></div><div className={styles.roundMilestones}><span>01 · Savlo aircraft pilot and test report</span><span>02 · Production-intent ACT-1 and PROVE-1</span><span>03 · Priced order and repeatable installation</span></div><p className={styles.roundPurpose}>Planned 12-month allocation: 45% team and software, 25% hardware and integration, 15% testing, 10% compliance and operations, 5% reserve. Implied investor ownership is 7.5% before other issuance.</p><div className={styles.roundContact}><p><strong>Zakhar Bernyk</strong><span>Chief Executive Officer</span></p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a></div></>
+    content: <><div className={styles.roundTerms}><div><strong>$1.5M</strong><span>Target priced equity raise</span></div><div><strong>$20M</strong><span>Target post-money valuation</span></div></div><div className={styles.roundMilestones}><span>01 · Partner aircraft validation and test report</span><span>02 · Production-intent ACT-1 and PROVE-1</span><span>03 · Priced order and repeatable installation</span></div><p className={styles.roundPurpose}>Planned 12-month allocation: 45% team and software, 25% hardware and integration, 15% testing, 10% compliance and operations, 5% reserve. Implied investor ownership is 7.5% before other issuance.</p><div className={styles.roundContact}><p><strong>Zakhar Bernyk</strong><span>Chief Executive Officer</span></p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a></div></>
   },
 ];
 

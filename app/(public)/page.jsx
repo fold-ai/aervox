@@ -38,6 +38,7 @@ export default function HomePage() {
         <nav className={styles.editorialNav} aria-label="Explore our systems">
           {systems.map((system, index) => <a key={system.type} href="#systems" onClick={() => setSelected(index)}><span>0{index + 1}</span>{system.name}<Arrow down /></a>)}
           <Link href="/systems/era-1"><span>05</span>ERA-1<Arrow down /></Link>
+          <Link href="/systems/vista-1"><span>06</span>VISTA-1<Arrow down /></Link>
         </nav>
       </section>
       <section id="introduction" className={styles.introduction}>
@@ -52,6 +53,7 @@ export default function HomePage() {
           <div className={styles.systemList} role="group" aria-label="Explore ACTPROVE systems">
             {systems.map((system, index) => <button key={system.type} aria-pressed={selected === index} onClick={() => setSelected(index)} className={selected === index ? styles.systemActive : ""}><span className={styles.systemNumber}>0{index + 1}</span><span><strong>{system.name}</strong><small>{system.category}</small></span><Arrow /></button>)}
             <Link className={styles.researchLink} href="/systems/era-1"><span>ERA-1 / Future autonomy research</span><Arrow /></Link>
+            <Link className={styles.researchLink} href="/systems/vista-1"><span>VISTA-1 / Wearable interface concept</span><Arrow /></Link>
           </div>
           <div className={styles.systemPresentation}>
             <div className={styles.systemArt}><SystemVisual type={active.type} compact /></div>
@@ -68,7 +70,7 @@ export default function HomePage() {
       <section className={styles.integrationSection} id="company">
         <div className={styles.sectionLabel}><span>04 / BUILT TOGETHER</span><span>AIRCRAFT-SPECIFIC INTEGRATION</span></div>
         <div className={styles.integrationGrid}><h2>Your aircraft.<br />Our intelligence.</h2><div><p>We work alongside aircraft manufacturers, bringing onboard compute, custom perception models, and ground software into their programs.</p><Link className={styles.textLink} href="/company">Meet ACTPROVE <Arrow /></Link></div></div>
-        <div className={styles.partnerRows}><div><span>AIRCRAFT DEVELOPMENT PARTNER</span><strong>Savlo Dynamics</strong><p>Onboard perception for a high-speed drone program.</p></div><div><span>ECOSYSTEM PARTNER</span><strong>BRAVE1</strong><p>A confirmed partnership in Ukraine’s defense technology ecosystem.</p></div><Link href="/contact"><span>BUILD WITH US</span><strong>Let’s connect <Arrow /></strong><p>For aircraft manufacturers and technology partners.</p></Link></div>
+        <div className={styles.partnerRows}><div><span>AIRCRAFT INTEGRATION PARTNER</span><strong>Savlo Dynamics</strong><p>Collaborating on aircraft integration for ACT-1 and PROVE-1.</p></div><div><span>ECOSYSTEM PARTNER</span><strong>BRAVE1</strong><p>A confirmed partnership in Ukraine’s defense technology ecosystem.</p></div><Link href="/contact"><span>BUILD WITH US</span><strong>Let’s connect <Arrow /></strong><p>For aircraft manufacturers and technology partners.</p></Link></div>
       </section>
     </main>
     <SiteFooter />

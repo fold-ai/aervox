@@ -2,6 +2,7 @@
 
 import { useId } from "react";
 import InterceptionFilm from "./InterceptionFilm";
+import VistaVisual from "./VistaVisual";
 import styles from "./SystemVisual.module.css";
 
 const names = {
@@ -72,6 +73,7 @@ export default function SystemVisual({ type = "act-1", compact = false, classNam
   const id = `system-${useId().replace(/:/g, "")}-`;
   const kind = type.toLowerCase();
   if (kind === "act-1") return <InterceptionFilm className={className} />;
+  if (kind === "vista-1") return <VistaVisual compact={compact} className={className} />;
   const Illustration = kind === "prove-1" ? Software : Research;
   return <div className={`${styles.visual} ${compact ? styles.compact : ""} ${className}`} data-system={kind}>
     <svg viewBox="0 0 1000 650" role="img" aria-label={names[kind] || names["act-1"]} preserveAspectRatio="xMidYMid meet"><Illustration id={id} kind={kind} /></svg>

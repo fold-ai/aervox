@@ -41,9 +41,9 @@
 .relationship { display: block; font: 8px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .07em; color: #6a775c; margin: 3px 0 14px; }
 .partnerRow p { font-size: 14px; line-height: 1.75; max-width: 450px; }
 .partnerRow > svg { width: 19px; height: 19px; margin-top: 6px; color: #7d896f; }
-.page .milestones { padding-top: 37px; padding-bottom: 76px; background: #dcdfd1; }
+.page .milestones { padding-top: 37px; padding-bottom: 76px; background: #e1e1da; }
 .milestones h2 { font-size: clamp(41px, 4.6vw, 71px); line-height: 1.03; margin: 69px 0 55px; }
-.milestoneRows { margin-left: 24%; }
+.milestoneRows { margin-left: 0; }
 .milestoneRow { display: grid; grid-template-columns: 130px 1fr auto; gap: 35px; padding: 29px 0 33px; border-top: 1px solid #10120f30; align-items: start; }
 .milestoneRow:last-child { border-bottom: 1px solid #10120f30; }
 .milestoneDate { font: 10px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .06em; padding-top: 5px; color: #505d43; }

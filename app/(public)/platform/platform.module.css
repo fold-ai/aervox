@@ -42,7 +42,7 @@
 .stageCopy .textLink { font-size: 11px; }
 .architectureNote { display: flex; justify-content: space-between; gap: 25px; padding-top: 20px; font: 9px/1.6 ui-monospace, SFMono-Regular, monospace; color: var(--muted); }
 .architectureNote > span:last-child { font-family: var(--font-body), sans-serif; font-size: 11px; }
-.development { padding: 72px var(--gutter) 85px; background: #dedfd5; border-top: 1px solid #10120f1a; }
+.development { padding: 72px var(--gutter) 85px; background: #e1e1da; border-top: 1px solid #10120f1a; }
 .development .sectionHeading { margin-bottom: 52px; }
 .developmentGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; }
 .developmentColumn { padding-top: 23px; border-top: 1px solid #10120f75; }

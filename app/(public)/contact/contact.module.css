@@ -30,7 +30,7 @@
 .inquiryRow > svg { width: 23px; height: 23px; margin-top: 33px; color: #455535; transition: transform .2s ease; }
 .inquiryRow:hover > svg { transform: translate(4px, -4px); }
 .inquiryRow:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
-.page .companyLink { display: grid; grid-template-columns: 1fr 1.45fr; gap: 12%; background: #dcdfd1; padding-top: 54px; padding-bottom: 59px; }
+.page .companyLink { display: grid; grid-template-columns: 1fr 1.45fr; gap: 12%; background: #e1e1da; padding-top: 54px; padding-bottom: 59px; }
 .companyLink > span { font: 8px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .075em; color: #667259; padding-top: 6px; }
 .companyLink a { display: block; position: relative; padding-right: 51px; font: 400 clamp(26px, 3.1vw, 47px)/1.1 var(--font-display), sans-serif; font-variation-settings: "wdth" 100; letter-spacing: -.04em; }
 .companyLink svg { position: absolute; right: 0; top: 3px; width: 30px; height: 30px; }

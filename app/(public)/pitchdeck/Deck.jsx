@@ -75,8 +75,8 @@ export default function Deck() {
 
       <section className="slide">
         <h2>Our first company partnership: Savlo Dynamics</h2>
-        <p className="lede">Savlo Dynamics is developing a drone designed to fly at 500 mph. We are building an onboard perception system for its platform to recognize relevant aerial objects and support high-speed interception decisions.</p>
-        <div className="stats"><div><b>500</b><span>mph partner-stated aircraft design speed</span></div><div><b>ACT-1</b><span>onboard perception work in progress</span></div><div><b>01</b><span>first active company partnership</span></div></div>
+        <p className="lede">We are collaborating with Savlo Dynamics on aircraft integration for ACT-1 and PROVE-1. Partner testing will guide the next development steps.</p>
+        <div className="stats"><div><b>ACT-1</b><span>onboard perception work in progress</span></div><div><b>PROVE-1</b><span>ground software in development</span></div></div>
       </section>
 
       <section className="slide">

@@ -30,7 +30,7 @@ export default function CompanyPage() {
       <section className={styles.partners} aria-labelledby="partners-title">
         <div className={styles.sectionLabel}><span>03 / PARTNERSHIPS</span><span>DEVELOPMENT THROUGH COLLABORATION</span></div>
         <div className={styles.sectionHeading}><h2 id="partners-title">Built together.</h2><p>Aircraft integration and partnerships are part of how Actprove develops its systems.</p></div>
-        <div className={styles.partnerRow}><span className={styles.rowNumber}>01</span><h3>Savlo Dynamics</h3><div><span className={styles.relationship}>AIRCRAFT INTEGRATION PARTNER</span><p>Developing onboard perception for a high-speed drone program, with ACT-1 and PROVE-1 connecting the aircraft to its ground systems.</p></div><Arrow diagonal /></div>
+        <div className={styles.partnerRow}><span className={styles.rowNumber}>01</span><h3>Savlo Dynamics</h3><div><span className={styles.relationship}>AIRCRAFT INTEGRATION PARTNER</span><p>Collaborating on aircraft integration for ACT-1 onboard perception and PROVE-1 ground software.</p></div><Arrow diagonal /></div>
         <div className={styles.partnerRow}><span className={styles.rowNumber}>02</span><h3>BRAVE1</h3><div><span className={styles.relationship}>CONFIRMED PARTNERSHIP</span><p>Actprove is a BRAVE1 partner within Ukraine’s defense technology ecosystem.</p></div><Arrow diagonal /></div>
       </section>
 

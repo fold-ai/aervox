@@ -6,7 +6,7 @@ import styles from "./systems.module.css";
 
 export const metadata = {
   title: "Systems — Actprove Defense Technologies",
-  description: "Explore Actprove’s onboard intelligence, ground software, and planned perception systems: ACT-1, PROVE-1, DETECT-1, ARCA-1, and ERA-1.",
+  description: "Explore Actprove’s onboard intelligence, ground software and product directions: ACT-1, PROVE-1, DETECT-1, ARCA-1, ERA-1 and VISTA-1.",
   alternates: { canonical: "/systems" },
 };
 
@@ -15,7 +15,7 @@ export default function SystemsPage() {
     <SiteHeader theme="light" />
     <main id="main">
       <section className={styles.indexIntro} aria-labelledby="systems-title">
-        <div className={styles.eyebrowRow}><span>ACTPROVE / SYSTEMS</span><span>01—05</span></div>
+        <div className={styles.eyebrowRow}><span>ACTPROVE / SYSTEMS</span><span>01—06</span></div>
         <div className={styles.introLayout}><h1 id="systems-title">Intelligence.<br />Built into the aircraft.</h1><p>Onboard compute. Ground software. Connected perception. Explore the systems we are developing, and the directions we are pursuing next.</p></div>
         <nav className={styles.productNav} aria-label="Systems on this page">{systems.map(system => <a key={system.slug} href={`#${system.slug}`}><span>{system.number}</span>{system.name}<Arrow /></a>)}</nav>
       </section>
@@ -29,10 +29,10 @@ export default function SystemsPage() {
       </section>
 
       <section className={styles.roadmap} aria-labelledby="roadmap-title">
-        <div className={styles.roadmapHeading}><div className={styles.sectionLabel}><span>02 / LOOKING AHEAD</span><h2 id="roadmap-title">The next directions.</h2></div><p>Planned systems and long-term research build on a shared foundation of perception and aircraft integration.</p></div>
+        <div className={styles.roadmapHeading}><div className={styles.sectionLabel}><span>02 / LOOKING AHEAD</span><h2 id="roadmap-title">The next directions.</h2></div><p>Planned systems and long-term research build on a shared foundation of perception, aircraft integration and operator context.</p></div>
         <div className={styles.roadmapGrid}>{systems.slice(2).map(system => <article key={system.slug} id={system.slug} className={styles.roadmapProduct} aria-labelledby={`${system.slug}-title`}>
           <div className={styles.roadmapArt}><SystemVisual type={system.slug} compact /></div>
-          <div className={styles.roadmapTop}><span>{system.number} / {system.category}</span><span>{system.status}</span></div>
+          <div className={styles.roadmapTop}><span>{system.number} / {system.category}</span><span>{system.stage === "research" ? "Long-term" : system.status}</span></div>
           <Link href={`/systems/${system.slug}`} className={styles.roadmapLink}><h3 id={`${system.slug}-title`}>{system.name}</h3><Arrow diagonal /></Link><p>{system.summary}</p>
         </article>)}</div>
         <p className={styles.roadmapNote}>Roadmap systems are planned or under research. Their intended capabilities are subject to development and validation.</p>
