@@ -154,7 +154,7 @@ function Td({
         alert ? "text-alert" : value === null ? "text-dim" : "text-bright"
       }`}
     >
-      {value === null ? "–" : fixed(value, decimals)}
+      {value === null ? "-" : fixed(value, decimals)}
     </td>
   );
 }

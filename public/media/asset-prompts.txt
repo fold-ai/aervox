@@ -22,7 +22,7 @@ Use case: ads-marketing
 Asset type: Original 16:9 photographic visual for an interactive aerospace perception demonstration on a website.
 Primary request: An almost top-down aerial photograph of cool gray scrubland and dry grass, with a diagonal paved country road, a few small light industrial buildings, and exactly three small civilian vehicles spaced widely along the road.
 Scene/backdrop: Detailed sparse scrub, grass, pale gravel tracks, and gray soil in a remote rural landscape. A two-lane road runs diagonally from near bottom left at x=12%, y=100% to top right at x=89%, y=0%. A small cluster of plain low industrial buildings lies away from the road near the left side, with realistic pale roofs.
-Subject: Exactly three civilian vehicles, all visibly separated. A white van on the road near x=32%, y=72%; a dark gray compact car near x=53%, y=47%; a light gray SUV near x=73%, y=23%. Vehicles should be clearly recognizable from above, each approximately 2.5–3% of the image width.
+Subject: Exactly three civilian vehicles, all visibly separated. A white van on the road near x=32%, y=72%; a dark gray compact car near x=53%, y=47%; a light gray SUV near x=73%, y=23%. Vehicles should be clearly recognizable from above, each approximately 2.5-3% of the image width.
 Style/medium: Photorealistic high resolution aerial survey photography, realistic optics, excellent fine texture, straight photographic scene.
 Composition/framing: 16:9 landscape, camera looking almost straight downward with only a slight oblique angle. No horizon or sky. Preserve spacious terrain around the three vehicles for subsequent webpage graphic overlays.
 Lighting/mood: Soft overcast daylight, realistic muted shadows.

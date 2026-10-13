@@ -5,7 +5,7 @@ import { systems } from "@/lib/site-systems";
 import styles from "./systems.module.css";
 
 export const metadata = {
-  title: "Systems — Actprove Defense Technologies",
+  title: "Systems - Actprove Defense Technologies",
   description: "Explore Actprove’s onboard intelligence, ground software and product directions: ACT-1, PROVE-1, DETECT-1, ARCA-1, ERA-1 and VISTA-1.",
   alternates: { canonical: "/systems" },
 };
@@ -15,7 +15,7 @@ export default function SystemsPage() {
     <SiteHeader theme="light" />
     <main id="main">
       <section className={styles.indexIntro} aria-labelledby="systems-title">
-        <div className={styles.eyebrowRow}><span>ACTPROVE / SYSTEMS</span><span>01—06</span></div>
+        <div className={styles.eyebrowRow}><span>ACTPROVE / SYSTEMS</span><span>01-06</span></div>
         <div className={styles.introLayout}><h1 id="systems-title">Intelligence.<br />Built into the aircraft.</h1><p>Onboard compute. Ground software. Connected perception. Explore the systems we are developing, and the directions we are pursuing next.</p></div>
         <nav className={styles.productNav} aria-label="Systems on this page">{systems.map(system => <a key={system.slug} href={`#${system.slug}`}><span>{system.number}</span>{system.name}<Arrow /></a>)}</nav>
       </section>

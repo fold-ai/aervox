@@ -8,9 +8,9 @@ import styles from "./GroundRecon.module.css";
 const GroundReconWorld = dynamic(() => import("./GroundReconWorld"), { ssr: false });
 // The color camera illustrates this corridor subset of the wider authored map.
 const VEHICLES = [
-  { id: "V-01", color: "#bcbdb3", offset: 32, lane: 1.88, speed: 54, occupants: "1–2" },
-  { id: "V-02", color: "#646e68", offset: 0, lane: 1.88, speed: 54, occupants: "2–3" },
-  { id: "V-03", color: "#a4aaa4", offset: -35, lane: 1.88, speed: 54, occupants: "1–2" },
+  { id: "V-01", color: "#bcbdb3", offset: 32, lane: 1.88, speed: 54, occupants: "1-2" },
+  { id: "V-02", color: "#646e68", offset: 0, lane: 1.88, speed: 54, occupants: "2-3" },
+  { id: "V-03", color: "#a4aaa4", offset: -35, lane: 1.88, speed: 54, occupants: "1-2" },
 ];
 const VIEWS = [
   { id: "overview", label: "Overview", description: "Area view / all authored tracks" },
@@ -112,12 +112,12 @@ export default function GroundRecon({ motionPaused = false, showOverlays = true,
               <div className={styles.speed}><strong>{selected.speed}</strong><span>km/h<small>Speed (simulated)</small></span></div>
               <div className={styles.occupants}><span>Occupants (scenario)</span><strong>{selected.occupants}<small>approx.</small></strong></div>
             </div>
-            <div className={styles.sceneFooter}><span>{paused ? "MOTION PAUSED" : "COLOR CAMERA / 3D"}</span><span>CORRIDOR A · V-01–03 SUBSET</span></div>
+            <div className={styles.sceneFooter}><span>{paused ? "MOTION PAUSED" : "COLOR CAMERA / 3D"}</span><span>CORRIDOR A · V-01-03 SUBSET</span></div>
           </>}
         </>}
         {failed && <div className={styles.fallbackNotice}><span>3D PREVIEW UNAVAILABLE</span><p>This browser could not display the color camera.</p><button type="button" onClick={() => setView("overview")}>Return to overview</button></div>}
         {compact && <button type="button" ref={returnButton} className={styles.returnOverview} onClick={event => { if (event.detail === 0) setFocusDroneId(view === "drone01" ? "D-01" : "D-02"); setView("overview"); }}><span aria-hidden="true">←</span> Overview <span>/ D-{view === "drone01" ? "01" : "02"}</span></button>}
-        {compact && !failed && <span className={styles.compactBadge}>CORRIDOR A / V-01–03</span>}
+        {compact && !failed && <span className={styles.compactBadge}>CORRIDOR A / V-01-03</span>}
       </>}
     </div>
     {!compact && <>
@@ -135,7 +135,7 @@ export default function GroundRecon({ motionPaused = false, showOverlays = true,
           </> : <>
             <div className={styles.vehiclePanelTitle}><span>CAMERA SUBSET / CORRIDOR A</span><span>03 VEHICLES</span></div>
             <div className={styles.vehicleChoices} role="group" aria-label="Select a vehicle in the camera subset">{VEHICLES.map((vehicle, index) => <button type="button" key={vehicle.id} disabled={failed} aria-pressed={selectedIndex === index} onClick={() => chooseVehicle(index)}><span style={{ backgroundColor: vehicle.color }} />{vehicle.id}<small>{failed ? "Unavailable" : selectedIndex === index ? "Following" : "Follow"}</small></button>)}</div>
-            <p className={styles.scenarioNote}>Color reconstruction of V-01–03. Speed and occupant ranges are authored scenario values.</p>
+            <p className={styles.scenarioNote}>Color reconstruction of V-01-03. Speed and occupant ranges are authored scenario values.</p>
           </>}
         </div>
       </div>

@@ -19,7 +19,7 @@ function Software({ id }) {
     <defs><clipPath id={`${id}map`}><rect x="294" y="153" width="584" height="344" /></clipPath><linearGradient id={`${id}screen`} x2="0" y2="1"><stop stopColor="#2a2a29" /><stop offset="1" stopColor="#171716" /></linearGradient></defs>
     <rect x="75" y="79" width="850" height="498" fill="#141414" stroke="#575755" />
     <path d="M75 124h850M271 124v453M75 528h850" stroke="#525250" strokeWidth=".8" />
-    <text x="101" y="107" className={styles.softwareBrand}>PROVE—1</text><text x="891" y="106" textAnchor="end" className={styles.screenMicro}>OBSERVATION WORKSPACE</text>
+    <text x="101" y="107" className={styles.softwareBrand}>PROVE-1</text><text x="891" y="106" textAnchor="end" className={styles.screenMicro}>OBSERVATION WORKSPACE</text>
     <text x="101" y="162" className={styles.screenMicro}>REVIEW</text><path d="M101 188h140" stroke="#424240" /><text x="101" y="216" className={styles.screenText}>Observations</text><text x="101" y="258" className={styles.screenMuted}>Telemetry</text><text x="101" y="300" className={styles.screenMuted}>Model review</text><path d="M101 330h140" stroke="#424240" />
     <text x="101" y="377" className={styles.screenMicro}>SELECTED FRAME</text><text x="100" y="410" className={styles.screenLarge}>03</text><path d="M101 438h79M101 450h122M101 462h97" stroke="#6f6f6c" strokeWidth="2" opacity=".6" />
     <rect x="294" y="153" width="584" height="344" fill={`url(#${id}screen)`} />

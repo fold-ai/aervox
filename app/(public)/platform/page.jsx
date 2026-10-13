@@ -31,7 +31,7 @@ export default function PlatformPage() {
         <div className={styles.introGrid}>
           <h1 id="platform-title">One connected<br />picture.</h1>
           <div className={styles.introCopy}>
-            <p>From the aircraft to the operator. Onboard intelligence, shared observations, and ground software—designed to work together.</p>
+            <p>From the aircraft to the operator. Onboard intelligence, shared observations, and ground software-designed to work together.</p>
             <a className={styles.textLink} href="#explore">Explore the platform <Arrow down /></a>
           </div>
         </div>

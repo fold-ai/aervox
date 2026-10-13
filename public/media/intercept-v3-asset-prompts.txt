@@ -1,4 +1,4 @@
-ACTPROVE interception film v3 — stage 1, 2026-10-04
+ACTPROVE interception film v3 - stage 1, 2026-10-04
 Generated with the built-in imagegen tool. Authored as a fictional brand film in scripts/render-intercept-v3.swift; no real sensor footage or operational logic.
 
 Asset: intercept-backdrop-v3.png
@@ -11,6 +11,6 @@ Asset: intercept-vapor-v3.png (transparent)
 Use case: ads-marketing. Asset for compositing a cinematic aerial film: ONE photorealistic thin wispy bank of cold gray-white cloud vapor, wide horizontal landscape composition, genuinely transparent background with soft semitransparent feathered wisps. The cloud mass sits along the lower third and left edge only; center and upper right completely empty transparent space. Fine natural mist detail, realistic diffuse overcast light, subtle blue-gray shadows, not fluffy cartoon smoke, not explosion, not dramatic cumulonimbus, no scenery, no objects, no text, no solid background. Used as near-camera cloud wisps passing the lens in an aerial scene.
 
 Deliverables:
-intercept-sequence-v3.mp4 — 1920×1080, 30 fps, 14 seconds, silent H.264.
-intercept-poster-v3.webp — reduced-motion / loading fallback at 8 seconds.
-intercept-track-v3.json — normalized editorial poses synchronized to the video frames.
+intercept-sequence-v3.mp4 - 1920×1080, 30 fps, 14 seconds, silent H.264.
+intercept-poster-v3.webp - reduced-motion / loading fallback at 8 seconds.
+intercept-track-v3.json - normalized editorial poses synchronized to the video frames.

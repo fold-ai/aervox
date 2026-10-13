@@ -171,17 +171,17 @@ function Rows({
           <div key={f.label} className="flex items-baseline gap-2">
             <span className="min-w-0 flex-1 truncate text-[11px] text-dim">{f.label}</span>
             <span className="num w-16 shrink-0 text-right text-[11px] text-dim">
-              {va === null ? "–" : fixed(va, f.decimals)}
+              {va === null ? "-" : fixed(va, f.decimals)}
             </span>
             <span className="num w-16 shrink-0 text-right text-[11px] text-bright">
-              {vb === null ? "–" : fixed(vb, f.decimals)}
+              {vb === null ? "-" : fixed(vb, f.decimals)}
             </span>
             <span
               className={`num w-20 shrink-0 text-right text-[11px] ${
                 same ? "text-dim" : good === null ? "text-bright" : good ? "text-bright" : "text-alert"
               }`}
             >
-              {d === null ? "–" : same ? "=" : `${d > 0 ? "+" : ""}${fixed(d, f.decimals)}`}
+              {d === null ? "-" : same ? "=" : `${d > 0 ? "+" : ""}${fixed(d, f.decimals)}`}
             </span>
             <span className="num w-14 shrink-0 text-right text-[10px] text-dim">
               {pct === null || same ? "" : `${pct > 0 ? "+" : ""}${fixed(pct, 1)}%`}

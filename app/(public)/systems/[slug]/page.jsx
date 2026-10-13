@@ -14,12 +14,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const system = getSystem(slug);
-  if (!system) return { title: "System not found — Actprove" };
+  if (!system) return { title: "System not found - Actprove" };
   return {
-    title: `${system.name} — ${system.category} | Actprove`,
+    title: `${system.name} - ${system.category} | Actprove`,
     description: `${system.summary} ${system.status}.`,
     alternates: { canonical: `/systems/${system.slug}` },
-    openGraph: { title: `${system.name} — Actprove`, description: system.summary, type: "website" },
+    openGraph: { title: `${system.name} - Actprove`, description: system.summary, type: "website" },
   };
 }
 

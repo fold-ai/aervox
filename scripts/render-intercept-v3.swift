@@ -288,4 +288,4 @@ writer.finishWriting { finished.signal() }
 finished.wait()
 guard writer.status == .completed else { throw RenderError.writer(writer.error?.localizedDescription ?? "Finish failed") }
 let size = try FileManager.default.attributesOfItem(atPath: output.path)[.size] as? NSNumber
-print("Complete: \(output.path) — \(size?.intValue ?? 0) bytes, \(frameWidth)×\(frameHeight), \(fps) fps, \(duration)s, silent H.264")
+print("Complete: \(output.path) - \(size?.intValue ?? 0) bytes, \(frameWidth)×\(frameHeight), \(fps) fps, \(duration)s, silent H.264")
