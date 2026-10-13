@@ -17,7 +17,7 @@ const slides = [
     key: "thesis", label: "Investment overview · October 2026", nav: "ACTPROVE", cover: true,
     title: <>The autonomy stack<br />for interceptor drones</>,
     content: <>
-      <p className={styles.coverDescription}>ACT-1 onboard perception and PROVE-1 operator software. Beta systems tested internally. Savlo Dynamics is our first aircraft integration partner.</p>
+      <p className={styles.coverDescription}>Onboard perception and operator software for interceptor drones. ACT-1 beta has been tested successfully on a Savlo Dynamics aircraft.</p>
       <div className={styles.coverBottom}><p><strong>Zakhar Bernyk</strong><span>CEO and lead programmer</span></p><p><strong>$1.5M</strong><span>Target equity raise</span></p><p><strong>$20M</strong><span>Target post-money valuation</span></p></div>
     </>
   },
@@ -29,20 +29,20 @@ const slides = [
     ]} /></>
   },
   {
-    key: "product", label: "Product architecture", nav: "ACT-1 + PROVE-1", title: <>One aircraft program<br />Two connected products</>,
-    content: <><div className={styles.architecture} aria-label="ACTPROVE system architecture"><article><span className={styles.label}>AIRCRAFT INPUT</span><h3>Sensors</h3><p>Camera and aircraft data chosen with the OEM.</p></article><article><span className={styles.label}>ONBOARD</span><h3>ACT-1</h3><p>Compute hardware and perception software for the aircraft.</p></article><article><span className={styles.label}>OPERATOR</span><h3>PROVE-1</h3><p>Telemetry, observation review and mission analysis.</p></article></div><p className={styles.bridge}>The first use case is interceptor aircraft. Both products are in beta; Savlo aircraft integration is the next gate.</p></>
+    key: "product", label: "Product portfolio", nav: "Six systems", title: <>Two products in beta<br />Four product directions</>,
+    content: <><div className={styles.coreProducts} aria-label="Current ACTPROVE products"><article><span className={styles.label}>ONBOARD / BETA</span><h3>ACT-1</h3><p>Compute and perception for interceptor aircraft, integrated with the drone and its sensors.</p></article><article><span className={styles.label}>GROUND / BETA</span><h3>PROVE-1</h3><p>Operator software for telemetry, observation review and mission analysis.</p></article></div><div className={styles.futureProducts} aria-label="ACTPROVE product directions"><article><h3>DETECT-1</h3><p>Planned scene perception for long-range drones.</p></article><article><h3>ARCA-1</h3><p>Radar and camera sensing; early prototype research.</p></article><article><h3>ERA-1</h3><p>Long-term aircraft autonomy research.</p></article><article><h3>VISTA-1</h3><p>Wearable operator view; interface concept.</p></article></div><p className={styles.portfolioNote}>The round funds ACT-1 and PROVE-1 validation. Other systems advance through separate research and product gates.</p></>
   },
   {
-    key: "evidence", label: "Internal beta evidence", nav: "ACT-1 test results", title: <>A 10 km result<br />A clear validation plan</>,
-    content: <><div className={styles.testResult}><div><span className={styles.label}>ACT-1 INTERNAL BETA</span><strong>10 km</strong><p>Target lock on a moving object, achieved on the second attempt with a test drone.</p></div><div><span className={styles.label}>PROVE-1 INTERNAL BETA</span><h3>Operator software<br />in testing</h3><p>Telemetry and observation workflow are being tested alongside ACT-1 development.</p></div></div><div className={styles.stageGrid} aria-label="Perception workflow and validation status"><div><span>01</span><strong>Detection</strong><p>Internal test</p></div><div><span>02</span><strong>Classification</strong><p>Threat assessment tested</p></div><div><span>03</span><strong>Tracking</strong><p>Metrics to document</p></div><div><span>04</span><strong>Target lock</strong><p>Second attempt at 10 km</p></div><div><span>05</span><strong>Control handoff</strong><p>Partner validation gate</p></div></div><p className={styles.sourceNote}>Internal beta result from one successful acquisition after two attempts. Target type, optics, conditions, repeatability and false-positive rate still need a documented test report. Partner validation is planned.</p></>
+    key: "evidence", label: "Beta test evidence", nav: "ACT-1 tests", title: <>ACT-1 tested<br />on a Savlo drone</>,
+    content: <><div className={styles.testResult}><div><span className={styles.label}>SAVLO DYNAMICS AIRCRAFT</span><strong>ACT-1</strong><p>ACT-1 beta was tested successfully on a Savlo Dynamics drone.</p></div><div><span className={styles.label}>MOVING-TARGET TEST</span><strong>10 km</strong><p>A moving object was acquired and locked on the second attempt with a test drone.</p></div></div><p className={styles.bridge}>PROVE-1 beta is also under test. The next evidence gate is a documented, repeatable partner test with defined acceptance criteria.</p><p className={styles.sourceNote}>The 10 km target lock is an internal beta observation, not a validated operating range. Repeatability, optics, conditions and false-positive rate remain to be documented.</p></>
   },
   {
-    key: "traction", label: "Partner collaboration", nav: "Savlo integration", title: <>A first OEM relationship<br />A path to validation</>,
+    key: "traction", label: "Partner collaboration", nav: "Route to market", title: <>An OEM integration path<br />A defined next gate</>,
     content: <><Rows items={[
-      ["Savlo Dynamics", "We are collaborating on aircraft integration for ACT-1 and PROVE-1."],
-      ["Next validation gate", "Define acceptance criteria and document performance on a partner aircraft."],
-      ["Commercial status", "No partner order or revenue is included in our financial model."],
-    ]} /><p className={styles.sourceNote}>The relationship is an integration path. No purchase volume or revenue is claimed.</p></>
+      ["Savlo Dynamics", "Agreed aircraft integration collaboration. ACT-1 beta testing on a Savlo drone has been completed successfully."],
+      ["BRAVE1", "Confirmed collaboration provides access to the defense-tech community, selected data and a testing pathway."],
+      ["Next commercial gate", "Document repeatable results, agree acceptance criteria and convert partner interest into a priced order."],
+    ]} /><p className={styles.sourceNote}>No purchase order, committed production volume or partner revenue is claimed.</p></>
   },
   {
     key: "market", label: "Market", nav: "Bottom-up demand", title: <>Large demand signal<br />Specific OEM market</>,
@@ -75,7 +75,7 @@ const slides = [
   },
   {
     key: "round", label: "Equity round", nav: "The ask", light: true, title: <>$1.5M for the next<br />customer proof</>,
-    content: <><div className={styles.roundTerms}><div><strong>$1.5M</strong><span>Target priced equity raise</span></div><div><strong>$20M</strong><span>Target post-money valuation</span></div></div><div className={styles.roundMilestones}><span>01 · Partner aircraft validation and test report</span><span>02 · Production-intent ACT-1 and PROVE-1</span><span>03 · Priced order and repeatable installation</span></div><p className={styles.roundPurpose}>Planned 12-month allocation: 45% team and software, 25% hardware and integration, 15% testing, 10% compliance and operations, 5% reserve. Implied investor ownership is 7.5% before other issuance.</p><div className={styles.roundContact}><p><strong>Zakhar Bernyk</strong><span>Chief Executive Officer</span></p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a></div></>
+    content: <><div className={styles.roundTerms}><div><strong>$1.5M</strong><span>Target priced equity raise</span></div><div><strong>$20M</strong><span>Target post-money valuation</span></div></div><div className={styles.roundMilestones}><span>01 · Repeatable partner acceptance tests</span><span>02 · Production-intent ACT-1 and PROVE-1</span><span>03 · Priced order and repeatable installation</span></div><p className={styles.roundPurpose}>Planned 12-month use of funds: $675k team and software, $375k hardware and integration, $225k testing, $150k compliance and operations, $75k reserve. Implied investor ownership is 7.5% before other issuance.</p><div className={styles.roundContact}><p><strong>Zakhar Bernyk</strong><span>Chief Executive Officer</span></p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a></div></>
   },
 ];
 

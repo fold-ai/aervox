@@ -273,6 +273,15 @@
 }
 
 /* Ten-slide investor narrative: architecture and measured evidence. */
+.coreProducts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6%; border-top: 1px solid var(--deck-line); }
+.coreProducts article { padding: 22px 0 26px; border-bottom: 1px solid var(--deck-line); }
+.coreProducts h3 { font-size: clamp(43px, 5vw, 78px); line-height: 1; margin: 13px 0 15px; }
+.coreProducts p { font-size: clamp(15px, 1.2vw, 18px); line-height: 1.5; max-width: 440px; }
+.futureProducts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3%; }
+.futureProducts article { border-top: 1px solid var(--deck-line); padding-top: 12px; }
+.futureProducts h3 { font-size: clamp(21px, 2.1vw, 33px); margin-bottom: 8px; white-space: nowrap; }
+.futureProducts p { font-size: clamp(12px, 1.05vw, 15px); line-height: 1.45; }
+.content .portfolioNote { color: #cfcdc7; font-size: 14px; line-height: 1.5; }
 .architecture { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5%; border-top: 1px solid var(--deck-line); padding-top: 26px; }
 .architecture article { position: relative; min-height: 230px; border-bottom: 1px solid var(--deck-line); padding: 0 4% 22px 0; }
 .architecture article:not(:last-child)::after { content: '→'; position: absolute; right: -7%; top: 46%; color: var(--deck-accent); font: 30px/1 var(--font-display), sans-serif; }
@@ -294,6 +303,11 @@
 .roundMilestones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4%; }
 .roundMilestones span { border-top: 1px solid var(--deck-line); color: var(--deck-paper); font-size: 13px; line-height: 1.5; padding-top: 13px; }
 @media (min-width: 901px) and (max-height: 780px) {
+  .coreProducts article { padding: 15px 0 19px; }
+  .coreProducts h3 { font-size: 58px; margin: 8px 0 9px; }
+  .coreProducts p { font-size: 15px; }
+  .futureProducts h3 { font-size: 25px; }
+  .futureProducts p { font-size: 12px; }
   .architecture article { min-height: 185px; }
   .architecture h3 { margin: 18px 0 12px; }
   .testResult strong { font-size: 92px; }
@@ -303,6 +317,14 @@
   .content .sourceNote { font-size: 11px; }
 }
 @media (max-width: 600px) {
+  .coreProducts { grid-template-columns: 1fr; gap: 0; }
+  .coreProducts article { padding: 16px 0; }
+  .coreProducts h3 { font-size: 45px; margin: 7px 0; }
+  .coreProducts p { font-size: 14px; }
+  .futureProducts { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+  .futureProducts h3 { font-size: 24px; }
+  .futureProducts p { font-size: 12px; }
+  .content .portfolioNote { font-size: 12px; }
   .architecture { grid-template-columns: 1fr; gap: 16px; padding-top: 16px; }
   .architecture article { min-height: 0; padding-bottom: 16px; }
   .architecture article:not(:last-child)::after { content: '↓'; right: 0; top: auto; bottom: -13px; font-size: 20px; }
