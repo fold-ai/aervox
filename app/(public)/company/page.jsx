@@ -38,8 +38,8 @@ export default function CompanyPage() {
         <div className={styles.sectionLabel}><span>04 / NEXT STEPS</span><span>PLANNED MILESTONES</span></div>
         <h2 id="milestones-title">The next stage<br />of development.</h2>
         <div className={styles.milestoneRows}>
-          <div className={styles.milestoneRow}><span className={styles.milestoneDate}>Q1 2027</span><div><h3>First combat testing.</h3><p>First testing in actual combat conditions in Ukraine is planned for Q1 2027.</p></div><span className={styles.planned}>PLANNED</span></div>
-          <div className={styles.milestoneRow}><span className={styles.milestoneDate}>ATLANTA</span><div><h3>A U.S. office.</h3><p>An Atlanta office is planned as part of Actprove’s development.</p></div><span className={styles.planned}>PLANNED</span></div>
+          <div className={styles.milestoneRow}><span className={styles.milestoneDate}>Q2 2027</span><div><h3>First combat testing.</h3><p>First testing in actual combat conditions in Ukraine is planned for Q2 2027.</p></div><span className={styles.planned}>PLANNED</span></div>
+          <div className={styles.milestoneRow}><span className={styles.milestoneDate}>U.S. + UKRAINE</span><div><h3>Office locations under review.</h3><p>We are currently evaluating office locations in the United States and Ukraine.</p></div><span className={styles.planned}>UNDER REVIEW</span></div>
         </div>
       </section>
     </main>
