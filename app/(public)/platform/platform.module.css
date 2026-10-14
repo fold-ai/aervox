@@ -1,4 +1,4 @@
-.page { --paper: #e8e8df; --ink: #10120f; --muted: #61665c; --accent: #d8ed8a; --rule: #10120f33; --gutter: clamp(24px, 5vw, 88px); background: var(--paper); color: var(--ink); overflow: clip; }
+.page { --paper: #f9f9f7; --ink: #10120f; --muted: #61665c; --accent: #d8ed8a; --rule: #10120f33; --gutter: clamp(24px, 5vw, 88px); background: var(--paper); color: var(--ink); overflow: clip; }
 .page h1, .page h2, .page h3, .page strong { font-family: var(--font-display), sans-serif; font-variation-settings: "wdth" 100; font-weight: 400; }
 .page p { max-width: none; }
 .page a:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
@@ -42,7 +42,7 @@
 .stageCopy .textLink { font-size: 11px; }
 .architectureNote { display: flex; justify-content: space-between; gap: 25px; padding-top: 20px; font: 9px/1.6 ui-monospace, SFMono-Regular, monospace; color: var(--muted); }
 .architectureNote > span:last-child { font-family: var(--font-body), sans-serif; font-size: 11px; }
-.development { padding: 72px var(--gutter) 85px; background: #e1e1da; border-top: 1px solid #10120f1a; }
+.development { padding: 72px var(--gutter) 85px; background: #f0f0ee; border-top: 1px solid #10120f1a; }
 .development .sectionHeading { margin-bottom: 52px; }
 .developmentGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; }
 .developmentColumn { padding-top: 23px; border-top: 1px solid #10120f75; }
