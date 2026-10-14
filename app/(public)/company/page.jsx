@@ -4,7 +4,7 @@ import styles from "./company.module.css";
 
 export const metadata = {
   title: "Company | Actprove",
-  description: "Actprove develops onboard intelligence and ground software for unmanned defense aircraft. Learn about its leadership, partnerships, and planned milestones.",
+  description: "Actprove develops onboard intelligence, ground software, and connected defense systems. Learn about its leadership, partnerships, and planned milestones.",
 };
 
 export default function CompanyPage() {
@@ -13,8 +13,8 @@ export default function CompanyPage() {
     <main id="main">
       <section className={styles.intro} aria-labelledby="company-title">
         <div className={styles.sectionLabel}><span>01 / COMPANY</span><span>ACTPROVE DEFENSE TECHNOLOGIES</span></div>
-        <h1 id="company-title">Intelligence.<br />Built into the aircraft.</h1>
-        <div className={styles.introBottom}><span className={styles.smallLabel}>OUR FOCUS</span><p>We develop onboard intelligence and ground software for counter-drone, deep-strike, and reconnaissance aircraft.</p><Link href="/systems" className={styles.textLink}>Explore the systems<Arrow diagonal /></Link></div>
+        <h1 id="company-title">Intelligence.<br />Across the mission.</h1>
+        <div className={styles.introBottom}><span className={styles.smallLabel}>OUR FOCUS</span><p>We develop onboard intelligence, ground software, sensing, and equipment integration. Our first focus is strike and interceptor drones.</p><Link href="/systems" className={styles.textLink}>Explore the systems<Arrow diagonal /></Link></div>
       </section>
 
       <section className={styles.approach} aria-labelledby="approach-title">

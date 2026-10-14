@@ -16,7 +16,7 @@ export default function SystemsPage() {
     <main id="main">
       <section className={styles.indexIntro} aria-labelledby="systems-title">
         <div className={styles.eyebrowRow}><span>ACTPROVE / SYSTEMS</span><span>01-06</span></div>
-        <div className={styles.introLayout}><h1 id="systems-title">Intelligence.<br />Built into the aircraft.</h1><p>Onboard compute. Ground software. Connected perception. Explore the systems we are developing, and the directions we are pursuing next.</p></div>
+        <div className={styles.introLayout}><h1 id="systems-title">Intelligence.<br />Across the mission.</h1><p>Onboard compute. Ground software. Connected sensing and equipment. Explore the systems in development and the directions we are pursuing next.</p></div>
         <nav className={styles.productNav} aria-label="Systems on this page">{systems.map(system => <a key={system.slug} href={`#${system.slug}`}><span>{system.number}</span>{system.name}<Arrow /></a>)}</nav>
       </section>
 
@@ -38,7 +38,7 @@ export default function SystemsPage() {
         <p className={styles.roadmapNote}>Roadmap systems and concepts require development and validation before their intended capabilities can be demonstrated.</p>
       </section>
 
-      <section className={styles.platformBand} aria-labelledby="platform-title"><span>ONE CONNECTED PLATFORM</span><h2 id="platform-title">The aircraft.<br />The operator.<br />The same picture.</h2><div><p>Explore how onboard intelligence and ground software come together around an aircraft program.</p><Link href="/platform" className={styles.textLink}>Explore the platform<Arrow diagonal /></Link></div></section>
+      <section className={styles.platformBand} aria-labelledby="platform-title"><span>ONE CONNECTED PLATFORM</span><h2 id="platform-title">The sensor.<br />The operator.<br />The same picture.</h2><div><p>Explore how onboard intelligence, ground software, and connected equipment come together.</p><Link href="/platform" className={styles.textLink}>Explore the platform<Arrow diagonal /></Link></div></section>
     </main>
     <SiteFooter />
   </div>;

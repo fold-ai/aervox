@@ -58,13 +58,13 @@ export function SiteFooter() {
   return <footer className={styles.footer}>
     <div className={styles.footerInvitation}>
       <span className={styles.footerIndex}>ACTPROVE / NEXT STEPS</span>
-      <Link href="/contact" className={styles.footerHeading}>Bring intelligence<br />to your aircraft.<Arrow diagonal /></Link>
+      <Link href="/contact" className={styles.footerHeading}>Bring intelligence<br />to your mission.<Arrow diagonal /></Link>
     </div>
     <div className={styles.footerMain}>
-      <div className={styles.footerIdentity}><Brand /><p>Onboard intelligence.<br />Ground software.<br />Aircraft-specific integration.</p></div>
+      <div className={styles.footerIdentity}><Brand /><p>Onboard intelligence.<br />Ground software.<br />Connected equipment.</p></div>
       <div className={styles.footerNav}><span>EXPLORE</span><nav aria-label="Footer navigation">{navigation.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div>
       <div className={styles.footerConnect}><span>CONNECT</span><a href="mailto:contact@actprove.com">contact@actprove.com<Arrow diagonal /></a></div>
     </div>
-    <div className={styles.footerBottom}><span>© 2026 ACTPROVE DEFENSE TECHNOLOGIES</span><span>BUILT AROUND THE AIRCRAFT.</span><Link href="/">ACTPROVE<Arrow /></Link></div>
+    <div className={styles.footerBottom}><span>© 2026 ACTPROVE DEFENSE TECHNOLOGIES</span><span>INTELLIGENCE ACROSS THE MISSION.</span><Link href="/">ACTPROVE<Arrow /></Link></div>
   </footer>;
 }
