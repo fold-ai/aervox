@@ -1,5 +1,5 @@
 .header { --chrome-ink: #e8e8df; --chrome-paper: #10120f; --chrome-rule: #e8e8df2e; position: relative; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 40px; height: 100px; padding: 0 clamp(24px, 5vw, 88px); color: var(--chrome-ink); background: var(--chrome-paper); border-bottom: 1px solid var(--chrome-rule); }
-.header[data-theme="light"] { --chrome-ink: #10120f; --chrome-paper: #f9f9f7; --chrome-rule: #10120f30; }
+.header[data-theme="light"] { --chrome-ink: #10120f; --chrome-paper: #ffffff; --chrome-rule: #10120f30; }
 .header[data-overlay="true"] { position: absolute; inset: 0 0 auto; background: transparent; }
 .brand { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 8px; flex-shrink: 0; text-decoration: none; }
 .brand img { width: 178px; height: auto; display: block; }
