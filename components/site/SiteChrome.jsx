@@ -11,6 +11,7 @@ const navigation = [
   { href: "/systems", label: "Systems" },
   { href: "/platform", label: "Platform" },
   { href: "/company", label: "Company" },
+  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ];
 

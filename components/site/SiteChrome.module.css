@@ -34,6 +34,7 @@
 .footerBottom a { display: flex; align-items: center; gap: 16px; text-decoration: none; color: #b6c1ab; }
 .footerBottom svg { width: 15px; height: 15px; }
 @media (max-width: 900px) { .footerMain { gap: 30px; grid-template-columns: 1.1fr .65fr 1fr; } .footerBottom > span:nth-child(2) { display: none; } }
+@media (min-width: 761px) and (max-width: 1100px) { .header { gap: 24px; } .header .brand img { width: 148px; } .navigation { gap: 22px; } .navigation > a { font-size: 11px; } .navigation > a:last-child { margin-left: 0; } }
 @media (max-width: 760px) {
   .header { height: 82px; gap: 20px; }
   .brand img { width: 148px; }
