@@ -52,7 +52,7 @@ export default function HomePage() {
         <div className={styles.systemSelector}>
           <div className={styles.systemList} role="group" aria-label="Explore ACTPROVE systems">
             {systems.map((system, index) => <button key={system.type} aria-pressed={selected === index} onClick={() => setSelected(index)} className={selected === index ? styles.systemActive : ""}><span className={styles.systemNumber}>0{index + 1}</span><span><strong>{system.name}</strong><small>{system.category}</small></span><Arrow /></button>)}
-            <Link className={styles.researchLink} href="/systems/era-1"><span>ERA-1 / Future autonomy research</span><Arrow /></Link>
+            <Link className={styles.researchLink} href="/systems/era-1"><span>ERA-1 / Legacy equipment connection</span><Arrow /></Link>
             <Link className={styles.researchLink} href="/systems/vista-1"><span>VISTA-1 / Wearable interface concept</span><Arrow /></Link>
           </div>
           <div className={styles.systemPresentation}>

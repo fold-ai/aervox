@@ -29,13 +29,13 @@ export default function SystemsPage() {
       </section>
 
       <section className={styles.roadmap} aria-labelledby="roadmap-title">
-        <div className={styles.roadmapHeading}><div className={styles.sectionLabel}><span>02 / LOOKING AHEAD</span><h2 id="roadmap-title">The next directions.</h2></div><p>Planned systems and long-term research build on a shared foundation of perception, aircraft integration and operator context.</p></div>
+        <div className={styles.roadmapHeading}><div className={styles.sectionLabel}><span>02 / LOOKING AHEAD</span><h2 id="roadmap-title">The next directions.</h2></div><p>Planned systems and concepts extend the platform to sensing, long-range perception, older equipment and field interfaces.</p></div>
         <div className={styles.roadmapGrid}>{systems.slice(2).map(system => <article key={system.slug} id={system.slug} className={styles.roadmapProduct} aria-labelledby={`${system.slug}-title`}>
           <div className={styles.roadmapArt}><SystemVisual type={system.slug} compact /></div>
           <div className={styles.roadmapTop}><span>{system.number} / {system.category}</span><span>{system.stage === "research" ? "Long-term" : system.status}</span></div>
           <Link href={`/systems/${system.slug}`} className={styles.roadmapLink}><h3 id={`${system.slug}-title`}>{system.name}</h3><Arrow diagonal /></Link><p>{system.summary}</p>
         </article>)}</div>
-        <p className={styles.roadmapNote}>Roadmap systems are planned or under research. Their intended capabilities are subject to development and validation.</p>
+        <p className={styles.roadmapNote}>Roadmap systems and concepts require development and validation before their intended capabilities can be demonstrated.</p>
       </section>
 
       <section className={styles.platformBand} aria-labelledby="platform-title"><span>ONE CONNECTED PLATFORM</span><h2 id="platform-title">The aircraft.<br />The operator.<br />The same picture.</h2><div><p>Explore how onboard intelligence and ground software come together around an aircraft program.</p><Link href="/platform" className={styles.textLink}>Explore the platform<Arrow diagonal /></Link></div></section>

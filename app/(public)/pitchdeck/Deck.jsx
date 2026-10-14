@@ -95,7 +95,7 @@ export default function Deck() {
         <div className="stages">
           <div><h3>ARCA-1</h3><p>Planned 3-6 metre radar and camera system for drone detection. Its 50 km range is a design goal, not a validated capability.</p></div>
           <div><h3>DETECT-1</h3><p>Planned onboard perception for long-range drones, designed to identify objects of interest and surface changing conditions to operators.</p></div>
-          <div><h3>ERA-1</h3><p>Long-term research into autonomous fighter-aircraft flight management, object classification, and civilian-risk awareness with human authorization.</p></div>
+          <div><h3>ERA-1</h3><p>Planned hardware adapter for older or incompatible equipment. It would relay available status and telemetry into the shared PROVE-1 operational view.</p></div>
         </div>
       </section>
 
@@ -104,7 +104,7 @@ export default function Deck() {
         <div className="rows">
           <div className="row"><h3>Now</h3><p>Developing PROVE-1 and ACT-1, with an active integration project for Savlo Dynamics.</p></div>
           <div className="row"><h3>Next</h3><p>Testing model performance with partner hardware and expanding the training-data workflow.</p></div>
-          <div className="row"><h3>Later</h3><p>Research and validation for ARCA-1, DETECT-1, and ERA-1.</p></div>
+          <div className="row"><h3>Later</h3><p>Development and validation for ARCA-1, DETECT-1, and ERA-1.</p></div>
         </div>
         <p className="fine">Roadmap descriptions are development goals and should not be read as deployed capabilities.</p>
       </section>

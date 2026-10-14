@@ -11,7 +11,7 @@ export const metadata = {
 const workflow = [
   { number: "01", label: "ON THE AIRCRAFT", name: "ACT-1", copy: "Bring sensor inputs and onboard perception together, close to the source. ACT-1 is being developed as the intelligence layer within the aircraft.", detail: "Sensor inputs / Onboard compute", href: "/systems/act-1", link: "Explore ACT-1" },
   { number: "02", label: "ACROSS THE AREA", name: "Shared observations", copy: "A common view connects observations with their aircraft and location. Move from an area overview to an individual perspective without losing the wider context.", detail: "Aircraft context / Observation history" },
-  { number: "03", label: "WITH THE OPERATOR", name: "PROVE-1", copy: "Review the picture, compare perspectives, and understand what changed. PROVE-1 is being developed as the ground software for operator review and mission analysis.", detail: "Operator review / Mission analysis", href: "/systems/prove-1", link: "Explore PROVE-1" },
+  { number: "03", label: "WITH THE OPERATOR", name: "PROVE-1", copy: "Review observations and equipment status in one ground-software workflow. A planned ERA-1 adapter would bring older or incompatible platforms into that view.", detail: "Operator review / Equipment status", href: "/systems/prove-1", link: "Explore PROVE-1" },
 ];
 
 function Arrow({ down = false }) {

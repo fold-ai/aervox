@@ -10,7 +10,7 @@ const names = {
   "prove-1": "PROVE-1 observation review software concept",
   "detect-1": "DETECT-1 abstract perception study",
   "arca-1": "ARCA-1 abstract sensing study",
-  "era-1": "ERA-1 abstract computational research surface",
+  "era-1": "ERA-1 abstract equipment connection concept",
 };
 
 function Software({ id }) {
@@ -40,7 +40,7 @@ function Software({ id }) {
 }
 
 function Research({ kind = "era-1" }) {
-  // An abstract mathematical ribbon, used only as a research illustration.
+  // An abstract mathematical ribbon, used only as a concept illustration.
   const project = (u, v) => {
     if (kind === "detect-1") {
       const radius = 204 + v * 72 * Math.cos(u);
@@ -64,7 +64,7 @@ function Research({ kind = "era-1" }) {
     <g fill="none" stroke="#e3e3dd" strokeWidth="1.2" opacity=".75"><path d={curve(Array.from({ length: 181 }, (_, index) => project(index / 180 * Math.PI * 2, 1)))} /><path d={curve(Array.from({ length: 181 }, (_, index) => project(index / 180 * Math.PI * 2, -1)))} /></g>
     <path d="M165 325h92m489 0h93M500 94v50m0 360v51" stroke="#797976" opacity=".55" />
     <circle cx="500" cy="325" r="4" fill="none" stroke="#bebeb9" strokeWidth=".7" /><circle cx="500" cy="325" r="223" fill="none" stroke="#6d6d6a" strokeDasharray="1 10" opacity=".6" />
-    <text x="167" y="579" className={styles.screenMicro}>{kind === "detect-1" ? "PERCEPTION / CONTEXT" : kind === "arca-1" ? "SENSING / CONNECTION" : "FORM / CONTEXT / INQUIRY"}</text><text x="835" y="579" textAnchor="end" className={styles.screenMicro}>{kind === "era-1" ? "OPEN RESEARCH" : "CONCEPT STUDY"}</text>
+    <text x="167" y="579" className={styles.screenMicro}>{kind === "detect-1" ? "PERCEPTION / CONTEXT" : kind === "arca-1" ? "SENSING / CONNECTION" : "EQUIPMENT / CONNECTION"}</text><text x="835" y="579" textAnchor="end" className={styles.screenMicro}>CONCEPT STUDY</text>
   </>;
 }
 
@@ -77,6 +77,6 @@ export default function SystemVisual({ type = "act-1", compact = false, classNam
   const Illustration = kind === "prove-1" ? Software : Research;
   return <div className={`${styles.visual} ${compact ? styles.compact : ""} ${className}`} data-system={kind}>
     <svg viewBox="0 0 1000 650" role="img" aria-label={names[kind] || names["act-1"]} preserveAspectRatio="xMidYMid meet"><Illustration id={id} kind={kind} /></svg>
-    <span className={styles.artLabel}>ACTPROVE / {kind.toUpperCase()}</span><span className={styles.conceptLabel}>{kind === "prove-1" ? "PRODUCT ILLUSTRATION" : kind === "era-1" ? "RESEARCH STUDY" : "CONCEPT STUDY"}</span>
+    <span className={styles.artLabel}>ACTPROVE / {kind.toUpperCase()}</span><span className={styles.conceptLabel}>{kind === "prove-1" ? "PRODUCT ILLUSTRATION" : "CONCEPT STUDY"}</span>
   </div>;
 }
