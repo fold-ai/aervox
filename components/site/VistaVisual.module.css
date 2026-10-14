@@ -1,8 +1,5 @@
 .visual { position: relative; width: 100%; height: 100%; overflow: hidden; isolation: isolate; background: #10120f; color: #e8e8df; }
 .image { object-fit: cover; object-position: 54% center; }
-.screenPreview { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .3s ease; }
-.screenOn .screenPreview { opacity: 1; }
-.screenMicro { fill: #e8e8df; font: 10px ui-monospace, SFMono-Regular, monospace; letter-spacing: 1px; }
 .shade { position: absolute; inset: 0; background: linear-gradient(90deg, #10120ff2 0%, #10120fd0 23%, #10120f35 51%, transparent 75%), linear-gradient(0deg, #10120fa8 0%, transparent 25%, transparent 78%, #10120f80 100%); }
 .header, .footer { position: absolute; z-index: 1; left: clamp(20px, 3vw, 50px); right: clamp(20px, 3vw, 50px); display: flex; justify-content: space-between; gap: 16px; font: 10px/1.5 ui-monospace, SFMono-Regular, monospace; letter-spacing: .1em; }
 .header { top: clamp(20px, 3vw, 44px); }
@@ -11,11 +8,6 @@
 .copy > span { font: 11px/1.4 ui-monospace, SFMono-Regular, monospace; letter-spacing: .16em; }
 .copy strong { font: 400 clamp(48px, 6vw, 100px)/.96 var(--font-display), sans-serif; letter-spacing: -.06em; }
 .copy i { display: block; width: 51px; height: 2px; background: #d8ed8a; }
-.toggle { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 33px; margin: -9px 0; padding: 6px 10px; border: 1px solid #e8e8df90; background: #10120fd9; color: #e8e8df; font: inherit; letter-spacing: inherit; cursor: pointer; white-space: nowrap; }
-.toggle:hover, .toggle:focus-visible { border-color: #d8ed8a; color: #d8ed8a; }
-.toggle:focus-visible { outline: 2px solid #d8ed8a; outline-offset: 3px; }
-.powerIcon { display: block; width: 7px; height: 7px; border: 1px solid currentColor; border-radius: 50%; }
-.screenOn .powerIcon { background: #d8ed8a; border-color: #d8ed8a; }
 .compact .header, .compact .footer { font-size: 8px; }
 .compact .copy { left: clamp(20px, 3vw, 50px); gap: 13px; }
 .compact .copy > span { font-size: 9px; }
@@ -24,11 +16,8 @@
   .image { object-position: 65% center; }
   .shade { background: linear-gradient(90deg, #10120ff0 0%, #10120f88 45%, #10120f18 85%), linear-gradient(0deg, #10120fb3, transparent 25%, transparent 78%, #10120f8c); }
   .header, .footer { font-size: 8px; }
-  .header > span:last-child, .footer > span:last-child { display: none; }
+  .header > span:last-child { display: none; }
   .copy { left: 24px; gap: 14px; }
   .copy strong { font-size: clamp(42px, 10vw, 62px); }
   .compact .copy strong { font-size: clamp(36px, 9vw, 52px); }
-  .screenOn .copy strong, .screenOn .copy i { opacity: 0; }
-  .toggle { font-size: 8px; gap: 7px; }
 }
-@media (prefers-reduced-motion: reduce) { .screenPreview { transition: none; } }
