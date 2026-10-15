@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./FlightSequence.module.css";
 
-const FILM = "/media/intercept-sequence-v5.mp4";
-const POSTER = "/media/intercept-poster-v5.webp";
-const TRACK = "/media/intercept-track-v5.json";
+const FILM = "/media/intercept-sequence-v6.mp4";
+const POSTER = "/media/intercept-poster-v6.webp";
+const TRACK = "/media/intercept-track-v6.json";
 const HERO_POSITION = .64;
 let trackRequest;
 
