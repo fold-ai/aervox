@@ -113,3 +113,13 @@
   .sequence[data-variant="demo"] .assessment > span { font-size: 7px; }
 }
 @media (prefers-reduced-motion: reduce) { .sequence[data-variant="demo"] .targetInfo { animation: none; } }
+/* Shared graphite console palette used by the ACT-1 and PROVE-1 displays. */
+.sequence[data-variant="demo"] { background: #111517; }
+.sequence[data-variant="demo"] .video,
+.sequence[data-variant="demo"] .poster { filter: saturate(.12) contrast(.95); }
+.sequence[data-variant="demo"] .overlay { --lock: #bed3c3; }
+.sequence[data-variant="demo"] .overlay[data-committing="true"] { --lock: #df9b91; }
+.sequence[data-variant="demo"] .targetInfo,
+.sequence[data-variant="demo"] .overlay[data-committing="true"] .targetInfo { background: #111517eb; border-color: #59605d; color: #e0e5e2; }
+.sequence[data-variant="demo"] .progress > span { background: #c5d3ca; }
+.sequence[data-variant="demo"] .targetClass > strong { font-family: var(--font-display),sans-serif; }

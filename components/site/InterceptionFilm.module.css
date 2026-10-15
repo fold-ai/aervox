@@ -1,11 +1,21 @@
-.player { display:flex; flex-direction:column; width:100%; height:100%; min-width:0; overflow:hidden; background:#10120f; color:#e8e8df; }
-.film { flex:1; min-height:0; aspect-ratio:auto; }
-.controls { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:48px; padding:8px 18px; flex-shrink:0; border-top:1px solid #e8e8df3b; }
-.controls > span { font:10px/1.5 ui-monospace,monospace; letter-spacing:.055em; }
-.controls i { font-style:normal; color:#a4aa9e; }
-.controls > div { display:flex; gap:18px; }
-.controls button { display:inline-flex; align-items:center; gap:8px; padding:6px 0; border:0; background:transparent; color:inherit; font:12px/1.5 var(--font-body),sans-serif; cursor:pointer; }
-.controls button:hover { color:#d8ed8a; }
-.controls button:disabled { opacity:.5; cursor:default; }
-.controls button:focus-visible { outline:1px solid #d8ed8a; outline-offset:4px; }
-@media(max-width:660px) { .controls { padding:8px 12px; }.controls i { display:none; }.controls > div { gap:15px; } }
+.viewport { width: 100%; height: 100%; position: relative; overflow: hidden; background: #111517; }
+.screen { width: 1000px; height: 522px; position: absolute; top: 0; left: 0; transform-origin: top left; color: #e0e5e2; background: #111517; }
+.header { height: 44px; box-sizing: border-box; display: flex; align-items: center; gap: 30px; padding: 0 20px; border-bottom: 1px solid #343b3f; font: 10px ui-monospace,monospace; letter-spacing: .5px; color: #a8b1b2; }
+.header strong { font: 600 19px var(--font-display),sans-serif; color: #edf0ea; letter-spacing: -.4px; }
+.header strong span { margin-right: 10px; }
+.header > span:last-child { margin-left: auto; }
+.film { height: 430px; aspect-ratio: auto; }
+.controls { height: 48px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 20px; border-top: 1px solid #343b3f; }
+.controls > span { font: 10px ui-monospace,monospace; letter-spacing: .5px; }
+.controls i { font-style: normal; margin-left: 20px; color: #9aa5a7; }
+.controls > div { display: flex; gap: 24px; }
+.controls button { min-height: 40px; padding: 0 10px; border: 0; background: transparent; color: #e0e5e2; font: 12px ui-monospace,monospace; cursor: pointer; }
+.controls button:hover { background: #ffffff12; }
+.controls button:disabled { opacity: .5; cursor: default; }
+.controls button:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+.dialog { width: min(1100px, 96vw); }
+.dialog .viewport { height: auto; aspect-ratio: 1000 / 522; }
+@media(max-width:600px) { .dialog .viewport { min-width: 650px; } }
+
+.viewer { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+@media(max-width:600px) { .viewer { padding-bottom: 14px; } }

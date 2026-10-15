@@ -1,0 +1,3 @@
+Generated with built-in imagegen. Asset: intercept-target-v5.png.
+Prompt: Photorealistic transparent cutout of a jet-powered Shahed-238 visual impression, viewed from directly behind and slightly above. Broad triangular delta wings, wingtip vertical fins, graphite airframe, rear circular jet exhaust and dorsal intake. No propeller, piston engine, flames, markings or text. Entire aircraft in frame. Soft overcast daylight. Illustrative marketing visual, not engineering documentation.
+The film uses authored editorial keyframes and an existing generated cloud background. It does not simulate guidance, detection, safety assessment or real performance.

@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./FlightSequence.module.css";
 
-const FILM = "/media/intercept-sequence-v4.mp4";
-const POSTER = "/media/intercept-poster-v4.webp";
-const TRACK = "/media/intercept-track-v4.json";
+const FILM = "/media/intercept-sequence-v5.mp4";
+const POSTER = "/media/intercept-poster-v5.webp";
+const TRACK = "/media/intercept-track-v5.json";
 const HERO_POSITION = .64;
 let trackRequest;
 
@@ -134,11 +134,11 @@ function TrackingOverlay({ track, frame, size, hero }) {
     {hero && <div className={styles.cameraSource}><span><i /> I-01 / INTERCEPTOR VIEW</span><small>EO CAMERA <b>{String(Math.floor(frame.time)).padStart(2, "0")}:{String(Math.floor((frame.time % 1) * 30)).padStart(2, "0")}</b></small></div>}
     {(targetOnScreen || ending) && (hero || frame.phase !== "Distant") && <div className={styles.targetInfo} style={{ left: panelX, top: panelY, width: panelWidth, opacity: ending ? 1 : frame.opacity }} data-placement={placement}>
       <div className={styles.targetHeading}><span>TARGET</span><b>01</b></div>
-      <div className={styles.targetClass}><strong>SHAHED-136</strong><span>GERAN-2</span></div>
+      <div className={styles.targetClass}><strong>SHAHED-238</strong><span>JET-POWERED</span></div>
       <div className={styles.targetStatus}><i />{status}</div>
       <div className={styles.assessment}>
         <span>{analyzed ? "ANALYSIS COMPLETE" : "SCENE ANALYSIS"}<b>{analyzed ? "✓" : "…"}</b></span>
-        <span>{zoneClear ? "ZONE SAFE · SIMULATED" : "ASSESSING ZONE"}<b>{zoneClear ? "✓" : "…"}</b></span>
+        <span>{zoneClear ? "REVIEW COMPLETE · DEMO" : "REVIEWING SCENE"}<b>{zoneClear ? "✓" : "…"}</b></span>
       </div>
       {hero && <span className={styles.simulation}>SCRIPTED DEMONSTRATION</span>}
     </div>}
@@ -253,12 +253,12 @@ export default function FlightSequence({ motionPaused = false, showOverlays = tr
   const showFallback = (playbackState === "blocked" || playbackState === "error") && !motionPaused && !reducedMotion;
 
   return <div ref={rootRef} className={`${styles.sequence} ${className}`.trim()} data-variant={hero ? "hero" : "demo"} data-playback={playbackState} role="group" aria-label="Illustrative drone-on-drone interception film">
-    <video ref={videoRef} className={styles.video} src={FILM} poster={POSTER} width="1920" height="1080" autoPlay={wantsPlayback} muted playsInline loop preload="metadata" aria-label="A fictional interceptor-camera film approaches a Shahed-136 / Geran-2. A centered crosshair and green square follow the aircraft. A scripted zone-clear message appears, the reticle turns red, and a brief impact transition ends the simulated interception. No live sensor data or real safety assessment."
+    <video ref={videoRef} className={styles.video} src={FILM} poster={POSTER} width="1920" height="1080" autoPlay={wantsPlayback} muted playsInline loop preload="metadata" aria-label="A fictional interceptor-camera film approaches a jet-powered Shahed-238. A centered crosshair and green square follow the aircraft. A scripted review-complete message appears, the reticle turns red, and a brief impact transition ends the simulated interception. No live sensor data or real safety assessment."
       onPlaying={() => { setHasVideoFrame(true); setPlaybackState("playing"); }}
       onSeeked={() => { if (videoRef.current?.readyState >= 2 && !reducedMotion) setHasVideoFrame(true); }}
       onPause={() => setPlaybackState(state => reducedMotion ? "reduced-motion" : state === "blocked" || state === "error" ? state : "paused")}
       onError={() => setPlaybackState("error")} />
-    {showPoster && <img className={styles.poster} src={POSTER} alt="A Shahed-136 / Geran-2 silhouette seen from a fictional interceptor camera in a cloud corridor" fetchPriority={hero ? "high" : "auto"} decoding="async" draggable="false" />}
+    {showPoster && <img className={styles.poster} src={POSTER} alt="A jet-powered Shahed-238 silhouette seen from a fictional interceptor camera in a cloud corridor" fetchPriority={hero ? "high" : "auto"} decoding="async" draggable="false" />}
     {showOverlays && <TrackingOverlay track={track} frame={frame} size={size} hero={hero} />}
     {showFallback && <button className={styles.playButton} type="button" onClick={playFromGesture}><span aria-hidden="true">▷</span>{playbackState === "error" ? "Retry film" : "Play film"}</button>}
   </div>;
