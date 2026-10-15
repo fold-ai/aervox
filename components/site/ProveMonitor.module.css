@@ -30,3 +30,27 @@
   .viewControls { gap: 14px; }
   .caption .expand { gap: 8px; }
 }
+.interface .heading { font-size: 17px; }
+.hostileLabel { fill: #e9a399; font: 9px ui-monospace, monospace; letter-spacing: 1.5px; }
+.toolIcon { fill: #d5ddda; font-size: 23px; }
+.svgButton { cursor: pointer; outline: none; }
+.hitArea { fill: transparent; stroke: transparent; stroke-width: 1; }
+.svgButton:hover > .hitArea { fill: #d2dfd113; stroke: #dce8e65c; }
+.svgButton[aria-pressed="true"] > .hitArea { fill: #c5d6cb15; stroke: #c5d6cb66; }
+.svgButton:focus-visible > .hitArea { stroke: #ffffff; stroke-width: 2; fill: #dce8e61c; }
+.svgButton[aria-disabled="true"] { opacity: .3; cursor: default; }
+.caption > span { font: 10px/1.5 ui-monospace, monospace; color: #626865; }
+.dialog { padding: 0; border: 1px solid #59605d; background: #111517; color: #e5e9e6; width: min(1320px, 96vw); max-width: 96vw; max-height: 94dvh; overflow: auto; }
+.dialog::backdrop { background: #070b0cd9; }
+.dialogBar { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 8px 18px; border-bottom: 1px solid #343b3f; font: 11px/1.5 ui-monospace, monospace; }
+.dialogBar button { min-height: 44px; background: transparent; color: #eef1ed; border: 0; padding: 0 4px; font: inherit; cursor: pointer; }
+.dialogBar button:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.dialogBar button span { margin-left: 18px; font-size: 22px; }
+.dialogCanvas { overflow-x: auto; overscroll-behavior-x: contain; }
+.dialogCanvas .interface { width: 100%; min-width: 860px; height: auto; aspect-ratio: 1000 / 620; }
+.dialogHint { padding: 12px 18px; margin: 0; color: #b0bab5; font: 11px/1.6 ui-monospace, monospace; }
+@media (max-width: 600px) {
+  .caption > span { max-width: 170px; font-size: 9px; }
+  .dialogBar { padding-inline: 10px; font-size: 9px; }
+  .dialogBar button span { margin-left: 5px; }
+}
