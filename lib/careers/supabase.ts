@@ -23,6 +23,8 @@ type Application = {
   id: string; roleSlug: string; roleTitle: string; fullName: string; email: string;
   location: string; availability: string; statement: string; resumeUrl: string;
   portfolioUrl: string; resume: File | null;
+  usWorkAuthorization: string; usSponsorship: string; workArrangement: string;
+  motivation: string; roleQuestion: string; roleResponse: string;
 };
 
 export async function saveCareerApplication(application: Application, ip: string) {
@@ -40,9 +42,12 @@ export async function saveCareerApplication(application: Application, ip: string
       id: application.id, role_slug: application.roleSlug, role_title: application.roleTitle,
       full_name: application.fullName, email: application.email, location: application.location,
       availability: application.availability || null, statement: application.statement,
+      us_work_authorization: application.usWorkAuthorization, us_sponsorship: application.usSponsorship,
+      work_arrangement: application.workArrangement, motivation: application.motivation,
+      role_question: application.roleQuestion, role_response: application.roleResponse,
       resume_url: application.resumeUrl || null, portfolio_url: application.portfolioUrl || null,
       resume_path: resumePath, resume_filename: application.resume?.name.slice(0, 180) || null,
-      ip_hash: ipHash, consent_version: "2026-10-14",
+      ip_hash: ipHash, consent_version: "2026-10-14-v2",
     } }) });
   } catch {
     // An uncertain network outcome may already have committed the record.

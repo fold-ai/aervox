@@ -4,6 +4,7 @@ import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
 import CareerApplicationForm from "@/components/site/CareerApplicationForm";
 import { careerRoles, getCareerRole, getCareerTeam, getHiringStage } from "@/lib/careers/roles";
 import { careersConfigured } from "@/lib/careers/supabase";
+import { careerProfiles } from "@/lib/careers/profiles";
 import styles from "../careers.module.css";
 
 export const dynamicParams = false;
@@ -21,6 +22,7 @@ export default async function CareerRolePage({ params }) {
   if (!role) notFound();
   const team = getCareerTeam(role.team);
   const stage = getHiringStage(role.stage);
+  const profile = careerProfiles[role.slug];
   return <div className={styles.page}>
     <SiteHeader theme="light" />
     <main id="main">
@@ -34,9 +36,13 @@ export default async function CareerRolePage({ params }) {
         <aside className={styles.roleAside}><span className={styles.label}>THE ROLE</span><dl><div><dt>TEAM</dt><dd>{team.label}</dd></div><div><dt>HIRING PHASE</dt><dd>{stage.label}</dd></div><div><dt>EXPERIENCE</dt><dd>{role.experience}</dd></div><div><dt>LOCATION</dt><dd>U.S. / Ukraine office locations under review. Work arrangements and travel discussed by role.</dd></div><div><dt>COMPENSATION</dt><dd>Equity participation. Written terms discussed during hiring.</dd></div></dl><Link href="/careers#process" className={styles.textLink}>How we hire<Arrow /></Link></aside>
         <div className={styles.roleCopy}>
           <div><span className={styles.label}>01 / OWNERSHIP</span><h2>What you will own.</h2><p>{role.ownership}</p>{role.stage > 1 && <p className={styles.fine}>This role is part of our {stage.label.toLowerCase()}. We welcome expressions of interest as the program develops.</p>}</div>
-          <div><span className={styles.label}>02 / SKILLS</span><h2>What you bring.</h2><ul>{role.requirements.map(item => <li key={item}>{item}</li>)}</ul></div>
-          {!!role.preferred.length && <div><span className={styles.label}>03 / ADDITIONAL EXPERIENCE</span><h2>Useful experience.</h2><ul>{role.preferred.map(item => <li key={item}>{item}</li>)}</ul></div>}
-          <div><span className={styles.label}>WORKING TOGETHER</span><p>We look for independent ownership, clear written communication, practical judgment and honest reporting of limitations and test results. Role-specific access requirements and field responsibilities will be discussed during the process.</p></div>
+          <div><span className={styles.label}>02 / EXPECTATIONS</span><h2>What we expect from you.</h2><ul>{profile.expectations.map(item => <li key={item}>{item}</li>)}</ul></div>
+          <div><span className={styles.label}>03 / RESPONSIBILITIES</span><h2>What you will do.</h2><ul>{profile.responsibilities.map(item => <li key={item}>{item}</li>)}</ul></div>
+          <div><span className={styles.label}>04 / REQUIRED EXPERIENCE</span><h2>What you bring.</h2><ul>{role.requirements.map(item => <li key={item}>{item}</li>)}</ul></div>
+          {!!role.preferred.length && <div><span className={styles.label}>05 / PREFERRED EXPERIENCE</span><h2>Useful, not essential.</h2><ul>{role.preferred.map(item => <li key={item}>{item}</li>)}</ul></div>}
+          <div><span className={styles.label}>{role.preferred.length ? "06" : "05"} / SUCCESS IN THE ROLE</span><h2>What good looks like.</h2><ul>{profile.outcomes.map(item => <li key={item}>{item}</li>)}</ul></div>
+          <div className={styles.discussion}><span className={styles.label}>YOUR EXPERIENCE</span><h2>A conversation about your work.</h2><p>{profile.discussion}</p><p className={styles.fine}>Use a non-confidential example. We care about your own contribution, the decisions you made and the evidence behind the outcome.</p></div>
+          <div><span className={styles.label}>WORKING AT ACTPROVE</span><p>We are an early-stage, founder-led company. Expect hands-on work, changing priorities and direct responsibility for a clearly defined area. Write down decisions, raise risks early and distinguish demonstrated results from assumptions.</p><p className={styles.fine}>The experience range is a guide to scope and independence. Equivalent practical experience is welcome; required professional authorizations still apply. Hiring phases describe our plan, not 58 immediate openings. Location, employment terms and any role-specific access or field requirements are discussed before an offer.</p><p className={styles.fine}>Need an adjustment to the application or interview process? Contact <a href="mailto:contact@actprove.com?subject=Careers%20accessibility">contact@actprove.com</a>.</p></div>
         </div>
       </section>
       <section id="apply" className={styles.applicationSection} aria-labelledby="apply-title">

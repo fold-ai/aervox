@@ -68,6 +68,12 @@
 .applicationForm textarea { resize: vertical; line-height: 1.6; }
 .applicationForm ::placeholder { color: #7a7d77; opacity: 1; }
 .fullField { grid-column: 1 / -1; }
+.formSection { border-top: 1px solid var(--career-rule); padding-top: 22px; margin-top: 10px; }
+.formSection:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.page .formSection h3 { font: 11px/1.5 ui-monospace, SFMono-Regular, monospace; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 12px; }
+.formSection p { font-size: 12px; line-height: 1.7; }
+.discussion { border-top: 1px solid var(--career-rule); padding-top: 30px; }
+.applicationForm label { line-height: 1.6; }
 .fieldHint { font-size: 11px; color: var(--career-muted); font-weight: 300; }
 .fileInput { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 18px; border: 1px dashed #10120f60; min-height: 60px; padding: 15px; margin-top: 10px; font-size: 12px; overflow-wrap: anywhere; }
 .fileInput input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; }

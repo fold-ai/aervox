@@ -43,7 +43,7 @@ export default function CareersPage() {
           <li><span>05</span><h3>References and decision</h3><p>We use independent interview feedback and role-specific criteria. References are checked with your consent. We aim to respond within a few days of the final meeting.</p></li>
           <li><span>06</span><h3>Offer and onboarding</h3><p>Agree written terms, responsibilities and equity participation. Onboarding covers secure access, the platform, lab and field safety, a mentor and your first owned project.</p></li>
         </ol>
-        <div className={styles.processNote}><span className={styles.label}>WHAT WE LOOK FOR</span><p>Depth in the role. Practical judgment. Ownership. Clear communication. Technical evaluation is led by the CTO, a relevant lead or an invited technical expert; the founder evaluates leadership and mission alignment.</p></div>
+        <div className={styles.processNote}><span className={styles.label}>WHAT WE LOOK FOR</span><p>Depth in the role. Practical judgment. Ownership. Clear communication. The founder and relevant technical reviewers assess evidence against the role requirements. Specialist advisers may join where needed. We discuss your own contribution, how you verified the outcome and what you learned when something did not work.</p></div>
       </section>
 
       <section id="apply" className={styles.applicationSection} aria-labelledby="application-title">
