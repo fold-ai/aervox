@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styles from './DetectVisual.module.css';
+import monitor from './ProveMonitor.module.css';
 
 const labels = ['Assembly hall', 'Storage building', 'Office building', 'Storage vessels', 'Loading yard'];
 const ids = ['B-01','B-02','B-03','S-01','Y-01'];
@@ -58,20 +59,22 @@ function Scene({ inactive = false }) {
   const replay=()=>{playback.current.time=0;setPaused(false);};
   const done=frame.time>=22;
   return <div className={styles.workspace}>
-    <header className={styles.header}><strong>◭ <span>DETECT-1</span></strong><span>SCENE UNDERSTANDING</span><small>FICTIONAL CAMPUS / 01</small></header>
+    <header className={styles.header}><img src="/actprove-wordmark.png" alt="Actprove" width="900" height="90" /><strong>DETECT-1</strong><span>PERCEPTION WORKSPACE</span><small>FICTIONAL DEMO</small></header>
+    <div className={styles.workArea}>
     <div className={styles.scene} ref={host}>
       <canvas ref={canvas} aria-label="Illustrative first-person aerial approach to a fictional industrial campus" />
       {state==='loading'&&<div className={styles.loading}>Preparing scene<span>DETECT-1 / Concept study</span></div>}
       {state==='error'&&<div className={styles.loading}>3D preview unavailable<span>Use a browser with WebGL to explore this concept.</span></div>}
       <div className={styles.topline}><span>01 / ONBOARD VIEW</span><span>{frame.time<5?'OBSERVING':frame.time<18?'BUILDING CONTEXT':'OBSERVATIONS READY'}</span></div>
       {state==='ready'&&showLabels&&frame.points.map((point,i)=>point.visible&&(frame.time>2+i*2.2||selected===i)&&<button key={ids[i]} className={styles.marker} style={{left:`${point.x}%`,top:`${point.y}%`}} aria-label={`Inspect ${labels[i]}`} aria-pressed={selected===i} onClick={()=>setSelected(i)}><i/>{ids[i]}<span>{labels[i]}</span></button>)}
-      <div className={styles.sceneTitle} aria-hidden="true"><span>PERCEPTION, IN CONTEXT.</span><strong>DETECT-1</strong></div>
+      <div className={styles.sceneSource}>ONBOARD VIEW <span>INDUSTRIAL CAMPUS / 01</span></div>
+      <div className={styles.timeline}><span style={{transform:`scaleX(${frame.time/22})`}}/></div>
+    </div>
       <aside className={styles.observation} aria-label="Selected observation">
-        <div><span>OBSERVATION</span><span>{ids[selected]}</span></div>
-        <h3>{labels[selected]}</h3><p>{descriptions[selected]}</p>
+        <div><span>SELECTED / {ids[selected]}</span></div>
+        <h3>{labels[selected]}</h3><span className={styles.reviewStatus}><i/>Illustrative observation</span><p>{descriptions[selected]}</p>
         <dl><div><dt>Class</dt><dd>{types[selected]}</dd></div><div><dt>Source</dt><dd>Illustrative model</dd></div></dl>
       </aside>
-      <div className={styles.timeline}><span style={{transform:`scaleX(${frame.time/22})`}}/></div>
     </div>
     <div className={styles.toolbar}>
       <div className={styles.layers} aria-label="Scene layers">{[['Contours',structures,setStructures],['Labels',showLabels,setShowLabels],['Scan',scan,setScan]].map(([label,on,set])=><button key={label} type="button" aria-pressed={on} onClick={()=>set(v=>!v)}><i/>{label}</button>)}</div>
@@ -82,11 +85,20 @@ function Scene({ inactive = false }) {
   </div>;
 }
 
+function MonitorScreen({ inactive }) {
+  const viewport=useRef(null);const [scale,setScale]=useState(1);
+  useEffect(()=>{const observer=new ResizeObserver(([entry])=>setScale(entry.contentRect.width/1000));observer.observe(viewport.current);return()=>observer.disconnect();},[]);
+  return <div ref={viewport} className={styles.viewport}><div className={styles.scaledScreen} style={{transform:`scale(${scale})`}}><Scene inactive={inactive}/></div></div>;
+}
+
 export default function DetectVisual({className=''}) {
   const dialog=useRef(null);const [expanded,setExpanded]=useState(false);
-  return <figure className={`${styles.figure} ${className}`} data-system="detect-1">
-    <Scene inactive={expanded}/>
-    <figcaption><span>Fictional scene / illustrative observations</span><button type="button" onClick={()=>{setExpanded(true);dialog.current.showModal();}}>Explore scene <span aria-hidden="true">↗</span></button></figcaption>
+  return <figure className={`${monitor.figure} ${styles.figure} ${className}`} data-system="detect-1">
+    <div className={monitor.stage}><div className={monitor.device}>
+      <img className={monitor.hardware} src="/media/prove-1-field-monitor.webp" alt="DETECT-1 perception workspace on a graphite field monitor" width="1536" height="1024" loading="lazy" decoding="async" />
+      <div className={monitor.display}><MonitorScreen inactive={expanded}/></div>
+    </div></div>
+    <figcaption className={monitor.caption}><span>DETECT-1 / Scene understanding concept.</span><button type="button" className={monitor.expand} onClick={()=>{setExpanded(true);dialog.current.showModal();}}>Inspect interface <span aria-hidden="true">↗</span></button></figcaption>
     <dialog ref={dialog} className={styles.dialog} aria-label="Explore DETECT-1 scene" onClose={()=>setExpanded(false)}>
       <div className={styles.dialogBar}><span>DETECT-1 / PERCEPTION CONCEPT</span><button type="button" onClick={()=>dialog.current.close()}>Close scene ×</button></div>
       {expanded&&<Scene/>}
