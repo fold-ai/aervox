@@ -5,6 +5,7 @@ import InterceptionFilm from "./InterceptionFilm";
 import VistaVisual from "./VistaVisual";
 import ProveMonitor from "./ProveMonitor";
 import DetectVisual from "./DetectVisual";
+import ConnectionVisual from "./ConnectionVisual";
 import styles from "./SystemVisual.module.css";
 
 const names = {
@@ -52,6 +53,7 @@ export default function SystemVisual({ type = "act-1", compact = false, classNam
   if (kind === "vista-1") return <VistaVisual compact={compact} className={className} />;
   if (kind === "prove-1") return <ProveMonitor compact={compact} className={className} />;
   if (kind === "detect-1") return <DetectVisual className={className} />;
+  if (kind === "era-1" || kind === "arca-1") return <ConnectionVisual type={kind} compact={compact} className={className} />;
   const Illustration = Research;
   return <div className={`${styles.visual} ${compact ? styles.compact : ""} ${className}`} data-system={kind}>
     <svg viewBox="0 0 1000 650" role="img" aria-label={names[kind] || names["act-1"]} preserveAspectRatio="xMidYMid meet"><Illustration id={id} kind={kind} /></svg>
