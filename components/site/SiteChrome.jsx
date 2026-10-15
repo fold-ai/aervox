@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import wordmark from "@/public/actprove-wordmark.png";
 import styles from "./SiteChrome.module.css";
+import { policyLinks } from "@/lib/site-policy-links";
 
 const navigation = [
   { href: "/systems", label: "Systems" },
@@ -66,6 +67,8 @@ export function SiteFooter() {
       <div className={styles.footerNav}><span>EXPLORE</span><nav aria-label="Footer navigation">{navigation.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div>
       <div className={styles.footerConnect}><span>CONNECT</span><a href="mailto:contact@actprove.com">contact@actprove.com<Arrow diagonal /></a></div>
     </div>
+    <div className={styles.footerLegal}><Link href="/legal">LEGAL & PRIVACY<Arrow diagonal /></Link><nav aria-label="Legal and privacy">{policyLinks.map(policy => <Link key={policy.slug} href={`/legal/${policy.slug}`}>{policy.label}</Link>)}</nav></div>
+    <div className={styles.footerOperator}>ACTPROVE is operated by Menuo Inc., a Delaware corporation.</div>
     <div className={styles.footerBottom}><span>© 2026 ACTPROVE DEFENSE TECHNOLOGIES</span><span>INTELLIGENCE ACROSS THE MISSION.</span><Link href="/">ACTPROVE<Arrow /></Link></div>
   </footer>;
 }

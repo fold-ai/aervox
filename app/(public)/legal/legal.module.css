@@ -1,0 +1,80 @@
+.page { background: #fff; color: #171918; --line: #d9dcda; }
+.page :focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+.page ::selection { color: #fff; background: #171918; }
+.main { padding: 0 clamp(24px, 5vw, 88px) 96px; max-width: 1600px; margin: 0 auto; }
+.eyebrow { display: block; color: #626963; font: 10px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .06em; }
+.intro { padding: 66px 0 48px; border-bottom: 1px solid #303630; }
+.page h1 { font-variation-settings: "wdth" 100; font-weight: 400; letter-spacing: -.055em; line-height: 1.02; max-width: 18ch; }
+.intro h1 { font-size: clamp(48px, 6.5vw, 100px); margin: 42px 0 38px; }
+.introBottom { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.page p { color: #565d57; font-size: 16px; line-height: 1.75; max-width: 70ch; }
+.introBottom p { margin: 0; max-width: 48ch; }
+.policyGrid { display: grid; grid-template-columns: 1fr 1fr; }
+.policyCard { display: flex; flex-direction: column; color: inherit; text-decoration: none; padding: 36px 40px 32px 0; border-bottom: 1px solid var(--line); }
+.policyCard:nth-child(even) { border-left: 1px solid var(--line); padding-left: 40px; padding-right: 0; }
+.policyCard h2 { font-size: clamp(25px, 2.4vw, 35px); font-variation-settings: "wdth" 100; margin: 25px 0 15px; letter-spacing: -.035em; }
+.policyCard p { max-width: 48ch; margin: 0 0 25px; font-size: 15px; }
+.cardAction { display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 12px; margin-top: auto; }
+.cardAction svg { width: 20px; }
+.policyCard:hover h2 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.contactPanel { margin-top: 64px; padding: 32px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px; background: #f5f6f5; align-items: center; }
+.contactPanel h2 { font-size: 30px; font-variation-settings: "wdth" 100; letter-spacing: -.035em; margin: 18px 0; }
+.contactPanel p { font-size: 14px; margin: 0; }
+.contactPanel > a { display: flex; justify-content: space-between; align-items: center; gap: 15px; border-bottom: 1px solid #939993; padding: 14px 0; font-size: 15px; text-decoration: none; overflow-wrap: anywhere; }
+.documentHeader { padding: 40px 0 34px; border-bottom: 1px solid #303630; }
+.backLink { display: inline-flex; flex-direction: row-reverse; gap: 10px; align-items: center; font-size: 12px; text-decoration: none; margin-bottom: 44px; }
+.backLink svg { transform: rotate(180deg); width: 17px; }
+.documentHeader h1 { margin: 26px 0 24px; font-size: clamp(44px, 6vw, 86px); }
+.documentHeader > p { max-width: 65ch; font-size: 18px; margin-bottom: 34px; }
+.documentMeta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 30px; font: 10px/1.7 ui-monospace, SFMono-Regular, monospace; color: #626963; }
+.documentLayout { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 2fr); gap: clamp(40px, 7vw, 110px); padding-top: 45px; }
+.contents nav { position: sticky; top: 25px; }
+.contents .eyebrow { margin-bottom: 20px; }
+.contents a { display: flex; gap: 13px; font-size: 12px; color: #515953; text-decoration: none; padding: 8px 0; }
+.contents a:hover { color: #000; text-decoration: underline; text-underline-offset: 4px; }
+.contents a > span { color: #7a827c; font: 10px/1.9 ui-monospace, SFMono-Regular, monospace; }
+.article { min-width: 0; }
+.section { position: relative; padding: 0 0 34px; margin-bottom: 34px; border-bottom: 1px solid var(--line); scroll-margin-top: 26px; }
+.sectionNumber { display: block; font: 10px/1.5 ui-monospace, SFMono-Regular, monospace; color: #69716b; margin-bottom: 12px; }
+.section h2 { font-size: 28px; font-variation-settings: "wdth" 100; letter-spacing: -.035em; line-height: 1.2; margin-bottom: 22px; }
+.section ul { padding-left: 21px; color: #565d57; font-size: 16px; line-height: 1.75; }
+.section li + li { margin-top: 12px; }
+.tableWrap { overflow-x: auto; margin: 24px 0; }
+.tableWrap table { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.65; text-align: left; }
+.tableWrap th, .tableWrap td { padding: 17px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tableWrap thead th { background: #f4f5f4; font-weight: 500; font-size: 12px; }
+.tableWrap tbody th { font-weight: 400; width: 28%; min-width: 125px; color: #212721; }
+.tableWrap td { color: #565d57; min-width: 185px; }
+.relatedLinks { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 25px; }
+.relatedLinks a { display: inline-flex; align-items: center; gap: 10px; border-bottom: 1px solid #8a938b; padding-bottom: 4px; text-decoration: none; font-size: 13px; }
+.relatedLinks svg { flex-shrink: 0; width: 15px; height: 15px; }
+.documentEnd { display: flex; flex-wrap: wrap; gap: 25px; justify-content: space-between; }
+.documentEnd a { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; text-decoration: none; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 760px) {
+  .main { padding-bottom: 55px; }
+  .intro { padding-top: 40px; }
+  .introBottom, .contactPanel, .documentLayout { grid-template-columns: 1fr; gap: 24px; }
+  .intro h1 { font-size: clamp(43px, 10vw, 65px); }
+  .policyGrid { grid-template-columns: 1fr; }
+  .policyCard, .policyCard:nth-child(even) { padding: 28px 0; border-left: 0; }
+  .policyCard h2 { margin-top: 17px; }
+  .contactPanel { padding: 24px; margin-top: 40px; }
+  .contactPanel h2 { font-size: 26px; }
+  .documentHeader h1 { font-size: clamp(40px, 10vw, 65px); overflow-wrap: anywhere; }
+  .documentHeader > p { font-size: 16px; }
+  .documentLayout { padding-top: 28px; gap: 36px; }
+  .contents nav { position: static; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+  .contents a { padding: 9px 0; font-size: 13px; }
+  .section h2 { font-size: 25px; }
+  .page p, .section ul { font-size: 15px; }
+  .tableWrap th, .tableWrap td { padding: 13px 10px; }
+}
+@media print {
+  .page > header, .page > footer, .contents, .backLink, .documentEnd { display: none; }
+  .main { padding: 0; }
+  .documentLayout { display: block; }
+  .documentHeader { padding-top: 0; }
+  .section { break-inside: avoid; }
+  .tableWrap { overflow: visible; }
+}

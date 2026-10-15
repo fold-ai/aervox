@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { Arrow } from "./SiteChrome";
 import { careerRoles } from "@/lib/careers/roles";
 import { careerQuestions, openApplicationQuestion } from "@/lib/careers/questions";
@@ -59,7 +60,8 @@ export default function CareerApplicationForm({ roleSlug = "", configured = fals
       <label className={styles.fullField}>What relevant technical or professional experience would you bring?<textarea name="statement" rows={5} minLength={20} maxLength={5000} required placeholder="Describe the systems, projects or work most relevant to this role, your own contribution and the tools or methods you used." /><span className={styles.fieldHint}>Engineering, research, operations, contract work and substantial independent projects are all relevant when they demonstrate the required skills.</span></label>
       <label className={styles.fullField}>{careerQuestions[selectedRole] || openApplicationQuestion}<textarea key={selectedRole} name="roleResponse" rows={5} minLength={20} maxLength={3000} required placeholder="Explain the problem, your decisions, your own contribution and the result." /><span className={styles.fieldHint}>This question follows your selected role. Please keep the example non-confidential.</span></label>
       <div className={styles.honeypot} aria-hidden="true"><label>Company website<input name="companyWebsite" tabIndex={-1} autoComplete="off" /></label></div>
-      <label className={`${styles.consent} ${styles.fullField}`}><input type="checkbox" name="consent" value="yes" required /><span>I agree that ACTPROVE may store and review my application and resume for recruitment, and contact me about relevant roles.</span></label>
+      <p className={`${styles.fine} ${styles.fullField}`}>Your application and resume are used for recruitment. Unsuccessful or withdrawn applications are retained for up to 6 months after the last recruitment contact, subject to legal retention requirements. <Link href="/legal/retention" target="_blank" rel="noopener noreferrer">Retention details (opens in a new tab)</Link>. This acknowledgement is not consent to marketing.</p>
+      <label className={`${styles.consent} ${styles.fullField}`}><input type="checkbox" name="consent" value="yes" required /><span>I have read the <Link href="/legal/applicants" target="_blank" rel="noopener noreferrer">Applicant Privacy Notice (opens in a new tab)</Link> and understand how Menuo Inc. handles my application for ACTPROVE.</span></label>
       <div className={`${styles.formBottom} ${styles.fullField}`}><button type="submit" className={styles.primaryButton}>{state === "sending" ? "Submitting…" : "Submit application"}<Arrow diagonal /></button><p>Questions or a data-removal request?<br /><a href="mailto:contact@actprove.com?subject=Careers%20inquiry">contact@actprove.com</a></p></div>
     </fieldset>
     {message && <p className={styles.formError} role="alert">{message}</p>}

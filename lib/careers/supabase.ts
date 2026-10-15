@@ -1,4 +1,5 @@
 import "server-only";
+import { policyVersion } from "../site-policies";
 import { createHmac, randomUUID } from "node:crypto";
 import { ApplicationError } from "./validation.mjs";
 
@@ -47,7 +48,7 @@ export async function saveCareerApplication(application: Application, ip: string
       role_question: application.roleQuestion, role_response: application.roleResponse,
       resume_url: application.resumeUrl || null, portfolio_url: application.portfolioUrl || null,
       resume_path: resumePath, resume_filename: application.resume?.name.slice(0, 180) || null,
-      ip_hash: ipHash, consent_version: "2026-10-14-v2",
+      ip_hash: ipHash, consent_version: policyVersion,
     } }) });
   } catch {
     // An uncertain network outcome may already have committed the record.
