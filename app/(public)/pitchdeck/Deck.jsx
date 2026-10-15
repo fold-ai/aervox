@@ -93,7 +93,7 @@ export default function Deck() {
       <section className="slide">
         <h2>Next on the roadmap</h2>
         <div className="stages">
-          <div><h3>ARCA-1</h3><p>Planned 3-6 metre radar and camera system for drone detection. Its 50 km range is a design goal, not a validated capability.</p></div>
+          <div><h3>ARCA-1</h3><p>Planned radar and camera sensing for drone detection at distance, flight-pattern analysis and position prediction. Range and prediction accuracy require validation.</p></div>
           <div><h3>DETECT-1</h3><p>Planned onboard perception for long-range drones, designed to identify objects of interest and surface changing conditions to operators.</p></div>
           <div><h3>ERA-1</h3><p>Planned hardware adapter for older or incompatible equipment. It would relay available status and telemetry into the shared PROVE-1 operational view.</p></div>
         </div>
