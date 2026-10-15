@@ -221,6 +221,3 @@
   .contactLink { gap: 55px; min-height: 52px; }
 }
 @media (prefers-reduced-motion: reduce) { .productNav svg, .textLink svg, .roadmapLink svg, .relatedLink > svg { transition: none; } }
-
-/* Concept diagrams keep their controls and explanation in the document flow. */
-.productArt:has([data-connection-concept]) { height:auto; aspect-ratio:auto; }
