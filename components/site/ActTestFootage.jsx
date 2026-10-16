@@ -21,8 +21,8 @@ export default function ActTestFootage() {
         aria-label="ACT-1 drone detection and tracking test recording"
         aria-describedby="act-test-caption"
       >
-        <source src="/media/act-1-testing/detection-tracking-test.mp4" type="video/mp4" />
-        Your browser does not support video playback. <a href="/media/act-1-testing/detection-tracking-test.mp4">Open the test recording.</a>
+        <source src="/media/act-1-testing/detection-tracking-test-silent.mp4" type="video/mp4" />
+        Your browser does not support video playback. <a href="/media/act-1-testing/detection-tracking-test-silent.mp4">Open the test recording.</a>
       </video>
       <figcaption id="act-test-caption">Recorded system view with a tracking marker, crosshair and status overlay. Original 4:3 recording.</figcaption>
     </figure>
