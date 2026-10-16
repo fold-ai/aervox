@@ -1,13 +1,10 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
 import { companyIdentity, policies } from "@/lib/site-policies";
 import styles from "./legal.module.css";
 
-export const metadata = {
-  title: "Legal & Privacy | ACTPROVE",
-  description: "Privacy, recruitment data, retention, cookies and website policies for ACTPROVE, operated by Menuo Inc.",
-  alternates: { canonical: "/legal" },
-};
+export const metadata = pageMetadata({"title": "Legal & Privacy | ACTPROVE", "description": "Privacy, recruitment data, retention, cookies and website policies for ACTPROVE, operated by Menuo Inc.", "path": "/legal"});
 
 export default function LegalIndex() {
   return <div className={styles.page}>

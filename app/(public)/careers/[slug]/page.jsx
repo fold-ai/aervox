@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { pageMetadata, breadcrumbs } from "@/lib/seo";
+import StructuredData from "@/components/site/StructuredData";
 import { notFound } from "next/navigation";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
 import CareerApplicationForm from "@/components/site/CareerApplicationForm";
@@ -13,7 +15,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const role = getCareerRole(slug);
   if (!role) return {};
-  return { title: `${role.title} | Careers | Actprove`, description: role.ownership, alternates: { canonical: `/careers/${role.slug}` } };
+  return pageMetadata({ title: `${role.title} | ACTPROVE Careers`, description: `${getHiringStage(role.stage).label} at ACTPROVE. ${role.ownership}`, path: `/careers/${role.slug}` });
 }
 
 export default async function CareerRolePage({ params }) {
@@ -24,6 +26,7 @@ export default async function CareerRolePage({ params }) {
   const stage = getHiringStage(role.stage);
   const profile = careerProfiles[role.slug];
   return <div className={styles.page}>
+    <StructuredData data={breadcrumbs([["Home", "/"], ["Careers", "/careers"], [role.title, `/careers/${role.slug}`]])} />
     <SiteHeader theme="light" />
     <main id="main">
       <section className={styles.roleHero} aria-labelledby="role-title">

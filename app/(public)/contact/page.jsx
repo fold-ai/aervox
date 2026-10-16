@@ -1,12 +1,9 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
 import styles from "./contact.module.css";
 
-export const metadata = {
-  title: "Contact | Actprove",
-  description: "Contact Actprove about aircraft integration, engineering collaboration, or investment. Email contact@actprove.com.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata = pageMetadata({"title": "Contact ACTPROVE | Partnerships & Engineering", "description": "Contact ACTPROVE about defense technology, equipment integration, engineering partnerships and careers at contact@actprove.com.", "path": "/contact"});
 
 const systemNames = new Map([
   ["act-1", "ACT-1"],

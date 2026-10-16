@@ -1,3 +1,5 @@
+import StructuredData from "@/components/site/StructuredData";
+import { pageMetadata, absoluteUrl, breadcrumbs } from "@/lib/seo";
 import Link from "next/link";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
 import CareersDirectory from "@/components/site/CareersDirectory";
@@ -6,14 +8,12 @@ import { careerRoles } from "@/lib/careers/roles";
 import { careersConfigured } from "@/lib/careers/supabase";
 import styles from "./careers.module.css";
 
-export const metadata = {
-  title: "Careers | Actprove",
-  description: "Build connected defense systems at ACTPROVE. Explore engineering, leadership, testing and operations roles, learn how we hire and apply.",
-  alternates: { canonical: "/careers" },
-};
+export const metadata = pageMetadata({"title": "Defense Tech Careers & Engineering Roles | ACTPROVE", "description": "Explore defense technology careers at ACTPROVE in software, computer vision, embedded systems, hardware and operations. Review role profiles and apply directly.", "path": "/careers"});
 
 export default function CareersPage() {
   return <div className={styles.page}>
+    <StructuredData data={breadcrumbs([["Home", "/"], ["Careers", "/careers"]])} />
+    <StructuredData data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: "ACTPROVE careers and role profiles", url: absoluteUrl("/careers"), description: "Current priorities and future role profiles across the ACTPROVE hiring plan.", mainEntity: { "@type": "ItemList", itemListElement: careerRoles.map((role, index) => ({ "@type": "ListItem", position: index + 1, name: role.title, url: absoluteUrl(`/careers/${role.slug}`) })) } }} />
     <SiteHeader theme="light" />
     <main id="main">
       <section className={styles.hero} aria-labelledby="careers-title">

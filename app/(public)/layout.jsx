@@ -1,3 +1,4 @@
+import { SITE_URL, siteDescription } from "@/lib/seo";
 import { Archivo, IBM_Plex_Sans } from "next/font/google";
 import "./site.css";
 
@@ -16,16 +17,9 @@ const body = IBM_Plex_Sans({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://actprove.com"),
-  title: "Actprove Defense Technologies",
-  description:
-    "Actprove develops onboard intelligence, ground software, sensing and equipment integration for connected defense systems.",
-  openGraph: {
-    title: "Actprove Defense Technologies",
-    description:
-      "Onboard intelligence for strike and interceptor drones, ground software for operators, and connected sensing and equipment. ACT-1 and PROVE-1 are in development.",
-    type: "website"
-  }
+  metadataBase: new URL(SITE_URL),
+  title: "ACTPROVE | Defense Technology & Connected Systems",
+  description: siteDescription,
 };
 
 export const viewport = {

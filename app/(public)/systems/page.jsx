@@ -1,14 +1,11 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { SiteHeader, SiteFooter, Arrow } from "@/components/site/SiteChrome";
 import SystemVisual from "@/components/site/SystemVisual";
 import { systems } from "@/lib/site-systems";
 import styles from "./systems.module.css";
 
-export const metadata = {
-  title: "Systems - Actprove Defense Technologies",
-  description: "Explore Actprove’s onboard intelligence, ground software and product directions: ACT-1, PROVE-1, DETECT-1, ARCA-1, ERA-1 and VISTA-1.",
-  alternates: { canonical: "/systems" },
-};
+export const metadata = pageMetadata({"title": "Defense Technology Systems | ACTPROVE", "description": "Explore ACT-1 drone intelligence, PROVE-1 ground software and planned DETECT-1, ARCA-1, ERA-1 and VISTA-1 systems.", "path": "/systems"});
 
 export default function SystemsPage() {
   return <div className={styles.page}>

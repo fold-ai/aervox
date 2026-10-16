@@ -1,12 +1,10 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import PerceptionDemo from "@/components/site/PerceptionDemo";
 import { SiteHeader, SiteFooter } from "@/components/site/SiteChrome";
 import styles from "./platform.module.css";
 
-export const metadata = {
-  title: "Connected Platform | Actprove",
-  description: "Explore Actprove’s connected platform concept: onboard ACT-1 intelligence, shared observations, and PROVE-1 operator review.",
-};
+export const metadata = pageMetadata({"title": "Connected Defense Platform | ACTPROVE", "description": "Explore the ACTPROVE platform: ACT-1 onboard perception, PROVE-1 ground software and planned connections across sensors, equipment and operators.", "path": "/platform"});
 
 const workflow = [
   { number: "01", label: "ON THE AIRCRAFT", name: "ACT-1", copy: "Bring sensor inputs and onboard perception together, close to the source. ACT-1 is being developed as the intelligence layer within the aircraft.", detail: "Sensor inputs / Onboard compute", href: "/systems/act-1", link: "Explore ACT-1" },

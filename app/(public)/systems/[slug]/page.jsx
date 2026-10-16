@@ -1,3 +1,5 @@
+import { pageMetadata, breadcrumbs } from "@/lib/seo";
+import StructuredData from "@/components/site/StructuredData";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader, SiteFooter, Arrow } from "@/components/site/SiteChrome";
@@ -15,12 +17,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const system = getSystem(slug);
   if (!system) return { title: "System not found - Actprove" };
-  return {
-    title: `${system.name} - ${system.category} | Actprove`,
-    description: `${system.summary} ${system.status}.`,
-    alternates: { canonical: `/systems/${system.slug}` },
-    openGraph: { title: `${system.name} - Actprove`, description: system.summary, type: "website" },
-  };
+  return pageMetadata({ title: `${system.name} - ${system.category} | ACTPROVE`, description: `${system.summary} ${system.status}.`, path: `/systems/${system.slug}` });
 }
 
 export default async function SystemPage({ params }) {
@@ -29,6 +26,7 @@ export default async function SystemPage({ params }) {
   if (!system) notFound();
   const related = getSystem(system.related);
   return <div className={styles.page}>
+    <StructuredData data={breadcrumbs([["Home", "/"], ["Systems", "/systems"], [system.name, `/systems/${system.slug}`]])} />
     <SiteHeader theme="light" />
     <main id="main">
       <section className={styles.productHero} aria-labelledby="product-title">

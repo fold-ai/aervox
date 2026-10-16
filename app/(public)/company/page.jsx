@@ -1,11 +1,9 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
 import styles from "./company.module.css";
 
-export const metadata = {
-  title: "Company | Actprove",
-  description: "Actprove develops onboard intelligence, ground software, and connected defense systems. Learn about its leadership, partnerships, and planned milestones.",
-};
+export const metadata = pageMetadata({"title": "About ACTPROVE | Defense Technology Company", "description": "Meet ACTPROVE, an early-stage defense technology company developing drone intelligence, ground software, sensing and equipment integration.", "path": "/company"});
 
 export default function CompanyPage() {
   return <div className={styles.page}>

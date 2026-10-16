@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
 import { getPolicy, policies, policyDate } from "@/lib/site-policies";
@@ -8,7 +9,7 @@ export function generateStaticParams() { return policies.map(({ slug }) => ({ sl
 export async function generateMetadata({ params }) {
   const policy = getPolicy((await params).slug);
   if (!policy) return {};
-  return { title: `${policy.title} | ACTPROVE`, description: policy.summary, alternates: { canonical: `/legal/${policy.slug}` } };
+  return pageMetadata({ title: `${policy.title} | ACTPROVE`, description: policy.summary, path: `/legal/${policy.slug}` });
 }
 
 export default async function PolicyPage({ params }) {
