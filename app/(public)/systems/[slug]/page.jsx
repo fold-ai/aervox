@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader, SiteFooter, Arrow } from "@/components/site/SiteChrome";
 import SystemVisual from "@/components/site/SystemVisual";
 import ProveHardware from "@/components/site/ProveHardware";
+import ActTestFootage from "@/components/site/ActTestFootage";
 import { systems, getSystem } from "@/lib/site-systems";
 import styles from "../systems.module.css";
 
@@ -44,6 +45,7 @@ export default async function SystemPage({ params }) {
       </section>
 
       {system.slug === "prove-1" && <ProveHardware />}
+      {system.slug === "act-1" && <ActTestFootage />}
 
       <section className={styles.capabilities} aria-labelledby="capabilities-title">
         <div className={styles.capabilityHeading}><span className={styles.smallSectionLabel}>02 / {system.stage === "research" ? "RESEARCH DIRECTIONS" : "CAPABILITY FOCUS"}</span><h2 id="capabilities-title">{system.stage === "research" ? "Questions worth exploring." : "Designed around the task."}</h2></div>

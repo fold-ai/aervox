@@ -1,0 +1,18 @@
+.section { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 8%; margin: 0 var(--gutter) 76px; padding-top: 40px; border-top: 1px solid var(--rule); scroll-margin-top: 32px; }
+.eyebrow, .duration { font: 10px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .04em; color: #606060; }
+.copy h2 { margin: 26px 0; font-size: clamp(36px, 4vw, 62px); line-height: 1.05; letter-spacing: -.045em; }
+.copy p { margin: 0 0 20px; max-width: 390px; color: #606060; font-size: 16px; line-height: 1.75; }
+.copy .context { font-size: 13px; }
+.duration { display: block; margin-top: 32px; }
+.figure { width: 100%; max-width: 720px; margin: 0; justify-self: end; }
+.video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; background: #111; object-fit: contain; }
+.video:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+.figure figcaption { margin-top: 14px; color: #606060; font-size: 12px; line-height: 1.6; }
+@media (max-width: 760px) {
+  .section { grid-template-columns: 1fr; gap: 28px; margin-bottom: 46px; padding-top: 28px; }
+  .copy h2 { font-size: 39px; margin: 21px 0; }
+  .copy p { font-size: 15px; }
+  .copy .context { font-size: 13px; }
+  .duration { margin-top: 23px; }
+  .figure { max-width: 100%; }
+}
