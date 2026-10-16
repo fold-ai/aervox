@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader, SiteFooter, Arrow } from "@/components/site/SiteChrome";
 import SystemVisual from "@/components/site/SystemVisual";
+import ProveHardware from "@/components/site/ProveHardware";
 import { systems, getSystem } from "@/lib/site-systems";
 import styles from "../systems.module.css";
 
@@ -41,6 +42,8 @@ export default async function SystemPage({ params }) {
         <div className={styles.smallSectionLabel}>01 / PURPOSE</div>
         <div className={styles.purposeGrid}><h2 id="purpose-title">{system.purposeTitle}</h2><div>{system.purpose.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div></div>
       </section>
+
+      {system.slug === "prove-1" && <ProveHardware />}
 
       <section className={styles.capabilities} aria-labelledby="capabilities-title">
         <div className={styles.capabilityHeading}><span className={styles.smallSectionLabel}>02 / {system.stage === "research" ? "RESEARCH DIRECTIONS" : "CAPABILITY FOCUS"}</span><h2 id="capabilities-title">{system.stage === "research" ? "Questions worth exploring." : "Designed around the task."}</h2></div>

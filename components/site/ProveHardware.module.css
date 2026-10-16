@@ -1,0 +1,34 @@
+.section { padding: 24px var(--gutter) 76px; scroll-margin-top: 32px; }
+.heading { display: grid; grid-template-columns: 1.3fr .7fr; gap: 8%; align-items: end; padding: 32px 0 38px; border-top: 1px solid var(--rule); }
+.eyebrow, .cardTop, .viewControls, .features { font: 10px/1.6 ui-monospace, SFMono-Regular, monospace; letter-spacing: .04em; }
+.eyebrow { color: #606060; }
+.heading h2 { margin: 22px 0 0; font-size: clamp(32px, 3.5vw, 54px); line-height: 1.08; letter-spacing: -.045em; }
+.heading > p { margin: 0; max-width: 360px; color: #606060; font-size: 15px; line-height: 1.7; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.card { display: flex; flex-direction: column; min-width: 0; }
+.cardTop { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; border-top: 1px solid var(--ink); padding: 17px 0 8px; }
+.cardTop > span:last-child { color: #707070; }
+.figure { margin: 0; }
+.image { aspect-ratio: 4 / 3; background: #fff; }
+.image img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.viewControls { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 12px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); color: #606060; }
+.viewControls > div { display: flex; gap: 4px; }
+.viewControls button { min-width: 56px; min-height: 44px; padding: 8px 14px; font: inherit; color: var(--ink); background: transparent; border: 1px solid transparent; cursor: pointer; }
+.viewControls button[aria-pressed="true"] { border-color: var(--ink); }
+.viewControls button:hover { background: #f3f3f3; }
+.viewControls button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.copy { padding-top: 27px; }
+.copy h3 { margin: 0 0 18px; font-size: clamp(26px, 2.5vw, 38px); line-height: 1.1; letter-spacing: -.04em; }
+.copy p { margin: 0 0 28px; color: #606060; font-size: 15px; line-height: 1.75; max-width: 560px; }
+.features { margin: auto 0 0; padding: 17px 0; border-top: 1px solid var(--rule); color: #606060; }
+.note { margin: 22px 0 0; font-size: 12px; line-height: 1.6; color: #707070; }
+@media (max-width: 760px) {
+  .section { padding-top: 6px; padding-bottom: 46px; }
+  .heading { grid-template-columns: 1fr; gap: 20px; padding-top: 25px; padding-bottom: 28px; }
+  .heading h2 { font-size: 35px; }
+  .grid { grid-template-columns: 1fr; gap: 36px; }
+  .cardTop { font-size: 9px; }
+  .copy { padding-top: 23px; }
+  .copy h3 { font-size: 30px; }
+  .viewControls { font-size: 9px; }
+}
