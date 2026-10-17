@@ -30,7 +30,7 @@ export default function CareersPage() {
       </section>
 
       <section id="roles" className={styles.rolesSection} aria-labelledby="roles-title">
-        <div className={styles.sectionTop}><div><span className={styles.label}>02 / OPPORTUNITIES</span><h2 id="roles-title">Find your place.</h2></div><p>Explore {careerRoles.length} role profiles across our hiring plan. Priority roles come first; later-stage roles are open for expressions of interest.</p></div>
+        <div className={styles.sectionTop}><div><span className={styles.label}>02 / OPPORTUNITIES</span><h2 id="roles-title">Find your place.</h2></div><p>We welcome applications across {careerRoles.length} role profiles. Priority and core-team candidates are reviewed first. Hiring is phased; future opportunities are expressions of interest, not immediate openings.</p></div>
         <CareersDirectory />
       </section>
 
@@ -50,7 +50,7 @@ export default function CareersPage() {
       </section>
 
       <section id="apply" className={styles.applicationSection} aria-labelledby="application-title">
-        <div className={styles.applicationIntro}><span className={styles.label}>04 / APPLY</span><h2 id="application-title">Start here.</h2><p>Choose a role or send an open application. Show us what you have built and what you want to own next.</p><p className={styles.fine}>Send only work you are permitted to share. Please leave out classified material, controlled technical data and confidential information from previous employers.</p><a className={styles.textLink} href="mailto:contact@actprove.com?subject=Careers%20inquiry">Careers questions<Arrow diagonal /></a></div>
+        <div className={styles.applicationIntro}><span className={styles.label}>04 / APPLY</span><h2 id="application-title">Start here.</h2><p>Choose a role or send an open application. We review candidates against the work we need next and the available hiring budget. Show us what you have built and what you want to own.</p><p className={styles.fine}>Send only work you are permitted to share. Please leave out classified material, controlled technical data and confidential information from previous employers.</p><a className={styles.textLink} href="mailto:contact@actprove.com?subject=Careers%20inquiry">Careers questions<Arrow diagonal /></a></div>
         <CareerApplicationForm configured={careersConfigured()} />
       </section>
     </main>

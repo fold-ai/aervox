@@ -15,7 +15,7 @@ function application() {
 test("normalizes a complete application and resolves its listed role", async () => {
   const result = await validateApplication(application());
   assert.equal(result.email, "test@example.com");
-  assert.equal(result.roleTitle, "Chief Technology Officer");
+  assert.equal(result.roleTitle, "Hands-on Chief Technology Officer");
   assert.equal(result.roleQuestion, careerQuestions["chief-technology-officer"]);
   assert.equal(result.usWorkAuthorization, "yes");
   assert.match(result.roleResponse, /verified/);
