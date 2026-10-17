@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Arrow } from "./SiteChrome";
 import { careerRoles } from "@/lib/careers/roles";
 import { careerQuestions, openApplicationQuestion } from "@/lib/careers/questions";
+import { applicantRetentionSummary } from "@/lib/careers/privacy";
 import styles from "@/app/(public)/careers/careers.module.css";
 
 export default function CareerApplicationForm({ roleSlug = "", configured = false }) {
@@ -42,7 +43,7 @@ export default function CareerApplicationForm({ roleSlug = "", configured = fals
     {!configured && <p className={styles.formNotice}>Online applications are being set up. For now, contact <a href="mailto:contact@actprove.com?subject=Career%20application">contact@actprove.com</a> about your role.</p>}
     <fieldset disabled={!configured || state === "sending"}>
       <legend className={styles.srOnly}>Your application details</legend>
-      <div className={`${styles.formSection} ${styles.fullField}`}><h3>01 / About you</h3><p>All fields are required unless marked optional. A PDF or a resume/profile link is sufficient.</p></div>
+      <div className={`${styles.formSection} ${styles.fullField}`}><h3>01 / About you</h3><p>Before entering your details, read our <Link href="/legal/applicants" target="_blank" rel="noopener noreferrer">Applicant Privacy Notice (opens in a new tab)</Link> for the information we collect, its purpose, recipients and retention. Our <Link href="/legal/recruitment" target="_blank" rel="noopener noreferrer">Recruitment Policy (opens in a new tab)</Link> explains the hiring process and candidate support.</p><p>All fields are required unless marked optional. A PDF or a resume/profile link is sufficient.</p></div>
       <label className={styles.fullField}>Role<select name="roleSlug" value={selectedRole} onChange={event => setSelectedRole(event.target.value)} required><option value="open-application">Open application</option>{careerRoles.map(role => <option value={role.slug} key={role.slug}>{role.title} / {role.team === "shared" ? "Platform & operations" : role.team === "leadership" ? "Leadership" : role.team.toUpperCase()}</option>)}</select></label>
       <label>Full name<input name="fullName" autoComplete="name" maxLength={120} required /></label>
       <label>Email<input name="email" type="email" autoComplete="email" maxLength={254} required /></label>
@@ -63,7 +64,7 @@ export default function CareerApplicationForm({ roleSlug = "", configured = fals
       <label className={styles.fullField}>What relevant technical or professional experience would you bring?<textarea name="statement" rows={5} minLength={20} maxLength={5000} required placeholder="Describe the systems, projects or work most relevant to this role, your own contribution and the tools or methods you used." /><span className={styles.fieldHint}>Engineering, research, operations, contract work and substantial independent projects are all relevant when they demonstrate the required skills.</span></label>
       <label className={styles.fullField}>{careerQuestions[selectedRole] || openApplicationQuestion}<textarea key={selectedRole} name="roleResponse" rows={5} minLength={20} maxLength={3000} required placeholder="Explain the problem, your decisions, your own contribution and the result." /><span className={styles.fieldHint}>This question follows your selected role. Please keep the example non-confidential.</span></label>
       <div className={styles.honeypot} aria-hidden="true"><label>Company website<input name="companyWebsite" tabIndex={-1} autoComplete="off" /></label></div>
-      <p className={`${styles.fine} ${styles.fullField}`}>Your application and resume are used for recruitment. Unsuccessful or withdrawn applications are retained for up to 6 months after the last recruitment contact, subject to legal retention requirements. <Link href="/legal/retention" target="_blank" rel="noopener noreferrer">Retention details (opens in a new tab)</Link>. This acknowledgement is not consent to marketing.</p>
+      <p className={`${styles.fine} ${styles.fullField}`}>Your application and resume are used for recruitment. {applicantRetentionSummary} <Link href="/legal/retention" target="_blank" rel="noopener noreferrer">Retention details (opens in a new tab)</Link>. This acknowledgement is not consent to marketing or authorization for a third-party background report.</p>
       <label className={`${styles.consent} ${styles.fullField}`}><input type="checkbox" name="consent" value="yes" required /><span>I have read the <Link href="/legal/applicants" target="_blank" rel="noopener noreferrer">Applicant Privacy Notice (opens in a new tab)</Link> and understand how Menuo Inc. handles my application for ACTPROVE.</span></label>
       <div className={`${styles.formBottom} ${styles.fullField}`}><button type="submit" className={styles.primaryButton}>{state === "sending" ? "Submitting…" : "Submit application"}<Arrow diagonal /></button><p>Questions or a data-removal request?<br /><a href="mailto:contact@actprove.com?subject=Careers%20inquiry">contact@actprove.com</a></p></div>
     </fieldset>

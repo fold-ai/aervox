@@ -1,6 +1,6 @@
 # ACTPROVE website privacy operations
 
-Owner: Menuo Inc. Publication version: 2026-10-17-v4.
+Owner: Menuo Inc. Publication version: 2026-10-17-v5.
 Contact: contact@actprove.com. The founder must assign a named person to monitor it.
 
 This is an internal operating checklist, not a public webpage or a legal opinion.
@@ -19,7 +19,7 @@ should check applicability, employment recordkeeping and international transfers
 - Restricted console uses actprove_session, act1.layout.* and act1.record.
 - Current form collects only the information listed in the applicant notice.
 - Existing consent_version and consent_at database fields remain for compatibility.
-  New records use notice version 2026-10-14-v3. The new checkbox acknowledges the
+  New records use notice version 2026-10-17-v5. The new checkbox acknowledges the
   notice; it is not a consent legal basis or marketing opt-in. Keep older notice
   language in version control and do not relabel existing application records.
 
@@ -33,8 +33,9 @@ were read or deleted for this change. Menuo must operate this process:
    internal_notes using ISO dates until dedicated fields/workflows are introduced.
    An administrative review does not restart retention.
 3. Review pending expirations at least monthly. Include open applications with no
-   ongoing discussion. Arrange removal by the six-calendar-month deadline, not
-   six months after an arbitrary internal status update.
+   ongoing discussion. Determine the governing legal minimum before scheduling
+   deletion. Where no longer requirement applies, arrange removal by the normal
+   six-calendar-month deadline after actual contact, not an administrative update.
 4. Before deleting, check applicable mandatory employment recordkeeping and any
    documented specific legal hold. Consult counsel about U.S. federal/state
    coverage before choosing the default for a record. Record the exception,
@@ -97,3 +98,54 @@ The applicant notice now explicitly covers on-site availability, willingness to
 relocate, relocation-assistance needs and earliest on-site start availability.
 New acknowledgements use 2026-10-17-v4; older records keep their original notice
 version. No new processor or public access to applicant data was introduced.
+
+## Applicant policy audit, 2026-10-17
+
+Public policies now include a dedicated Recruitment Policy. The form links the
+Applicant Privacy Notice and Recruitment Policy before the first input and keeps
+an acknowledgement at submission. This acknowledgement is neither marketing
+consent nor authorization for a third-party background report. Version v5 adds
+source/later-check explanations and makes legal retention precedence explicit;
+no additional applicant fields or processors are introduced.
+
+Coverage checked against the current form:
+- Identity and contact: full name, email, current city/country.
+- Role and scheduling: role selection and earliest on-site start availability.
+- Professional evidence: resume/profile, optional portfolio, experience,
+  motivation and role-specific answer, with the server-selected question.
+- U.S. screening: authorization, sponsorship, on-site availability, relocation
+  willingness and relocation-assistance needs.
+- Administration: application ID/version, creation/acknowledgement timestamps,
+  status, notes and a pseudonymous anti-abuse IP digest. Hosting may separately
+  process the original IP; the app does not store it as a raw database field.
+
+Live technical checks on 2026-10-17 confirmed restricted table/RPC access and
+private PDF-only storage. The one informational advisor finding about no RLS
+policies is expected for this server-only table: public roles have no grants.
+Neither storage policies nor credential locations were broadened by this audit.
+
+Operational items still require an owner; published text does not complete them:
+1. Confirm the U.S. office state and employee/contractor arrangements, then record
+   counsel's applicability decision for federal and state retention requirements.
+   A six-month default cannot shorten a mandatory recordkeeping period. For
+   covered employers, EEOC rules require one year; some state rules are longer.
+2. Assign a person to monitor contact@actprove.com for applicant/privacy requests,
+   recruitment concerns and accommodation requests, including response deadlines.
+3. Complete the existing monthly retention review, legal-hold decision and private
+   resume/copy removal workflow. There is no automated deletion worker in the site.
+4. Confirm provider agreements, email provider, admin access list and backup
+   retention. Do not claim these contractual/operational checks are completed.
+5. Add the official correspondence address once supplied by the founder. None was
+   invented or substituted with an unconfirmed office/registered-agent address.
+6. If later proposing a consumer background report, arrange separate FCRA and
+   applicable state disclosures/authorization and adverse-action procedures.
+   The website form cannot substitute for those documents.
+7. Before introducing automated hiring decisions, biometric/interview recording,
+   new demographic questions or new vendors, assess the feature and applicable
+   notice/consent requirements and update the notice before collection begins.
+
+Research sources checked for this audit:
+- https://www.eeoc.gov/employers/recordkeeping-requirements
+- https://www.ftc.gov/business-guidance/blog/2017/04/background-checks-prospective-employees-keep-required-disclosures-simple
+- https://oag.ca.gov/privacy/ccpa
+- https://calcivilrights.ca.gov/Employment/

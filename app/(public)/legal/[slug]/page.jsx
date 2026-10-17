@@ -2,7 +2,7 @@ import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
-import { getPolicy, policies, policyDate } from "@/lib/site-policies";
+import { getPolicy, policies, policyDate, policyDateISO } from "@/lib/site-policies";
 import styles from "../legal.module.css";
 
 export function generateStaticParams() { return policies.map(({ slug }) => ({ slug })); }
@@ -21,7 +21,7 @@ export default async function PolicyPage({ params }) {
       <header className={styles.documentHeader}>
         <Link href="/legal" className={styles.backLink}>All policies<Arrow /></Link>
         <span className={styles.eyebrow}>{policy.category}</span><h1>{policy.title}</h1><p>{policy.summary}</p>
-        <div className={styles.documentMeta}><span>MENUO INC. / ACTPROVE</span><span>Effective & updated <time dateTime="2026-10-14">{policyDate}</time></span></div>
+        <div className={styles.documentMeta}><span>MENUO INC. / ACTPROVE</span><span>Effective & updated <time dateTime={policyDateISO}>{policyDate}</time></span></div>
       </header>
       <div className={styles.documentLayout}>
         <aside className={styles.contents}><nav aria-label="On this page"><span className={styles.eyebrow}>ON THIS PAGE</span>{policy.sections.map((section, index) => <a key={section.id} href={`#${section.id}`}><span>{String(index + 1).padStart(2, "0")}</span>{section.title}</a>)}</nav></aside>
