@@ -1,13 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { validateApplication, ApplicationError } from "../lib/careers/validation.mjs";
+import { validateApplication, ApplicationError, APPLICATION_VERSION } from "../lib/careers/validation.mjs";
+import { careerCompensation, compensationForRole, formatCompensation } from "../lib/careers/compensation.js";
 import { careerRoles } from "../lib/careers/roles.js";
 import { careerProfiles } from "../lib/careers/profiles.js";
 import { careerQuestions, openApplicationQuestion } from "../lib/careers/questions.js";
 
 function application() {
   const form = new FormData();
-  for (const [name, value] of Object.entries({ applicationId: "941a434c-27ea-489f-a7b7-671d2521e970", roleSlug: "chief-technology-officer", fullName: "Test Applicant", email: "TEST@example.com", location: "Test city", usWorkAuthorization: "yes", usSponsorship: "not_required", workArrangement: "discuss", motivation: "I want to own reliable hardware and software integration.", roleResponse: "I owned the integration, investigated failures and verified the result.", statement: "I have built and maintained software systems.", resumeUrl: "https://example.com/resume", consent: "yes" })) form.set(name, value);
+  for (const [name, value] of Object.entries({ applicationId: "941a434c-27ea-489f-a7b7-671d2521e970", roleSlug: "chief-technology-officer", fullName: "Test Applicant", email: "TEST@example.com", location: "Test city", usWorkAuthorization: "yes", usSponsorship: "not_required", workArrangement: "onsite", availability: "Four weeks after confirmation", onSiteAvailability: "after_relocation", relocationWillingness: "yes", relocationAssistance: "yes", motivation: "I want to own reliable hardware and software integration.", roleResponse: "I owned the integration, investigated failures and verified the result.", statement: "I have built and maintained software systems.", resumeUrl: "https://example.com/resume", consent: "yes" })) form.set(name, value);
   return form;
 }
 
@@ -21,7 +22,7 @@ test("normalizes a complete application and resolves its listed role", async () 
 });
 
 test("requires complete screening answers without rejecting a work-authorization status", async () => {
-  for (const name of ["usWorkAuthorization", "usSponsorship", "workArrangement", "motivation", "roleResponse"]) {
+  for (const name of ["usWorkAuthorization", "usSponsorship", "workArrangement", "availability", "onSiteAvailability", "relocationWillingness", "relocationAssistance", "motivation", "roleResponse"]) {
     const missing = application(); missing.delete(name);
     await assert.rejects(validateApplication(missing), ApplicationError);
   }
@@ -29,7 +30,7 @@ test("requires complete screening answers without rejecting a work-authorization
     const invalid = application(); invalid.set(name, value);
     await assert.rejects(validateApplication(invalid), ApplicationError);
   }
-  for (const value of ["yes", "no", "unsure", "outside_us"]) {
+  for (const value of ["yes", "no", "unsure"]) {
     const form = application(); form.set("usWorkAuthorization", value); form.set("usSponsorship", "required");
     assert.equal((await validateApplication(form)).usWorkAuthorization, value);
   }
@@ -75,4 +76,34 @@ test("requires an actual PDF and rejects oversized uploads", async () => {
   await assert.rejects(validateApplication(oversized), /3 MB/);
   const valid = application(); valid.delete("resumeUrl"); valid.set("resume", new File(["%PDF-1.7\n"], "resume.pdf", { type: "application/pdf" }));
   assert.equal((await validateApplication(valid)).resume.name, "resume.pdf");
+});
+
+
+test("retains relocation and on-site answers without automatically excluding candidates", async () => {
+  const form = application();
+  form.set("onSiteAvailability", "no");
+  form.set("relocationWillingness", "no");
+  form.set("relocationAssistance", "unsure");
+  const result = await validateApplication(form);
+  assert.equal(result.applicationVersion, APPLICATION_VERSION);
+  assert.equal(result.onSiteAvailability, "no");
+  assert.equal(result.relocationWillingness, "no");
+  assert.equal(result.relocationAssistance, "unsure");
+  for (const [field, value] of [["onSiteAvailability", "invented"], ["relocationWillingness", "invented"], ["relocationAssistance", "invented"], ["workArrangement", "remote"], ["workArrangement", "hybrid"]]) {
+    const invalid = application(); invalid.set(field, value);
+    await assert.rejects(validateApplication(invalid), ApplicationError);
+  }
+});
+
+test("all 58 roles publish U.S. pay with only approved leadership equity", () => {
+  assert.deepEqual(Object.keys(careerCompensation).sort(), careerRoles.map(role => role.slug).sort());
+  assert.deepEqual(Object.entries(careerCompensation).filter(([, pay]) => pay.equity).map(([slug]) => slug).sort(), ["chief-technology-officer", "vp-engineering", "chief-systems-engineer"].sort());
+  for (const role of careerRoles) {
+    const pay = compensationForRole(role.slug);
+    assert.ok(pay.min > 0 && pay.max > pay.min, role.slug);
+    assert.equal(pay.period, role.type === "Contract" || role.slug === "test-assembly-technician" ? "hour" : "year", role.slug);
+    assert.match(formatCompensation(pay), /USD \/ (year|hour)$/);
+    assert.ok(!/[\u2013\u2014]/.test(formatCompensation(pay)));
+    if (pay.equity) assert.ok(pay.equity[0] >= 0.1 && pay.equity[1] <= 0.5);
+  }
 });

@@ -174,3 +174,16 @@
   .roleCopy p, .roleCopy li { font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) { .roleRow { transition: none; } }
+
+.page .benefitsSection { margin: 0 clamp(24px, 5vw, 88px); padding: 64px 0 80px; border-top: 1px solid var(--career-ink); }
+.page .benefitsContent h2 { font-size: clamp(38px, 4.7vw, 76px); line-height: 1.05; margin: 24px 0 38px; }
+.benefitsGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 40px; margin: 0 0 28px; }
+.benefitsGrid > div { border-top: 1px solid var(--career-rule); padding-top: 18px; }
+.benefitsGrid dt { font-size: 18px; margin-bottom: 12px; }
+.benefitsGrid dd { margin: 0; font-size: 14px; line-height: 1.7; color: var(--career-muted); }
+.roleBenefits .benefitsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.page .roleCopy .salaryRange { color: var(--career-ink); font-size: clamp(21px, 2.4vw, 34px); margin-bottom: 18px; }
+.roleRow > div > .roleSalary { color: var(--career-ink); font-size: 13px; margin-top: 11px; }
+.compensationDetails { border-top: 1px solid var(--career-rule); padding-top: 30px; }
+@media (max-width: 1050px) { .benefitsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .page .benefitsSection { padding: 45px 0 52px; } .benefitsGrid, .roleBenefits .benefitsGrid { grid-template-columns: 1fr; } }

@@ -27,3 +27,21 @@ PDF files are in the private `career-resumes` Storage bucket. The `resume_path` 
 ## Checks
 
 Run `node --test tests/careers.test.mjs` and `npm run build`. Verify a browser submission against the production table after changing configuration. Identify test submissions clearly and close them after verification.
+
+## U.S. on-site hiring update, 2026-10-17
+
+Apply `migrations/20261017055615_careers_us_hiring.sql` once to the existing project
+before releasing the new form. It adds on-site availability, relocation willingness,
+relocation-assistance needs and a form-version marker, and updates the private RPC.
+Existing records are unchanged; legacy payloads can still complete during rollout.
+
+New records carry `application_version = 2026-10-17-us-v1`. Their work arrangement
+is on-site, and all three relocation/on-site answers and start availability are
+required. A candidate's `no`, `unsure` or location-dependent answer is retained for
+human review; no automatic hiring decision is made. Review the new columns in
+`public.career_applications`. Work authorization and sponsorship are U.S.-specific.
+
+Compensation and employee benefits are defined in `lib/careers/compensation.js`.
+Contract fees are hourly. The technician is a full-time hourly employee and receives
+employee benefits. Only CTO, VP Engineering and Chief Systems Engineer have an
+equity range. Future-phase roles remain expressions of interest.

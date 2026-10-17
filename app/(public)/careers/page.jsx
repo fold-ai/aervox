@@ -2,13 +2,14 @@ import StructuredData from "@/components/site/StructuredData";
 import { pageMetadata, absoluteUrl, breadcrumbs } from "@/lib/seo";
 import Link from "next/link";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
+import CareerBenefits from "@/components/site/CareerBenefits";
 import CareersDirectory from "@/components/site/CareersDirectory";
 import CareerApplicationForm from "@/components/site/CareerApplicationForm";
 import { careerRoles } from "@/lib/careers/roles";
 import { careersConfigured } from "@/lib/careers/supabase";
 import styles from "./careers.module.css";
 
-export const metadata = pageMetadata({"title": "Defense Tech Careers & Engineering Roles | ACTPROVE", "description": "Explore defense technology careers at ACTPROVE in software, computer vision, embedded systems, hardware and operations. Review role profiles and apply directly.", "path": "/careers"});
+export const metadata = pageMetadata({"title": "Defense Tech Careers & Engineering Roles | ACTPROVE", "description": "Explore on-site U.S. defense technology careers at ACTPROVE. See role-specific pay ranges, employee benefits and relocation support, and apply directly.", "path": "/careers"});
 
 export default function CareersPage() {
   return <div className={styles.page}>
@@ -25,13 +26,15 @@ export default function CareersPage() {
       <section className={styles.context} aria-labelledby="work-title">
         <span className={styles.label}>01 / THE WORK</span>
         <div><h2 id="work-title">Own a part.<br />Understand the whole.</h2><p>ACT-1 and PROVE-1 are our first focus: onboard intelligence and ground software. DETECT-1, ARCA-1, ERA-1 and VISTA-1 extend the platform through perception, sensing, equipment integration and wearable interfaces.</p><p>We value practical engineering, clear writing and honest test results. The work moves between code, the bench and the field.</p><Link href="/systems" className={styles.textLink}>Explore our systems<Arrow /></Link></div>
-        <dl className={styles.workFacts}><div><dt>OWNERSHIP</dt><dd>Build your area, document decisions and work directly with the people who depend on it.</dd></div><div><dt>LOCATION</dt><dd>Office locations in the United States and Ukraine are under review. Working arrangements and travel depend on the role.</dd></div><div><dt>COMPENSATION</dt><dd>Equity participation is part of our hiring plan. Role-specific compensation and terms are discussed during the process.</dd></div></dl>
+        <dl className={styles.workFacts}><div><dt>OWNERSHIP</dt><dd>Build your area, document decisions and work directly with the people who depend on it.</dd></div><div><dt>LOCATION</dt><dd>We are hiring for on-site work in the United States. Our U.S. office location is being finalized and will be confirmed before an offer. Role-relevant lab, field work and travel apply.</dd></div><div><dt>COMPENSATION</dt><dd>U.S. pay ranges are listed for every role. Full-time employees receive our benefits package. Equity is reserved for selected key leadership roles and is stated only in those listings.</dd></div></dl>
       </section>
 
       <section id="roles" className={styles.rolesSection} aria-labelledby="roles-title">
         <div className={styles.sectionTop}><div><span className={styles.label}>02 / OPPORTUNITIES</span><h2 id="roles-title">Find your place.</h2></div><p>Explore {careerRoles.length} role profiles across our hiring plan. Priority roles come first; later-stage roles are open for expressions of interest.</p></div>
         <CareersDirectory />
       </section>
+
+      <section id="benefits" className={styles.benefitsSection} aria-label="U.S. employee benefits"><CareerBenefits /></section>
 
       <section id="process" className={styles.process} aria-labelledby="process-title">
         <div className={styles.sectionTop}><div><span className={styles.label}>03 / HOW WE HIRE</span><h2 id="process-title">Show us the work.</h2></div><p>Our process follows the role. Engineers discuss systems they built; hardware candidates work at the bench; pilots demonstrate flight judgment; operations candidates work through practical cases.</p></div>
@@ -41,7 +44,7 @@ export default function CareersPage() {
           <li><span>03</span><h3>Work through the role</h3><p>A paid, relevant work sample, technical discussion, bench exercise or practical scenario helps us understand how you work. We use non-sensitive evaluation material.</p></li>
           <li><span>04</span><h3>Meet the team</h3><p>Discuss the product and the people you would work with. Where practical, this includes time in the lab or a controlled test environment.</p></li>
           <li><span>05</span><h3>References and decision</h3><p>We use independent interview feedback and role-specific criteria. References are checked with your consent. We aim to respond within a few days of the final meeting.</p></li>
-          <li><span>06</span><h3>Offer and onboarding</h3><p>Agree written terms, responsibilities and equity participation. Onboarding covers secure access, the platform, lab and field safety, a mentor and your first owned project.</p></li>
+          <li><span>06</span><h3>Offer and onboarding</h3><p>Agree written compensation, benefits, on-site responsibilities and any role-specific equity terms. Onboarding covers secure access, the platform, lab and field safety, a mentor and your first owned project.</p></li>
         </ol>
         <div className={styles.processNote}><span className={styles.label}>WHAT WE LOOK FOR</span><p>Depth in the role. Practical judgment. Ownership. Clear communication. The founder and relevant technical reviewers assess evidence against the role requirements. Specialist advisers may join where needed. We discuss your own contribution, how you verified the outcome and what you learned when something did not work.</p></div>
       </section>

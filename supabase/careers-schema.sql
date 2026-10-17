@@ -12,6 +12,10 @@ create table public.career_applications (
   us_work_authorization text check (us_work_authorization in ('yes', 'no', 'unsure', 'outside_us')),
   us_sponsorship text check (us_sponsorship in ('not_required', 'required', 'unsure', 'outside_us')),
   work_arrangement text check (work_arrangement in ('onsite_and_field', 'onsite', 'hybrid', 'remote', 'discuss')),
+  application_version text,
+  on_site_availability text check (on_site_availability in ('yes', 'after_relocation', 'depends_on_location', 'no')),
+  relocation_willingness text check (relocation_willingness in ('already_local', 'yes', 'depends_on_location', 'no')),
+  relocation_assistance text check (relocation_assistance in ('yes', 'no', 'unsure')),
   motivation text check (length(motivation) between 20 and 2000),
   role_question text check (length(role_question) between 20 and 1000),
   role_response text check (length(role_response) between 20 and 3000),
@@ -30,6 +34,17 @@ create table public.career_applications (
       us_work_authorization is not null and us_sponsorship is not null and
       work_arrangement is not null and motivation is not null and
       role_question is not null and role_response is not null
+    )
+  ),
+  constraint career_us_hiring_required check (
+    application_version is null or (
+      application_version = '2026-10-17-us-v1' and
+      on_site_availability is not null and relocation_willingness is not null and
+      relocation_assistance is not null and availability is not null and length(availability) between 1 and 160 and
+      us_work_authorization is not null and us_work_authorization in ('yes', 'no', 'unsure') and
+      us_sponsorship is not null and us_sponsorship in ('not_required', 'required', 'unsure') and
+      work_arrangement is not null and work_arrangement = 'onsite' and
+      motivation is not null and role_question is not null and role_response is not null
     )
   ),
   constraint career_resume_required check (resume_url is not null or resume_path is not null)
@@ -79,7 +94,8 @@ begin
   insert into public.career_applications (
     id, role_slug, role_title, full_name, email, location, availability, statement,
     resume_url, portfolio_url, resume_path, resume_filename, consent_version, ip_hash,
-    us_work_authorization, us_sponsorship, work_arrangement, motivation, role_question, role_response
+    us_work_authorization, us_sponsorship, work_arrangement, motivation, role_question, role_response,
+    application_version, on_site_availability, relocation_willingness, relocation_assistance
   ) values (
     app_id, application ->> 'role_slug', application ->> 'role_title', application ->> 'full_name', app_email,
     application ->> 'location', application ->> 'availability', application ->> 'statement',
@@ -87,7 +103,9 @@ begin
     application ->> 'resume_filename', application ->> 'consent_version', app_ip,
     application ->> 'us_work_authorization', application ->> 'us_sponsorship',
     application ->> 'work_arrangement', application ->> 'motivation',
-    application ->> 'role_question', application ->> 'role_response'
+    application ->> 'role_question', application ->> 'role_response',
+    application ->> 'application_version', application ->> 'on_site_availability',
+    application ->> 'relocation_willingness', application ->> 'relocation_assistance'
   );
   return jsonb_build_object('ok', true, 'id', app_id);
 end;

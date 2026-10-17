@@ -3,6 +3,8 @@ import { pageMetadata, breadcrumbs } from "@/lib/seo";
 import StructuredData from "@/components/site/StructuredData";
 import { notFound } from "next/navigation";
 import { Arrow, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
+import CareerBenefits from "@/components/site/CareerBenefits";
+import { compensationForRole, formatCompensation, compensationNote } from "@/lib/careers/compensation";
 import CareerApplicationForm from "@/components/site/CareerApplicationForm";
 import { careerRoles, getCareerRole, getCareerTeam, getHiringStage } from "@/lib/careers/roles";
 import { careersConfigured } from "@/lib/careers/supabase";
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const role = getCareerRole(slug);
   if (!role) return {};
-  return pageMetadata({ title: `${role.title} | ACTPROVE Careers`, description: `${getHiringStage(role.stage).label} at ACTPROVE. ${role.ownership}`, path: `/careers/${role.slug}` });
+  return pageMetadata({ title: `${role.title} | ACTPROVE Careers`, description: `${role.title}: ${formatCompensation(compensationForRole(role.slug))}. On-site in the United States. ${getHiringStage(role.stage).label} at ACTPROVE.`, path: `/careers/${role.slug}` });
 }
 
 export default async function CareerRolePage({ params }) {
@@ -25,6 +27,9 @@ export default async function CareerRolePage({ params }) {
   const team = getCareerTeam(role.team);
   const stage = getHiringStage(role.stage);
   const profile = careerProfiles[role.slug];
+  const compensation = compensationForRole(role.slug);
+  const isEmployee = role.type === "Full-time";
+  const equityText = compensation.equity ? `${compensation.equity[0]}% - ${compensation.equity[1]}% subject to an individual grant approval and written terms. Proposed vesting: four years with a one-year cliff.` : "Equity is not included for this role.";
   return <div className={styles.page}>
     <StructuredData data={breadcrumbs([["Home", "/"], ["Careers", "/careers"], [role.title, `/careers/${role.slug}`]])} />
     <SiteHeader theme="light" />
@@ -36,7 +41,7 @@ export default async function CareerRolePage({ params }) {
         <div className={styles.roleHeroFoot}><span>{role.level} / {role.type}</span><a href="#apply" className={styles.primaryButton}>{role.stage > 1 ? "Express interest" : "Apply for this role"}<Arrow diagonal /></a></div>
       </section>
       <section className={styles.roleDetails} aria-label="Role details">
-        <aside className={styles.roleAside}><span className={styles.label}>THE ROLE</span><dl><div><dt>TEAM</dt><dd>{team.label}</dd></div><div><dt>HIRING PHASE</dt><dd>{stage.label}</dd></div><div><dt>EXPERIENCE</dt><dd>{role.experience}</dd></div><div><dt>LOCATION</dt><dd>U.S. / Ukraine office locations under review. Work arrangements and travel discussed by role.</dd></div><div><dt>COMPENSATION</dt><dd>Equity participation. Written terms discussed during hiring.</dd></div></dl><Link href="/careers#process" className={styles.textLink}>How we hire<Arrow /></Link></aside>
+        <aside className={styles.roleAside}><span className={styles.label}>THE ROLE</span><dl><div><dt>TEAM</dt><dd>{team.label}</dd></div><div><dt>HIRING PHASE</dt><dd>{stage.label}</dd></div><div><dt>EXPERIENCE</dt><dd>{role.experience}</dd></div><div><dt>LOCATION</dt><dd>United States / on-site. U.S. office location being finalized and confirmed before an offer. Role-relevant travel may apply.</dd></div><div><dt>COMPENSATION</dt><dd><strong>{formatCompensation(compensation)}</strong><br />{isEmployee ? "Base pay before taxes." : "Contract fees before taxes."}</dd></div><div><dt>EQUITY</dt><dd>{equityText}</dd></div></dl><Link href="/careers#process" className={styles.textLink}>How we hire<Arrow /></Link></aside>
         <div className={styles.roleCopy}>
           <div><span className={styles.label}>01 / OWNERSHIP</span><h2>What you will own.</h2><p>{role.ownership}</p>{role.stage > 1 && <p className={styles.fine}>This role is part of our {stage.label.toLowerCase()}. We welcome expressions of interest as the program develops.</p>}</div>
           <div><span className={styles.label}>02 / EXPECTATIONS</span><h2>What we expect from you.</h2><ul>{profile.expectations.map(item => <li key={item}>{item}</li>)}</ul></div>
@@ -45,7 +50,9 @@ export default async function CareerRolePage({ params }) {
           {!!role.preferred.length && <div><span className={styles.label}>05 / PREFERRED EXPERIENCE</span><h2>Useful, not essential.</h2><ul>{role.preferred.map(item => <li key={item}>{item}</li>)}</ul></div>}
           <div><span className={styles.label}>{role.preferred.length ? "06" : "05"} / SUCCESS IN THE ROLE</span><h2>What good looks like.</h2><ul>{profile.outcomes.map(item => <li key={item}>{item}</li>)}</ul></div>
           <div className={styles.discussion}><span className={styles.label}>YOUR EXPERIENCE</span><h2>A conversation about your work.</h2><p>{profile.discussion}</p><p className={styles.fine}>Use a non-confidential example. We care about your own contribution, the decisions you made and the evidence behind the outcome.</p></div>
-          <div><span className={styles.label}>WORKING AT ACTPROVE</span><p>We are an early-stage, founder-led company. Expect hands-on work, changing priorities and direct responsibility for a clearly defined area. Write down decisions, raise risks early and distinguish demonstrated results from assumptions.</p><p className={styles.fine}>The experience range is a guide to scope and independence. Equivalent practical experience is welcome; required professional authorizations still apply. Hiring phases describe our plan, not 58 immediate openings. Location, employment terms and any role-specific access or field requirements are discussed before an offer.</p><p className={styles.fine}>Need an adjustment to the application or interview process? Contact <a href="mailto:contact@actprove.com?subject=Careers%20accessibility">contact@actprove.com</a>.</p></div>
+          <div className={styles.compensationDetails}><span className={styles.label}>PAY AND TERMS</span><h2>Compensation, clearly stated.</h2><p className={styles.salaryRange}>{formatCompensation(compensation)}</p><p>{isEmployee ? (compensation.period === "hour" ? "This is an hourly, full-time employee role. Overtime is paid where applicable." : "Annual base salary before taxes, plus eligible employee benefits.") : "Contract fees are based on an agreed scope, hours and deliverables. Employee benefits and equity are not included. Site attendance, travel and reimbursable expenses are agreed in writing."}</p><p className={styles.fine}>{compensationNote}</p>{compensation.equity && <p className={styles.fine}>Equity: {equityText}</p>}{isEmployee && <p className={styles.fine}>Compensation is reviewed annually. A review does not guarantee an increase or a bonus.</p>}</div>
+          {isEmployee && <CareerBenefits compact />}
+          <div><span className={styles.label}>WORKING AT ACTPROVE</span><p>We are an early-stage, founder-led company. Expect hands-on work, changing priorities and direct responsibility for a clearly defined area. Write down decisions, raise risks early and distinguish demonstrated results from assumptions.</p><p className={styles.fine}>The experience range is a guide to scope and independence. Equivalent practical experience is welcome; required professional authorizations still apply. Hiring phases describe our plan, not 58 immediate openings. The U.S. office location, on-site duties, employment terms and any role-specific access or field requirements are confirmed before an offer.</p><p className={styles.fine}>Need an adjustment to the application or interview process? Contact <a href="mailto:contact@actprove.com?subject=Careers%20accessibility">contact@actprove.com</a>.</p></div>
         </div>
       </section>
       <section id="apply" className={styles.applicationSection} aria-labelledby="apply-title">

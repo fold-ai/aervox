@@ -1,6 +1,6 @@
 # ACTPROVE website privacy operations
 
-Owner: Menuo Inc. Publication version: 2026-10-14-v3.
+Owner: Menuo Inc. Publication version: 2026-10-17-v4.
 Contact: contact@actprove.com. The founder must assign a named person to monitor it.
 
 This is an internal operating checklist, not a public webpage or a legal opinion.
@@ -90,3 +90,10 @@ job that could destroy applicant data without operational review.
 - https://vercel.com/legal/privacy-notice
 
 - https://www.eeoc.gov/employers/recordkeeping-requirements
+
+## U.S. hiring form update, 2026-10-17
+
+The applicant notice now explicitly covers on-site availability, willingness to
+relocate, relocation-assistance needs and earliest on-site start availability.
+New acknowledgements use 2026-10-17-v4; older records keep their original notice
+version. No new processor or public access to applicant data was introduced.
