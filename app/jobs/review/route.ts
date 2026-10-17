@@ -224,9 +224,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         ok: false,
-        error: `Could not assemble the source data: ${
-          err instanceof Error ? err.message : String(err)
-        }`,
+        error: "Could not assemble the source data. Please try again.",
       },
       { status: 502 },
     );
@@ -287,9 +285,9 @@ export async function POST(req: NextRequest) {
     });
     payload = (await res.json()) as Record<string, unknown>;
     if (!res.ok) {
-      const detail = (payload.error as { message?: string } | undefined)?.message;
+
       return NextResponse.json(
-        { ok: false, source, error: detail ?? `OpenAI returned ${res.status}` },
+        { ok: false, source, error: "The review provider could not complete this request." },
         { status: 502 },
       );
     }
@@ -297,7 +295,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         ok: false, source,
-        error: err instanceof Error ? err.message : "Could not reach OpenAI.",
+        error: "Could not reach the review provider. Please try again.",
       },
       { status: 502 },
     );

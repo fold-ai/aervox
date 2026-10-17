@@ -58,7 +58,7 @@ export async function readSession(token: string | undefined): Promise<SessionCla
     const sst = Number(payload.sst ?? 0);
     // The absolute ceiling is enforced here rather than only at sign-in, so a
     // stolen token cannot be refreshed forever.
-    if (!sst || now - sst > AUTH.absoluteSessionSeconds) return null;
+    if (!Number.isFinite(sst) || sst <= 0 || sst > now + 60 || now - sst > AUTH.absoluteSessionSeconds || !payload.sub || !Number.isFinite(payload.exp)) return null;
     return {
       sub: String(payload.sub ?? ""),
       email: String(payload.email ?? ""),

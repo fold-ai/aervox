@@ -1,3 +1,4 @@
+import "server-only";
 /**
  * Postgres.
  *
@@ -6,6 +7,7 @@
  * an ORM would sit between us and the query plans that matter for trajectory
  * payloads.
  */
+import { databaseConnectionOptions } from "./db-connection.mjs";
 import { Pool, type PoolClient, type QueryResultRow } from "pg";
 
 declare global {
@@ -29,15 +31,13 @@ export function connectionString(): string {
 
 export function pool(): Pool {
   if (!globalThis.__actprovePool) {
-    const url = connectionString();
     globalThis.__actprovePool = new Pool({
-      connectionString: url,
+      ...databaseConnectionOptions(connectionString(), process.env.POSTGRES_CA_CERT),
       // Serverless invocations are short and many; a large pool per instance
       // exhausts the server's connection limit rather than helping.
       max: Number(process.env.PGPOOL_MAX ?? 3),
       idleTimeoutMillis: 10_000,
       connectionTimeoutMillis: 8_000,
-      ssl: /localhost|127\.0\.0\.1/.test(url) ? undefined : { rejectUnauthorized: false },
     });
   }
   return globalThis.__actprovePool;

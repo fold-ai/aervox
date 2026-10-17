@@ -30,3 +30,7 @@ export async function POST(request: NextRequest) {
     return reply({ ok: false, error: "We could not save your application. Please try again or contact contact@actprove.com." }, 503);
   }
 }
+
+export async function GET() {
+  return NextResponse.json({ ok: false, error: "Use the application form to submit." }, { status: 405, headers: { "Allow": "POST", "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" } });
+}

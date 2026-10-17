@@ -2,6 +2,7 @@
 
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { safeNextPath } from "@/lib/auth/request.mjs";
 import { Brand } from "@/components/ui/Brand";
 
 /**
@@ -37,7 +38,7 @@ function LoginForm() {
         return;
       }
       // Full navigation, so middleware sees the new cookie on the way in.
-      window.location.assign(next.startsWith("/") ? next : "/admin-pro");
+      window.location.assign(safeNextPath(next));
     } catch {
       setError("Could not reach the server.");
       setBusy(false);

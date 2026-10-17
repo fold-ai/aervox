@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: `unknown action '${action}'` }, { status: 400 });
   } catch (err) {
     return NextResponse.json(
-      { ok: false, error: err instanceof Error ? err.message : String(err) },
+      { ok: false, error: "The request could not be completed. Please try again." },
       { status: 500 },
     );
   }

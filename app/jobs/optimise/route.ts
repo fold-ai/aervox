@@ -141,7 +141,7 @@ export async function POST(req: NextRequest) {
       spec_digest: stableHash(best?.spec ?? {}).slice(0, 12),
     });
   } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
+    const message = "The request could not be completed. Please try again.";
     if (body.id) {
       await query(
         "UPDATE optimisations SET status = 'failed', message = $2, finished_at = NOW() WHERE id = $1",

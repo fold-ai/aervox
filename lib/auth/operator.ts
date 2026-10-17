@@ -1,3 +1,4 @@
+import "server-only";
 import { cookies } from "next/headers";
 import { AUTH } from "./config";
 import { readSession, type SessionClaims } from "./session";

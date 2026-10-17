@@ -124,5 +124,5 @@ function harden(res: NextResponse, isConsole: boolean): NextResponse {
 export const config = {
   // Everything except the static asset pipeline: the gate needs /admin-pro and
   // /api, and the headers are worth setting on the public pages too.
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|icon.png|.*\\.(?:png|jpg|jpeg|svg|glb|woff2?)$).*)"],
+  matcher: ["/admin-pro/:path*", "/api/:path*", "/jobs/:path*", "/((?!_next/static|_next/image|favicon.ico|icon.png|.*\\.(?:png|jpg|jpeg|svg|glb|woff2?)$).*)"],
 };

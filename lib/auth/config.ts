@@ -77,5 +77,5 @@ export function isInternalCall(token: string | null): boolean {
 }
 
 export function isPublicPath(pathname: string): boolean {
-  return AUTH.publicPaths.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+  return AUTH.publicPaths.some((p) => pathname === p);
 }
