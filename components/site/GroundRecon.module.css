@@ -147,3 +147,7 @@
   .recon[data-mode="overview"] .viewChoices { gap: 25px; }
   .returnOverview { min-height: 40px; }
 }
+
+/* Overview height follows the map plus its controls. */
+.recon[data-mode="overview"] .scene,
+.recon[data-mode="overview"][data-compact="true"] .scene { aspect-ratio:auto; min-height:0; }

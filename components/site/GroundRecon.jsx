@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { Component, useCallback, useEffect, useRef, useState } from "react";
 import GroundOverview from "./GroundOverview";
+import { OVERVIEW_COUNT, overviewRecord } from "./ground-overview-data";
 import styles from "./GroundRecon.module.css";
 
 const GroundReconWorld = dynamic(() => import("./GroundReconWorld"), { ssr: false });
@@ -123,15 +124,15 @@ export default function GroundRecon({ motionPaused = false, showOverlays = true,
     {!compact && <>
       <div className={styles.observationBar}>
         <div className={styles.viewChoices} role="group" aria-label="Overview and aircraft cameras">{VIEWS.map(item => <button type="button" key={item.id} ref={element => { cameraButtons.current[item.id] = element; }} disabled={failed && item.id !== "overview"} aria-pressed={view === item.id} onClick={() => chooseView(item.id)}><span className={styles.viewIcon} aria-hidden="true">{item.id === "overview" ? "⌖" : "↗"}</span>{item.label}</button>)}</div>
-        <span className={styles.viewStatus}>{overview ? "AREA VIEW / 17 TRACKS" : failed ? "STATIC REFERENCE" : "COLOR CAMERA / CORRIDOR A"}</span>
+        <span className={styles.viewStatus}>{overview ? `AREA VIEW / ${OVERVIEW_COUNT} OBJECTS` : failed ? "STATIC REFERENCE" : "COLOR CAMERA / CORRIDOR A"}</span>
       </div>
       <div className={styles.context}>
         <div><span className={styles.kicker}>CONNECTED PERSPECTIVES</span><h3>Understand the area.<br />Choose your perspective.</h3><p>Track movement across the scene. Distinguish friendly vehicles and aircraft, then open a drone’s camera for a closer look.</p></div>
         <div className={styles.vehiclePanel}>
           {overview ? <>
             <div className={styles.vehiclePanelTitle}><span>SELECTED TRACK</span><span>AUTHORED SCENARIO</span></div>
-            <div className={styles.selectedTrack}><strong>{selectedId}</strong><span>{selectedId.startsWith("F") ? "Friendly vehicle" : "Vehicle track"}<small>Tracked in area view</small></span><i data-friendly={selectedId.startsWith("F")} /></div>
-            <p className={styles.scenarioNote}>Simulated movement and friendly classifications. Select D-01 or D-02 to open the color camera.</p>
+            <div className={styles.selectedTrack}><strong>{selectedId}</strong><span>{overviewRecord(selectedId).label}<small>Tracked in area view</small></span><i data-friendly={overviewRecord(selectedId).affiliation === "Friendly"} /></div>
+            <p className={styles.scenarioNote}>Fictional terrain, observations and boundary snapshots. Select D-01 or D-02 to open the color camera.</p>
           </> : <>
             <div className={styles.vehiclePanelTitle}><span>CAMERA SUBSET / CORRIDOR A</span><span>03 VEHICLES</span></div>
             <div className={styles.vehicleChoices} role="group" aria-label="Select a vehicle in the camera subset">{VEHICLES.map((vehicle, index) => <button type="button" key={vehicle.id} disabled={failed} aria-pressed={selectedIndex === index} onClick={() => chooseVehicle(index)}><span style={{ backgroundColor: vehicle.color }} />{vehicle.id}<small>{failed ? "Unavailable" : selectedIndex === index ? "Following" : "Follow"}</small></button>)}</div>
