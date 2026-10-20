@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader, SiteFooter, Arrow } from "@/components/site/SiteChrome";
 import SystemVisual from "@/components/site/SystemVisual";
 import ProveHardware from "@/components/site/ProveHardware";
+import EraSensors, { EraModuleShowcase } from "@/components/site/EraHardware";
 import ActTestFootage from "@/components/site/ActTestFootage";
 import { systems, getSystem } from "@/lib/site-systems";
 import styles from "../systems.module.css";
@@ -35,7 +36,7 @@ export default async function SystemPage({ params }) {
         <div className={styles.productBreadcrumb}><Link href="/systems">All systems<Arrow /></Link><span>{system.number} / {system.category}</span><span className={styles.status}><i />{system.status}</span></div>
         <h1 id="product-title">{system.name}</h1>
         <div className={styles.heroDescription}><h2>{system.headline}</h2><p>{system.summary}</p></div>
-        <div className={styles.productArt}><SystemVisual type={system.slug} /></div>
+        {system.slug === "era-1" ? <div className={styles.hardwareArt}><EraModuleShowcase /></div> : <div className={styles.productArt}><SystemVisual type={system.slug} /></div>}
         <div className={styles.artCaption}><span>{system.illustration}</span><span>{system.status} / ACTPROVE</span></div>
       </section>
 
@@ -45,6 +46,7 @@ export default async function SystemPage({ params }) {
       </section>
 
       {system.slug === "prove-1" && <ProveHardware />}
+      {system.slug === "era-1" && <EraSensors />}
       {system.slug === "act-1" && <ActTestFootage />}
 
       <section className={styles.capabilities} aria-labelledby="capabilities-title">

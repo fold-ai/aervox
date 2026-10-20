@@ -59,6 +59,7 @@
 .heroDescription h2 { margin: 0; font-size: clamp(29px, 3.5vw, 55px); line-height: 1.08; letter-spacing: -.045em; white-space: pre-line; }
 .heroDescription p { margin: 0; max-width: 460px; justify-self: end; font-size: 17px; line-height: 1.6; color: #54594d; }
 .productArt { height: clamp(370px, 47vw, 725px); }
+.hardwareArt { width: 100%; }
 .artCaption { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding: 18px 0 23px; border-bottom: 1px solid var(--rule); font-size: 12px; color: #666e5b; }
 .artCaption > span:last-child { font: 10px/1.5 ui-monospace, SFMono-Regular, monospace; text-transform: uppercase; white-space: nowrap; }
 .purpose { padding: 82px var(--gutter) 70px; }
