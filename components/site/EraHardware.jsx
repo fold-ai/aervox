@@ -12,11 +12,8 @@ function RenderViews({ item, view, onChange, imageId }) {
 }
 
 function RenderImage({ item, view, imageId, priority = false, sizes }) {
-  // Assembly images have different source proportions; object-fit preserves the complete render.
-  const height = view === "exploded" ? 1600 : 1280;
-  const width = view === "exploded" && item.id === "era-1-mini" ? 1440 : 1600;
   return <div className={styles.image} id={imageId}>
-    <Image src={eraRenderPath(item.id, view)} alt={`${item.name}, ${eraViewLabels[view].toLowerCase()} CAD render of the mechanical prototype`} width={width} height={height} sizes={sizes} priority={priority} unoptimized />
+    <Image src={eraRenderPath(item.id, view)} alt={`${item.name}, ${eraViewLabels[view].toLowerCase()} CAD render of the mechanical prototype`} width={1600} height={1280} sizes={sizes} priority={priority} unoptimized />
   </div>;
 }
 
