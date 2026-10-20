@@ -33,8 +33,6 @@
 .sensorGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 46px 28px; }
 .sensorCard { min-width: 0; }
 .cardTop { display: flex; justify-content: space-between; gap: 15px; padding: 15px 0; border-top: 1px solid var(--ink); color: #686868; text-transform: uppercase; }
-.sensorFigure figcaption { border-bottom: 1px solid var(--rule); }
-.sensorFigure .views { justify-content: flex-start; }
 .sensorCard h3 { margin: 24px 0 14px; font-size: clamp(24px, 2.4vw, 35px); letter-spacing: -.04em; line-height: 1.1; }
 .sensorCard > p { margin: 0; color: #606060; font-size: 14px; line-height: 1.75; }
 .note { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--rule); color: #707070; font-size: 12px; line-height: 1.7; }
