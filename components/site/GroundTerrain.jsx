@@ -25,33 +25,65 @@ const FIELD_EDGES = [
   "M928 591 1035 624 1018 671 907 633Z",
   "M1064 626 1175 659 1161 699 1042 676Z",
 ];
-const CLUSTERS = [
-  { x: 183, y: 209, angle: -8, rows: 3, cols: 5 },
-  { x: 389, y: 281, angle: 22, rows: 4, cols: 5 },
-  { x: 588, y: 196, angle: 10, rows: 3, cols: 6 },
-  { x: 884, y: 325, angle: 31, rows: 4, cols: 7 },
-  { x: 542, y: 498, angle: 28, rows: 3, cols: 5 },
-  { x: 995, y: 552, angle: 15, rows: 3, cols: 6 },
-  { x: 75, y: 116, angle: -6, rows: 2, cols: 4 },
-  { x: 1080, y: 104, angle: 14, rows: 2, cols: 5 },
+const WOODLANDS = [
+  "M72 101C95 74 135 80 154 101S190 117 203 145 176 176 141 166 105 151 80 147 57 126 72 101Z",
+  "M228 179C257 160 274 171 283 191S318 200 333 217 315 245 285 234 260 222 238 222 213 199 228 179Z",
+  "M337 282C367 257 392 268 405 288S443 303 447 329 419 351 395 335 374 326 349 326 321 304 337 282Z",
+  "M567 230C594 208 626 215 643 240S678 251 683 275 656 304 632 284 612 275 583 273 550 249 567 230Z",
+  "M846 173C869 155 900 165 919 184S951 189 960 211 946 241 916 229 888 218 862 215 832 192 846 173Z",
+  "M893 411C925 387 957 406 970 425S1002 439 1006 464 974 487 951 470 934 458 907 457 875 435 893 411Z",
+  "M249 549C274 534 305 537 321 558S351 576 352 597 328 616 301 603 282 598 259 593 233 568 249 549Z",
 ];
-const SECONDARY_ROADS = [
-  "M61 0C74 55 93 72 106 119S141 163 179 176",
-  "M198 208 204 247 258 253 286 279",
-  "M290 154 335 168 400 179",
-  "M441 253 421 280 418 332 451 354 483 406",
-  "M588 184 578 214 602 244 661 257 687 271",
-  "M904 294 883 320 900 370 941 397 978 405",
-  "M535 473 536 510 574 550 623 555",
-  "M1017 514 996 550 1035 603 1078 615",
-  "M22 331 161 316 247 292",
-  "M171 347 189 419 216 477 252 497",
-  "M485 340 561 360 582 425 642 487 689 548",
-  "M966 213 993 277 1023 329 1020 362",
-  "M1069 59 1081 91 1136 134 1199 153",
-  "M765 576 802 526 819 480 851 459",
+const TREE_BELTS = [
+  { x: 95, y: 112, angle: 27, length: 106, depth: 26, count: 28 },
+  { x: 240, y: 193, angle: 24, length: 88, depth: 18, count: 23 },
+  { x: 352, y: 290, angle: 25, length: 96, depth: 22, count: 26 },
+  { x: 590, y: 239, angle: 25, length: 90, depth: 22, count: 24 },
+  { x: 861, y: 183, angle: 22, length: 93, depth: 23, count: 26 },
+  { x: 909, y: 424, angle: 28, length: 95, depth: 23, count: 27 },
+  { x: 266, y: 560, angle: 22, length: 84, depth: 20, count: 24 },
+  { x: 66, y: 428, angle: -12, length: 112, depth: 6, count: 24 },
+  { x: 347, y: 166, angle: 12, length: 120, depth: 5, count: 23 },
+  { x: 595, y: 428, angle: -17, length: 86, depth: 6, count: 19 },
+  { x: 1000, y: 280, angle: -20, length: 102, depth: 6, count: 22 },
 ];
-const STREAM = "M678 -30C636 41 664 77 614 119S583 164 563 207 555 261 514 293 468 346 455 385 461 439 424 464 409 512 373 547 345 610 290 646 247 679 209 735";
+const SPARSE_STANDS = [
+  { x: 203, y: 375, angle: 70, length: 29, depth: 12, count: 8 },
+  { x: 517, y: 514, angle: -12, length: 36, depth: 15, count: 9 },
+  { x: 748, y: 99, angle: 30, length: 37, depth: 12, count: 8 },
+  { x: 789, y: 550, angle: -24, length: 35, depth: 16, count: 8 },
+  { x: 1096, y: 522, angle: 67, length: 35, depth: 13, count: 9 },
+];
+const CONTOURS = [
+  "M73 55C111 37 143 41 175 62M63 65C107 41 146 48 178 72M55 76C99 50 145 55 181 81",
+  "M403 84C443 60 496 72 520 101M397 94C441 71 486 80 512 108M392 104C433 82 477 87 505 117",
+  "M1037 97C1063 64 1113 63 1156 92M1044 107C1073 76 1110 76 1147 101M1053 117C1079 91 1109 89 1139 111",
+  "M118 608C155 578 198 583 220 612M126 615C160 590 192 591 213 619M134 624C160 604 185 602 206 626",
+  "M779 625C802 605 851 609 873 637M787 633C808 617 845 620 864 643M796 641C817 630 839 631 854 649",
+];
+// Tiny, generic earthwork symbols add context, without describing a real layout.
+const EARTHWORKS = [
+  { x: 306, y: 305, angle: 23 },
+  { x: 476, y: 488, angle: -18 },
+  { x: 653, y: 329, angle: 21 },
+  { x: 958, y: 332, angle: 65 },
+  { x: 867, y: 575, angle: -17 },
+];
+
+function TreeStand({ stand, seed }) {
+  return <g transform={`translate(${stand.x} ${stand.y}) rotate(${stand.angle})`}>
+    {Array.from({ length: stand.count }, (_, index) => {
+      const x = index / (stand.count - 1) * stand.length;
+      const y = Math.sin(index * 2.37 + seed) * stand.depth * .48 + Math.sin(index * .62) * 2.3;
+      const radius = 2.7 + ((index * 7 + seed) % 9) * .28;
+      return <g key={index}>
+        <ellipse cx={x + 1.7} cy={y + 2.1} rx={radius + .9} ry={radius * .77} fill="#121a19" opacity=".52" />
+        <ellipse cx={x} cy={y} rx={radius} ry={radius * .83} fill={index % 3 ? "#3c4741" : "#4d554d"} opacity=".74" />
+        <path d={`M${x - radius * .44} ${y - .3}q${radius * .3} ${-radius * .4} ${radius * .65} ${-radius * .28}`} stroke="#939b89" strokeWidth=".45" opacity=".27" fill="none" />
+      </g>;
+    })}
+  </g>;
+}
 
 export default function GroundTerrain({ relief = true }) {
   return <g aria-hidden="true" pointerEvents="none">
@@ -60,37 +92,17 @@ export default function GroundTerrain({ relief = true }) {
     <g fill="none" stroke="#c4c7c6" strokeWidth=".55" opacity={relief ? ".13" : ".08"}>
       {FIELD_EDGES.map((path, index) => <path key={index} d={path} />)}
     </g>
-    <path d={STREAM} fill="none" stroke="#151c20" strokeWidth="6.5" opacity=".72" />
-    <path d={STREAM} fill="none" stroke="#768286" strokeWidth="1.6" opacity=".34" />
-    <g fill="none" stroke="#171b1c" strokeWidth="5" opacity=".72">
-      {SECONDARY_ROADS.map((path, index) => <path key={index} d={path} />)}
+    <g fill="#1f2b27" opacity=".34">
+      {WOODLANDS.map((path, index) => <path key={index} d={path} />)}
     </g>
-    <g fill="none" stroke="#9b9b92" strokeWidth="1.15" opacity=".44">
-      {SECONDARY_ROADS.map((path, index) => <path key={index} d={path} />)}
+    {[...TREE_BELTS, ...SPARSE_STANDS].map((stand, index) => <TreeStand key={index} stand={stand} seed={index * 3} />)}
+    <g fill="none" stroke="#c3c7bd" strokeWidth=".45" opacity={relief ? ".12" : ".2"}>
+      {CONTOURS.map((path, index) => <path key={index} d={path} />)}
     </g>
-    {CLUSTERS.map((cluster, clusterIndex) => <g key={clusterIndex} transform={`translate(${cluster.x} ${cluster.y}) rotate(${cluster.angle})`}>
-      <path d={`M-6 -7H${cluster.cols * 13}V${cluster.rows * 13 + 1}H-6Z`} fill="#24282a" opacity=".34" />
-      {Array.from({ length: cluster.rows * cluster.cols }, (_, index) => {
-        if ((index + clusterIndex * 2) % 7 === 1) return null;
-        const x = index % cluster.cols * 13;
-        const y = Math.floor(index / cluster.cols) * 13;
-        const w = 6 + (index % 3);
-        const h = 4 + ((index + 1) % 3);
-        return <g key={index}>
-          <rect x={x + 1.6} y={y + 2} width={w} height={h} fill="#131718" opacity=".9" />
-          <rect x={x} y={y} width={w} height={h} fill={index % 3 === 0 ? "#878985" : "#646a68"} stroke="#b2b3a8" strokeWidth=".25" />
-          <path d={`M${x} ${y + h / 2}h${w}`} stroke="#303638" strokeWidth=".5" />
-        </g>;
-      })}
+    {EARTHWORKS.map((position, index) => <g key={index} transform={`translate(${position.x} ${position.y}) rotate(${position.angle})`} fill="none" strokeLinecap="round" opacity=".48">
+      <path d="M-9 5Q-10-5 0-6T10 5" stroke="#111818" strokeWidth="3.5" />
+      <path d="M-11 5Q-12-7 0-8T12 5" stroke="#879084" strokeWidth="1.2" />
+      <path d="M-6 6H6" stroke="#5b665b" strokeWidth="2" />
     </g>)}
-    <g transform="translate(725 118) rotate(12)" fill="#727775" stroke="#a3a6a0" strokeWidth=".4" opacity=".77">
-      <rect width="27" height="11" /><rect y="16" width="27" height="11" />
-      <rect x="33" width="27" height="27" />
-      <path d="M0 5.5h27M0 21.5h27M46.5 0v27" fill="none" stroke="#383e3e" />
-    </g>
-    <g transform="translate(1068 466)" fill="#777d79" stroke="#b0b4ad" strokeWidth=".4" opacity=".75">
-      {[0, 13, 26].map(x => <g key={x}><circle cx={x} r="4.4" /><circle cx={x} cy="12" r="4.4" /></g>)}
-      <rect x="-5" y="23" width="37" height="10" />
-    </g>
   </g>;
 }

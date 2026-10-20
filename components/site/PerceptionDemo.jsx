@@ -38,7 +38,7 @@ export default function PerceptionDemo({ motionPaused = false }) {
     </div>
     {sceneKey === "air" ? <FlightSequence key={`air-${replay}`} motionPaused={paused} showOverlays={showOverlays} onPlaybackStateChange={setFilmPlayback} /> : <GroundRecon key={`ground-${replay}`} motionPaused={paused} showOverlays={showOverlays} />}
     <div className={styles.footer}>
-      <p className={styles.caption}>{sceneKey === "air" ? "Drone-on-drone interception / Concept film" : "Connected tracks & aircraft views / Illustrative scenario"}</p>
+      <p className={styles.caption}>{sceneKey === "air" ? "Drone-on-drone interception / Concept film" : "Frontline assets & aircraft views / Illustrative scenario"}</p>
       <div className={styles.controls}>
         <button type="button" className={styles.control} aria-pressed={showOverlays} onClick={() => setShowOverlays(value => !value)}><span className={styles.annotationIcon} aria-hidden="true" /><span>{showOverlays ? "Hide overlay" : "Show overlay"}</span></button>
         <button type="button" className={styles.control} onClick={() => { setReplay(value => value + 1); setLocalPaused(false); }} disabled={motionPaused || reducedMotion} aria-label="Replay sequence"><span aria-hidden="true">↺</span><span>Replay</span></button>

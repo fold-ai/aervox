@@ -39,7 +39,7 @@ export default function PlatformPage() {
       <section id="explore" className={styles.explore} aria-labelledby="explore-title">
         <div>
           <SectionLabel number="01">CONNECTED VIEW</SectionLabel>
-          <div className={styles.exploreTitle}><h2 id="explore-title">The whole area.<br />Every perspective.</h2><p>Select an aircraft to open its camera. Follow a vehicle, change the viewpoint, and return to the connected overview.</p></div>
+          <div className={styles.exploreTitle}><h2 id="explore-title">The whole area.<br />Every perspective.</h2><p>Select an aircraft to open its camera. Inspect armored equipment, change the viewpoint, and return to the connected overview.</p></div>
         </div>
         <PerceptionDemo />
         <div className={styles.demoFoot}><span>INTERACTIVE PLATFORM CONCEPT</span><span>Authored scenarios. Simulated observations.</span></div>
@@ -65,7 +65,7 @@ export default function PlatformPage() {
           <div className={styles.developmentColumn}>
             <div className={styles.developmentLabel}><span className={styles.currentMark} aria-hidden="true" />EXPLORE TODAY</div>
             <h3>The interactive concept.</h3>
-            <ul><li>Connected overview with moving vehicle and friendly aircraft markers.</li><li>Selectable aircraft views and full-color 3D camera perspectives.</li><li>Track selection, playback controls, and an air-sequence concept film.</li></ul>
+            <ul><li>Frontline overview with armored equipment, positions, personnel, and aircraft.</li><li>Selectable aircraft views and 3D field-camera perspectives.</li><li>Track selection, playback controls, and an air-sequence concept film.</li></ul>
             <a className={styles.textLink} href="#explore">Open the demonstration <Arrow /></a>
           </div>
           <div className={styles.developmentColumn}>
