@@ -113,7 +113,7 @@ export default function InvestmentDeckFrame({ slides = [], brief = false, childr
     <div ref={frameRef} className={styles.frame} data-presentation={presentation}>
       <header className={styles.topbar}>
         <a className={styles.brand} href="/" aria-label="Actprove home">
-          <Image src={wordmark} alt="Actprove" priority sizes="(max-width: 660px) 148px, 171px" />
+          <Image src={wordmark} alt="Actprove" priority unoptimized sizes="(max-width: 660px) 148px, 171px" />
           <span>DEFENSE TECHNOLOGIES</span>
         </a>
         <div className={styles.topActions}>
