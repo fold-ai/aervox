@@ -29,8 +29,8 @@ const slides = [
     key: "product", label: "The initial product", nav: "ACT-1 + PROVE-1",
     title: <>ACT-1 and PROVE-1</>,
     content: <><div className={styles.coreProducts}>
-      <article><span className={styles.label}>ONBOARD / BETA</span><h3>ACT-1</h3><p>Compute and perception software integrated with the aircraft and its sensors. Our first application is interceptor drones.</p></article>
-      <article><span className={styles.label}>OPERATOR / BETA</span><h3>PROVE-1</h3><p>Ground software for control, telemetry, observation review and equipment status. Connects the aircraft's data to the operator.</p></article>
+      <article><span className={styles.label}>ONBOARD / BETA</span><h3>ACT-1</h3><p>Compute and perception integrated with the aircraft and its sensors. Interceptor systems: $2,000-$2,500 each. Larger-drone pricing varies by configuration.</p></article>
+      <article><span className={styles.label}>OPERATOR / BETA</span><h3>PROVE-1</h3><p>Ground software for control, telemetry, observation review and equipment status. Pricing for PROVE-1 hardware and software is under discussion.</p></article>
     </div><p className={styles.bridge}>One integration covers the onboard system and the operator workflow. Manufacturers retain their aircraft; ACTPROVE supplies the intelligence layer.</p></>
   },
   {
@@ -47,7 +47,7 @@ const slides = [
     content: <><div className={styles.contractScale}>
       <div><span className={styles.label}>CONTRACTED INITIAL BATCH</span><strong>50</strong><p>For a new generation of interceptor drones from Wild Hornets, a Ukrainian drone supplier.</p></div>
       <div><span className={styles.label}>PROPOSED FOLLOW-ON</span><strong>1,000+</strong><p>Potential additional systems for later drone batches if the initial 50 systems perform well.</p></div>
-    </div><div className={styles.contractValue}><strong>$2-2.5M</strong><p>Indicative value of the follow-on proposed by Wild Hornets. Dependent on initial-batch performance and final commercial terms; not committed revenue.</p></div></>
+    </div><div className={styles.contractValue}><strong>$2-2.5M</strong><p>Indicative value of the follow-on proposed by Wild Hornets. Dependent on initial-batch performance and final commercial terms; not committed revenue.</p></div><p className={styles.sourceNote}>ACT-1 interceptor pricing: $2,000-$2,500 per system. Estimated markup on cost: ~45%, implying ~31% gross margin.</p></>
   },
   {
     key: "manufacturers", label: "Manufacturer collaboration", nav: "Ukrainian manufacturers",
@@ -69,13 +69,15 @@ const slides = [
     </>
   },
   {
-    key: "model", label: "Business model", nav: "Commercial model",
-    title: <>System supply, integration and support</>,
-    content: <><Rows items={[
-      ["System supply", "Hardware and software supplied to drone manufacturers. The Wild Hornets contract covers an initial 50 systems."],
-      ["OEM integration", "Aircraft-specific installation and acceptance work, scoped to the customer's configuration."],
-      ["Support and upgrades", "PROVE-1 software updates, technical support and hardware upgrades."],
-    ]} /><p className={styles.sourceNote}>Pricing and costs are specific to each configuration. The proposed follow-on remains subject to initial-batch performance and commercial terms.</p></>
+    key: "model", label: "Business model", nav: "Pricing + unit economics",
+    title: <>ACT-1 pricing and product economics</>,
+    content: <><div className={styles.unitEconomics}>
+      <div><span className={styles.label}>ACT-1 / INTERCEPTOR SYSTEM</span><strong>$2k-$2.5k</strong><p>Price per system for interceptor drones.</p></div>
+      <div><span className={styles.label}>ESTIMATED MARKUP ON COST</span><strong>~45%</strong><p>Equivalent to approximately 31% gross margin.</p></div>
+    </div><Rows items={[
+      ["Larger drones", "ACT-1 pricing varies with the aircraft, sensors and hardware configuration."],
+      ["Other products", "Pricing for PROVE-1 hardware and software, ERA-1 and ARCA-1 remains under discussion."],
+    ]} /><p className={styles.sourceNote}>Pricing and markup are current management estimates. OEM integration, updates and support are scoped per deployment.</p></>
   },
   {
     key: "portfolio", label: "Platform expansion", nav: "Product roadmap",
