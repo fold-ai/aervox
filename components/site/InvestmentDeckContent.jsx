@@ -13,7 +13,7 @@ const slides = [
     key: "thesis", label: "Investor presentation / October 2026", nav: "ACTPROVE", cover: true,
     title: <>Software infrastructure<br />for unmanned systems</>,
     content: <>
-      <p className={styles.coverDescription}>Onboard intelligence and ground software, integrated with manufacturers. Starting with interceptor drones. Built to extend across connected equipment.</p>
+      <p className={styles.coverDescription}>Onboard intelligence and ground software for manufacturers. Contracted to supply 50 systems for Wild Hornets' new generation of interceptor drones.</p>
       <div className={styles.coverBottom}><p><strong>Zakhar Bernyk</strong><span>Founder, CEO and lead programmer / ex-Fire Point</span></p><p><strong>$1.5M</strong><span>Target equity raise</span></p><p><strong>$20M</strong><span>Target post-money valuation</span></p></div>
     </>
   },
@@ -42,6 +42,14 @@ const slides = [
     </div><p className={styles.sourceNote}>Company-reported prototype result. Repeatability and configuration-level acceptance are the next validation gates.</p></>
   },
   {
+    key: "traction", label: "Wild Hornets contract", nav: "50 systems + potential follow-on",
+    title: <>50 systems contracted<br />with Wild Hornets</>,
+    content: <><div className={styles.contractScale}>
+      <div><span className={styles.label}>CONTRACTED INITIAL BATCH</span><strong>50</strong><p>For a new generation of interceptor drones from Wild Hornets, a Ukrainian drone supplier.</p></div>
+      <div><span className={styles.label}>PROPOSED FOLLOW-ON</span><strong>1,000+</strong><p>Potential additional systems for later drone batches if the initial 50 systems perform well.</p></div>
+    </div><div className={styles.contractValue}><strong>$2-2.5M</strong><p>Indicative value of the follow-on proposed by Wild Hornets. Dependent on initial-batch performance and final commercial terms; not committed revenue.</p></div></>
+  },
+  {
     key: "manufacturers", label: "Manufacturer collaboration", nav: "Ukrainian manufacturers",
     title: <>Working directly with manufacturers</>,
     content: <><div className={styles.manufacturerLayout}>
@@ -61,21 +69,13 @@ const slides = [
     </>
   },
   {
-    key: "expansion", label: "International expansion plan", nav: "International rollout",
-    title: <>Validated systems for<br />international customers</>,
+    key: "model", label: "Business model", nav: "Commercial model",
+    title: <>System supply, integration and support</>,
     content: <><Rows items={[
-      ["United States", "Pursue integrations with defense manufacturers and partners serving U.S. customers."],
-      ["Europe", "Expand through aircraft manufacturers and equipment integration partners."],
-      ["Middle East", "Pursue customer evaluations and local integration partnerships for validated configurations."],
-    ]} /><p className={styles.sourceNote}>Planned expansion after Ukrainian validation. Each entry requires customer acceptance and applicable approvals.</p></>
-  },
-  {
-    key: "model", label: "Business model", nav: "Revenue + unit economics",
-    title: <>System sales with ongoing support</>,
-    content: <><div className={styles.unitEconomics}><div><span className={styles.label}>TARGET SYSTEM PRICE</span><strong>$5k-$10k</strong><p>Depends on the sensor and hardware configuration.</p></div><div><span className={styles.label}>PRELIMINARY UNIT COST</span><strong>$2k-$5k</strong><p>Current estimate; configuration BOMs are being refined.</p></div></div><Rows items={[
-      ["OEM integration", "Aircraft-specific engineering, installation and acceptance work."],
-      ["Recurring support", "PROVE-1 software updates, technical support and hardware upgrades. Pricing is set with each deployment."],
-    ]} /><p className={styles.sourceNote}>Internal estimates, not contracted pricing. Price and cost ranges cover different configurations; they do not establish a gross margin.</p></>
+      ["System supply", "Hardware and software supplied to drone manufacturers. The Wild Hornets contract covers an initial 50 systems."],
+      ["OEM integration", "Aircraft-specific installation and acceptance work, scoped to the customer's configuration."],
+      ["Support and upgrades", "PROVE-1 software updates, technical support and hardware upgrades."],
+    ]} /><p className={styles.sourceNote}>Pricing and costs are specific to each configuration. The proposed follow-on remains subject to initial-batch performance and commercial terms.</p></>
   },
   {
     key: "portfolio", label: "Platform expansion", nav: "Product roadmap",
@@ -99,10 +99,10 @@ const slides = [
     key: "milestones", label: "Execution targets", nav: "Next 12 months",
     title: <>The next 12 months</>,
     content: <><div className={styles.milestoneRows}>
-      <div><span>NOW</span><h3>Working betas</h3><p>ACT-1 tested on a Savlo aircraft. PROVE-1 beta under test. Prepare repeatable partner evaluations.</p></div>
-      <div><span>NEXT</span><h3>OEM acceptance</h3><p>Document configuration-level results, integration requirements and production-intent hardware.</p></div>
+      <div><span>NOW</span><h3>First supply contract</h3><p>50 systems contracted with Wild Hornets. ACT-1 tested on a Savlo aircraft; PROVE-1 beta under test.</p></div>
+      <div><span>NEXT</span><h3>Initial batch delivery</h3><p>Deliver and integrate the contracted 50 systems, then evaluate performance with the customer.</p></div>
       <div><span>Q2 2027</span><h3>Formal field programme</h3><p>Planned first testing programme in actual operating conditions in Ukraine, building on initial prototype tests.</p></div>
-      <div><span>ROUND OBJECTIVE</span><h3>Customer conversion</h3><p>Convert successful evaluations into priced OEM orders and prepare validated configurations for international evaluation.</p></div>
+      <div><span>ROUND OBJECTIVE</span><h3>Qualify for expansion</h3><p>Use initial-batch results to secure the potential 1,000+ system follow-on and prepare international OEM evaluations.</p></div>
     </div></>
   },
   {
@@ -115,12 +115,12 @@ const slides = [
         ["Testing", "15%", "$225k"],
         ["Compliance and operations", "10%", "$150k"],
         ["Reserve", "5%", "$75k"],
-      ]} /><div className={styles.fundingPurpose}><h3>Fund the first commercial product</h3><p>ACT-1 and PROVE-1 validation, repeatable OEM installation and conversion to paid orders.</p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a><span className={styles.label}>ZAKHAR BERNYK / FOUNDER & CEO</span></div>
+      ]} /><div className={styles.fundingPurpose}><h3>Deliver the first customer batch</h3><p>Fulfil the 50-system Wild Hornets contract, validate ACT-1 and PROVE-1, and prepare for potential follow-on production.</p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a><span className={styles.label}>ZAKHAR BERNYK / FOUNDER & CEO</span></div>
     </div></>
   },
 ];
 
-const briefKeys = new Set(["thesis", "product", "evidence", "manufacturers", "validation", "round"]);
+const briefKeys = new Set(["thesis", "product", "evidence", "traction", "validation", "round"]);
 export default function InvestmentDeckContent({ brief = false }) {
   const visible = brief ? slides.filter(slide => briefKeys.has(slide.key)) : slides;
   return <InvestmentDeckFrame brief={brief} slides={visible.map(slide => slide.nav)}><div className={styles.content}>{visible.map((slide, index) => {

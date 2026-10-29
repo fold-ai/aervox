@@ -48,6 +48,12 @@
 .unitEconomics { display:grid; grid-template-columns:1fr 1fr; gap:7%; border-top:1px solid var(--deck-line); padding-top:18px; }
 .unitEconomics strong { display:block; font:400 clamp(42px,5vw,74px)/1.05 var(--font-display),sans-serif; letter-spacing:-.045em; margin:13px 0 10px; }
 .unitEconomics p { font-size:15px; line-height:1.5; }
+.contractScale { display:grid; grid-template-columns:1fr 1fr; gap:7%; border-top:1px solid var(--deck-line); padding-top:20px; }
+.contractScale strong { display:block; font:400 clamp(76px,7vw,112px)/1 var(--font-display),sans-serif; letter-spacing:-.06em; margin:12px 0 15px; }
+.contractScale p { font-size:17px; line-height:1.55; max-width:470px; }
+.contractValue { display:grid; grid-template-columns:1fr 1.75fr; gap:6%; align-items:center; border-top:1px solid var(--deck-line); padding-top:22px; }
+.contractValue strong { font:400 clamp(33px,3.5vw,54px)/1.1 var(--font-display),sans-serif; letter-spacing:-.04em; }
+.contractValue p { font-size:15px; line-height:1.55; }
 .tableWrap { width:100%; }
 .evidenceTable { width:100%; border-collapse:collapse; table-layout:fixed; text-align:left; }
 .evidenceTable th,.evidenceTable td { padding:17px 22px 17px 0; border-bottom:1px solid var(--deck-line); vertical-align:top; font-size:clamp(15px,1.3vw,18px); line-height:1.5; font-weight:400; overflow-wrap:anywhere; }
@@ -96,6 +102,7 @@
   .manufacturerLayout { padding-top:20px; }.manufacturerNames { gap:22px 18px; }.collaborationNotes p { font-size:15px; }
   .processList h3 { font-size:23px; margin:16px 0 12px; }.processList p { font-size:15px; }
   .unitEconomics strong { font-size:51px; margin:10px 0 8px; }.unitEconomics p { font-size:14px; }
+  .contractScale { padding-top:18px; }.contractScale strong { font-size:78px; margin:10px 0 13px; }.contractScale p { font-size:16px; }.contractValue { padding-top:18px; }.contractValue p { font-size:14px; }
   .evidenceTable th,.evidenceTable td { padding-top:13px; padding-bottom:13px; font-size:15px; }.evidenceTable thead th { font-size:9px; }
   .founderLayout > article > h3 { font-size:61px; }.teamDetails h3 { font-size:26px; }.teamDetails p { font-size:16px; }
   .milestoneRows > div { padding:16px 0; }.milestoneRows h3 { font-size:23px; }.milestoneRows p { font-size:15px; }
@@ -119,6 +126,7 @@
   .manufacturerLayout { grid-template-columns:1fr; gap:28px; padding-top:21px; }.manufacturerNames { grid-template-columns:1fr 1fr; gap:22px 15px; }.manufacturerNames li { font-size:27px; }.collaborationNotes h3 { font-size:25px; }.collaborationNotes p { font-size:15px; }
   .processList { grid-template-columns:1fr; gap:22px; }.processList li { display:grid; grid-template-columns:26px 1fr; gap:12px; padding-top:20px; }.processList li > span { padding-top:4px; }.processList h3 { margin:0 0 11px; font-size:23px; }.processList p { font-size:15px; }
   .unitEconomics { grid-template-columns:1fr; gap:24px; }.unitEconomics strong { font-size:49px; margin:10px 0; }.unitEconomics p { font-size:15px; }
+  .contractScale { grid-template-columns:1fr; gap:26px; }.contractScale strong { font-size:80px; }.contractScale p { font-size:16px; }.contractValue { grid-template-columns:1fr; gap:13px; }.contractValue strong { font-size:40px; }.contractValue p { font-size:14px; }
   .evidenceTable th,.evidenceTable td { padding:15px 12px 15px 0; font-size:14px; }.evidenceTable thead th { font-size:9px; letter-spacing:0; }.evidenceTable th:first-child { width:34%; }
   .founderLayout { grid-template-columns:1fr; gap:27px; padding-top:23px; }.founderLayout > article > h3 { font-size:57px; }.founderLayout > article > p,.teamDetails p { font-size:16px; }.content .founderCredential { font-size:25px; }
   .teamDetails { border-top:1px solid var(--deck-line); padding-top:24px; }.teamDetails h3 { font-size:27px; margin:12px 0 9px; }
