@@ -14,7 +14,7 @@ const slides = [
     key: "thesis", label: "Investor presentation / October 2026", nav: "ACTPROVE", cover: true,
     title: <>Software infrastructure<br />for unmanned systems</>,
     content: <>
-      <p className={styles.coverDescription}>Onboard computing and ground software for drone manufacturers. Initial contract: 50 ACT-1 systems for Wild Hornets' new generation of interceptor drones.</p>
+      <p className={styles.coverDescription}>Onboard computing and ground software for drone manufacturers. Technical requirements and development scope agreed for a 50-system ACT-1 programme with Wild Hornets.</p>
       <div className={styles.coverBottom}><p><strong>Zakhar Bernyk</strong><span>Founder, CEO and lead programmer / ex-Fire Point</span></p><p><strong>$1.5M</strong><span>Target equity raise</span></p><p><strong>$20M</strong><span>Target post-money valuation</span></p></div>
     </>
   },
@@ -38,24 +38,24 @@ const slides = [
     key: "evidence", label: "Prototype evidence", nav: "ACT-1 test result",
     title: <>ACT-1 tested on a Savlo aircraft</>,
     content: <><div className={styles.evidenceLayout}>
-      <div className={styles.testResult}><span className={styles.label}>DRONE TARGET LOCK / BETA TEST</span><strong>7 km</strong><p>ACT-1 acquired and locked a drone target during a prototype test on a Savlo Dynamics aircraft.</p></div>
-      <figure className={styles.testFootage}><video controls muted playsInline preload="none" poster="/media/act-1-testing/detection-tracking-poster.jpg" aria-label="ACT-1 detection and tracking test footage"><source src="/media/act-1-testing/detection-tracking-test-silent.mp4" type="video/mp4" /><a href="/media/act-1-testing/detection-tracking-test-silent.mp4">Open ACT-1 test footage</a></video><img className={styles.printEvidence} src="/media/act-1-testing/detection-tracking-poster.jpg" alt="ACT-1 detection and tracking test sensor view" width="480" height="360" /><figcaption>Real detection and tracking test footage. This clip shows the sensor view, not an interception.</figcaption></figure>
+      <div className={styles.testResult}><span className={styles.label}>ONBOARD-CAMERA ACQUISITION / TEST</span><strong>2 km</strong><p>ACT-1 acquired the target using the drone's own camera during testing with Savlo Dynamics.</p><p>The company reports a subsequent autonomous interception.</p></div>
+      <figure className={styles.testFootage}><video controls muted playsInline preload="none" poster="/media/act-1-testing/detection-tracking-poster.jpg" aria-label="ACT-1 detection and tracking test footage"><source src="/media/act-1-testing/detection-tracking-test-silent.mp4" type="video/mp4" /><a href="/media/act-1-testing/detection-tracking-test-silent.mp4">Open ACT-1 test footage</a></video><img className={styles.printEvidence} src="/media/act-1-testing/detection-tracking-poster.jpg" alt="ACT-1 detection and tracking test sensor view" width="480" height="360" /><figcaption>Onboard-camera acquisition and tracking from the Savlo Dynamics test. The interception is not shown in this clip.</figcaption></figure>
     </div><p className={styles.sourceNote}>Company-reported prototype result. Repeatability and aircraft-specific acceptance remain validation milestones.</p></>
   },
   {
-    key: "traction", label: "Wild Hornets contract", nav: "50 systems + potential follow-on",
-    title: <>50 systems contracted<br />with Wild Hornets</>,
+    key: "traction", label: "Wild Hornets programme", nav: "50-system scope + potential follow-on",
+    title: <>50-system programme<br />with Wild Hornets</>,
     content: <><div className={styles.contractScale}>
-      <div><span className={styles.label}>CONTRACTED INITIAL BATCH</span><strong>50</strong><p>ACT-1 systems for Wild Hornets' new generation of interceptor drones.</p></div>
+      <div><span className={styles.label}>TECHNICAL SCOPE AGREED</span><strong>50</strong><p>ACT-1 systems for new interceptor drones. Technical requirements and development scope agreed.</p></div>
       <div><span className={styles.label}>CONDITIONAL FOLLOW-ON</span><strong>1,000+</strong><p>Proposed additional systems, subject to performance of the initial batch and final terms.</p></div>
     </div><div className={styles.contractValue}><strong>$2-2.5M</strong><p>Illustrative value for 1,000 systems at $2,000-$2,500 each. The follow-on is conditional and does not represent committed revenue.</p></div><p className={styles.sourceNote}>ACT-1 interceptor pricing: $2,000-$2,500 per system. Estimated cost markup: ~45%, implying ~31% gross margin.</p></>
   },
   {
     key: "manufacturers", label: "Manufacturer relationships", nav: "Manufacturers + test partners",
     title: <>Working with Ukrainian manufacturers</>,
-    content: <><div className={styles.partnerContract}><div><span className={styles.label}>CONTRACTED CUSTOMER</span><h3>Wild Hornets</h3></div><p>Initial supply contract for 50 ACT-1 systems for interceptor drones.</p></div><div className={styles.manufacturerLayout}>
-      <div><span className={styles.label}>MANUFACTURER COLLABORATION</span><ul className={styles.manufacturerNames}><li>Skyeton</li><li>Vyriy Drone</li><li>TAF Industries</li><li>SkyFall</li></ul></div>
-      <div className={styles.collaborationNotes}><article><h3>Savlo Dynamics</h3><p>Aircraft integration and ACT-1 beta testing.</p></article><article><h3>BRAVE1</h3><p>Community, data access and test partners.</p></article></div>
+    content: <><div className={styles.partnerContract}><div><span className={styles.label}>50-SYSTEM PROGRAMME</span><h3>Wild Hornets</h3></div><p>Technical requirements and development scope agreed for 50 ACT-1 systems.</p></div><div className={styles.manufacturerLayout}>
+      <div><span className={styles.label}>COOPERATION DISCUSSIONS</span><ul className={styles.manufacturerNames}><li>Skyeton</li><li>Vyriy Drone</li><li>TAF Industries</li><li>SkyFall</li></ul></div>
+      <div className={styles.collaborationNotes}><article><h3>Savlo Dynamics</h3><p>Close collaboration, integration and completed onboard tests.</p></article><article><h3>BRAVE1</h3><p>Close collaboration on data access and test opportunities.</p></article></div>
     </div><p className={styles.bridge}>Ukraine is our base for recurring tests and manufacturer feedback. We plan to expand to the US, Europe and the Middle East after validation.</p></>
   },
   {
@@ -72,9 +72,9 @@ const slides = [
   {
     key: "portfolio", label: "Platform expansion", nav: "Product roadmap",
     title: <>Product roadmap</>,
-    content: <><p className={styles.lead}>ACT-1 and PROVE-1 remain the initial commercial focus.</p><Table label="ACTPROVE product expansion directions" headers={["System", "Expansion direction"]} rows={[
+    content: <><p className={styles.lead}>Current development and testing focus on ACT-1 and PROVE-1.</p><Table label="ACTPROVE product expansion directions" headers={["System", "Expansion direction"]} rows={[
       ["DETECT-1", "Planned scene perception for long-range aircraft."],
-      ["ARCA-1", "Radar and camera sensing, with trajectory and flight-pattern analysis in development."],
+      ["ARCA-1", "Radar/camera sensing and trajectory analysis. Near-term testing planned."],
       ["ERA-1 + mini", "Planned hardware adapters linking older equipment and sensors to PROVE-1."],
       ["VISTA-1", "Concept wearable interface for selected PROVE-1 information."],
     ]} /><p className={styles.sourceNote}>Each program has separate development and validation milestones. Future scope includes unmanned ground systems.</p></>
@@ -91,8 +91,8 @@ const slides = [
     key: "milestones", label: "Execution targets", nav: "Next 12 months",
     title: <>The next 12 months</>,
     content: <><div className={styles.milestoneRows}>
-      <div><span>NOW</span><h3>Contract and prototypes</h3><p>50 ACT-1 systems contracted with Wild Hornets. Savlo aircraft test completed. PROVE-1 beta under test.</p></div>
-      <div><span>NEXT</span><h3>Initial batch delivery</h3><p>Deliver and integrate the 50 systems, then evaluate them with Wild Hornets.</p></div>
+      <div><span>NOW</span><h3>Scope and testing</h3><p>Wild Hornets: requirements agreed for 50 systems. ACT-1 and PROVE-1 are the current test priorities.</p></div>
+      <div><span>NEXT</span><h3>Initial programme</h3><p>Develop and validate ACT-1 against the agreed requirements, then prepare the 50-system batch.</p></div>
       <div><span>Q2 2027</span><h3>Formal field validation</h3><p>Planned structured testing in Ukraine, building on the completed prototype tests.</p></div>
       <div><span>ROUND OBJECTIVE</span><h3>Follow-on qualification</h3><p>Use customer results to qualify for the conditional 1,000+ system follow-on and international evaluations.</p></div>
     </div></>
@@ -112,7 +112,7 @@ const slides = [
         ["Testing", "15%", "$225k"],
         ["Compliance and operations", "10%", "$150k"],
         ["Reserve", "5%", "$75k"],
-      ]} /><div className={styles.fundingPurpose}><h3>Deliver the first customer batch</h3><p>Fulfil Wild Hornets' 50-system contract and validate ACT-1 and PROVE-1 for potential follow-on production.</p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a><span className={styles.label}>ZAKHAR BERNYK / FOUNDER & CEO</span></div>
+      ]} /><div className={styles.fundingPurpose}><h3>Deliver the initial 50 systems</h3><p>Fund development, validation and delivery of Wild Hornets' 50-system programme, with ACT-1 and PROVE-1 testing as the priority.</p><a href="mailto:contact@actprove.com">contact@actprove.com <span aria-hidden="true">↗</span></a><span className={styles.label}>ZAKHAR BERNYK / FOUNDER & CEO</span></div>
     </div></>
   },
 ];
