@@ -8,14 +8,14 @@ const films = [
     id: "system-concept",
     title: "System overview",
     duration: "0:47",
-    description: "ARCA-1 sensor station, ACT-1 launch concept and flight sequence.",
+    description: "ARCA-1 station, ACT-1 launch concept and flight sequence.",
     alt: "Concept rendering of an ARCA-1 sensor station beside an aircraft enclosure",
   },
   {
     id: "aircraft-models",
     title: "Aircraft models",
     duration: "0:07",
-    description: "Representative UAV and cruise-missile models used in the visualization.",
+    description: "Representative aircraft models used in the animation.",
     alt: "Representative aircraft model from the concept animation",
   },
 ];
@@ -71,7 +71,7 @@ export default function InvestmentDeckDemo() {
         {films.map(item => <figure key={item.id}><img src={`${mediaPath}/${item.id}-poster.jpg`} alt={item.alt} width="1280" height="726" /><figcaption>{item.title} / {item.duration}</figcaption></figure>)}
         <a href="https://www.actprove.com/investment-deck#slide-11">Watch both films at actprove.com/investment-deck#slide-11</a>
       </div>
-      <p className={styles.sourceNote}>Concept visualization. The prototype-evidence slide contains the real test footage.</p>
+      <p className={styles.sourceNote}>Concept animation. Real test footage is on the evidence slide.</p>
     </div>
   );
 }
