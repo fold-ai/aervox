@@ -37,10 +37,13 @@ export default function InvestmentDeckDemo() {
   }
 
   async function playFilm() {
+    const video = videoRef.current;
+    if (!video) return;
     try {
-      await videoRef.current?.play();
-    } catch {
-      setFailed(true);
+      await video.play();
+    } catch (error) {
+      // Switching clips can abort a pending play request for the old element.
+      if (videoRef.current === video && error?.name !== "AbortError") setFailed(true);
     }
   }
 
