@@ -40,6 +40,13 @@ export default function InvestmentDeckFrame({ slides = [], brief = false, childr
   }, [count, setActive]);
 
   useEffect(() => {
+    const sections = viewportRef.current?.querySelectorAll("[data-investment-slide]");
+    sections?.forEach((section, index) => {
+      if (index !== activeIndex) section.querySelectorAll("video").forEach(video => video.pause());
+    });
+  }, [activeIndex]);
+
+  useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport || !count) return undefined;
     const sections = Array.from(viewport.querySelectorAll("[data-investment-slide]")).slice(0, count);
@@ -79,7 +86,7 @@ export default function InvestmentDeckFrame({ slides = [], brief = false, childr
         presentationButtonRef.current?.focus({ preventScroll: true });
         return;
       }
-      if (target instanceof Element && target.closest("input, textarea, select, button, a, [contenteditable], [role='textbox']")) return;
+      if (target instanceof Element && target.closest("input, textarea, select, button, a, video, [contenteditable], [role='textbox']")) return;
       const commands = {
         ArrowDown: activeRef.current + 1,
         ArrowRight: activeRef.current + 1,

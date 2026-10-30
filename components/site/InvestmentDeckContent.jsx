@@ -1,4 +1,5 @@
 import InvestmentDeckFrame from "./InvestmentDeckFrame";
+import InvestmentDeckDemo from "./InvestmentDeckDemo";
 import styles from "@/app/(public)/investment-deck/investment.module.css";
 
 function Rows({ items }) {
@@ -55,18 +56,7 @@ const slides = [
     content: <><div className={styles.manufacturerLayout}>
       <div><span className={styles.label}>AGREEMENTS TO COLLABORATE</span><ul className={styles.manufacturerNames}><li>Skyeton</li><li>Vyriy Drone</li><li>TAF Industries</li><li>SkyFall</li></ul></div>
       <div className={styles.collaborationNotes}><article><h3>Savlo Dynamics</h3><p>Aircraft integration collaboration and completed ACT-1 beta testing on a Savlo drone.</p></article><article><h3>BRAVE1</h3><p>Access to Ukraine's defense technology community, selected data and a pathway to evaluation partners.</p></article></div>
-    </div><p className={styles.bridge}>We work closely with Ukrainian manufacturers on platform fit, test access and feedback. Collaboration scope is agreed with each company.</p></>
-  },
-  {
-    key: "validation", label: "Why Ukraine first", nav: "Continuous validation",
-    title: <>Ukraine is our validation base</>,
-    content: <><p className={styles.lead}>Our concentration on Ukraine is deliberate. Close manufacturer relationships create a path to recurring tests on partner aircraft and direct feedback on what needs to improve.</p>
-      <ol className={styles.processList}>
-        <li><span>01</span><div><h3>Integrate with the OEM</h3><p>Adapt the system to the manufacturer's aircraft, sensors and operator workflow.</p></div></li>
-        <li><span>02</span><div><h3>Test and record</h3><p>Evaluate each configuration with partners and retain the results and failure cases.</p></div></li>
-        <li><span>03</span><div><h3>Improve the release</h3><p>Use the findings to update the system, then test the next version against the same criteria.</p></div></li>
-      </ol><p className={styles.bridge}>The goal is a repeatable product that can enter the United States, Europe and the Middle East after validation.</p>
-    </>
+    </div><p className={styles.bridge}>Ukraine is our validation base. Close manufacturer collaboration enables recurring tests and product feedback. The goal is to enter the United States, Europe and the Middle East with validated systems.</p></>
   },
   {
     key: "model", label: "Business model", nav: "Pricing + unit economics",
@@ -108,6 +98,11 @@ const slides = [
     </div></>
   },
   {
+    key: "demo", label: "System concept demo", nav: "Watch the concept demo", demo: true,
+    title: <>ACT-1 + ARCA-1 concept demo</>,
+    content: <InvestmentDeckDemo />
+  },
+  {
     key: "round", label: "Priced equity round", nav: "Funding + use of funds", light: true,
     title: <>A $1.5M equity round</>,
     content: <><div className={styles.termsStrip}><div><strong>$20M</strong><span>Target post-money valuation</span></div><div><strong>7.5%</strong><span>Implied new investor ownership</span></div><div><strong>12 months</strong><span>Planned operating runway</span></div></div><div className={styles.fundingLayout}>
@@ -122,13 +117,13 @@ const slides = [
   },
 ];
 
-const briefKeys = new Set(["thesis", "product", "evidence", "traction", "validation", "round"]);
+const briefKeys = new Set(["thesis", "product", "evidence", "traction", "demo", "round"]);
 export default function InvestmentDeckContent({ brief = false }) {
   const visible = brief ? slides.filter(slide => briefKeys.has(slide.key)) : slides;
   return <InvestmentDeckFrame brief={brief} slides={visible.map(slide => slide.nav)}><div className={styles.content}>{visible.map((slide, index) => {
     const number = index + 1;
     const Heading = slide.cover ? "h1" : "h2";
-    return <section key={slide.key} id={`slide-${number}`} data-investment-slide data-slide-key={slide.key} aria-labelledby={`slide-title-${number}`} className={`${styles.slide} ${slide.cover ? styles.cover : ""} ${slide.light ? styles.round : ""}`}>
+    return <section key={slide.key} id={`slide-${number}`} data-investment-slide data-slide-key={slide.key} aria-labelledby={`slide-title-${number}`} className={`${styles.slide} ${slide.cover ? styles.cover : ""} ${slide.light ? styles.round : ""} ${slide.demo ? styles.demoSlide : ""}`}>
       <p className={styles.eyebrow}>{String(number).padStart(2, "0")} / {slide.label}</p>
       <Heading id={`slide-title-${number}`} className={styles.title}>{slide.title}</Heading>
       {slide.content}
