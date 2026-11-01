@@ -7,6 +7,7 @@ import SystemVisual from "@/components/site/SystemVisual";
 import ProveHardware from "@/components/site/ProveHardware";
 import EraSensors, { EraModuleShowcase } from "@/components/site/EraHardware";
 import ActTestFootage from "@/components/site/ActTestFootage";
+import ActConceptFilms from "@/components/site/ActConceptFilms";
 import { systems, getSystem } from "@/lib/site-systems";
 import styles from "../systems.module.css";
 
@@ -48,6 +49,7 @@ export default async function SystemPage({ params }) {
       {system.slug === "prove-1" && <ProveHardware />}
       {system.slug === "era-1" && <EraSensors />}
       {system.slug === "act-1" && <ActTestFootage />}
+      {system.slug === "act-1" && <ActConceptFilms />}
 
       <section className={styles.capabilities} aria-labelledby="capabilities-title">
         <div className={styles.capabilityHeading}><span className={styles.smallSectionLabel}>02 / {system.stage === "research" ? "RESEARCH DIRECTIONS" : "CAPABILITY FOCUS"}</span><h2 id="capabilities-title">{system.stage === "research" ? "Questions worth exploring." : "Designed around the task."}</h2></div>
