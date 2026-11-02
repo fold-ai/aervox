@@ -4,22 +4,22 @@ import styles from "./demo.module.css";
 
 export const metadata = {
   title: "ACTPROVE | YC Application Demo",
-  description: "ACTPROVE demos: system concept, deployment concept, perception interface and onboard tracking.",
+  description: "ACTPROVE demos: Savlo Dynamics and Wild Hornets product concepts, perception interface and onboard tracking.",
   robots: { index: false, follow: false },
   alternates: { canonical: "/yc-application-demo" },
 };
 
 const demos = [
   {
-    id: "system-overview", title: "System overview", label: "CONCEPT ANIMATION", duration: "00:47",
-    description: "ACT-1 and ARCA-1 in an illustrative sensing, launch and flight sequence.",
+    id: "system-overview", title: "Savlo Dynamics concept", label: "CONCEPT ANIMATION", duration: "00:47",
+    description: "Product concept for our collaboration with Savlo Dynamics, showing an illustrative sensing, launch and flight sequence.",
     src: "/media/investor-demo/system-concept.mp4", poster: "/media/investor-demo/system-concept-poster.jpg",
     width: 1280, height: 726,
   },
   {
-    id: "deployment-concept", title: "Deployment concept", label: "CONCEPT ANIMATION", duration: "00:48",
-    description: "A sensor station and four-aircraft enclosure, including aircraft models and a departure sequence.",
-    src: "/media/yc-demo/deployment-concept.mp4", poster: "/media/yc-demo/deployment-concept-poster.jpg",
+    id: "deployment-concept", title: "Wild Hornets concept", label: "CONCEPT ANIMATION", duration: "00:35",
+    description: "Future integrated product concept requested by Wild Hornets as a next phase after delivery of the initial 50 ACT-1 onboard systems.",
+    src: "/media/yc-demo/wild-hornets-concept.mp4", poster: "/media/yc-demo/wild-hornets-concept-poster.jpg",
     width: 1280, height: 720,
   },
   {

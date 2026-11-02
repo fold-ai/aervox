@@ -1,5 +1,6 @@
 // Usage: swift -suppress-warnings scripts/prepare-yc-demo.swift OUTPUT_DIR DEPLOYMENT_MOV PERCEPTION_MOV
 // Or: swift -suppress-warnings scripts/prepare-yc-demo.swift OUTPUT_DIR ONBOARD_MOV
+// Or: swift -suppress-warnings scripts/prepare-yc-demo.swift OUTPUT_DIR --single BASENAME SOURCE_MOV
 // Export silent, streamable MP4s without embedded metadata; preserve source aspect ratios.
 import Foundation
 import AVFoundation
@@ -7,9 +8,10 @@ import ImageIO
 import UniformTypeIdentifiers
 let destination=URL(fileURLWithPath:CommandLine.arguments[1],isDirectory:true)
 try FileManager.default.createDirectory(at:destination,withIntermediateDirectories:true)
-let names = CommandLine.arguments.count == 3 ? ["onboard-tracking"] : ["deployment-concept", "perception-interface"]
+let single = CommandLine.arguments.count == 5 && CommandLine.arguments[2] == "--single"
+let names = single ? [CommandLine.arguments[3]] : (CommandLine.arguments.count == 3 ? ["onboard-tracking"] : ["deployment-concept", "perception-interface"])
 for (index,name) in names.enumerated(){
- let source=AVURLAsset(url:URL(fileURLWithPath:CommandLine.arguments[index+2]))
+ let source=AVURLAsset(url:URL(fileURLWithPath:CommandLine.arguments[single ? 4 : index+2]))
  let duration=try await source.load(.duration)
  let track=try await source.loadTracks(withMediaType:.video).first!
  let composition=AVMutableComposition()
