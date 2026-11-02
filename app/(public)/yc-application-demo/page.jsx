@@ -4,7 +4,7 @@ import styles from "./demo.module.css";
 
 export const metadata = {
   title: "ACTPROVE | YC Application Demo",
-  description: "Three short ACTPROVE demos: system concept, deployment concept and perception interface.",
+  description: "ACTPROVE demos: system concept, deployment concept, perception interface and onboard tracking.",
   robots: { index: false, follow: false },
   alternates: { canonical: "/yc-application-demo" },
 };
@@ -28,6 +28,12 @@ const demos = [
     src: "/media/yc-demo/perception-interface.mp4", poster: "/media/yc-demo/perception-interface-poster.jpg",
     width: 702, height: 304,
   },
+  {
+    id: "onboard-tracking", title: "Onboard tracking", label: "TEST RECORDING", duration: "01:46",
+    description: "Recorded onboard camera view with target tracking markers and telemetry overlays.",
+    src: "/media/yc-demo/onboard-tracking.mp4", poster: "/media/yc-demo/onboard-tracking-poster.jpg",
+    width: 480, height: 360,
+  },
 ];
 
 export default function YCApplicationDemo() {
@@ -37,7 +43,7 @@ export default function YCApplicationDemo() {
       <header className={styles.intro}>
         <span className={styles.eyebrow}>ACTPROVE / YC APPLICATION</span>
         <h1>Product demos.</h1>
-        <p>Onboard intelligence, sensing and connected software. Three short views of what we are building.</p>
+        <p>Onboard intelligence, sensing and connected software. Four views of what we are building.</p>
         <nav aria-label="Demo videos" className={styles.navigation}>
           {demos.map((demo, index) => <a key={demo.id} href={`#${demo.id}`}><span>0{index + 1}</span>{demo.title}<span aria-hidden="true">↓</span></a>)}
         </nav>
@@ -59,7 +65,7 @@ export default function YCApplicationDemo() {
           </figure>
         </section>)}
       </div>
-      <p className={styles.note}>The animations illustrate intended workflows. The interface demo uses sample footage. These videos do not establish validated field performance.</p>
+      <p className={styles.note}>The animations illustrate intended workflows, and the interface demo uses sample footage. The onboard tracking recording is shown separately. These videos do not establish repeatable performance across operating conditions.</p>
       <footer className={styles.footer}><Link href="/">ACTPROVE</Link><a href="mailto:contact@actprove.com">contact@actprove.com ↗</a></footer>
     </main>
   </div>;
