@@ -17,9 +17,9 @@ const demos = [
     width: 1280, height: 726,
   },
   {
-    id: "deployment-concept", title: "Wild Hornets concept", label: "CONCEPT ANIMATION", duration: "00:35",
+    id: "deployment-concept", title: "Wild Hornets concept", label: "CONCEPT ANIMATION", duration: "00:48",
     description: "Future integrated product concept requested by Wild Hornets as a next phase after delivery of the initial 50 ACT-1 onboard systems.",
-    src: "/media/yc-demo/wild-hornets-concept.mp4", poster: "/media/yc-demo/wild-hornets-concept-poster.jpg",
+    src: "/media/yc-demo/wild-hornets-r12.mp4", poster: "/media/yc-demo/wild-hornets-r12-poster.jpg",
     width: 1280, height: 720,
   },
   {
