@@ -1,0 +1,2 @@
+.preview { position: relative; width: 100%; aspect-ratio: 1600 / 692; overflow: hidden; background: #141414; }
+.preview img { position: absolute; top: 0; display: block; width: 100%; height: auto; margin-top: -6.5%; }

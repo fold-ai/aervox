@@ -90,10 +90,17 @@
 .platformChrome { border-color:#3b3b3b; color:#8c8c8c; background:#181818; }
 .platformChrome > span:first-child { color:#ddd; }.platformChrome i { background:#ddd; }
 .platformCaption { border-color:#3b3b3b; color:#aaa; background:#181818; }
+.platformViews { display:flex; flex-wrap:wrap; gap:6px; }
+.platformViews button { min-height:44px; padding:0 13px; border:1px solid #464646; background:transparent; color:#ccc; font:12px var(--font-body),sans-serif; cursor:pointer; }
+.platformViews button[aria-pressed="true"] { border-color:#e1e1e1; background:#e1e1e1; color:#171717; }
+.platformViews button:hover:not([aria-pressed="true"]) { background:#292929; }
+.platformCaption { align-items:center; flex-wrap:wrap; gap:8px 20px; }
 .platformBenefits > div { border-color:#363636; }.platformBenefits p { color:#999; }
 .platformSection :focus-visible { outline-color:#eee; }
 
 @media(max-width:660px) {
+  .platformChrome { flex-wrap:wrap; gap:8px; }
+  .platformViews button { padding-inline:9px; font-size:11px; }
   .disciplines { grid-template-columns:1fr; margin-top:35px; padding-top:0; gap:0; }
   .disciplines > div, .disciplines > div + div { border-left:0; border-top:1px solid #10120f25; padding:18px 0 20px; }
   .disciplines > div:first-child { border-top:0; }

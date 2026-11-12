@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { TrackedScene } from "@/components/site/PerceptionDemo";
+import ProveSoftwarePreview, { proveSoftwareImage } from "@/components/site/ProveSoftwarePreview";
 import SystemVisual from "@/components/site/SystemVisual";
 import { SiteHeader, SiteFooter } from "@/components/site/SiteChrome";
 import styles from "./home.module.css";
@@ -20,6 +21,7 @@ function Arrow({ down = false }) {
   return <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" style={down ? { transform: "rotate(90deg)" } : undefined}><path d="M4 12h15M12 5l7 7-7 7" stroke="currentColor" strokeWidth="1.3" /></svg>;
 }
 export default function HomePage() {
+  const [showMapDemo, setShowMapDemo] = useState(false);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -81,7 +83,25 @@ export default function HomePage() {
       <section className={styles.platformSection} id="platform">
         <div className={styles.sectionLabel}><span>03 / CONNECTED PERCEPTION</span><span>THE ACTPROVE PLATFORM</span></div>
         <div className={styles.platformHeading}><h2>See the whole picture.<br /><span>Then change perspective.</span></h2><Link className={styles.lightLink} href="/platform">Explore the platform <Arrow /></Link></div>
-        <div className={styles.platformFrame}><div className={styles.platformChrome}><span><i /> ACTPROVE / SHARED OBSERVATIONS</span><span>INTERACTIVE CONCEPT</span></div><TrackedScene motionPaused={motionPaused} /><div className={styles.platformCaption}><span>Select an aircraft to switch to its camera view.</span><button className={styles.mapMotion} onClick={() => setPaused(value => !value)} disabled={reducedMotion}>{reducedMotion ? "Motion off" : motionPaused ? "Resume motion" : "Pause motion"}<span aria-hidden="true">{motionPaused ? "▷" : "Ⅱ"}</span></button></div></div>
+        <div className={styles.platformFrame}>
+          <div className={styles.platformChrome}>
+            <span><i aria-hidden="true" /> ACTPROVE / PROVE-1</span>
+            <div className={styles.platformViews} role="group" aria-label="PROVE-1 views">
+              <button type="button" aria-pressed={!showMapDemo} onClick={() => setShowMapDemo(false)}>Software preview</button>
+              <button type="button" aria-pressed={showMapDemo} onClick={() => setShowMapDemo(true)}>Interactive demo</button>
+            </div>
+          </div>
+          {showMapDemo ? <TrackedScene motionPaused={motionPaused} /> : <ProveSoftwarePreview />}
+          <div className={styles.platformCaption}>
+            {showMapDemo ? <>
+              <span>Select an aircraft to switch to its camera view.</span>
+              <button type="button" className={styles.mapMotion} onClick={() => setPaused(value => !value)} disabled={reducedMotion}>{reducedMotion ? "Motion off" : motionPaused ? "Resume motion" : "Pause motion"}<span aria-hidden="true">{motionPaused ? "▷" : "Ⅱ"}</span></button>
+            </> : <>
+              <span>PROVE-1 operator workspace</span>
+              <a className={styles.mapMotion} href={proveSoftwareImage} target="_blank" rel="noreferrer">Open full-size image <span aria-hidden="true">↗</span></a>
+            </>}
+          </div>
+        </div>
         <div className={styles.platformBenefits}><div><span>01</span><h3>A shared view</h3><p>Review armored equipment, reported positions, and connected personnel in one overview.</p></div><div><span>02</span><h3>An aircraft perspective</h3><p>Open a selected drone’s field camera for another perspective.</p></div><div><span>03</span><h3>Context for the operator</h3><p>Connect observations with telemetry and review in the PROVE-1 workflow.</p></div></div>
       </section>
       <section className={styles.integrationSection} id="company">
