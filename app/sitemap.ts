@@ -5,7 +5,7 @@ import { careerRoles } from "@/lib/careers/roles";
 
 /** Public routes only. The console is never listed. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/systems", "/systems/act-1", "/systems/prove-1", "/systems/detect-1", "/systems/arca-1", "/systems/era-1", "/systems/vista-1", "/platform", "/company", "/careers", ...careerRoles.map(role => `/careers/${role.slug}`), "/contact", "/legal", ...policies.map(policy => `/legal/${policy.slug}`)];
+  const pages = ["", "/news/x24", "/systems", "/systems/act-1", "/systems/prove-1", "/systems/detect-1", "/systems/arca-1", "/systems/era-1", "/systems/vista-1", "/platform", "/company", "/careers", ...careerRoles.map(role => `/careers/${role.slug}`), "/contact", "/legal", ...policies.map(policy => `/legal/${policy.slug}`)];
   return pages.map(path => ({
     url: absoluteUrl(path || "/"),
     changeFrequency: "monthly",

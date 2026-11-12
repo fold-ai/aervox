@@ -4,7 +4,7 @@ import "./console.css";
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: "variable",
   variable: "--font-inter-tight",
   display: "swap",
 });

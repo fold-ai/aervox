@@ -189,20 +189,39 @@ function Interface({ id, state, setState }) {
   </svg>;
 }
 function initialState() { return { mode: "Overview", selectedId: "R-01", frame: 2, zoom: 1, page: 0, layers: { air: true, ground: true, vista: true, observations: true } }; }
+
+function SoftwarePreview() {
+  return <div className={styles.softwarePreview}>
+    <img src="/media/prove-1-software-preview.webp" alt="ACTPROVE operator software with a satellite map, asset tracks and mission panels" width="1600" height="900" loading="lazy" decoding="async" />
+  </div>;
+}
+
 export default function ProveMonitor({ compact = false, className = "" }) {
   const id = `prove-${useId().replace(/:/g, "")}`;
   const [state, setState] = useState(initialState);
+  const [showDemo, setShowDemo] = useState(false);
   const dialog = useRef(null);
+
+  function openInterface(interactive) {
+    setShowDemo(interactive);
+    dialog.current.showModal();
+  }
+
   return <figure className={`${styles.figure} ${compact ? styles.compact : ""} ${className}`} data-system="prove-1">
     <div className={styles.stage}><div className={styles.device}>
       <img className={styles.hardware} src="/media/prove-1-field-monitor.webp" alt="Graphite field monitor with protective casing and physical controls, an illustrative hardware presentation" width="1536" height="1024" loading="lazy" decoding="async" />
-      <div className={styles.display}><Interface id={id} state={state} setState={setState} /></div>
+      <div className={`${styles.display} ${styles.softwareScreen}`}><SoftwarePreview /></div>
     </div></div>
-    <figcaption className={styles.caption}><span>Click a marker or use the screen controls.</span><button type="button" className={styles.expand} onClick={() => dialog.current.showModal()}>Inspect interface<span aria-hidden="true">↗</span></button></figcaption>
-    <dialog ref={dialog} className={styles.dialog} aria-label="Explore PROVE-1 interface">
-      <div className={styles.dialogBar}><span>PROVE-1 / INTERACTIVE CONCEPT</span><button type="button" onClick={() => dialog.current.close()}>Close interface <span aria-hidden="true">×</span></button></div>
-      <div className={styles.dialogCanvas}><Interface id={`${id}-expanded`} state={state} setState={setState} /></div>
-      <p className={styles.dialogHint}>Select objects, toggle layers and explore snapshots. On small screens, scroll sideways to explore the full workspace.</p>
+    <figcaption className={styles.caption}>
+      <button type="button" onClick={() => openInterface(true)}>Interactive demo</button>
+      <button type="button" className={styles.expand} onClick={() => openInterface(false)}>Inspect interface<span aria-hidden="true">↗</span></button>
+    </figcaption>
+    <dialog ref={dialog} className={styles.dialog} aria-label={showDemo ? "PROVE-1 interactive demo" : "PROVE-1 software preview"}>
+      <div className={styles.dialogBar}><span>{showDemo ? "PROVE-1 / INTERACTIVE CONCEPT" : "PROVE-1 / SOFTWARE PREVIEW"}</span><button type="button" onClick={() => dialog.current.close()}>Close interface <span aria-hidden="true">×</span></button></div>
+      {showDemo ? <>
+        <div className={styles.dialogCanvas}><Interface id={id} state={state} setState={setState} /></div>
+        <p className={styles.dialogHint}>Select objects, toggle layers and explore snapshots. On small screens, scroll sideways to explore the full workspace.</p>
+      </> : <SoftwarePreview />}
     </dialog>
   </figure>;
 }

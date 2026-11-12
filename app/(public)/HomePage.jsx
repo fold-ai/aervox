@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { TrackedScene } from "@/components/site/PerceptionDemo";
@@ -43,6 +44,19 @@ export default function HomePage() {
           <div className={styles.navGroup}><span className={styles.navGroupLabel}>IN DEVELOPMENT / THE FOUNDATION</span><div className={styles.navLinks}>{systems.map((system, index) => <a key={system.type} href="#systems" onClick={() => setSelected(index)}><span>0{index + 1}</span>{system.name}<Arrow down /></a>)}</div></div>
           <div className={styles.navGroup}><span className={styles.navGroupLabel}>PLANNED / EXPANDING THE PLATFORM</span><div className={styles.navLinks}>{plannedSystems.map((system, index) => <Link key={system.type} href={`/systems/${system.type}`}><span>0{index + 3}</span>{system.name}<Arrow down /></Link>)}</div></div>
         </nav>
+      </section>
+      <section id="news" className={styles.newsSection} aria-labelledby="home-news-title">
+        <Link className={styles.newsStory} href="/news/x24">
+          <div className={styles.newsImage}>
+            <Image src="/media/x24/three-quarter.webp" alt="Three-quarter render of the ACTPROVE X24 aircraft" width={1920} height={1080} sizes="(max-width: 760px) 90vw, 54vw" />
+          </div>
+          <div className={styles.newsCopy}>
+            <p className={styles.newsLabel}>News <span aria-hidden="true">/</span> <time dateTime="2026-11-11">November 11, 2026</time></p>
+            <h2 id="home-news-title">Introducing X24.</h2>
+            <p>An autonomous aircraft developed in-house for low observability and operations in contested airspace.</p>
+            <span className={styles.newsAction}>Read the announcement <Arrow /></span>
+          </div>
+        </Link>
       </section>
       <section id="introduction" className={styles.introduction}>
         <div className={styles.sectionLabel}><span>01 / WHAT WE BUILD</span><span>FROM SENSOR TO OPERATOR</span></div>
